@@ -1,0 +1,32 @@
+.navBar {
+  border: 1px solid #dcdbdb;
+}
+
+.navBar-options a {
+  list-style: none;
+  padding: 12px;
+  font-weight: 700;
+  margin: 10px;
+  text-decoration: none;
+}
+
+.navBar-options a:visited {
+  color: rgb(15, 15, 15);
+}
+
+.navBar-options a:hover {
+  color: #ff5e5b;
+}
+
+.logoApp {
+  width: 150px;
+}
+
+li button .btn-primary {
+  display: flex;
+  align-items: center;
+}
+
+.btn-primary svg {
+  margin-right: 5px;
+}

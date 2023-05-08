@@ -1,0 +1,17 @@
+
+=============================================================================================================
+- Este archivo es sólo para denotar algunas reglas para tener un orden dentro de la creación de branches y 
+posibles metodologías a seguir en cuanto a la utilización de Git.
+=============================================================================================================
+
+-- Creación de Branches:
+
+A la hora de crear una branch seguiremos un orden específico al nombramiento:
+
+1) Número de creación de la branch, ej: 01#
+2) Seguido irá el nombre del requerimiento/feature, ej: 01#Maquetado-del-feed
+
+Dentro del archivo: ./branch_history.txt se irán anotando las ramas de trabajo que se hayan creado para ir
+teniendo orden y evitar la repetición de números / branches obsoletas.
+
+============================================================================================================

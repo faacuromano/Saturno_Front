@@ -1,0 +1,8 @@
+.img-portada {
+  height: 350px;
+  background-image: url("./salon04.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 70%;
+}

@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #222;
+}
+
+a.colorLink {
+  color: #ff5e5b !important;
+}
+
+/* MODIFICACIONES AL BOOTSTRAP */
+
+.btn-primary {
+  background-color: #ff5e5b;
+  color: white;
+  border-radius: 15px;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 8px 20px;
+}
+
+.btn-primary:hover {
+  background-color: #ff423e;
+}
+
+.btn-secondary {
+  color: white;
+  border-radius: 15px;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 8px 20px;
+}
+
+.container-fluid {
+  --bs-gutter-x: 0;
+}
+
+.index1 {
+  z-index: 1 !important;
+}
+
+.index9999 {
+  z-index: 9999 !important;
+}
+
+.container {
+  background-color: #fff;
+}
+
+.h5 {
+  font-size: 1.1rem;
+}
+
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  background-color: #ff423e;
+}
+
+h1 {
+  font-weight: 400;
+}
+
+label {
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: #282c34;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #282c34;
+}
+
+.form-control {
+  border-radius: 12px;
+}
+
+.fondo-jade {
+  background-color: #55dac3;
+}
+
+.dark {
+  filter: invert(1);
+}

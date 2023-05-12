@@ -19,6 +19,7 @@ import PerfilUsuario from "./Components/PerfilUsuario/PerfilUsuario";
 import UserConfiguration from "./Components/UserConfiguration/UserConfiguration";
 import RecoverPassword from "./Components/RecoverPassword/RecoverPassword";
 import Admin from "./Components/Admin/Admin";
+import TipoCuenta from "./Components/TipoCuenta/TipoCuenta";
 
 import { useContext, useEffect, useState } from "react";
 import ThemeContext from "./Contexts/ThemeContext/ThemeContext";
@@ -64,12 +65,12 @@ function App() {
       <BrowserRouter>
         {navBarRender}
         <Routes>
-          <Route path="/home" element={<Home/>} />
+          <Route path="/" element={<Home />} />
           <Route
             path="/buscar"
             element={
               <Container className="text-center py-5">
-                <Search/>
+                <Search />
               </Container>
             }
           />
@@ -77,7 +78,7 @@ function App() {
             path="/profesionales"
             element={
               <Container className="text-center py-5">
-                <Profesionales/>
+                <Profesionales />
               </Container>
             }
           />
@@ -85,7 +86,7 @@ function App() {
             path="/contacto"
             element={
               <Container className="text-center py-5">
-                <Contact/>
+                <Contact />
               </Container>
             }
           />
@@ -93,15 +94,23 @@ function App() {
             path="/sobrenosotros"
             element={
               <Container className="text-center py-5">
-                <AboutUs/>
+                <AboutUs />
               </Container>
             }
           />
           <Route
-            path="/"
+            path="/login"
             element={
               <Container className="text-center py-5">
-                <Login/>
+                <Login />
+              </Container>
+            }
+          />
+          <Route
+            path="/tipo-de-cuenta"
+            element={
+              <Container className="text-center py-5">
+                <TipoCuenta />
               </Container>
             }
           />
@@ -109,7 +118,7 @@ function App() {
             path="/signup"
             element={
               <Container className="text-center py-5">
-                <SignUp/>
+                <SignUp />
               </Container>
             }
           />
@@ -117,7 +126,7 @@ function App() {
             path="/perfilProfesional"
             element={
               <Container className="text-center py-5">
-                <PerfilProfesional/>
+                <PerfilProfesional />
               </Container>
             }
           />
@@ -125,7 +134,7 @@ function App() {
             path="/perfilUsuario"
             element={
               <Container className="text-center py-5">
-                <PerfilUsuario/>
+                <PerfilUsuario />
               </Container>
             }
           />
@@ -133,7 +142,7 @@ function App() {
             path="/configuracionUsuario"
             element={
               <Container className="text-center py-5">
-                <UserConfiguration/>
+                <UserConfiguration />
               </Container>
             }
           />
@@ -141,7 +150,7 @@ function App() {
             path="/recoverPassword"
             element={
               <Container className="text-center py-5">
-                <RecoverPassword/>
+                <RecoverPassword />
               </Container>
             }
           />
@@ -149,7 +158,7 @@ function App() {
             path="/admin"
             element={
               <Container className="text-center py-5">
-                <Admin/>
+                <Admin />
               </Container>
             }
           />
@@ -157,12 +166,12 @@ function App() {
             path="/*"
             element={
               <Container className="text-center py-5">
-                <Error404/>
+                <Error404 />
               </Container>
             }
           />
         </Routes>
-        <Footer/>
+        <Footer />
       </BrowserRouter>
     </div>
   );

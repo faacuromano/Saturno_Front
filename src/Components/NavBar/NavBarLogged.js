@@ -35,7 +35,7 @@ const NavBarLogged = () => {
     <Navbar bg="white" expand="lg" className="navBar index1">
       <Container>
         <Navbar.Brand>
-          <Link to={"/home"}>
+          <Link to={"/"}>
             <img
               className="logoApp"
               alt="logoApp"
@@ -50,7 +50,7 @@ const NavBarLogged = () => {
         >
           <ButtonTheme />
           <Nav.Link className="navBar-options mt-3 mt-lg-0">
-            <Link to={"/home"} className="colorLink">
+            <Link to={"/"} className="colorLink">
               Home
             </Link>
           </Nav.Link>
@@ -83,7 +83,7 @@ const NavBarLogged = () => {
             </Dropdown>
           </Nav.Link>
         </Navbar.Collapse>
-        <Modal className={theme} show={show} onHide={handleClose}>
+        <Modal className={theme} show={show} onHide={handleClose} centered>
           <Modal.Header closeButton>
             <Modal.Title>Cerrar sesión</Modal.Title>
           </Modal.Header>

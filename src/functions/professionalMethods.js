@@ -15,23 +15,10 @@ export async function getProfessionals() {
   }
 }
 
-export async function get_n_Professionals(n) {
-  try {
-    const response = await axios({
-      url: `${baseUrl}/profesional/cuted/${n}`,
-      method: "GET",
-    });
-
-    return response;
-  } catch (errors) {
-    console.log(errors);
-  }
-}
-
 export async function IDGetProfesional(id) {
   try {
     const response = await axios({
-      url: `${baseUrl}/profesional/${id}`,
+      url: `${baseUrl}/Profesional/${id}`,
       method: "GET",
     });
 

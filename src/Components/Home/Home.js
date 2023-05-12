@@ -12,7 +12,6 @@ const Home = () => {
         <CarruselBs />
       </Container>
       <Container className="pb-5">
-        <h5 className="mb-4">Encontrá los mejores lugares en Rosario</h5>
         <CardsProfesionales />
       </Container>
     </>

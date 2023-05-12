@@ -46,7 +46,11 @@ const NavBarLogOut = () => {
           className="justify-content-end text-center"
         >
           <ButtonTheme />
-
+          <Nav.Link className="navBar-options mt-3 mt-lg-0">
+            <Link to={"/"} className="colorLink">
+              Home
+            </Link>
+          </Nav.Link>
           <Nav.Link className="navBar-options mt-3 mt-lg-0">
             <Link to={"/profesionales"}>Qué es Saturno</Link>
           </Nav.Link>
@@ -57,7 +61,7 @@ const NavBarLogOut = () => {
             <Link to={"/sobrenosotros"}>Sobre nosotros</Link>
           </Nav.Link>
           <Nav.Link className="my-3 my-lg-0">
-            <Button variant="primary" as={Link} to={"/"}>
+            <Button variant="primary" as={Link} to={"/login"}>
               <FaRegUser /> Login
             </Button>
           </Nav.Link>

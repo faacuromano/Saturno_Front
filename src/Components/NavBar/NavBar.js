@@ -32,7 +32,7 @@ const NavBar = () => {
     <Navbar bg="white" expand="lg" className="navBar index1">
       <Container>
         <Navbar.Brand>
-          <Link to={"/home"}>
+          <Link to={"/"}>
             <img
               className="logoApp"
               alt="logoApp"
@@ -65,7 +65,7 @@ const NavBar = () => {
               </Button>
             </Link> */}
             <Dropdown as={ButtonGroup}>
-              <Button variant="primary" as={Link} to={"/"}>
+              <Button variant="primary" as={Link} to={"/login"}>
                 <FaRegUser /> Login
               </Button>
               <Dropdown.Toggle split variant="primary" id="dropdown-user" />

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getProfessionals } from "../../../functions/professionalMethods";
-import { get_n_Professionals } from "../../../functions/professionalMethods";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -14,10 +13,9 @@ const CardsProfesionales = () => {
   useEffect(() => {
     async function loadProfessional() {
       try {
-        const response = await  get_n_Professionals(4);
+        const response = await getProfessionals();
         if (response.status === 200) {
           setProfessional(response.data);
-          console.log(response)
         }
       } catch (e) {
         console.log("Catch: ", e);
@@ -27,16 +25,18 @@ const CardsProfesionales = () => {
   }, []);
 
   const storeProfessional = (item) => {
-    console.log(item);
+    var profesional = JSON.stringify(item);
     localStorage.removeItem("prof");
-    localStorage.setItem("prof", item.idUsuarios);
+    localStorage.setItem("prof", profesional);
   };
 
   return (
     <>
-      <Row className="justify-content-around">
+      <Row className="justify-content-center">
         {professional.length < 1 ? (
-          <h1> No hay datos disponibles </h1>
+          <p className="display-6 my-5 text-center">
+          <strong>Ups!</strong> No hay datos disponibles (?)
+        </p>
         ) : (
           professional.map((item) => (
             <Col xs={12} md={6} lg={3} className="mb-3 mb-lg-0">

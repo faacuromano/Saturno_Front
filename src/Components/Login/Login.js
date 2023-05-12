@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate, Link } from "react-router-dom";
 import { authClient } from "../../functions/clientMethods";
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
+import { getClient } from "../../functions/clientMethods";
 
 const Login = () => {
   const navigate = useNavigate(); // Allows us to redirect
@@ -35,7 +36,7 @@ const Login = () => {
   const passwordValidation = () => {
     if (password === "") {
       setErrors({ ...errors, password: "Campo obligatorio." });
-    } else if (password.length < 5 || password.length > 10) {
+    } else if (password.length < 4 || password.length > 10) {
       setErrors({
         ...errors,
         password: "Debe contener entre 5 y 10 caracteres.",
@@ -51,7 +52,7 @@ const Login = () => {
     authClient(userName, password).then(function (response) {
       console.log(response)
       if (response != null) {
-        navigate("/home");
+        navigate("/");
         console.log(response.data);
         localStorage.setItem("user", JSON.stringify(response.data));
         handleLogin(response.data);
@@ -110,7 +111,7 @@ const Login = () => {
           </p>
           <p>
             <b>¿No tenés cuenta?</b> Hacé click{" "}
-            <Link to={"/signup"} className="colorLink">
+            <Link to={"/tipo-de-cuenta"} className="colorLink">
               acá
             </Link>{" "}
             para registrarte.

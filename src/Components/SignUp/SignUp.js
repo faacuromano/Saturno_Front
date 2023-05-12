@@ -216,7 +216,7 @@ const SignUp = () => {
     <Container className="py-3">
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
-          <h1>Registrarse</h1>
+          <h1>Registro de cliente</h1>
         </Col>
         <Col xs={12} lg={10} xl={7} className="mt-2">
           <Form>

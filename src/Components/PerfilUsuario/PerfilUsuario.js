@@ -26,16 +26,15 @@ const PerfilUsuario = () => {
               <Col xs={3}>
                 <Image
                   className={theme}
-                  src={userLogged.fotoPefil}
+                  src={fotoUsuario}
                   alt=""
                   roundedCircle
                   fluid
                 />
               </Col>
               <Col xs={7}>
-                <h1>{userLogged.nombre + " " + userLogged.apellido}</h1>
-                <p>{userLogged.mail}</p>
-                <h5 className="fw-light">{userLogged.ubicacion}</h5>
+                <h1>{userLogged.nombre}</h1>
+                <h5 className="fw-light">{userLogged.ubication}</h5>
               </Col>
               <Col xs={10} className="border-bottom mt-5">
                 <h6>Tus turnos</h6>

@@ -25,21 +25,8 @@ const PerfilProfesional = () => {
   const { theme, handleTheme } = useContext(ThemeContext);
 
   useEffect(() => {
-    // const IDProfesional = localStorage.getItem("prof");
-    async function loadProfessional() {
-      try {
-        const response = await IDGetProfesional(10 );
-        console.log("ACA --->" + response.data)
-        if (response.status === 200) {
-          setProfessional(response.data);
-          console.log("ACA --->" + response)
-
-        }
-      } catch (e) {
-        console.log("Catch: ", e);
-      }
-    }
-    loadProfessional();
+    const Profesional = JSON.parse(localStorage.getItem("prof"));
+    setProfessional(Profesional)
   }, []);
 
   const fotoPerfil = require("./perfil.jpg");
@@ -52,7 +39,7 @@ const PerfilProfesional = () => {
   const current = new Date();
 
   const estilo = {
-    "background-image": "url(" + professional.fotoBanner + ")",
+    "background-image": "url(" + professional.fotoPortada + ")",
   };
 
   return (
@@ -84,7 +71,7 @@ const PerfilProfesional = () => {
                   {professional.ubicacion}
                 </p>
                 <p className="mb-1 ms-3 text-start">
-                  <FiClock /> {professional.horarioInicio + " a " + professional.horarioCierre }
+                  <FiClock /> {professional.horarioInicio} a {professional.horarioCierre}
                 </p>
                 <p className="mb-1 ms-3 text-start">
                   <BiMobileAlt /> {professional.numTelefono}
@@ -116,7 +103,7 @@ const PerfilProfesional = () => {
               </Col>
               <Col xs={8} className="text-start mt-5">
                 <h1 className="border-bottom pb-4 mb-3">
-                  {professional.nombre + " " + professional.apellido}
+                  {professional.nombre} {professional.apellido}
                 </h1>
                 <h5 className="mb-3 text-muted">{professional.profesion}</h5>
                 <p>{professional.descripcion}</p>

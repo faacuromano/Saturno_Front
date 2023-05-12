@@ -5,7 +5,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 export async function getClient() {
   try {
     const response = await axios({
-      url: `${baseUrl}/client`,
+      url: `${baseUrl}/usuario`,
       method: "GET",
     });
 
@@ -15,10 +15,10 @@ export async function getClient() {
   }
 }
 
-export async function authClient(mail, passw) {
+export async function authClient(user, passw) {
   try {
     const response = await axios({
-      url: `${baseUrl}/Usuario/login?username=${mail}&password=${passw}`,
+      url: `${baseUrl}/Usuario/login?username=${user}&password=${passw}`,
       method: "GET",
     });
     return response;

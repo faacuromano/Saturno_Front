@@ -1,7 +1,8 @@
 import React from 'react'
 
+import "./TipoCuenta.css";
+
 import { Col, Container, Row } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 
@@ -23,9 +24,9 @@ const TipoCuenta = () => {
                         <Card className='align-self-stretch'>
                             <Card.Img variant="top" src={fotoCliente} />
                             <Card.Body>
-                                <Card.Title as={"h4"} className='text-start'>Cliente</Card.Title>
+                                <Card.Title as={"h4"}>Cliente</Card.Title>
                                 <Card.Text>
-                                <ul className='my-4 text-start'>
+                                <ul className='mt-4 mb-5 text-start carta'>
                                     <li>Saca turnos con tu profesional</li>
                                     <li>Organiza tus turnos</li>
                                     <li>Busca profesionales por tu zona</li>
@@ -39,11 +40,11 @@ const TipoCuenta = () => {
                         <Card className='pb-4'>
                             <Card.Img variant="top" src={fotoProfesional} />
                             <Card.Body>
-                                <Card.Title as={"h4"} className='text-start'>Profesional</Card.Title>
+                                <Card.Title as={"h4"}>Profesional</Card.Title>
                                 <Card.Text>
-                                    <ul className='my-4 text-start'>
+                                    <ul className='mt-4 mb-5 text-start carta'>
                                         <li>Ofrece tus servicios más facilmente</li>
-                                        <li>Gestiona tus turnos en nuestro panel de control</li>
+                                        <li>Gestiona tus turnos en el panel de control</li>
                                         <li>Envía notificaciones a tus cliente</li>
                                         <li>Ofrece diferentes servicios</li>
                                     </ul>

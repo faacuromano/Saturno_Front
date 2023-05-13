@@ -3,12 +3,9 @@ import "./AboutUs.css";
 
 import { Col, Container, Row } from "react-bootstrap";
 import { Image } from "react-bootstrap";
-import { useContext } from "react";
-import ThemeContext from "../../Contexts/ThemeContext/ThemeContext";
 
 const AboutUs = () => {
   const imgAboutUs = require("./saturnoApp.png");
-  const { theme, handleTheme } = useContext(ThemeContext);
   return (
     <Container className="py-3 px-0">
       <Row className="justify-content-center text-start">
@@ -32,7 +29,7 @@ const AboutUs = () => {
           </p>
         </Col>
         <Col xs={12} className="px-0">
-          <Image className={theme} src={imgAboutUs} fluid />
+          <Image src={imgAboutUs} fluid />
         </Col>
         <Col xs={12} lg={10} xl={7} className="mt-5">
           <p>

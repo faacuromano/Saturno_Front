@@ -8,7 +8,6 @@ import { useContext } from "react";
 import ThemeContext from "../../Contexts/ThemeContext/ThemeContext";
 
 const PerfilUsuario = () => {
-  const fotoUsuario = require("./foto-usuario.jpg");
   const [userLogged, setUserLogged] = useState({});
 
   useEffect(() => {
@@ -26,14 +25,14 @@ const PerfilUsuario = () => {
               <Col xs={3}>
                 <Image
                   className={theme}
-                  src={fotoUsuario}
+                  src={userLogged.fotoPerfil}
                   alt=""
                   roundedCircle
                   fluid
                 />
               </Col>
               <Col xs={7}>
-                <h1>{userLogged.nombre}</h1>
+                <h1>{userLogged.nombre + " " + userLogged.apellido}</h1>
                 <h5 className="fw-light">{userLogged.ubication}</h5>
               </Col>
               <Col xs={10} className="border-bottom mt-5">

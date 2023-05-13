@@ -29,7 +29,6 @@ const PerfilProfesional = () => {
     setProfessional(Profesional)
   }, []);
 
-  const fotoPerfil = require("./perfil.jpg");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -39,7 +38,7 @@ const PerfilProfesional = () => {
   const current = new Date();
 
   const estilo = {
-    "background-image": "url(" + professional.fotoPortada + ")",
+    "background-image": "url(" + professional.fotoBanner + ")",
   };
 
   return (
@@ -60,7 +59,7 @@ const PerfilProfesional = () => {
               <Col xs={3}>
                 <div className={theme}>
                   <Image
-                    src={professional.fotoPefil}
+                    src={professional.fotoPerfil}
                     roundedCircle
                     fluid
                     className="mb-3"

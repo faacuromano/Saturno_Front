@@ -13,7 +13,7 @@ const CardProfesional = ({ data }) => {
   return (
     <>
       <Card key={data.Id}>
-        <Card.Img src={data.fotoPefil} className={theme} variant="top"/>
+        <Card.Img src={data.fotoPerfil} className={theme} variant="top"/>
         <Card.Body>
           <Card.Title>{data.nombre + " " + data.apellido} </Card.Title>
           <Card.Subtitle className="text-muted mb-2">
@@ -27,7 +27,7 @@ const CardProfesional = ({ data }) => {
               </li>
               <li>
                 <FiClock />
-                <span className="ml-4">{data.horarioInicio + " - " + data.horarioCierre}</span>
+                <span className="ml-4">{data.horarioInicio + " - " + data.horarioFinal}</span>
               </li>
             </ul>
           </Card.Text>

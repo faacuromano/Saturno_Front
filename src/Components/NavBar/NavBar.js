@@ -45,8 +45,8 @@ const NavBar = () => {
           id="basic-navbar-nav"
           className="justify-content-end text-center"
         >
-          <ButtonTheme />
-          {/* <Nav.Link className="navBar-options mt-3 mt-lg-0">
+          {/*<ButtonTheme />
+           <Nav.Link className="navBar-options mt-3 mt-lg-0">
             <Link to={"/buscar"}>Buscar</Link>
           </Nav.Link> */}
           <Nav.Link className="navBar-options mt-3 mt-lg-0">

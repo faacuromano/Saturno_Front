@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, FormGroup, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router";
@@ -9,9 +9,11 @@ import { RegisterClient } from "../../functions/clientMethods";
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
-  const [nameLastname, setNameLastname] = useState("");
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [fechaNac, setFechaNac] = useState("");
   const [ubication, setUbication] = useState("");
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState("");
@@ -47,25 +49,31 @@ const SignUp = () => {
     }
   };
 
-  const nameLastnameHandler = (e) => {
-    setNameLastname(e.target.value);
+  //Handler de nombre y apellido, validador de apellido
+  const lastnameHandler = (e) => {
+    setLastname(e.target.value);
   };
 
-  const nameLastnameValidation = () => {
-    if (nameLastname === "") {
-      setErrors({ ...errors, nameLastname: "Campo obligatorio." });
-    } else if (nameLastname.length < 5 || nameLastname.length > 25) {
+  const nameHandler = (e) => {
+    setName(e.target.value);
+  };
+
+  const LastnameValidation = () => {
+    if (lastname === "") {
+      setErrors({ ...errors, lastname: "Campo obligatorio." });
+    } else if (lastname.length < 5 || lastname.length > 25) {
       setErrors({
         ...errors,
-        nameLastname: "Debe contener entre 5 y 25 caracteres.",
+        lastname: "Debe contener entre 5 y 25 caracteres.",
       });
     } else {
       let _errors = { ...errors };
-      delete _errors.nameLastname;
+      delete _errors.lastname;
       setErrors(_errors);
     }
   };
 
+  //Handler y validación de email
   const emailHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -84,6 +92,7 @@ const SignUp = () => {
     }
   };
 
+  
   const phoneNumberHandler = (e) => {
     setPhoneNumber(e.target.value);
   };
@@ -99,6 +108,11 @@ const SignUp = () => {
       setErrors(_errors);
     }
   };
+
+  //Handler de fecha de nacimiento
+  const fechaNacHandler = (e) => {
+    setFechaNac(e.target.value);
+  }
 
   const ubicationHandler = (e) => {
     setUbication(e.target.value);
@@ -149,25 +163,27 @@ const SignUp = () => {
 
   const saveBaseUsuarioHandler = () => {
     const usuarioDatos = {
-      userName: userName,
-      email: email,
-      nombre: nameLastname,
-      password: password,
-      phoneNumber: phoneNumber,
-      ubication: ubication,
+      username: userName,
+      nombre: name,
+      apellido: lastname,
+      mail: email,
+      passw: password,
+      fechaNacimiento: fechaNac,
+      numTelefono: phoneNumber,
+      tipoCuenta: "C"
     };
 
-    if (
-      Object.keys(errors).length === 0 &&
-      userName &&
-      nameLastname &&
-      email &&
-      phoneNumber &&
-      ubication &&
-      password &&
-      validPassword
-    ) {
-      //ACÁ VA EL REGISTRO DE USUARIO
+    // if (
+    //   Object.keys(errors).length === 0 &&
+    //   userName &&
+    //   lastname &&
+    //   email &&
+    //   phoneNumber &&
+    //   ubication &&
+    //   password &&
+    //   validPassword
+    // ) {
+    //   //ACÁ VA EL REGISTRO DE USUARIO
 
       cleanInputs();
       //window.localStorage.setItem("user", JSON.stringify(userData));
@@ -175,38 +191,40 @@ const SignUp = () => {
       RegisterClient(usuarioDatos);
       navigate("/");
       setErrorsValidation("");
-    } else {
-      if (errors.userName) {
-        inputUserName.current.focus();
-      }
-      if (errors.nameLastname) {
-        inputNameLast.current.focus();
-      }
-      if (errors.email) {
-        inputEmail.current.focus();
-      }
-      if (errors.phoneNumber) {
-        inputPhoneNumber.current.focus();
-      }
-      if (errors.ubication) {
-        inputUbication.current.focus();
-      }
-      if (errors.password) {
-        inputPassword.current.focus();
-      }
-      if (errors.validPassword) {
-        inputValidPassword.current.focus();
-      }
+    // } else {
+    //   if (errors.userName) {
+    //     inputUserName.current.focus();
+    //   }
+    //   if (errors.lastname) {
+    //     inputNameLast.current.focus();
+    //   }
+    //   if (errors.email) {
+    //     inputEmail.current.focus();
+    //   }
+    //   if (errors.phoneNumber) {
+    //     inputPhoneNumber.current.focus();
+    //   }
+    //   if (errors.ubication) {
+    //     inputUbication.current.focus();
+    //   }
+    //   if (errors.password) {
+    //     inputPassword.current.focus();
+    //   }
+    //   if (errors.validPassword) {
+    //     inputValidPassword.current.focus();
+    //   }
 
-      setErrorsValidation("Por favor ingrese los datos correctamente.");
-    }
+    //   setErrorsValidation("Por favor ingrese los datos correctamente.");
+    // }
   };
 
   const cleanInputs = () => {
     setUserName("");
-    setNameLastname("");
+    setName("");
+    setLastname("");
     setEmail("");
     setPhoneNumber("");
+    setFechaNac("");
     setUbication("");
     setPassword("");
     setValidPassword("");
@@ -234,11 +252,19 @@ const SignUp = () => {
               )}
             </Form.Group>
             <Form.Group className="mt-4">
-              <Form.Label>Nombre y apellido:</Form.Label>
+              <Form.Label>Nombre:</Form.Label>
               <Form.Control
-                onChange={nameLastnameHandler}
-                value={nameLastname}
-                onBlur={nameLastnameValidation}
+                onChange={nameHandler}
+                value={name}
+                type="text"
+              />
+            </Form.Group>
+            <Form.Group className="mt-4">
+              <Form.Label>Apellido:</Form.Label>
+              <Form.Control
+                onChange={lastnameHandler}
+                value={lastname}
+                onBlur={LastnameValidation}
                 type="text"
                 ref={inputNameLast}
               />
@@ -269,6 +295,14 @@ const SignUp = () => {
               {errors.phoneNumber && (
                 <div className="errors">{errors.phoneNumber}</div>
               )}
+            </Form.Group>
+            <Form.Group className="mt-4">
+              <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
+              <Form.Control
+                onChange={fechaNacHandler}
+                value={fechaNac}
+                type="text"
+              />
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Ubicación:</Form.Label>

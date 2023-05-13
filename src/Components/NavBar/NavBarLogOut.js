@@ -45,7 +45,7 @@ const NavBarLogOut = () => {
           id="basic-navbar-nav"
           className="justify-content-end text-center"
         >
-          <ButtonTheme />
+          {/* <ButtonTheme /> */}
           <Nav.Link className="navBar-options mt-3 mt-lg-0">
             <Link to={"/"} className="colorLink">
               Home

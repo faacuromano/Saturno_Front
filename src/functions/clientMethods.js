@@ -48,7 +48,7 @@ export async function RegisterClient(client) {
   console.log("Register client ", client);
   try {
     axios({
-      url: `${baseUrl}/Client`,
+      url: `${baseUrl}/Usuario`,
       method: "POST",
       data: JSON.stringify(client),
       headers: {

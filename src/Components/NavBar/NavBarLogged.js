@@ -10,9 +10,9 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import Modal from "react-bootstrap/Modal";
 import "./NavBar.css";
-import ButtonTheme from "../ButtonTheme/ButtonTheme";
+//import ButtonTheme from "../ButtonTheme/ButtonTheme";
 import { useContext } from "react";
-import ThemeContext from "../../Contexts/ThemeContext/ThemeContext";
+//import ThemeContext from "../../Contexts/ThemeContext/ThemeContext";
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
 
 const NavBarLogged = () => {
@@ -30,7 +30,7 @@ const NavBarLogged = () => {
     navigate("/");
   };
 
-  const { theme, handleTheme } = useContext(ThemeContext);
+  //const { theme, handleTheme } = useContext(ThemeContext);
   return (
     <Navbar bg="white" expand="lg" className="navBar index1">
       <Container>
@@ -83,7 +83,7 @@ const NavBarLogged = () => {
             </Dropdown>
           </Nav.Link>
         </Navbar.Collapse>
-        <Modal className={theme} show={show} onHide={handleClose} centered>
+        <Modal show={show} onHide={handleClose} centered>
           <Modal.Header closeButton>
             <Modal.Title>Cerrar sesión</Modal.Title>
           </Modal.Header>

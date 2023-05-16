@@ -23,10 +23,9 @@ const PerfilProfesional = () => {
 
   useEffect(() => {
     const Profesional = JSON.parse(localStorage.getItem("prof"));
-    setProfessional(Profesional)
+    setProfessional(Profesional);
   }, []);
 
-  const fotoPerfil = require("./perfil.jpg");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -43,30 +42,38 @@ const PerfilProfesional = () => {
     <>
       <Container>
         <Row className="justify-content-center">
-          <Col xs={11} className="rounded">
-              <Row>
-                <Col
-                  xs={12}
-                  className="img-portada rounded-top"
-                  style={estilo}
-                ></Col>
-              </Row>
+          <Col xs={11} className="rounded border">
+            <Row>
+              <Col
+                xs={12}
+                className="img-portada rounded-top"
+                style={estilo}
+              ></Col>
+            </Row>
             <Row className="justify-content-center pt-3 pb-5">
               <Col xs={3}>
                 <Row className="justify-content-center">
                   <Col xs={8}>
-                  <Image
-                  src={professional.fotoPefil}
-                  roundedCircle
-                  fluid
-                  className="my-4"
-                />
+                    <Image
+                      src={professional.fotoPefil}
+                      roundedCircle
+                      fluid
+                      className="my-4"
+                    />
                   </Col>
                 </Row>
                 <ul className="list-unstyled text-start ps-5">
-                  <li className="mb-2"><BiMap /> <strong>{professional.direccion}</strong> - {professional.ubicacion}</li>
-                  <li className="mb-2"><FiClock /> {professional.horarioInicio} a {professional.horarioFinal}</li>
-                  <li className="mb-2"><BiMobileAlt /> {professional.numTelefono}</li>
+                  <li className="mb-2">
+                    <BiMap /> <strong>{professional.direccion}</strong> -{" "}
+                    {professional.ubicacion}
+                  </li>
+                  <li className="mb-2">
+                    <FiClock /> {professional.horarioInicio} a{" "}
+                    {professional.horarioFinal}
+                  </li>
+                  <li className="mb-2">
+                    <BiMobileAlt /> {professional.numTelefono}
+                  </li>
                 </ul>
               </Col>
               <Col xs={8} className="text-start mt-5">
@@ -75,7 +82,7 @@ const PerfilProfesional = () => {
                 </h1>
                 <h5 className="mb-3 text-muted">{professional.profesion}</h5>
                 <h5 className="mb-3">Descripción</h5>
-                <p className="my-3">>{professional.descripcion}</p>
+                <p className="my-3">{professional.descripcion}</p>
                 <h5 className="my-3">Lista de servicios</h5>
                 <p>Selecciona un servicio para solicitar un turno</p>
                 <Accordion>
@@ -84,12 +91,14 @@ const PerfilProfesional = () => {
                       Corte - <strong>$1000</strong>
                     </Accordion.Header>
                     <Accordion.Body>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam</p>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam
+                      </p>
                       <Button className="mt-4" onClick={handleShow}>
-                          <BsCalendarEvent /> Pedir turno
-                        </Button>
+                        <BsCalendarEvent /> Pedir turno
+                      </Button>
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey="1">
@@ -97,12 +106,14 @@ const PerfilProfesional = () => {
                       Corte + tintura - <strong>$1200</strong>
                     </Accordion.Header>
                     <Accordion.Body>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam</p>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam
+                      </p>
                       <Button className="mt-4" onClick={handleShow}>
-                          <BsCalendarEvent /> Pedir turno
-                        </Button>
+                        <BsCalendarEvent /> Pedir turno
+                      </Button>
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey="2">
@@ -110,12 +121,14 @@ const PerfilProfesional = () => {
                       Corte + tintura + permanente - <strong>$1800</strong>
                     </Accordion.Header>
                     <Accordion.Body>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam</p>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam
+                      </p>
                       <Button className="mt-4" onClick={handleShow}>
-                          <BsCalendarEvent /> Pedir turno
-                        </Button>
+                        <BsCalendarEvent /> Pedir turno
+                      </Button>
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
@@ -124,26 +137,26 @@ const PerfilProfesional = () => {
           </Col>
           {/* "Popup de turno" */}
           <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Elja su turno</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <DayPicker
-                      mode="single"
-                      selected={selected}
-                      onSelect={setSelected}
-                      fromMonth={current}
-                    />
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Cerrar
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                      Guardar turno
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
+            <Modal.Header closeButton>
+              <Modal.Title>Elja su turno</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <DayPicker
+                mode="single"
+                selected={selected}
+                onSelect={setSelected}
+                fromMonth={current}
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Cerrar
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                Guardar turno
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Row>
       </Container>
     </>

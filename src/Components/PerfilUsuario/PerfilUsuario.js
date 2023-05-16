@@ -4,8 +4,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 import CardProfesional from "../Home/CardsProfesionales/CardProfesional";
-import { useContext } from "react";
-import ThemeContext from "../../Contexts/ThemeContext/ThemeContext";
 
 const PerfilUsuario = () => {
   const fotoUsuario = require("./foto-usuario.jpg");
@@ -16,7 +14,6 @@ const PerfilUsuario = () => {
     setUserLogged(user);
   }, []);
 
-  const { theme, handleTheme } = useContext(ThemeContext);
   return (
     <>
       <Container>
@@ -24,13 +21,7 @@ const PerfilUsuario = () => {
           <Col xs={11} className="border rounded py-4">
             <Row className="justify-content-center align-items-center pt-3">
               <Col xs={3}>
-                <Image
-                  className={theme}
-                  src={fotoUsuario}
-                  alt=""
-                  roundedCircle
-                  fluid
-                />
+                <Image src={fotoUsuario} alt="" roundedCircle fluid />
               </Col>
               <Col xs={7}>
                 <h1>{userLogged.nombre}</h1>

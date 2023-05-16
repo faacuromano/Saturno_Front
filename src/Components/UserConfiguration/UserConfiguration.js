@@ -1,17 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Image } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
 
 const UserConfiguration = () => {
-  //Modal de profesional
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  //catch del user en la local host
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    const usuario = JSON.parse(localStorage.getItem("user"));
+    setUser(usuario);
+
+    setName(usuario.nombre);
+    setLastName(usuario.apellido);
+    setEmail(usuario.mail);
+    setFechaNac(usuario.fechaNacimiento);
+    setPhoneNumber(usuario.numTelefono);
+  }, []);
+
+  //set de la info en los inputs
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [fechaNac, setFechaNac] = useState("");
+  const [ubication, setUbication] = useState("");
+
+  const nameHandler = (e) => {
+    setName(e.target.value);
+  };
+
+  const lastNameHandler = (e) => {
+    setLastName(e.target.value);
+  };
+
+  const emailHandler = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const phoneNumberHandler = (e) => {
+    setPhoneNumber(e.target.value);
+  };
+
+  const fechaNacHandler = (e) => {
+    setFechaNac(e.target.value);
+  };
+
+  const ubicationHandler = (e) => {
+    setUbication(e.target.value);
+  };
 
   const imgPerfil = require("./foto-usuario.jpg");
   return (
@@ -21,9 +60,6 @@ const UserConfiguration = () => {
           <a href="#change-info" className="fw-bold">
             <p>Modificar información</p>
           </a>
-          <Link className="fw-bold" onClick={handleShow}>
-            <p>Crear cuenta profesional</p>
-          </Link>
           <a href="#change-password" className="fw-bold">
             <p>Cambiar contraseña</p>
           </a>
@@ -36,26 +72,58 @@ const UserConfiguration = () => {
             <Col xs={12}>
               <Form>
                 <Form.Group>
-                  <Form.Label>Nombre y apellido:</Form.Label>
-                  <Form.Control type="text" />
+                  <Form.Label>Nombre:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={name}
+                    onChange={nameHandler}
+                  />
+                </Form.Group>
+                <Form.Group className="mt-4">
+                  <Form.Label>Apellido:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={lastName}
+                    onChange={lastNameHandler}
+                  />
+                </Form.Group>
+                <Form.Group className="mt-4">
+                  <Form.Label>E-mail:</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    onChange={emailHandler}
+                  />
+                </Form.Group>
+                <Form.Group className="mt-4">
+                  <Form.Label>Número de celular:</Form.Label>
+                  <Form.Control
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={phoneNumberHandler}
+                  />
+                </Form.Group>
+                <Form.Group className="mt-4">
+                  <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={fechaNac}
+                    onChange={fechaNacHandler}
+                  />
                 </Form.Group>
                 <Form.Group className="mt-4">
                   <Form.Label>Ciudad:</Form.Label>
-                  <Form.Select aria-label="select your city">
+                  <Form.Select
+                    aria-label="select your city"
+                    value={ubication}
+                    onChange={ubicationHandler}
+                  >
                     <option>Elija su ciudad</option>
                     <option value="Rosario">Rosario</option>
                     <option value="Arroyo Seco">Arroyo Seco</option>
                     <option value="VGG">Villa Gobernador Galvez</option>
                     <option value="Baigorria">Baigorria</option>
                   </Form.Select>
-                </Form.Group>
-                <Form.Group className="mt-4">
-                  <Form.Label>E-mail:</Form.Label>
-                  <Form.Control type="email" />
-                </Form.Group>
-                <Form.Group className="mt-4">
-                  <Form.Label>Número de celular:</Form.Label>
-                  <Form.Control type="tel" />
                 </Form.Group>
                 <Col xs={8} className="mt-4 border rounded">
                   <Row className="justify-content-center py-4 align-items-center">
@@ -102,22 +170,6 @@ const UserConfiguration = () => {
           </Row>
         </Col>
       </Row>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Crear cuenta profesional</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          ¿Estas seguro que quieres actualizar tu cuenta a profesional?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Volver
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Actualizar cuenta
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </Container>
   );
 };

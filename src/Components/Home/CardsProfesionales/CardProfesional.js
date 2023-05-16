@@ -1,19 +1,16 @@
 import React from "react";
-import { useContext } from "react";
 import "./CardProfesional.css";
 
 import Card from "react-bootstrap/Card";
 import { FiClock } from "react-icons/fi";
 import { BiMap } from "react-icons/bi";
-import ThemeContext from "../../../Contexts/ThemeContext/ThemeContext";
 
 const CardProfesional = () => {
   const cardImg = require("./smart-fit.jpg");
-  const { theme, handleTheme } = useContext(ThemeContext);
   return (
     <>
       <Card>
-        <Card.Img className={theme} variant="top" src={cardImg} />
+        <Card.Img variant="top" src={cardImg} />
         <Card.Body>
           <Card.Title>Smart Fit</Card.Title>
           <Card.Subtitle className="text-muted mb-2">Gimnasio</Card.Subtitle>

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-import { Col, Container, FormGroup, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router";
@@ -92,7 +92,6 @@ const SignUp = () => {
     }
   };
 
-  
   const phoneNumberHandler = (e) => {
     setPhoneNumber(e.target.value);
   };
@@ -112,7 +111,7 @@ const SignUp = () => {
   //Handler de fecha de nacimiento
   const fechaNacHandler = (e) => {
     setFechaNac(e.target.value);
-  }
+  };
 
   const ubicationHandler = (e) => {
     setUbication(e.target.value);
@@ -170,7 +169,7 @@ const SignUp = () => {
       passw: password,
       fechaNacimiento: fechaNac,
       numTelefono: phoneNumber,
-      tipoCuenta: "C"
+      tipoCuenta: "C",
     };
 
     // if (
@@ -185,12 +184,11 @@ const SignUp = () => {
     // ) {
     //   //ACÁ VA EL REGISTRO DE USUARIO
 
-      cleanInputs();
-      //window.localStorage.setItem("user", JSON.stringify(userData));
-      console.log(usuarioDatos);
-      RegisterClient(usuarioDatos);
-      navigate("/");
-      setErrorsValidation("");
+    cleanInputs();
+    //window.localStorage.setItem("user", JSON.stringify(userData));
+    RegisterClient(usuarioDatos);
+    navigate("/");
+    setErrorsValidation("");
     // } else {
     //   if (errors.userName) {
     //     inputUserName.current.focus();
@@ -253,11 +251,7 @@ const SignUp = () => {
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
-              <Form.Control
-                onChange={nameHandler}
-                value={name}
-                type="text"
-              />
+              <Form.Control onChange={nameHandler} value={name} type="text" />
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>

@@ -63,16 +63,17 @@ export async function RegisterClient(client) {
 }
 
 export async function editClient(id, data) {
-  console.log("edit: ", id, JSON.stringify(data));
+  console.log("edit: ", id, data);
   try {
-    axios({
-      url: `${baseUrl}/Client/${id}`,
+    const response = await axios({
+      url: `${baseUrl}/Usuario/${id}`,
       method: "PUT",
       data: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json", // <- HERE
       },
     });
+    return response;
   } catch (errors) {
     console.log("auth: ", errors);
   }

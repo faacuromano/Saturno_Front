@@ -8,15 +8,12 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { FiSearch } from "react-icons/fi";
 import Card from "react-bootstrap/Card";
-import { useContext } from "react";
-import ThemeContext from "../../Contexts/ThemeContext/ThemeContext";
 
 const Search = () => {
   const img1 = require("./canchas.jpg");
   const img2 = require("./gimnasio.jpg");
   const img3 = require("./mecanica.jpg");
   const img4 = require("./peluqueria.jpg");
-  const { theme, handleTheme } = useContext(ThemeContext);
 
   return (
     <>
@@ -42,25 +39,25 @@ const Search = () => {
         <Row>
           <Col xs={12} md={6} lg={3} className="mb-3 mb-lg-0">
             <Card>
-              <Card.Img className={theme} fluid variant="top" src={img1} />
+              <Card.Img fluid variant="top" src={img1} />
               <Card.Title className="text-center mt-2">Canchas</Card.Title>
             </Card>
           </Col>
           <Col xs={12} md={6} lg={3} className="mb-3 mb-lg-0">
             <Card>
-              <Card.Img className={theme} fluid variant="top" src={img2} />
+              <Card.Img fluid variant="top" src={img2} />
               <Card.Title className="text-center mt-2">Gimnasio</Card.Title>
             </Card>
           </Col>
           <Col xs={12} md={6} lg={3} className="mb-3 mb-lg-0">
             <Card>
-              <Card.Img className={theme} fluid variant="top" src={img3} />
+              <Card.Img fluid variant="top" src={img3} />
               <Card.Title className="text-center mt-2">Mecánicos</Card.Title>
             </Card>
           </Col>
           <Col xs={12} md={6} lg={3} className="mb-3 mb-lg-0">
             <Card>
-              <Card.Img className={theme} fluid variant="top" src={img4} />
+              <Card.Img fluid variant="top" src={img4} />
               <Card.Title className="text-center mt-2">Peluquería</Card.Title>
             </Card>
           </Col>

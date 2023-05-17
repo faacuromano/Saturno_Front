@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 
+import "./NavBar.css";
+
 import { Link, useNavigate } from "react-router-dom";
-
 import { FaRegUser } from "react-icons/fa";
-
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import "./NavBar.css";
-import ButtonTheme from "../ButtonTheme/ButtonTheme";
-import { useContext } from "react";
-import ThemeContext from "../../Contexts/ThemeContext/ThemeContext";
+//import ButtonTheme from "../ButtonTheme/ButtonTheme";
+//import { useContext } from "react";
+//import ThemeContext from "../../Contexts/ThemeContext/ThemeContext";
 
 const NavBarLogOut = () => {
   //Modal de cerrar sesión
@@ -27,7 +26,7 @@ const NavBarLogOut = () => {
     navigate("/");
   };
 
-  const { theme, handleTheme } = useContext(ThemeContext);
+  //const { theme, handleTheme } = useContext(ThemeContext);
   return (
     <Navbar bg="white" expand="lg" className="navBar index1">
       <Container>
@@ -66,7 +65,7 @@ const NavBarLogOut = () => {
             </Button>
           </Nav.Link>
         </Navbar.Collapse>
-        <Modal className={theme} show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Cerrar sesión</Modal.Title>
           </Modal.Header>

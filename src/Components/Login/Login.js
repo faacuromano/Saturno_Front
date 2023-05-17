@@ -9,7 +9,6 @@ import Form from "react-bootstrap/Form";
 import { useNavigate, Link } from "react-router-dom";
 import { authClient } from "../../functions/clientMethods";
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
-import { getClient } from "../../functions/clientMethods";
 
 const Login = () => {
   const navigate = useNavigate(); // Allows us to redirect

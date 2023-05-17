@@ -22,7 +22,7 @@ import Admin from "./Components/Admin/Admin";
 import TipoCuenta from "./Components/TipoCuenta/TipoCuenta";
 
 import { useContext, useEffect, useState } from "react";
-import ThemeContext from "./Contexts/ThemeContext/ThemeContext";
+//import ThemeContext from "./Contexts/ThemeContext/ThemeContext";
 import Error404 from "./Components/Error404/Error404";
 import LoginContext from "./Contexts/ThemeContext/LoginContext";
 import NavBarLogOut from "./Components/NavBar/NavBarLogOut";
@@ -32,7 +32,7 @@ import SignUpProfesional from "./Components/SignUp/SignUpProfesional";
 // 1) export NODE_OPTIONS=--openssl-legacy-provider 2) npm start
 
 function App() {
-  const { theme, handleTheme } = useContext(ThemeContext);
+  //const { theme, handleTheme } = useContext(ThemeContext);
   const { auth, handleLogin } = useContext(LoginContext);
   const [navBarRender, setNavBarRender] = useState(<NavBarLogged />);
 
@@ -62,7 +62,7 @@ function App() {
   }, [auth]);
 
   return (
-    <div className={theme}>
+    <div>
       <BrowserRouter>
         {navBarRender}
         <Routes>

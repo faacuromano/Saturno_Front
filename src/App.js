@@ -27,6 +27,7 @@ import Error404 from "./Components/Error404/Error404";
 import LoginContext from "./Contexts/ThemeContext/LoginContext";
 import NavBarLogOut from "./Components/NavBar/NavBarLogOut";
 import NavBarLogged from "./Components/NavBar/NavBarLogged";
+import SignUpProfesional from "./Components/SignUp/SignUpProfesional";
 
 // 1) export NODE_OPTIONS=--openssl-legacy-provider 2) npm start
 
@@ -122,6 +123,13 @@ function App() {
               </Container>
             }
           />
+          <Route
+          path="/signuprofesional"
+          element={
+            <Container className="text-center py-5">
+              <SignUpProfesional/>
+            </Container>
+          }/>
           <Route
             path="/perfilProfesional"
             element={

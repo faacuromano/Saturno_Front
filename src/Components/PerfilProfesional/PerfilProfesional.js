@@ -24,6 +24,7 @@ const PerfilProfesional = () => {
   useEffect(() => {
     const Profesional = JSON.parse(localStorage.getItem("prof"));
     setProfessional(Profesional);
+    localStorage.removeItem("prof");
   }, []);
 
   const [show, setShow] = useState(false);
@@ -55,7 +56,7 @@ const PerfilProfesional = () => {
                 <Row className="justify-content-center">
                   <Col xs={8}>
                     <Image
-                      src={professional.fotoPefil}
+                      src={professional.fotoPerfil}
                       roundedCircle
                       fluid
                       className="my-4"

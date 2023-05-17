@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Image } from "react-bootstrap";
 
+import { editClient } from "../../functions/clientMethods";
+
 const UserConfiguration = () => {
   //catch del user en la local host
   const [user, setUser] = useState([]);
@@ -52,7 +54,26 @@ const UserConfiguration = () => {
     setUbication(e.target.value);
   };
 
-  const imgPerfil = require("./foto-usuario.jpg");
+  //Guardar cambios
+  const updateUserData = () => {
+    const newUserData = {
+      id: user.id,
+      nombre: name,
+      apellido: lastName,
+      username: user.username,
+      mail: email,
+      numTelefono: phoneNumber,
+      fechaNacimiento: fechaNac,
+      fotoPerfil: user.fotoPerfil,
+    };
+
+    editClient(newUserData.id, newUserData).then(function (response) {
+      alert(response.data);
+      console.log(response);
+    });
+    localStorage.setItem("user", JSON.stringify(newUserData));
+  };
+
   return (
     <Container className="py-3">
       <Row className="justify-content-around">
@@ -128,7 +149,7 @@ const UserConfiguration = () => {
                 <Col xs={8} className="mt-4 border rounded">
                   <Row className="justify-content-center py-4 align-items-center">
                     <Col xs={3}>
-                      <Image src={imgPerfil} fluid roundedCircle />
+                      <Image src={user.fotoPerfil} fluid roundedCircle />
                     </Col>
                     <Col xs={7}>
                       <h5>Cambiar foto de perfil</h5>
@@ -136,7 +157,11 @@ const UserConfiguration = () => {
                     </Col>
                   </Row>
                 </Col>
-                <Button variant="primary" className="mt-4">
+                <Button
+                  variant="primary"
+                  className="mt-4"
+                  onClick={updateUserData}
+                >
                   Guardar cambios
                 </Button>
               </Form>

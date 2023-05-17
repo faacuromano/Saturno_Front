@@ -19,25 +19,11 @@ const PerfilUsuario = () => {
         <Row className="justify-content-center text-start">
           <Col xs={11} className="border rounded py-4">
             <Row className="justify-content-center align-items-center pt-3">
-<<<<<<< HEAD
-              <Col xs={3}>
-                <Image
-                  className={theme}
-                  src={userLogged.fotoPerfil}
-                  alt=""
-                  roundedCircle
-                  fluid
-                />
-              </Col>
-              <Col xs={7}>
-                <h1>{userLogged.nombre + " " + userLogged.apellido}</h1>
-=======
               <Col xs={2}>
                 <Image src={userLogged.fotoPerfil} alt="" roundedCircle fluid />
               </Col>
               <Col xs={8}>
                 <h1>{userLogged.nombre}</h1>
->>>>>>> tipo-cuenta
                 <h5 className="fw-light">{userLogged.ubication}</h5>
               </Col>
               <Col xs={10} className="border-bottom mt-5">

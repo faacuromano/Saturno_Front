@@ -53,39 +53,6 @@ const PerfilProfesional = () => {
             </Row>
             <Row className="justify-content-center pt-3 pb-5">
               <Col xs={3}>
-<<<<<<< HEAD
-                <div className={theme}>
-                  <Image
-                    src={professional.fotoPerfil}
-                    roundedCircle
-                    fluid
-                    className="mb-3"
-                  />
-                </div>
-                <p className="mb-1 ms-3 text-start">
-                  <BiMap /> <strong>{professional.direccion}</strong> -{" "}
-                  {professional.ubicacion}
-                </p>
-                <p className="mb-1 ms-3 text-start">
-                  <FiClock /> {professional.horarioInicio} a {professional.horarioCierre}
-                </p>
-                <p className="mb-1 ms-3 text-start">
-                  <BiMobileAlt /> {professional.numTelefono}
-                </p>
-                <Button className="mt-4" onClick={handleShow}>
-                  <BsCalendarEvent /> Pedir turno
-                </Button>
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Elja su turno</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <DayPicker
-                      mode="single"
-                      selected={selected}
-                      onSelect={setSelected}
-                      fromMonth={current}
-=======
                 <Row className="justify-content-center">
                   <Col xs={8}>
                     <Image
@@ -93,7 +60,6 @@ const PerfilProfesional = () => {
                       roundedCircle
                       fluid
                       className="my-4"
->>>>>>> tipo-cuenta
                     />
                   </Col>
                 </Row>

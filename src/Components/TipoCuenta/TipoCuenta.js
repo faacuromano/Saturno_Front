@@ -49,7 +49,7 @@ const TipoCuenta = () => {
                                         <li>Ofrece diferentes servicios</li>
                                     </ul>
                                 </Card.Text>
-                                <Link onClick={(e)=>alert("Coming soon: Registro de profesional")} className='colorLink text-center'><strong>Crear cuenta Profesional</strong></Link>
+                                <Link to={"/signuprofesional"} className='colorLink'><strong>Crear cuenta Profesional</strong></Link>
                             </Card.Body>
                         </Card>
                     </Col>

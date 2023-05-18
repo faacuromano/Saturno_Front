@@ -10,7 +10,7 @@ const PerfilUsuario = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    setUserLogged(user);
+    setUserLogged(user.user);
   }, []);
 
   return (

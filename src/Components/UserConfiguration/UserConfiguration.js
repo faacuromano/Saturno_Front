@@ -15,11 +15,12 @@ const UserConfiguration = () => {
     const usuario = JSON.parse(localStorage.getItem("user"));
     setUser(usuario);
 
-    setName(usuario.nombre);
-    setLastName(usuario.apellido);
-    setEmail(usuario.mail);
-    setFechaNac(usuario.fechaNacimiento);
-    setPhoneNumber(usuario.numTelefono);
+    setName(usuario.user.nombre);
+    setLastName(usuario.user.apellido);
+    setEmail(usuario.user.mail);
+    setFechaNac(usuario.user.fechaNacimiento);
+    setPhoneNumber(usuario.user.numTelefono);
+    setFotoPerfil(usuario.user.fotoPerfil);
   }, []);
 
   //set de la info en los inputs
@@ -29,6 +30,7 @@ const UserConfiguration = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [fechaNac, setFechaNac] = useState("");
   const [ubication, setUbication] = useState("");
+  const [fotoPerfil, setFotoPerfil] = useState("");
 
   const nameHandler = (e) => {
     setName(e.target.value);
@@ -128,7 +130,7 @@ const UserConfiguration = () => {
                   <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
                   <Form.Control
                     type="text"
-                    value={fechaNac}
+                    value={fechaNac.slice(0,10)}
                     onChange={fechaNacHandler}
                   />
                 </Form.Group>
@@ -149,7 +151,7 @@ const UserConfiguration = () => {
                 <Col xs={8} className="mt-4 border rounded">
                   <Row className="justify-content-center py-4 align-items-center">
                     <Col xs={3}>
-                      <Image src={user.fotoPerfil} fluid roundedCircle />
+                      <Image src={fotoPerfil} fluid roundedCircle />
                     </Col>
                     <Col xs={7}>
                       <h5>Cambiar foto de perfil</h5>

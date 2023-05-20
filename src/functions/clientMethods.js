@@ -35,7 +35,7 @@ export async function DeleteClient(id) {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "DELETE",
       },
-      url: `${baseUrl}/client/${id}`,
+      url: `${baseUrl}/Usuario?id=${id}`,
       method: "DELETE",
     });
     return response;

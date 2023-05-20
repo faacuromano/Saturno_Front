@@ -4,6 +4,8 @@ import Table from "react-bootstrap/Table";
 
 import { getClient } from "../../../functions/clientMethods";
 import FilaCliente from "./FilaCliente";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const TablaCliente = () => {
   const [clients, setClients] = useState([]);
@@ -14,7 +16,6 @@ const TablaCliente = () => {
     });
   }, []);
 
-  console.log(clients);
   return (
     <>
       <p className="fw-bold">Administrador de clientes:</p>
@@ -32,6 +33,7 @@ const TablaCliente = () => {
           ))}
         </thead>
       </Table>
+      <Link to={"/signup"}><Button className="my-3">Crear cliente</Button></Link>
     </>
   );
 };

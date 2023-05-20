@@ -20,6 +20,8 @@ import UserConfiguration from "./Components/UserConfiguration/UserConfiguration"
 import RecoverPassword from "./Components/RecoverPassword/RecoverPassword";
 import Admin from "./Components/Admin/Admin";
 import TipoCuenta from "./Components/TipoCuenta/TipoCuenta";
+import ServiceSettings from "./Components/ServiceSettings/ServiceSettings";
+import AdminCliente from "./Components/Admin/AdminCliente/AdminCliente";
 
 import { useContext, useEffect, useState } from "react";
 //import ThemeContext from "./Contexts/ThemeContext/ThemeContext";
@@ -163,10 +165,26 @@ function App() {
             }
           />
           <Route
+            path="/serviceSettings"
+            element={
+              <Container className="text-center py-5">
+                <ServiceSettings/>
+              </Container>
+            }
+          />
+          <Route
             path="/admin"
             element={
               <Container className="text-center py-5">
                 <Admin />
+              </Container>
+            }
+          />
+          <Route
+            path="/adminCliente"
+            element={
+              <Container className="text-center py-5">
+                <AdminCliente />
               </Container>
             }
           />

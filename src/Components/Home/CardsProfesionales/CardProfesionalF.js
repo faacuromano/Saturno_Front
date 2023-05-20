@@ -9,7 +9,7 @@ import { BiMap } from "react-icons/bi";
 const CardProfesional = ({ data }) => {
   return (
     <>
-      <Card key={data.Id}>
+      <Card key={data.Id} className="mb-4">
         <Card.Img src={data.fotoPerfil} variant="top" />
         <Card.Body>
           <Card.Title>{data.nombre + " " + data.apellido} </Card.Title>

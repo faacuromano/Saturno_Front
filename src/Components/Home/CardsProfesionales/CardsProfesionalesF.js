@@ -32,7 +32,7 @@ const CardsProfesionales = () => {
 
   return (
     <>
-      <Row className="justify-content-center">
+      <Row className="">
         {professional.length < 1 ? (
           <p className="display-6 my-5 text-center">
           <strong>Ups!</strong> No hay datos disponibles (?)

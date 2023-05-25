@@ -49,16 +49,16 @@ const UserConfiguration = () => {
   const nameValidation = () => {
     if (name === "") {
       setErrors({ ...errors, name: "Campo obligatorio." });
-  } else if (name.length < 4 || name.length > 10) {
+    } else if (name.length > 25) {
       setErrors({
-      ...errors,
-      name: "Debe contener entre 4 y 10 caracteres.",
+        ...errors,
+        name: "Debe contener no más de 25 caracteres.",
       });
-  } else {
+    } else {
       let _errors = { ...errors };
       delete _errors.name;
       setErrors(_errors);
-  }
+    }
   };
 
   const lastNameHandler = (e) => {

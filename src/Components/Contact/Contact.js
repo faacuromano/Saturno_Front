@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -9,6 +9,69 @@ const Contact = () => {
   const [emailContact, setEmailContact] = useState("");
   const [subjectContact, setSubjectContact] = useState("");
   const [message, setMessage] = useState("");
+
+  // Error validation setters
+  const [errors, setErrors] = useState({});
+  const [errorsValidation, setErrorsValidation] = useState("");
+  const inputNameContact = useRef(null);
+  const inputNameLast = useRef(null);
+  const inputEmail = useRef(null);
+  const inputPhoneNumber = useRef(null);
+  const inputUbication = useRef(null);
+
+  // Validations
+
+  // Name 
+  const nameValidation = () => {
+    if (nameContact === "") {
+      setErrors({ ...errors, nameContact: "Campo obligatorio." });
+    } else if (nameContact.length > 25) {
+      setErrors({
+        ...errors,
+        nameContact: "Debe contener no más de 25 caracteres.",
+      });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.nameContact;
+      setErrors(_errors);
+    }
+  };
+
+  // Mail
+
+  const emailHandler = (e) => {
+    setEmailContact(e.target.value);
+  };
+
+  const emailValidation = () => {
+    const validEmail = "@";
+    const correct = emailContact.match(validEmail);
+    if (emailContact === "") {
+      setErrors({ ...errors, emailContact: "Campo obligatorio." });
+    } else if (!correct) {
+      setErrors({ ...errors, emailContact: "Ingrese un email correcto." });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.emailContact;
+      setErrors(_errors);
+    }
+  };
+
+  // Asunto 
+  const subjectValidation = () => {
+    if (subjectContact.length > 70) {
+      setErrors({
+        ...errors,
+        subjectContact: "No debe contener más de 70 caracteres.",
+      });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.subjectContact;
+      setErrors(_errors);
+    }
+  };
+
+  // ===========
 
   const nameContactHandler = (e) => {
     setNameContact(e.target.value);
@@ -52,16 +115,25 @@ const Contact = () => {
                 <Form.Control
                   type="text"
                   onChange={nameContactHandler}
+                  onBlur={nameValidation}
                   value={nameContact}
+
                 />
+                {errors.nameContact && (
+                  <div className="errors">{errors.nameContact}</div>
+                )}
               </Form.Group>
               <Form.Group className="mt-4">
                 <Form.Label>E-mail:</Form.Label>
                 <Form.Control
                   type="email"
                   onChange={emailContactHandler}
+                  onBlur={emailValidation}
                   value={emailContact}
                 />
+              {errors.emailContact && (
+                <div className="errors">{errors.emailContact}</div>
+              )}
               </Form.Group>
               <Form.Group className="mt-4">
                 <Form.Label>Asunto:</Form.Label>
@@ -69,7 +141,11 @@ const Contact = () => {
                   type="text"
                   onChange={subjectContactHandler}
                   value={subjectContact}
+                  onBlur={subjectValidation}
                 />
+                {errors.subjectContact && (
+                  <div className="errors">{errors.subjectContact}</div>
+                )}
               </Form.Group>
               <Form.Group className="mt-4">
                 <Form.Label>Mensaje:</Form.Label>

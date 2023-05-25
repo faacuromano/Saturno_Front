@@ -52,7 +52,7 @@ const UserConfiguration = () => {
     } else if (name.length > 25) {
       setErrors({
         ...errors,
-        name: "Debe contener no más de 25 caracteres.",
+        name: "No debe contener más de 25 caracteres.",
       });
     } else {
       let _errors = { ...errors };

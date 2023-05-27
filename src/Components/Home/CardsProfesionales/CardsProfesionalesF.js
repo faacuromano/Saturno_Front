@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getProfessionals } from "../../../functions/professionalMethods";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
 
 import CardProfesionalF from "./CardProfesionalF";
-import { Link } from "react-router-dom";
+
 
 const CardsProfesionales = () => {
   const [professional, setProfessional] = useState([]);
@@ -24,12 +25,6 @@ const CardsProfesionales = () => {
     loadProfessional();
   }, []);
 
-  const storeProfessional = (item) => {
-    var profesional = JSON.stringify(item);
-    localStorage.removeItem("prof");
-    localStorage.setItem("prof", profesional);
-  };
-
   return (
     <>
       <Row className="">
@@ -40,10 +35,7 @@ const CardsProfesionales = () => {
         ) : (
           professional.map((item) => (
             <Col xs={12} md={6} lg={3} className="mb-3 mb-lg-0">
-              <Link
-                to={"/perfilProfesional"}
-                onClick={storeProfessional.bind(this, item)}
-              >
+              <Link to={`/perfilProfesional/${item.username}`}>
                 <CardProfesionalF data={item} />
               </Link>
             </Col>

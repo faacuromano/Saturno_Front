@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-//import { IDGetProfesional } from "../../functions/professionalMethods";
+
+import { GetByProfUsername } from "../../functions/professionalMethods";
 
 import "./PerfilProfesional.css";
 
@@ -8,24 +9,24 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import Accordion from "react-bootstrap/Accordion";
 import Modal from "react-bootstrap/Modal";
+import { useParams } from "react-router";
 
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
 
 import { FiClock } from "react-icons/fi";
 import { BiMap, BiMobileAlt } from "react-icons/bi";
 import { BsCalendarEvent } from "react-icons/bs";
-
-//import { Link } from "react-router-dom";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 
 const PerfilProfesional = () => {
   const [professional, setProfessional] = useState([]);
+  const { profesional } = useParams();
 
   useEffect(() => {
-    const Profesional = JSON.parse(localStorage.getItem("prof"));
-    setProfessional(Profesional);
-    localStorage.removeItem("prof");
-  }, []);
+    GetByProfUsername(profesional).then(function (response) {
+      setProfessional(response)
+    })
+  },[])
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

@@ -50,18 +50,18 @@ const AdminCliente = () => {
 
   const updateUserData = () => {
     const newUserData = {
-      id: ID,
-      nombre: name,
-      apellido: lastname,
-      username: userName,
-      mail: email,
-      numTelefono: phoneNumber,
-      fechaNacimiento: fechaNac,
-      fotoPerfil: "",
+        id: ID,
+        nombre: name,
+        apellido: lastname,
+        username: userName,
+        mail: email,
+        ubicacion: ubication,
+        numTelefono: phoneNumber,
+        fechaNacimiento: fechaNac,
+        fotoPerfil: ""
     };
 
     editClient(newUserData.id, newUserData).then(function (response) {
-      alert(response.data);
       console.log(response);
     });
   };
@@ -115,10 +115,10 @@ const AdminCliente = () => {
               <Form.Label>Fecha de nacimiento:</Form.Label>
               <Form.Control type="text" value={fechaNac} onChange={fechaNacHandler}/>
             </Form.Group>
-            {/* <Form.Group className="my-4">
+            <Form.Group className="my-4">
               <Form.Label>Ubicación:</Form.Label>
               <Form.Control type="text" value={ubication} onChange={ubicationHandler}/>
-            </Form.Group> */}
+            </Form.Group>
           </Form>
         </Col>
         <Col xl={7} className="mt-3">

@@ -13,7 +13,7 @@ const FilaCliente = (user) => {
     <>
       <tr>
       <td><Link onClick={IDwrapper} to={"/adminCliente"}><strong>{usuario.id}</strong></Link></td>
-        <td>{usuario.username}</td>
+        <td><Link onClick={IDwrapper} to={"/adminCliente"}>{usuario.username}</Link></td>
         <td>{usuario.nombre}</td>
         <td>{usuario.apellido}</td>
         <td>{usuario.mail}</td>

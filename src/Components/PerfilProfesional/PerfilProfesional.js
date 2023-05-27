@@ -2,31 +2,35 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import { GetByProfUsername } from "../../functions/professionalMethods";
+import { GetServiceByUsername } from "../../functions/serviceMethods";
 
 import "./PerfilProfesional.css";
+import "react-day-picker/dist/style.css";
 
 import { Button, Col, Container, Row } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
-import Accordion from "react-bootstrap/Accordion";
 import Modal from "react-bootstrap/Modal";
 import { useParams } from "react-router";
-
+import { DayPicker } from "react-day-picker";
+import AcordionServicios from "./AcordionServicios/AcordionServicios";
 
 import { FiClock } from "react-icons/fi";
 import { BiMap, BiMobileAlt } from "react-icons/bi";
-import { BsCalendarEvent } from "react-icons/bs";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
 
 const PerfilProfesional = () => {
-  const [professional, setProfessional] = useState([]);
+  const [profData, setProfData] = useState([]);
+  const [serviceData, setServiceData] = useState([]);
   const { profesional } = useParams();
 
   useEffect(() => {
     GetByProfUsername(profesional).then(function (response) {
-      setProfessional(response)
-    })
-  },[])
+      setProfData(response);
+    });
+
+    GetServiceByUsername(profesional).then(function (response) {
+      setServiceData(response);
+    });
+  }, []);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -37,7 +41,7 @@ const PerfilProfesional = () => {
   const current = new Date();
 
   const estilo = {
-    "background-image": "url(" + professional.fotoBanner + ")",
+    "background-image": "url(" + profData.fotoBanner + ")",
   };
 
   return (
@@ -57,7 +61,7 @@ const PerfilProfesional = () => {
                 <Row className="justify-content-center">
                   <Col xs={8}>
                     <Image
-                      src={professional.fotoPerfil}
+                      src={profData.fotoPerfil}
                       roundedCircle
                       fluid
                       className="my-4"
@@ -66,74 +70,37 @@ const PerfilProfesional = () => {
                 </Row>
                 <ul className="list-unstyled text-start ps-5">
                   <li className="mb-2">
-                    <BiMap /> <strong>{professional.direccion}</strong> -{" "}
-                    {professional.ubicacion}
+                    <BiMap /> <strong>{profData.direccion}</strong> -{" "}
+                    {profData.ubicacion}
                   </li>
                   <li className="mb-2">
-                    <FiClock /> {professional.horarioInicio} a{" "}
-                    {professional.horarioFinal}
+                    <FiClock /> {profData.horarioInicio} a{" "}
+                    {profData.horarioFinal}
                   </li>
                   <li className="mb-2">
-                    <BiMobileAlt /> {professional.numTelefono}
+                    <BiMobileAlt /> {profData.numTelefono}
                   </li>
                 </ul>
               </Col>
               <Col xs={8} className="text-start mt-5">
                 <h1 className="pb-4 mb-3">
-                  {professional.nombre} {professional.apellido}
+                  {profData.nombre} {profData.apellido}
                 </h1>
-                <h5 className="mb-3 text-muted">{professional.profesion}</h5>
+                <h5 className="mb-3 text-muted">{profData.profesion}</h5>
                 <h5 className="mb-3">Descripción</h5>
-                <p className="my-3">{professional.descripcion}</p>
+                <p className="my-3">{profData.descripcion}</p>
                 <h5 className="my-3">Lista de servicios</h5>
                 <p>Selecciona un servicio para solicitar un turno</p>
-                <Accordion>
-                  <Accordion.Item eventKey="0">
-                    <Accordion.Header>
-                      Corte - <strong>$1000</strong>
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam
-                      </p>
-                      <Button className="mt-4" onClick={handleShow}>
-                        <BsCalendarEvent /> Pedir turno
-                      </Button>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                  <Accordion.Item eventKey="1">
-                    <Accordion.Header>
-                      Corte + tintura - <strong>$1200</strong>
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam
-                      </p>
-                      <Button className="mt-4" onClick={handleShow}>
-                        <BsCalendarEvent /> Pedir turno
-                      </Button>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                  <Accordion.Item eventKey="2">
-                    <Accordion.Header>
-                      Corte + tintura + permanente - <strong>$1800</strong>
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam
-                      </p>
-                      <Button className="mt-4" onClick={handleShow}>
-                        <BsCalendarEvent /> Pedir turno
-                      </Button>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                </Accordion>
+
+                {serviceData.length === 0 ? (
+                  <p>
+                    <em>
+                      Para mostrar su perfil al público debe crear un servicio
+                    </em>
+                  </p>
+                ) : (
+                  <AcordionServicios servicios={serviceData} />
+                )}
               </Col>
             </Row>
           </Col>

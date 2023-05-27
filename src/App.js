@@ -1,11 +1,12 @@
 import React from "react";
+import { useContext, useEffect, useState } from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 
-//import Professional from './Components/Professional';
 import Home from "./Components/Home/Home";
 import Footer from "./Components/Footer/Footer";
 import Login from "./Components/Login/Login";
@@ -20,19 +21,17 @@ import UserConfiguration from "./Components/UserConfiguration/UserConfiguration"
 import RecoverPassword from "./Components/RecoverPassword/RecoverPassword";
 import Admin from "./Components/Admin/Admin";
 import TipoCuenta from "./Components/TipoCuenta/TipoCuenta";
-
-import { useContext, useEffect, useState } from "react";
-//import ThemeContext from "./Contexts/ThemeContext/ThemeContext";
-import Error404 from "./Components/Error404/Error404";
-import LoginContext from "./Contexts/ThemeContext/LoginContext";
+import ServiceSettings from "./Components/ServiceSettings/ServiceSettings";
+import AdminCliente from "./Components/Admin/AdminCliente/AdminCliente";
+import Error404 from "./Components/Error404/Error404"
 import NavBarLogOut from "./Components/NavBar/NavBarLogOut";
 import NavBarLogged from "./Components/NavBar/NavBarLogged";
 import SignUpProfesional from "./Components/SignUp/SignUpProfesional";
 
-// 1) export NODE_OPTIONS=--openssl-legacy-provider 2) npm start
+import LoginContext from "./Contexts/ThemeContext/LoginContext";
+
 
 function App() {
-  //const { theme, handleTheme } = useContext(ThemeContext);
   const { auth, handleLogin } = useContext(LoginContext);
   const [navBarRender, setNavBarRender] = useState(<NavBarLogged />);
 
@@ -131,7 +130,7 @@ function App() {
             </Container>
           }/>
           <Route
-            path="/perfilProfesional"
+            path="/perfilProfesional/:profesional"
             element={
               <Container className="text-center py-5">
                 <PerfilProfesional />
@@ -163,10 +162,26 @@ function App() {
             }
           />
           <Route
+            path="/serviceSettings"
+            element={
+              <Container className="text-center py-5">
+                <ServiceSettings/>
+              </Container>
+            }
+          />
+          <Route
             path="/admin"
             element={
               <Container className="text-center py-5">
                 <Admin />
+              </Container>
+            }
+          />
+          <Route
+            path="/adminCliente"
+            element={
+              <Container className="text-center py-5">
+                <AdminCliente />
               </Container>
             }
           />

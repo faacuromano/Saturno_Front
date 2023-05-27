@@ -66,12 +66,6 @@ const Profesionales = () => {
             <p className="border py-3 rounded mb-2">Clubes</p>
           </Col>
           <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Clínicas / hospitales</p>
-          </Col>
-          <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Consultorios médicos</p>
-          </Col>
-          <Col xs={6} lg={3}>
             <p className="border py-3 rounded mb-2">Estéticas</p>
           </Col>
           <Col xs={6} lg={3}>
@@ -101,7 +95,7 @@ const Profesionales = () => {
               </p>
             </Col>
             <Col xs={12}>
-              <Link to={"/signup"} className="colorLink">
+              <Link to={"/signuprofesional"} className="colorLink">
                 <Button color="primary">Crear cuenta profesional</Button>
               </Link>
             </Col>

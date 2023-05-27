@@ -11,7 +11,7 @@ const AdminNavigation = ({ setMenu }) => {
               setMenu("C");
             }}
           >
-            Clientes
+            <strong>Clientes</strong>
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>

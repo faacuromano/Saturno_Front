@@ -22,6 +22,7 @@ const SignUp = () => {
   const [errorsValidation, setErrorsValidation] = useState("");
   const inputUserName = useRef(null);
   const inputNameLast = useRef(null);
+  const inputName = useRef(null);
   const inputEmail = useRef(null);
   const inputPhoneNumber = useRef(null);
   const inputUbication = useRef(null);
@@ -49,13 +50,29 @@ const SignUp = () => {
     }
   };
 
+  // Handler de nombre y validador
+  const nameHandler = (e) => {
+    setName(e.target.value);
+  };
+
+  const nameValidation = () => {
+    if (name === "") {
+      setErrors({ ...errors, name: "Campo obligatorio." });
+    } else if (name.length > 25) {
+      setErrors({
+        ...errors,
+        name: "No debe contener más de 25 caracteres.",
+      });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.name;
+      setErrors(_errors);
+    }
+  };
+
   //Handler de nombre y apellido, validador de apellido
   const lastnameHandler = (e) => {
     setLastname(e.target.value);
-  };
-
-  const nameHandler = (e) => {
-    setName(e.target.value);
   };
 
   const LastnameValidation = () => {
@@ -251,8 +268,11 @@ const SignUp = () => {
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
-              <Form.Control onChange={nameHandler} value={name} type="text" />
+              <Form.Control onChange={nameHandler} value={name} onBlur={nameValidation} type="text" />
             </Form.Group>
+            {errors.name && (
+              <div className="errors">{errors.name}</div>
+            )}
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>
               <Form.Control
@@ -262,8 +282,8 @@ const SignUp = () => {
                 type="text"
                 ref={inputNameLast}
               />
-              {errors.nameLastname && (
-                <div className="errors">{errors.nameLastname}</div>
+              {errors.lastname && (
+                <div className="errors">{errors.lastname}</div>
               )}
             </Form.Group>
             <Form.Group className="mt-4">

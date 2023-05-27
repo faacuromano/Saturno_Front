@@ -15,14 +15,31 @@ export async function getProfessionals() {
   }
 }
 
-export async function IDGetProfesional(id) {
-  try {
+export async function GetByProfUsername(username){
+  try{
     const response = await axios({
-      url: `${baseUrl}/Profesional/${id}`,
-      method: "GET",
+      url: `${baseUrl}/Profesional/${username}`,
+      method: "GET"
     });
+    return response.data;
+  } catch (errors){
+    console.log(errors)
+  }
+}
 
-    return response;
+export async function RegisterProfessional(professional) {
+  console.log("Register professional ", professional);
+  try {
+    axios({
+      url: `${baseUrl}/profesional`,
+      method: "POST",
+      data: JSON.stringify(professional),
+      headers: {
+        "Content-Type": "application/json", // <- HERE
+      },
+    });
+    const listUser = getProfessionals();
+    console.log(listUser);
   } catch (errors) {
     console.log(errors);
   }

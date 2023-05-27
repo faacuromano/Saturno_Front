@@ -23,7 +23,7 @@ const PerfilUsuario = () => {
                 <Image src={userLogged.fotoPerfil} alt="" roundedCircle fluid />
               </Col>
               <Col xs={8}>
-                <h1>{userLogged.nombre}</h1>
+                <h1>{userLogged.nombre} {userLogged.apellido}</h1>
                 <h5 className="fw-light">{userLogged.ubication}</h5>
               </Col>
               <Col xs={10} className="border-bottom mt-5">

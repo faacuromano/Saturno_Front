@@ -4,262 +4,277 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { RegisterProfessional } from "../../functions/professionalMethods";
 import { useNavigate } from "react-router";
-  
+import { RegisterPayment } from '../MercadoPagoIntegration/mercadoPagoCheckout';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+initMercadoPago('TEST-a1306846-3773-42d7-806e-ec8161f2315d');
+
+// SDK de Mercado Pago
+const mercadopago = require("mercadopago");
+// Agrega credenciales
+mercadopago.configure({
+  access_token: "TEST-1363133089955810-051616-60e599c38c5e8cd051d5579312bd7ac6-754636012",
+});
 
 const SignUpProfesional = () => {
-    const [userNameProf, setUserNameProf] = useState("");
-    const [nameProf, setNameProf] = useState("");
-    const [lastNameProf, setLastNameProf] = useState("");
-    const [emailProf, setEmailProf] = useState("");
-    const [phoneProf, setPhoneProf ] = useState("");
-    const [nacProf,setNacProf ] = useState("");
-    const [ubicProf,setUbicProf ] = useState("");
-    const [direcProf,setDirecProf ] = useState("");
-    const [descProf, setDescProf] = useState("");
-    const [horaInicio, setHoraInicio] = useState("");
-    const [horaFinal, setHoraFinal] = useState("");
-    const [contraProf, setContraProf] = useState("");
-    const [validContraProf, setValidContraProf] = useState("");
-    const [errors, setErrors] = useState({});
-    const [errorsValidation, setErrorsValidation] = useState("");
-    const inputUserNameProf = useRef(null);
-    const inputNameProf = useRef(null);
-    const inputLastNameProf = useRef(null);
-    const inputEmailProf = useRef(null);
-    const inputPhoneProf = useRef(null);
-    const inputNacProf = useRef(null);
-    const inputUbicProf = useRef(null);
-    const inputDirecProf = useRef(null);
-    const inputContraProf = useRef(null);
-    const inputValidContraProf = useRef(null);
-    const inputHoraInicio = useRef(null);
-    const inputHoraFinal = useRef(null);
+  const [userNameProf, setUserNameProf] = useState("");
+  const [nameProf, setNameProf] = useState("");
+  const [lastNameProf, setLastNameProf] = useState("");
+  const [emailProf, setEmailProf] = useState("");
+  const [phoneProf, setPhoneProf] = useState("");
+  const [nacProf, setNacProf] = useState("");
+  const [ubicProf, setUbicProf] = useState("");
+  const [direcProf, setDirecProf] = useState("");
+  const [descProf, setDescProf] = useState("");
+  const [horaInicio, setHoraInicio] = useState("");
+  const [horaFinal, setHoraFinal] = useState("");
+  const [contraProf, setContraProf] = useState("");
+  const [validContraProf, setValidContraProf] = useState("");
+  const [errors, setErrors] = useState({});
+  const [errorsValidation, setErrorsValidation] = useState("");
+  const inputUserNameProf = useRef(null);
+  const inputNameProf = useRef(null);
+  const inputLastNameProf = useRef(null);
+  const inputEmailProf = useRef(null);
+  const inputPhoneProf = useRef(null);
+  const inputNacProf = useRef(null);
+  const inputUbicProf = useRef(null);
+  const inputDirecProf = useRef(null);
+  const inputContraProf = useRef(null);
+  const inputValidContraProf = useRef(null);
+  const inputHoraInicio = useRef(null);
+  const inputHoraFinal = useRef(null);
+
+  // MercadoPago
+  const [pagar, setPagar] = useState(true);
+  const [preference, setPreference] = useState();
+  const [response, setResponse] = useState();
+  let preferenceId = null;
 
 
-    //NOMBRE USUARIO: HANDLER, VALIDATION
-    
-    const userNameProfHandler = (e) => {
-        setUserNameProf(e.target.value);
-      };
-    
-    const userNameProfValidation = () => {
+  //NOMBRE USUARIO: HANDLER, VALIDATION
+
+  const userNameProfHandler = (e) => {
+    setUserNameProf(e.target.value);
+  };
+
+  const userNameProfValidation = () => {
     if (userNameProf === "") {
-        setErrors({ ...errors, userNameProf: "Campo obligatorio." });
+      setErrors({ ...errors, userNameProf: "Campo obligatorio." });
     } else if (userNameProf.length < 4 || userNameProf.length > 15) {
-        setErrors({
+      setErrors({
         ...errors,
         userNameProf: "Debe contener entre 4 y 15 caracteres.",
-        });
+      });
     } else {
-        let _errors = { ...errors };
-        delete _errors.userNameProf;
-        setErrors(_errors);
+      let _errors = { ...errors };
+      delete _errors.userNameProf;
+      setErrors(_errors);
     }
-    };
+  };
 
-    //NOMBRE: HANDLER, VALIDATION
-    const nameProfHandler = (e) => {
-        setNameProf(e.target.value);
-    };
+  //NOMBRE: HANDLER, VALIDATION
+  const nameProfHandler = (e) => {
+    setNameProf(e.target.value);
+  };
 
-    const nameProfValidation = () => {
-        if (nameProf === "") {
-            setErrors({ ...errors, nameProf: "Campo obligatorio." });
-        } else if (nameProf.length < 4 || nameProf.length > 10) {
-            setErrors({
-            ...errors,
-            nameProf: "Debe contener entre 4 y 10 caracteres.",
-            });
-        } else {
-            let _errors = { ...errors };
-            delete _errors.nameProf;
-            setErrors(_errors);
-        }
-        };
-   
-    //APELLIDO: HANDLER, VALIDATION
-    const lastNameProfHandler = (e) => {
+  const nameProfValidation = () => {
+    if (nameProf === "") {
+      setErrors({ ...errors, nameProf: "Campo obligatorio." });
+    } else if (nameProf.length < 4 || nameProf.length > 10) {
+      setErrors({
+        ...errors,
+        nameProf: "Debe contener entre 4 y 10 caracteres.",
+      });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.nameProf;
+      setErrors(_errors);
+    }
+  };
+
+  //APELLIDO: HANDLER, VALIDATION
+  const lastNameProfHandler = (e) => {
     setLastNameProf(e.target.value);
-    };
+  };
 
-    const lastNameProfValidation = () => {
-        if (lastNameProf === "") {
-            setErrors({ ...errors, lastNameProf: "Campo obligatorio." });
-        } else if (lastNameProf.length < 4 || lastNameProf.length > 10) {
-            setErrors({
-            ...errors,
-            lastNameProf: "Debe contener entre 4 y 10 caracteres.",
-            });
-        } else {
-            let _errors = { ...errors };
-            delete _errors.lastNameProf;
-            setErrors(_errors);
-        }
-        };
+  const lastNameProfValidation = () => {
+    if (lastNameProf === "") {
+      setErrors({ ...errors, lastNameProf: "Campo obligatorio." });
+    } else if (lastNameProf.length < 4 || lastNameProf.length > 10) {
+      setErrors({
+        ...errors,
+        lastNameProf: "Debe contener entre 4 y 10 caracteres.",
+      });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.lastNameProf;
+      setErrors(_errors);
+    }
+  };
 
-    //EMAIL: HANDLER, VALIDATION
-    const emailProfHandler = (e) => {
+  //EMAIL: HANDLER, VALIDATION
+  const emailProfHandler = (e) => {
     setEmailProf(e.target.value);
-    };
+  };
 
-    const emailProfValidation = () => {
-      const validEmail = "@";
-      const correct = emailProf.match(validEmail);
-      if (emailProf === "") {
-        setErrors({ ...errors, emailProf: "Campo obligatorio." });
-      } else if (!correct) {
-        setErrors({ ...errors, emailProf: "Ingrese un email correcto." });
-      } else {
-        let _errors = { ...errors };
-        delete _errors.emailProf;
-        setErrors(_errors);
-      }
-    };
+  const emailProfValidation = () => {
+    const validEmail = "@";
+    const correct = emailProf.match(validEmail);
+    if (emailProf === "") {
+      setErrors({ ...errors, emailProf: "Campo obligatorio." });
+    } else if (!correct) {
+      setErrors({ ...errors, emailProf: "Ingrese un email correcto." });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.emailProf;
+      setErrors(_errors);
+    }
+  };
 
-    //TELEFONO: HANDLER, VALIDATION
-    const phoneProfHandler = (e) => {
+  //TELEFONO: HANDLER, VALIDATION
+  const phoneProfHandler = (e) => {
     setPhoneProf(e.target.value);
-    };
+  };
 
-    const phoneProfValidation = () => {
-      if (phoneProf === "") {
-        setErrors({ ...errors, phoneProf: "Campo obligatorio." });
-      } else if (phoneProf.length < 10 || phoneProf.length > 10) {
-        setErrors({ ...errors, phoneProf: "Debe contener 10 números." });
-      } else {
-        let _errors = { ...errors };
-        delete _errors.phoneProf;
-        setErrors(_errors);
-      }
-    };
+  const phoneProfValidation = () => {
+    if (phoneProf === "") {
+      setErrors({ ...errors, phoneProf: "Campo obligatorio." });
+    } else if (phoneProf.length < 10 || phoneProf.length > 10) {
+      setErrors({ ...errors, phoneProf: "Debe contener 10 números." });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.phoneProf;
+      setErrors(_errors);
+    }
+  };
 
-    //NACIMIENTO: HANDLER, VALIDATION
-    const nacProfHandler = (e) => {
+  //NACIMIENTO: HANDLER, VALIDATION
+  const nacProfHandler = (e) => {
     setNacProf(e.target.value);
-    };
+  };
 
-    const nacProfValidation = () => {
-      if (nacProf === "") {
-        setErrors({ ...errors, nacProf: "Campo obligatorio." });
-      } else {
-        let _errors = { ...errors };
-        delete _errors.nacProf;
-        setErrors(_errors);
-      }
-    };
+  const nacProfValidation = () => {
+    if (nacProf === "") {
+      setErrors({ ...errors, nacProf: "Campo obligatorio." });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.nacProf;
+      setErrors(_errors);
+    }
+  };
 
-    //UBICACION: HANDLER, VALIDATION
-    const ubicProfHandler = (e) => {
+  //UBICACION: HANDLER, VALIDATION
+  const ubicProfHandler = (e) => {
     setUbicProf(e.target.value);
-    };
+  };
 
-    const ubicProfValidation = () => {
-      if (ubicProf === "") {
-        setErrors({ ...errors, ubicProf: "Campo obligatorio." });
-      } else {
-        let _errors = { ...errors };
-        delete _errors.ubicProf;
-        setErrors(_errors);
-      }
-    };
+  const ubicProfValidation = () => {
+    if (ubicProf === "") {
+      setErrors({ ...errors, ubicProf: "Campo obligatorio." });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.ubicProf;
+      setErrors(_errors);
+    }
+  };
 
-    //DIRECCION: HANDLER, VALIDATION
-    const direcProfHandler = (e) => {
+  //DIRECCION: HANDLER, VALIDATION
+  const direcProfHandler = (e) => {
     setDirecProf(e.target.value);
-    };
+  };
 
-    const direcProfValidation = () => {
-      if (direcProf === "") {
-        setErrors({ ...errors, direcProf: "Campo obligatorio." });
-      } else if (direcProf.length < 5) {
-        setErrors({
-          ...errors,
-          direcProf: "No puede contener menos de 5 caracteres.",
-        });
-      } else {
-        let _errors = { ...errors };
-        delete _errors.direcProf;
-        setErrors(_errors);
-      }
-    };
+  const direcProfValidation = () => {
+    if (direcProf === "") {
+      setErrors({ ...errors, direcProf: "Campo obligatorio." });
+    } else if (direcProf.length < 5) {
+      setErrors({
+        ...errors,
+        direcProf: "No puede contener menos de 5 caracteres.",
+      });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.direcProf;
+      setErrors(_errors);
+    }
+  };
 
-    //DESCRIPCION: HANDLER
-    const descProfHandler = (e) => {
+  //DESCRIPCION: HANDLER
+  const descProfHandler = (e) => {
     setDescProf(e.target.value);
-    };
+  };
 
-    //HORA_DESDE: HANDLER
-    const horaInicioHandler = (e) => {
-      setHoraInicio(e.target.value);
-      };
-    
-    const horaInicioValidation = () => {
-      if (horaInicio === "") {
-        setErrors({ ...errors, horaInicio: "Campo obligatorio." });
-      } else {
-        let _errors = { ...errors };
-        delete _errors.horaInicio;
-        setErrors(_errors);
-      }
-    };
-      
-    //HORA_HASTA: HANDLER
-    const horaFinalHandler = (e) => {
-      setHoraFinal(e.target.value);
-      };
-    
-    const horaFinalValidation = () => {
-      if (horaFinal === "") {
-        setErrors({ ...errors, horaFinal: "Campo obligatorio." });
-      } else {
-        let _errors = { ...errors };
-        delete _errors.horaFinal;
-        setErrors(_errors);
-      }
-    };
+  //HORA_DESDE: HANDLER
+  const horaInicioHandler = (e) => {
+    setHoraInicio(e.target.value);
+  };
 
-    //CONTRASENA: HANDLER, VALIDATION
-    const contraProfHandler = (e) => {
+  const horaInicioValidation = () => {
+    if (horaInicio === "") {
+      setErrors({ ...errors, horaInicio: "Campo obligatorio." });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.horaInicio;
+      setErrors(_errors);
+    }
+  };
+
+  //HORA_HASTA: HANDLER
+  const horaFinalHandler = (e) => {
+    setHoraFinal(e.target.value);
+  };
+
+  const horaFinalValidation = () => {
+    if (horaFinal === "") {
+      setErrors({ ...errors, horaFinal: "Campo obligatorio." });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.horaFinal;
+      setErrors(_errors);
+    }
+  };
+
+  //CONTRASENA: HANDLER, VALIDATION
+  const contraProfHandler = (e) => {
     setContraProf(e.target.value);
-    };
+  };
 
-    const contraProfValidation = () => {
-      if (contraProf === "") {
-        setErrors({ ...errors, contraProf: "Campo obligatorio." });
-      } else if (contraProf.length < 5 || contraProf.length > 10) {
-        setErrors({
-          ...errors,
-          contraProf: "Debe contener entre 5 y 10 caracteres.",
-        });
-      } else {
-        let _errors = { ...errors };
-        delete _errors.contraProf;
-        setErrors(_errors);
-      }
-    };
-    //CONTRASENA VALIDA: HANDLER, VALIDATION
-    const validContraProfHandler = (e) => {
+  const contraProfValidation = () => {
+    if (contraProf === "") {
+      setErrors({ ...errors, contraProf: "Campo obligatorio." });
+    } else if (contraProf.length < 5 || contraProf.length > 10) {
+      setErrors({
+        ...errors,
+        contraProf: "Debe contener entre 5 y 10 caracteres.",
+      });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.contraProf;
+      setErrors(_errors);
+    }
+  };
+  //CONTRASENA VALIDA: HANDLER, VALIDATION
+  const validContraProfHandler = (e) => {
     setValidContraProf(e.target.value);
-    };
+  };
 
-    const validContraProfValidation = () => {
-      if (validContraProf === "") {
-        setErrors({ ...errors, validContraProf: "Campo obligatorio." });
-      } else if (validContraProf !== contraProf) {
-        setErrors({ ...errors, validContraProf: "Las contraseñas no coinciden." });
-      } else {
-        let _errors = { ...errors };
-        delete _errors.validContraProf;
-        setErrors(_errors);
-      }
-    };
-    
-    //GUARDAR LOS DATOS DEL PROFESIONAL
-    const saveProfHandler = () => {
+  const validContraProfValidation = () => {
+    if (validContraProf === "") {
+      setErrors({ ...errors, validContraProf: "Campo obligatorio." });
+    } else if (validContraProf !== contraProf) {
+      setErrors({ ...errors, validContraProf: "Las contraseñas no coinciden." });
+    } else {
+      let _errors = { ...errors };
+      delete _errors.validContraProf;
+      setErrors(_errors);
+    }
+  };
 
-      if (userNameProf === "" || nameProf === ""||lastNameProf === ""||emailProf === ""||phoneProf === ""|| ubicProf === ""|| direcProf === ""||horaInicio === ""||horaFinal === "" ||contraProf === "" ||validContraProf === "" ){
-        alert("Debe completar los campos requeridos.")
-      } else {
+  //GUARDAR LOS DATOS DEL PROFESIONAL
+  const saveProfHandler = () => {
+
+    if (userNameProf === "" || nameProf === "" || lastNameProf === "" || emailProf === "" || phoneProf === "" || ubicProf === "" || direcProf === "" || horaInicio === "" || horaFinal === "" || contraProf === "" || validContraProf === "") {
+      alert("Debe completar los campos requeridos.")
+    } else {
       const profesionalDatos = {
         descripcion: descProf,
         horarioInicio: horaInicio,
@@ -276,42 +291,96 @@ const SignUpProfesional = () => {
           numTelefono: phoneProf,
           fechaNacimiento: nacProf,
           fotoPerfil: null,
-          tipoCuenta: "P"}
+          tipoCuenta: "P"
+        }
       }
       RegisterProfessional(profesionalDatos);
       console.log(profesionalDatos)
       setErrorsValidation("");
     }
     cleanInputs();
-    ;};
+    ;
+  };
 
-    //LIMPIAR CAMPOS
-    const cleanInputs = () => {
-        setUserNameProf("");
-        setNameProf("");
-        setLastNameProf("");
-        setEmailProf("");
-        setPhoneProf("");
-        setNacProf("");
-        setUbicProf("");
-        setDirecProf("");
-        setDescProf("");
-        setHoraInicio("");
-        setHoraFinal("");
-        setContraProf("");
-        setValidContraProf("");
+  // Crea un objeto de preferencia
+
+  
+  const onSubmit = () => {
+    
+    if (emailProf === "") {
+      alert("Debe añadir el mail de pago.")
+    } else {
+      let preference = {
+        reason: "Contratar Plan Profesional",
+        auto_recurring: {
+          frequency: 1,
+          frequency_type: "months",
+          start_date: null,
+          end_date: null,
+          transaction_amount: 10,
+          currency_id: "ARS"
+        },
+        back_url: "/",
+        payer_email: emailProf,
       };
-    
-    
+      RegisterPayment(preference);
+
+      mercadopago.preferences.create(preference).then(function(response){
+        console.log(response.body.id, "yo, la response");
+        console.log("hola");
+      }).catch(function(error){
+        console.log(error);
+      });
+
+      mercadopago.preferences.get(preferenceId).then(response => console.log(response));
+
+      setResponse(1);
+      console.log(preferenceId)
+      
+      setPagar(false)
+      // mercadopago.preferences.create(preferenceId)
+      //   .then(function (response) {
+      //     response.json({
+      //       global: response.body.id,
+      //     });
+      //     // En esta instancia deberás asignar el valor dentro de response.body.id por el ID de preferencia solicitado en el siguiente paso
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
+      console.log(preference)
+
+    }
+  };
+
+
+  //LIMPIAR CAMPOS
+  const cleanInputs = () => {
+    setUserNameProf("");
+    setNameProf("");
+    setLastNameProf("");
+    setEmailProf("");
+    setPhoneProf("");
+    setNacProf("");
+    setUbicProf("");
+    setDirecProf("");
+    setDescProf("");
+    setHoraInicio("");
+    setHoraFinal("");
+    setContraProf("");
+    setValidContraProf("");
+  };
+
+
   return (
     <Container className="py-3">
-        <Row className="justify-content-center text-start">
+      <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
           <h1>Registro de profesional</h1>
         </Col>
         <Col xs={12} lg={10} xl={7} className="mt-2">
           <Form>
-          <Form.Group>
+            <Form.Group>
               <Form.Label>Nombre de usuario:</Form.Label>
               <Form.Control
                 type="text"
@@ -333,7 +402,7 @@ const SignUpProfesional = () => {
                 value={nameProf}
                 ref={inputNameProf}
               />
-               {errors.nameProf && (
+              {errors.nameProf && (
                 <div className="errors">{errors.nameProf}</div>
               )}
             </Form.Group>
@@ -359,7 +428,7 @@ const SignUpProfesional = () => {
                 value={emailProf}
                 ref={inputEmailProf}
               />
-               {errors.emailProf && (
+              {errors.emailProf && (
                 <div className="errors">{errors.emailProf}</div>
               )}
             </Form.Group>
@@ -473,19 +542,21 @@ const SignUpProfesional = () => {
             </Form.Group>
           </Form>
           <Button
-              variant="primary"
-              className="mt-4"
-              onClick={saveProfHandler}
-            >
-              Enviar
-            </Button>
-            <Button
-              variant="secondary"
-              className="mt-4 mx-2"
-              onClick={cleanInputs}
-            >
-              Resetear
-            </Button>
+            variant="primary"
+            className="mt-4"
+            onClick={onSubmit}
+          >
+            Enviar
+          </Button>
+          <Button
+            variant="secondary"
+            className="mt-4 mx-2"
+            onClick={cleanInputs}
+          >
+            Resetear
+          </Button>
+          {(pagar) ? null : <Wallet initialization={{ preferenceId: response  }} />}
+
         </Col>
       </Row>
     </Container>

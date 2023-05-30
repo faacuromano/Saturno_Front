@@ -15,6 +15,30 @@ export async function getClient() {
   }
 }
 
+export async function getClientByUsername(username) {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/cliente/${username}`,
+      method: "GET",
+    });
+    return response;
+  } catch (errors) {
+    console.log(errors);
+  }
+}
+
+export async function getClientProfile(username) {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/perfilDe/${username}`,
+      method: "GET",
+    });
+    return response;
+  } catch (errors) {
+    console.log(errors);
+  }
+}
+
 export async function authClient(user, passw) {
   try {
     const response = await axios({
@@ -45,10 +69,9 @@ export async function DeleteClient(id) {
 }
 
 export async function RegisterClient(client) {
-  console.log("Register client ", client);
   try {
     axios({
-      url: `${baseUrl}/Usuario`,
+      url: `${baseUrl}/cliente`,
       method: "POST",
       data: JSON.stringify(client),
       headers: {
@@ -56,17 +79,16 @@ export async function RegisterClient(client) {
       },
     });
     const listUser = getClient();
-    console.log(listUser);
+    console.log("listUser", listUser);
   } catch (errors) {
     console.log(errors);
   }
 }
 
-export async function editClient(id, data) {
-  console.log("edit: ", id, data);
+export async function editClient(username, data) {
   try {
     const response = await axios({
-      url: `${baseUrl}/Usuario/${id}`,
+      url: `${baseUrl}/Usuario/${username}`,
       method: "PUT",
       data: JSON.stringify(data),
       headers: {

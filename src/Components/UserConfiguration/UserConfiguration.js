@@ -1,28 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Image } from "react-bootstrap";
 
 import { editClient } from "../../functions/clientMethods";
+import { getClientByUsername } from "../../functions/clientMethods";
 
 const UserConfiguration = () => {
-  //catch del user en la local host
-  const [user, setUser] = useState([]);
-
-  useEffect(() => {
-    const usuario = JSON.parse(localStorage.getItem("user"));
-    setUser(usuario);
-
-    setName(usuario.user.nombre);
-    setLastName(usuario.user.apellido);
-    setEmail(usuario.user.mail);
-    setFechaNac(usuario.user.fechaNacimiento);
-    setPhoneNumber(usuario.user.numTelefono);
-    setFotoPerfil(usuario.user.fotoPerfil);
-  }, []);
-
   //set de la info en los inputs
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -31,6 +17,20 @@ const UserConfiguration = () => {
   const [fechaNac, setFechaNac] = useState("");
   const [ubication, setUbication] = useState("");
   const [fotoPerfil, setFotoPerfil] = useState("");
+  const [username, setUsername] = useState("");
+
+  //Modal
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [headerModal, setHeaderModal] = useState();
+  const [bodyModal, setBodyModal] = useState();
+  const handlerHeaderModal = (data) => {
+    setHeaderModal(data);
+  };
+  const handlerBodyModal = (data) => {
+    setBodyModal(data);
+  };
 
   // Error validation setters
   const [errors, setErrors] = useState({});
@@ -40,6 +40,20 @@ const UserConfiguration = () => {
   const inputEmail = useRef(null);
   const inputPhoneNumber = useRef(null);
   const inputUbication = useRef(null);
+
+  useEffect(() => {
+    const user_name = localStorage.getItem("user");
+    getClientByUsername(user_name).then(function (response) {
+      setUsername(response.data.username);
+      setName(response.data.nombre);
+      setLastName(response.data.apellido);
+      setEmail(response.data.mail);
+      setFechaNac(response.data.fechaNacimiento);
+      setPhoneNumber(response.data.numTelefono);
+      setFotoPerfil(response.data.fotoPerfil);
+      setUbication(response.data.ubicacion);
+    });
+  }, []);
 
   //Handler de nombre y apellido, validador de apellido
   const nameHandler = (e) => {
@@ -136,21 +150,40 @@ const UserConfiguration = () => {
   //Guardar cambios
   const updateUserData = () => {
     const newUserData = {
-      id: user.id,
       nombre: name,
       apellido: lastName,
-      username: user.username,
+      username: username,
       mail: email,
+      ubicacion: ubication,
       numTelefono: phoneNumber,
       fechaNacimiento: fechaNac,
-      fotoPerfil: user.fotoPerfil,
+      fotoPerfil: fotoPerfil,
     };
 
-    editClient(newUserData.id, newUserData).then(function (response) {
-      alert(response.data);
-      console.log(response);
+    editClient(username, newUserData).then(function (response) {
+      if (response) {
+        handlerHeaderModal(
+          <Modal.Header closeButton>
+            <Modal.Title>¡Modificación exitosa!</Modal.Title>
+          </Modal.Header>
+        );
+        handlerBodyModal(
+          <Modal.Body>Tu información fue modificada con exito</Modal.Body>
+        );
+      } else {
+        handlerHeaderModal(
+          <Modal.Header closeButton>
+            <Modal.Title>¡Error en la modificacion!</Modal.Title>
+          </Modal.Header>
+        );
+        handlerBodyModal(
+          <Modal.Body>
+            Hubo un problema al querer modificar tu información
+          </Modal.Body>
+        );
+      }
+      handleShow();
     });
-    localStorage.setItem("user", JSON.stringify(newUserData));
   };
 
   return (
@@ -180,9 +213,7 @@ const UserConfiguration = () => {
                     onBlur={nameValidation}
                     ref={inputName}
                   />
-                   {errors.name && (
-                    <div className="errors">{errors.name}</div>
-                  )}
+                  {errors.name && <div className="errors">{errors.name}</div>}
                 </Form.Group>
                 <Form.Group className="mt-4">
                   <Form.Label>Apellido:</Form.Label>
@@ -297,6 +328,15 @@ const UserConfiguration = () => {
             </Col>
           </Row>
         </Col>
+        <Modal show={show} onHide={handleClose} centered>
+          {headerModal}
+          {bodyModal}
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleClose}>
+              Ok
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Row>
     </Container>
   );

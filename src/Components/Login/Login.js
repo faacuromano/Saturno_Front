@@ -49,14 +49,16 @@ const Login = () => {
 
   const loginHandler = () => {
     authClient(userName, password).then(function (response) {
-      console.log(response)
-      if (response != null) {
+      if (response) {
+        localStorage.setItem("user", response.data.user.username);
+        const newAuth = {
+          username: response.data.user.username,
+          token: response.data.token,
+        };
+        handleLogin(newAuth);
         navigate("/");
-        console.log(response.data);
-        localStorage.setItem("user", JSON.stringify(response.data));
-        handleLogin(response.data);
       } else {
-        alert('Usuario o contraseña incorrectos')
+        alert("Usuario o contraseña incorrectos");
         handleLogin(null);
       }
     });

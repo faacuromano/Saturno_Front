@@ -3,14 +3,18 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
+
 import CardsProfesionales from "../Home/CardsProfesionales/CardsProfesionalesF";
+import { getClientProfile } from "../../functions/clientMethods";
 
 const PerfilUsuario = () => {
   const [userLogged, setUserLogged] = useState({});
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    setUserLogged(user.user);
+    const username = localStorage.getItem("user");
+    getClientProfile(username).then(function (response) {
+      setUserLogged(response.data);
+    });
   }, []);
 
   return (
@@ -23,8 +27,10 @@ const PerfilUsuario = () => {
                 <Image src={userLogged.fotoPerfil} alt="" roundedCircle fluid />
               </Col>
               <Col xs={8}>
-                <h1>{userLogged.nombre} {userLogged.apellido}</h1>
-                <h5 className="fw-light">{userLogged.ubication}</h5>
+                <h1>
+                  {userLogged.nombre} {userLogged.apellido}
+                </h1>
+                <h5 className="fw-light">{userLogged.ubicacion}</h5>
               </Col>
               <Col xs={10} className="border-bottom mt-5">
                 <h6>Tus turnos</h6>

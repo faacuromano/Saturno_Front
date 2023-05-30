@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router";
@@ -8,18 +8,24 @@ import { useNavigate } from "react-router";
 import { RegisterClient } from "../../functions/clientMethods";
 
 const SignUp = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false);
+    navigate("/");
+  };
+  const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+
   const [userName, setUserName] = useState("");
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [fechaNac, setFechaNac] = useState("");
-  const [ubication, setUbication] = useState("");
+  const [ubication, setUbication] = useState("Rosario");
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState("");
-  //const [userData, setUserData] = useState();
-  const [errors, setErrors] = useState({});
-  const [errorsValidation, setErrorsValidation] = useState("");
+
   const inputUserName = useRef(null);
   const inputNameLast = useRef(null);
   const inputName = useRef(null);
@@ -29,8 +35,10 @@ const SignUp = () => {
   const inputPassword = useRef(null);
   const inputValidPassword = useRef(null);
 
-  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
+  const [errorsValidation, setErrorsValidation] = useState("");
 
+  // Handlers y validaciones
   const userNameHandler = (e) => {
     setUserName(e.target.value);
   };
@@ -50,7 +58,6 @@ const SignUp = () => {
     }
   };
 
-  // Handler de nombre y validador
   const nameHandler = (e) => {
     setName(e.target.value);
   };
@@ -70,7 +77,6 @@ const SignUp = () => {
     }
   };
 
-  //Handler de nombre y apellido, validador de apellido
   const lastnameHandler = (e) => {
     setLastname(e.target.value);
   };
@@ -90,7 +96,6 @@ const SignUp = () => {
     }
   };
 
-  //Handler y validación de email
   const emailHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -125,7 +130,6 @@ const SignUp = () => {
     }
   };
 
-  //Handler de fecha de nacimiento
   const fechaNacHandler = (e) => {
     setFechaNac(e.target.value);
   };
@@ -133,6 +137,7 @@ const SignUp = () => {
   const ubicationHandler = (e) => {
     setUbication(e.target.value);
   };
+
   const ubicationValidation = () => {
     if (ubication === "") {
       setErrors({ ...errors, ubication: "Campo obligatorio." });
@@ -146,6 +151,7 @@ const SignUp = () => {
   const passwordHandler = (e) => {
     setPassword(e.target.value);
   };
+
   const passwordValidation = () => {
     if (password === "") {
       setErrors({ ...errors, password: "Campo obligatorio." });
@@ -177,16 +183,20 @@ const SignUp = () => {
     }
   };
 
+  //GUARDAR INFORMACIÓN
   const saveBaseUsuarioHandler = () => {
     const usuarioDatos = {
-      username: userName,
-      nombre: name,
-      apellido: lastname,
-      mail: email,
-      passw: password,
-      fechaNacimiento: fechaNac,
-      numTelefono: phoneNumber,
-      tipoCuenta: "C",
+      idUsuariosNavigation: {
+        nombre: name,
+        apellido: lastname,
+        username: userName,
+        mail: email,
+        ubicacion: ubication,
+        numTelefono: phoneNumber,
+        fechaNacimiento: fechaNac,
+        fotoPerfil: "string",
+        pass: password,
+      },
     };
 
     // if (
@@ -199,13 +209,13 @@ const SignUp = () => {
     //   password &&
     //   validPassword
     // ) {
-    //   //ACÁ VA EL REGISTRO DE USUARIO
 
     cleanInputs();
-    //window.localStorage.setItem("user", JSON.stringify(userData));
     RegisterClient(usuarioDatos);
-    navigate("/");
+    localStorage.setItem("user", userName);
+    handleShow();
     setErrorsValidation("");
+
     // } else {
     //   if (errors.userName) {
     //     inputUserName.current.focus();
@@ -268,11 +278,15 @@ const SignUp = () => {
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
-              <Form.Control onChange={nameHandler} value={name} onBlur={nameValidation} type="text" />
+              <Form.Control
+                onChange={nameHandler}
+                value={name}
+                onBlur={nameValidation}
+                type="text"
+                ref={inputName}
+              />
             </Form.Group>
-            {errors.name && (
-              <div className="errors">{errors.name}</div>
-            )}
+            {errors.name && <div className="errors">{errors.name}</div>}
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>
               <Form.Control
@@ -379,6 +393,19 @@ const SignUp = () => {
             </Button>
           </Form>
         </Col>
+        <Modal show={show} onHide={handleClose} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>¡Registro exitoso!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Ya puedes sacar turnos con tus profesionales favoritos
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleClose}>
+              Ir al Inicio
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Row>
     </Container>
   );

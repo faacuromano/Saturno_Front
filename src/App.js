@@ -28,6 +28,8 @@ import NavBarLogOut from "./Components/NavBar/NavBarLogOut";
 import NavBarLogged from "./Components/NavBar/NavBarLogged";
 import SignUpProfesional from "./Components/SignUp/SignUpProfesional";
 
+import ProfessionalConf from "./Components/UserConfiguration/ProfessionalConf";
+
 import LoginContext from "./Contexts/ThemeContext/LoginContext";
 
 
@@ -166,6 +168,14 @@ function App() {
             element={
               <Container className="text-center py-5">
                 <ServiceSettings/>
+              </Container>
+            }
+          />
+          <Route
+            path="/professionalconf"
+            element={
+              <Container className="text-center py-5">
+                <ProfessionalConf/>
               </Container>
             }
           />

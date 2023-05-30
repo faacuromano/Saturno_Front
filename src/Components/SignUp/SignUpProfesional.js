@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Col, Container, FormGroup, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { RegisterProfessional } from "../../functions/professionalMethods";
 import { useNavigate } from "react-router";
-  
+import { getRubros } from '../../functions/rubrosMethods';  
+import { getUbicaciones } from '../../functions/ubicationMethods';
 
 const SignUpProfesional = () => {
     const [userNameProf, setUserNameProf] = useState("");
@@ -13,7 +14,7 @@ const SignUpProfesional = () => {
     const [emailProf, setEmailProf] = useState("");
     const [phoneProf, setPhoneProf ] = useState("");
     const [nacProf,setNacProf ] = useState("");
-    const [ubicProf,setUbicProf ] = useState("");
+    //const [ubicProf,setUbicProf ] = useState("");
     const [direcProf,setDirecProf ] = useState("");
     const [descProf, setDescProf] = useState("");
     const [horaInicio, setHoraInicio] = useState("");
@@ -22,6 +23,10 @@ const SignUpProfesional = () => {
     const [validContraProf, setValidContraProf] = useState("");
     const [errors, setErrors] = useState({});
     const [errorsValidation, setErrorsValidation] = useState("");
+    const [profesion, setProfesion] = useState("");
+    const [profesiones, setProfesiones] = useState([]);
+    const [ubicacion, setUbicacion] = useState("");
+    const [ubicaciones, setUbicaciones] = useState([]);
     const inputUserNameProf = useRef(null);
     const inputNameProf = useRef(null);
     const inputLastNameProf = useRef(null);
@@ -34,6 +39,29 @@ const SignUpProfesional = () => {
     const inputValidContraProf = useRef(null);
     const inputHoraInicio = useRef(null);
     const inputHoraFinal = useRef(null);
+    const inputProfesion = useRef(null);
+
+    //lista de rubros y ubicaciones
+   
+   useEffect(() => {
+      getRubros()
+      .then (response => {
+          console.log('listaRubros', response);
+          setProfesiones([...response.data]);
+      }).catch(error => {
+          console.error('Error:', error);
+      });
+
+      getUbicaciones()
+    .then (response => {
+        console.log('listaUbicaciones', response);
+        setUbicaciones([...response.data]);
+    }).catch(error => {
+        console.error('Error:', error);
+    });
+   }, []);
+    
+
 
 
     //NOMBRE USUARIO: HANDLER, VALIDATION
@@ -149,7 +177,7 @@ const SignUpProfesional = () => {
     };
 
     //UBICACION: HANDLER, VALIDATION
-    const ubicProfHandler = (e) => {
+/*     const ubicProfHandler = (e) => {
     setUbicProf(e.target.value);
     };
 
@@ -161,7 +189,7 @@ const SignUpProfesional = () => {
         delete _errors.ubicProf;
         setErrors(_errors);
       }
-    };
+    }; */
 
     //DIRECCION: HANDLER, VALIDATION
     const direcProfHandler = (e) => {
@@ -182,6 +210,19 @@ const SignUpProfesional = () => {
         setErrors(_errors);
       }
     };
+
+    //PROFESION HANDLER
+    const profesionHandler = (e) => {
+      setProfesion(e.target.value);
+      console.log("profesion", profesion)
+    }
+
+    //ubicacion hanlder
+
+    const ubicacionHandler = (e) => {
+      setUbicacion(e.target.value);
+      console.log("ubicacion",ubicacion)
+    }
 
     //DESCRIPCION: HANDLER
     const descProfHandler = (e) => {
@@ -257,7 +298,7 @@ const SignUpProfesional = () => {
     //GUARDAR LOS DATOS DEL PROFESIONAL
     const saveProfHandler = () => {
 
-      if (userNameProf === "" || nameProf === ""||lastNameProf === ""||emailProf === ""||phoneProf === ""|| ubicProf === ""|| direcProf === ""||horaInicio === ""||horaFinal === "" ||contraProf === "" ||validContraProf === "" ){
+      if (userNameProf === "" || nameProf === ""||lastNameProf === ""||emailProf === ""||phoneProf === ""|| ubicacion === ""|| direcProf === ""||horaInicio === ""||horaFinal === "" ||contraProf === "" ||validContraProf === "" ){
         alert("Debe completar los campos requeridos.")
       } else {
       const profesionalDatos = {
@@ -266,17 +307,19 @@ const SignUpProfesional = () => {
         horarioFinal: horaFinal,
         fotoBanner: null,
         direccion: direcProf,
-        ubicacion: ubicProf,
+        profesion: profesion,
         idUsuariosNavigation: {
           nombre: nameProf,
           apellido: lastNameProf,
           username: userNameProf,
           mail: emailProf,
-          pass: contraProf,
+          ubicacion: ubicacion,
           numTelefono: phoneProf,
           fechaNacimiento: nacProf,
           fotoPerfil: null,
-          tipoCuenta: "P"}
+          pass: contraProf,
+          /* verificado: true,
+          tipoCuenta: "P" */}
       }
       RegisterProfessional(profesionalDatos);
       console.log(profesionalDatos)
@@ -293,8 +336,9 @@ const SignUpProfesional = () => {
         setEmailProf("");
         setPhoneProf("");
         setNacProf("");
-        setUbicProf("");
         setDirecProf("");
+        setProfesion("");
+        setUbicacion("");
         setDescProf("");
         setHoraInicio("");
         setHoraFinal("");
@@ -387,23 +431,20 @@ const SignUpProfesional = () => {
               />
             </Form.Group>
             <Form.Group className="mt-4">
-              <Form.Label>Ubicación:</Form.Label>
-              <Form.Select
-                onChange={ubicProfHandler}
-                value={ubicProf}
-                onBlur={ubicProfValidation}
-                ref={inputUbicProf}
-              >
-                <option>Elija su ciudad</option>
-                <option value="Rosario">Rosario</option>
-                <option value="Arroyo Seco">Arroyo Seco</option>
-                <option value="VGG">Villa Gobernador Galvez</option>
-                <option value="Baigorria">Baigorria</option>
-              </Form.Select>
-              {errors.ubicProf && (
-                <div className="errors">{errors.ubicProf}</div>
-              )}
-            </Form.Group>
+                  <Form.Label>Ubicación:</Form.Label>
+                  <Form.Select
+                    aria-label="select your city"
+                    value={ubicacion}
+                    onChange={ubicacionHandler}>
+                    {ubicaciones.map((ubicacion, index) => 
+                    (<option 
+                      key={index}
+                      value={ubicacion}
+                      >
+                      {ubicacion}
+                     </option>))}
+                  </Form.Select>
+                </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Dirección (calle, nro.):</Form.Label>
               <Form.Control
@@ -417,6 +458,21 @@ const SignUpProfesional = () => {
                 <div className="errors">{errors.direcProf}</div>
               )}
             </Form.Group>
+            <Form.Group className="mt-4">
+                  <Form.Label>Profesión:</Form.Label>
+                  <Form.Select
+                    aria-label="select your city"
+                    value={profesion}
+                    onChange={profesionHandler}>
+                    {profesiones.map((profesion, index) => 
+                    (<option 
+                      key={index}
+                      value={profesion}
+                      >
+                      {profesion}
+                     </option>))}
+                  </Form.Select>
+                </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Breve descripción del servicio:</Form.Label>
               <Form.Control

@@ -44,3 +44,20 @@ export async function RegisterProfessional(professional) {
     console.log(errors);
   }
 }
+
+export async function editProfessional(id, data) {
+  console.log("edit: ", id, data);
+  try {
+    const response = await axios({
+      url: `${baseUrl}/profesional/${id}`,
+      method: "PUT",
+      data: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json", // <- HERE
+      },
+    });
+    return response;
+  } catch (errors) {
+    console.log("auth: ", errors);
+  }
+}

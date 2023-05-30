@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import { Image } from "react-bootstrap";
 import { editProfessional } from "../../functions/professionalMethods";
 import { getRubros } from "../../functions/rubrosMethods";
-import { closestIndexTo } from "date-fns/esm/fp";
+
 
 const ProfessionalConf = () => {  
   //set de la info en los inputs
@@ -18,13 +18,12 @@ const ProfessionalConf = () => {
   const [direccion, setDireccion] = useState("");
   const [profesion, setProfesion] = useState("");
   const [profesiones, setProfesiones] = useState([]);
-
   const [user, setUser] = useState([]);
 
   useEffect(() => {
     const usuario = JSON.parse(localStorage.getItem("user"));
     setUser(usuario);
-    
+
     //me traigo todos los datos del usuario loggeado de la BD 
     GetByProfUsername(usuario.user.username)
       .then(response => {

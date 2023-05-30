@@ -18,7 +18,7 @@ export async function getProfessionals() {
 export async function GetByProfUsername(username){
   try{
     const response = await axios({
-      url: `${baseUrl}/Profesional/${username}`,
+      url: `${baseUrl}/profesional/${username}`,
       method: "GET"
     });
     return response.data;

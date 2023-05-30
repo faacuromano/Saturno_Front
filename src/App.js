@@ -23,7 +23,7 @@ import Admin from "./Components/Admin/Admin";
 import TipoCuenta from "./Components/TipoCuenta/TipoCuenta";
 import ServiceSettings from "./Components/ServiceSettings/ServiceSettings";
 import AdminCliente from "./Components/Admin/AdminCliente/AdminCliente";
-import Error404 from "./Components/Error404/Error404"
+import Error404 from "./Components/Error404/Error404";
 import NavBarLogOut from "./Components/NavBar/NavBarLogOut";
 import NavBarLogged from "./Components/NavBar/NavBarLogged";
 import SignUpProfesional from "./Components/SignUp/SignUpProfesional";
@@ -31,23 +31,11 @@ import SignUpProfesional from "./Components/SignUp/SignUpProfesional";
 import ProfessionalConf from "./Components/UserConfiguration/ProfessionalConf";
 
 import LoginContext from "./Contexts/ThemeContext/LoginContext";
-
+import ScrollToTop from "./functions/ScrollToTop";
 
 function App() {
   const { auth, handleLogin } = useContext(LoginContext);
   const [navBarRender, setNavBarRender] = useState(<NavBarLogged />);
-
-  useEffect(() => {
-    const getUser = () => {
-      const user = localStorage.getItem("user");
-      if (user) {
-        handleLogin(JSON.parse(user));
-      } else {
-        console.log("Usuario no registrado");
-      }
-    };
-    getUser();
-  }, []);
 
   useEffect(() => {
     const authChecker = () => {
@@ -66,6 +54,7 @@ function App() {
     <div>
       <BrowserRouter>
         {navBarRender}
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
@@ -125,12 +114,13 @@ function App() {
             }
           />
           <Route
-          path="/signuprofesional"
-          element={
-            <Container className="text-center py-5">
-              <SignUpProfesional/>
-            </Container>
-          }/>
+            path="/signuprofesional"
+            element={
+              <Container className="text-center py-5">
+                <SignUpProfesional />
+              </Container>
+            }
+          />
           <Route
             path="/perfilProfesional/:profesional"
             element={
@@ -167,7 +157,7 @@ function App() {
             path="/serviceSettings"
             element={
               <Container className="text-center py-5">
-                <ServiceSettings/>
+                <ServiceSettings />
               </Container>
             }
           />

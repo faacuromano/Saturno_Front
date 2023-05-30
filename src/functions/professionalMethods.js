@@ -15,15 +15,15 @@ export async function getProfessionals() {
   }
 }
 
-export async function GetByProfUsername(username){
-  try{
+export async function GetByProfUsername(username) {
+  try {
     const response = await axios({
-      url: `${baseUrl}/profesional/${username}`,
-      method: "GET"
+      url: `${baseUrl}/Profesional/${username}`,
+      method: "GET",
     });
     return response.data;
-  } catch (errors){
-    console.log(errors)
+  } catch (errors) {
+    console.log(errors);
   }
 }
 

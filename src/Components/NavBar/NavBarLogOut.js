@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import "./NavBar.css";
 
@@ -10,23 +10,22 @@ import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-//import ButtonTheme from "../ButtonTheme/ButtonTheme";
-//import { useContext } from "react";
-//import ThemeContext from "../../Contexts/ThemeContext/ThemeContext";
+import LoginContext from "../../Contexts/ThemeContext/LoginContext";
 
 const NavBarLogOut = () => {
   //Modal de cerrar sesión
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const navigate = useNavigate();
+  const { auth, handleLogin } = useContext(LoginContext);
 
   const loginHandler = () => {
+    //Acá debería borrar la data del authcontext
     localStorage.removeItem("user");
+    handleLogin({});
     navigate("/");
   };
 
-  //const { theme, handleTheme } = useContext(ThemeContext);
   return (
     <Navbar bg="white" expand="lg" className="navBar index1">
       <Container>
@@ -44,11 +43,8 @@ const NavBarLogOut = () => {
           id="basic-navbar-nav"
           className="justify-content-end text-center"
         >
-          {/* <ButtonTheme /> */}
           <Nav.Link className="navBar-options mt-3 mt-lg-0">
-            <Link to={"/"} className="colorLink">
-              Home
-            </Link>
+            <Link to={"/"}>Inicio</Link>
           </Nav.Link>
           <Nav.Link className="navBar-options mt-3 mt-lg-0">
             <Link to={"/profesionales"}>Qué es Saturno?</Link>

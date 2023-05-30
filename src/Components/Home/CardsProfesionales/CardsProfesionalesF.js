@@ -32,8 +32,8 @@ const CardsProfesionales = () => {
             <strong>Ups!</strong> No hay datos disponibles (?)
           </p>
         ) : (
-          professional.map((item) => (
-            <Col xs={12} md={6} lg={3} className="mb-3 mb-lg-0">
+          professional.map((item, index) => (
+            <Col xs={12} md={6} lg={3} className="mb-3 mb-lg-0" key={index}>
               <Link to={`/perfilProfesional/${item.username}`}>
                 <CardProfesionalF data={item} />
               </Link>

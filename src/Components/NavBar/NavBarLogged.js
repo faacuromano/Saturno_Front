@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import "./NavBar.css";
+import { FaRegUser } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { FaRegUser } from "react-icons/fa";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Container } from "react-bootstrap";
@@ -9,10 +12,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import Modal from "react-bootstrap/Modal";
-import "./NavBar.css";
-//import ButtonTheme from "../ButtonTheme/ButtonTheme";
-import { useContext } from "react";
-//import ThemeContext from "../../Contexts/ThemeContext/ThemeContext";
+
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
 
 const NavBarLogged = () => {
@@ -30,7 +30,6 @@ const NavBarLogged = () => {
     navigate("/");
   };
 
-  //const { theme, handleTheme } = useContext(ThemeContext);
   return (
     <Navbar bg="white" expand="lg" className="navBar index1">
       <Container>
@@ -49,9 +48,7 @@ const NavBarLogged = () => {
           className="justify-content-end text-center"
         >
           <Nav.Link className="navBar-options mt-3 mt-lg-0">
-            <Link to={"/"} className="colorLink">
-              Home
-            </Link>
+            <Link to={"/"}>Inicio</Link>
           </Nav.Link>
           <Nav.Link className="navBar-options mt-3 mt-lg-0">
             <Link to={"/profesionales"}>Qué es Saturno?</Link>

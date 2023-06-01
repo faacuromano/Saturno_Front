@@ -12,7 +12,7 @@ initMercadoPago('TEST-a1306846-3773-42d7-806e-ec8161f2315d');
 const mercadopago = require("mercadopago");
 // Agrega credenciales
 mercadopago.configure({
-  access_token: "TEST-1363133089955810-051616-60e599c38c5e8cd051d5579312bd7ac6-754636012",
+  access_token: "APP_USR-2303800404167032-053121-7d6958f7ac334a6723eeaf0caf34f864-1387539311",
 });
 
 const SignUpProfesional = () => {
@@ -311,7 +311,9 @@ const SignUpProfesional = () => {
       alert("Debe añadir el mail de pago.")
     } else {
       let preference = {
+        preapproval_plan_id: null,
         reason: "Contratar Plan Profesional",
+        payer_email: emailProf,
         auto_recurring: {
           frequency: 1,
           frequency_type: "months",
@@ -321,7 +323,7 @@ const SignUpProfesional = () => {
           currency_id: "ARS"
         },
         back_url: "/",
-        payer_email: emailProf,
+        status: "pending"
       };
       RegisterPayment(preference);
 
@@ -334,7 +336,7 @@ const SignUpProfesional = () => {
 
       mercadopago.preferences.get(preferenceId).then(response => console.log(response));
 
-      setResponse(1);
+      setResponse(preferenceId);
       console.log(preferenceId)
       
       setPagar(false)

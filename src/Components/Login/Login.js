@@ -54,6 +54,7 @@ const Login = () => {
         const newAuth = {
           username: response.data.user.username,
           token: response.data.token,
+          tipoCuenta: response.data.user.tipoCuenta,
         };
         handleLogin(newAuth);
         navigate("/");

@@ -3,9 +3,7 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import { Button } from "react-bootstrap";
 
-import { BsCalendarEvent } from "react-icons/bs";
-
-const AcordionServicios = ({ servicios }) => {
+const AcordionEdit = ({ servicios }) => {
   return (
     <>
       <Accordion>
@@ -18,9 +16,10 @@ const AcordionServicios = ({ servicios }) => {
             </Accordion.Header>
             <Accordion.Body>
               <p>{item.descripcion}</p>
-              <Button>
-                <BsCalendarEvent /> Sacar turno
+              <Button className="mt-4 me-1" variant="secondary">
+                Editar
               </Button>
+              <Button>Borrar</Button>
             </Accordion.Body>
           </Accordion.Item>
         ))}
@@ -29,4 +28,4 @@ const AcordionServicios = ({ servicios }) => {
   );
 };
 
-export default AcordionServicios;
+export default AcordionEdit;

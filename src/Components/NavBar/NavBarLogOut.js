@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import "./NavBar.css";
 
@@ -7,24 +7,28 @@ import { FaRegUser } from "react-icons/fa";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Container } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
+import MenuOffline from "./MenuOffline";
+import MenuCliente from "./MenuCliente";
+import MenuProfesional from "./MenuProfesional";
+import MenuAdmin from "./MenuAdmin";
 
 const NavBarLogOut = () => {
-  //Modal de cerrar sesión
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const navigate = useNavigate();
+  const [menuRender, setMenuRender] = useState(<MenuOffline />);
   const { auth, handleLogin } = useContext(LoginContext);
 
-  const loginHandler = () => {
-    //Acá debería borrar la data del authcontext
-    localStorage.removeItem("user");
-    handleLogin({});
-    navigate("/");
-  };
+  useEffect(() => {
+    if (auth.tipoCuenta === "C") {
+      setMenuRender(<MenuCliente />);
+    } else if (auth.tipoCuenta === "P") {
+      setMenuRender(<MenuProfesional />);
+    } else if (auth.tipoCuenta == "A") {
+      setMenuRender(<MenuAdmin />);
+    } else {
+      setMenuRender(<MenuOffline />);
+    }
+  }, [auth]);
 
   return (
     <Navbar bg="white" expand="lg" className="navBar index1">
@@ -55,26 +59,8 @@ const NavBarLogOut = () => {
           <Nav.Link className="navBar-options mt-3 mt-lg-0">
             <Link to={"/sobrenosotros"}>Sobre nosotros</Link>
           </Nav.Link>
-          <Nav.Link className="my-3 my-lg-0">
-            <Button variant="primary" as={Link} to={"/login"}>
-              <FaRegUser /> Login
-            </Button>
-          </Nav.Link>
+          <Nav.Link className="my-3 my-lg-0">{menuRender}</Nav.Link>
         </Navbar.Collapse>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Cerrar sesión</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>¿Estas seguro que quieres cerrar sesión?</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Volver
-            </Button>
-            <Button variant="primary" onClick={loginHandler}>
-              Cerrar sesión
-            </Button>
-          </Modal.Footer>
-        </Modal>
       </Container>
     </Navbar>
   );

@@ -25,35 +25,16 @@ import ServiceSettings from "./Components/ServiceSettings/ServiceSettings";
 import AdminCliente from "./Components/Admin/AdminCliente/AdminCliente";
 import Error404 from "./Components/Error404/Error404";
 import NavBarLogOut from "./Components/NavBar/NavBarLogOut";
-import NavBarLogged from "./Components/NavBar/NavBarLogged";
 import SignUpProfesional from "./Components/SignUp/SignUpProfesional";
-
 import ProfessionalConf from "./Components/UserConfiguration/ProfessionalConf";
 
-import LoginContext from "./Contexts/ThemeContext/LoginContext";
 import ScrollToTop from "./functions/ScrollToTop";
 
 function App() {
-  const { auth, handleLogin } = useContext(LoginContext);
-  const [navBarRender, setNavBarRender] = useState(<NavBarLogged />);
-
-  useEffect(() => {
-    const authChecker = () => {
-      if (auth) {
-        setNavBarRender(<NavBarLogged />);
-        console.log("rendered: ", auth);
-      } else {
-        setNavBarRender(<NavBarLogOut />);
-        console.log("not rendered: ", auth);
-      }
-    };
-    authChecker();
-  }, [auth]);
-
   return (
     <div>
       <BrowserRouter>
-        {navBarRender}
+        <NavBarLogOut />
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -165,7 +146,7 @@ function App() {
             path="/professionalconf"
             element={
               <Container className="text-center py-5">
-                <ProfessionalConf/>
+                <ProfessionalConf />
               </Container>
             }
           />

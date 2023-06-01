@@ -325,18 +325,18 @@ const SignUpProfesional = () => {
         back_url: "/",
         status: "pending"
       };
-      RegisterPayment(preference);
+      RegisterPayment(preference); // Registra la preferencia dentro de la API
 
-      mercadopago.preferences.create(preference).then(function(response){
-        console.log(response.body.id, "yo, la response");
-        console.log("hola");
-      }).catch(function(error){
-        console.log(error);
-      });
+      // mercadopago.preferences.create(preference).then(function(response){
+      //   console.log(response.body.id, "yo, la response");
+      //   console.log("hola");
+      // }).catch(function(error){
+      //   console.log(error);
+      // });
 
       mercadopago.preferences.get(preferenceId).then(response => console.log(response));
 
-      setResponse(preferenceId);
+      setResponse("2c938084886ca43a018874a053ef03b7");
       console.log(preferenceId)
       
       setPagar(false)

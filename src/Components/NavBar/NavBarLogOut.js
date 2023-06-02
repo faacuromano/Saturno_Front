@@ -2,8 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 
 import "./NavBar.css";
 
-import { Link, useNavigate } from "react-router-dom";
-import { FaRegUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Container } from "react-bootstrap";
@@ -23,7 +22,7 @@ const NavBarLogOut = () => {
       setMenuRender(<MenuCliente />);
     } else if (auth.tipoCuenta === "P") {
       setMenuRender(<MenuProfesional />);
-    } else if (auth.tipoCuenta == "A") {
+    } else if (auth.tipoCuenta === "A") {
       setMenuRender(<MenuAdmin />);
     } else {
       setMenuRender(<MenuOffline />);

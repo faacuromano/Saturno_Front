@@ -7,17 +7,16 @@ import { Button, Modal } from "react-bootstrap";
 import { CreateService } from "../../functions/serviceMethods";
 import { GetServiceByUsername } from "../../functions/serviceMethods";
 import { GetByProfUsername } from "../../functions/professionalMethods";
+
 import AcordionEdit from "./AcordionEdit/AcordionEdit";
-import { useNavigate } from "react-router";
 
 const ServiceSettings = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
-  const [idServicio, setIdServicio] = useState();
+  const [idProfesional, setIdProfesional] = useState();
   const [nombreServicio, setNombreServicio] = useState("");
   const [precioServicio, setPrecioServicio] = useState();
   const [descripcionServicio, setDescripcionServicio] = useState("");
@@ -35,7 +34,7 @@ const ServiceSettings = () => {
       setServicios(response);
     });
     GetByProfUsername(username).then(function (response) {
-      setIdServicio(response.idUsuarios);
+      setIdProfesional(response.idUsuarios);
       setUsername(response.username);
     });
   }, []);
@@ -43,10 +42,6 @@ const ServiceSettings = () => {
   useEffect(() => {
     serviceMapHandler();
   }, [servicios]);
-
-  const idHandler = (e) => {
-    setIdServicio(e.target.value);
-  };
 
   const nombreHandler = (e) => {
     setNombreServicio(e.target.value);
@@ -64,30 +59,21 @@ const ServiceSettings = () => {
     setDuracionServicio(e.target.value);
   };
 
-  const createServiceHandler = () => {
-    const newService = {
-      nombre: nombreServicio,
-      descripcion: descripcionServicio,
-      precio: parseInt(precioServicio),
-      duracion: duracionServicio,
-      idProfesional: parseInt(idServicio),
-    };
-
-    CreateService(newService).then((response) => {
-      if (response.status === 200) {
-        console.log("Servicio creado");
-        GetServiceByUsername(username).then(function (response) {
-          setServicios(response);
-        });
-      } else {
-        console.log("Servicio no creado");
-      }
-    });
+  const limpiarCampos = () => {
+    setNombreServicio("");
+    setPrecioServicio("");
+    setDescripcionServicio("");
+    setDuracionServicio("");
   };
 
   const serviceMapHandler = () => {
     if (servicios) {
-      setMapServicio(<AcordionEdit servicios={servicios} />);
+      setMapServicio(
+        <AcordionEdit
+          servicios={servicios}
+          refreshAfterDelete={refreshAfterDelete}
+        />
+      );
     } else {
       setMapServicio(
         <p>
@@ -95,6 +81,34 @@ const ServiceSettings = () => {
         </p>
       );
     }
+  };
+
+  const refreshAfterDelete = () => {
+    GetServiceByUsername(username).then(function (response) {
+      setServicios(response);
+    });
+  };
+
+  const createServiceHandler = () => {
+    const newService = {
+      nombre: nombreServicio,
+      descripcion: descripcionServicio,
+      precio: parseInt(precioServicio),
+      duracion: duracionServicio,
+      idProfesional: parseInt(idProfesional),
+    };
+
+    CreateService(newService).then((response) => {
+      if (response.status === 200) {
+        console.log("Servicio creado");
+        GetServiceByUsername(username).then(function (response) {
+          setServicios(response);
+          limpiarCampos();
+        });
+      } else {
+        console.log("Servicio no creado");
+      }
+    });
   };
 
   return (

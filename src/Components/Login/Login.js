@@ -60,7 +60,6 @@ const Login = () => {
         navigate("/");
       } else {
         alert("Usuario o contraseña incorrectos");
-        handleLogin(null);
       }
     });
     setUserName("");

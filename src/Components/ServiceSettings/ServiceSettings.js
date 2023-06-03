@@ -14,6 +14,9 @@ const ServiceSettings = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [createdMessage, setCreatedMessage] = useState(
+    <Modal.Body>Creando servicio</Modal.Body>
+  );
 
   const [username, setUsername] = useState("");
   const [idProfesional, setIdProfesional] = useState();
@@ -22,11 +25,7 @@ const ServiceSettings = () => {
   const [descripcionServicio, setDescripcionServicio] = useState("");
   const [duracionServicio, setDuracionServicio] = useState("");
   const [servicios, setServicios] = useState([]);
-  const [mapServicio, setMapServicio] = useState(
-    <p>
-      <em>Cree un servicio para empezar a usar nuestro servicio</em>
-    </p>
-  );
+  const [mapServicio, setMapServicio] = useState();
 
   useEffect(() => {
     const username = localStorage.getItem("user");
@@ -67,23 +66,25 @@ const ServiceSettings = () => {
   };
 
   const serviceMapHandler = () => {
-    if (servicios) {
+    if (servicios.length > 0) {
       setMapServicio(
         <AcordionEdit
           servicios={servicios}
-          refreshAfterDelete={refreshAfterDelete}
+          refreshAfterChange={refreshAfterChange}
+          idProfesional={idProfesional}
         />
       );
     } else {
+      console.log("Lista vacia");
       setMapServicio(
         <p>
-          <em>Cree un servicio para empezar a usar nuestro servicio</em>
+          <em>Cree un servicio para empezar poder empezar a ofrecer turnos</em>
         </p>
       );
     }
   };
 
-  const refreshAfterDelete = () => {
+  const refreshAfterChange = () => {
     GetServiceByUsername(username).then(function (response) {
       setServicios(response);
     });
@@ -99,14 +100,32 @@ const ServiceSettings = () => {
     };
 
     CreateService(newService).then((response) => {
-      if (response.status === 200) {
-        console.log("Servicio creado");
+      if (response) {
+        setCreatedMessage(
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>¡Felicitaciones!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>El servicio ha sido creado con éxito</Modal.Body>
+          </>
+        );
+        handleShow();
         GetServiceByUsername(username).then(function (response) {
           setServicios(response);
           limpiarCampos();
         });
       } else {
-        console.log("Servicio no creado");
+        setCreatedMessage(
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>Lo sentimos...</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              No se pudo crear el servicio, por favor intente más tarde
+            </Modal.Body>
+          </>
+        );
+        handleShow();
       }
     });
   };
@@ -164,15 +183,11 @@ const ServiceSettings = () => {
           </Form>
         </Col>
         <Modal show={show} onHide={handleClose} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Cerrar sesión</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>¿Estas seguro que quieres cerrar sesión?</Modal.Body>
+          {createdMessage}
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Volver
             </Button>
-            <Button variant="primary">Cerrar sesión</Button>
           </Modal.Footer>
         </Modal>
       </Row>

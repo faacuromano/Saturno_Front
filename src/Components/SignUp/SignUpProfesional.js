@@ -23,7 +23,7 @@ const SignUpProfesional = () => {
   const [validContraProf, setValidContraProf] = useState("");
   const [errors, setErrors] = useState({});
   const [errorsValidation, setErrorsValidation] = useState("");
-  const [profesion, setProfesion] = useState("");
+  const [profesion, setProfesion] = useState("Psicologo");
   const [profesiones, setProfesiones] = useState([]);
   const [ubicacion, setUbicacion] = useState("Rosario");
   const [ubicaciones, setUbicaciones] = useState([]);

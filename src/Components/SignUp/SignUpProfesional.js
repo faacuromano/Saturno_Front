@@ -6,6 +6,7 @@ import { RegisterProfessional } from "../../functions/professionalMethods";
 import { useNavigate } from "react-router";
 import { getRubros } from "../../functions/rubrosMethods";
 import { getUbicaciones } from "../../functions/ubicationMethods";
+import AlertPopUp from "../AlertPopUp/AlertPopUp";
 
 const SignUpProfesional = () => {
   const [userNameProf, setUserNameProf] = useState("");
@@ -40,6 +41,8 @@ const SignUpProfesional = () => {
   const inputHoraInicio = useRef(null);
   const inputHoraFinal = useRef(null);
   const inputProfesion = useRef(null);
+
+  const [openPopUp, setOpenPopUp] = useState(false);
 
   //lista de rubros y ubicaciones
 
@@ -312,7 +315,9 @@ const SignUpProfesional = () => {
       contraProf === "" ||
       validContraProf === ""
     ) {
-      alert("Debe completar los campos requeridos.");
+      setTimeout(() => {
+        setOpenPopUp(true)
+      }, 0);
     } else {
       const profesionalDatos = {
         descripcion: descProf,
@@ -362,6 +367,7 @@ const SignUpProfesional = () => {
 
   return (
     <Container className="py-3">
+      <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Debe completar los campos requeridos." />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
           <h1>Registro de profesional</h1>

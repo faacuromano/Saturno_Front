@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate, Link } from "react-router-dom";
 import { authClient } from "../../functions/clientMethods";
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
+import AlertPopUp from "../AlertPopUp/AlertPopUp";
 
 const Login = () => {
   const navigate = useNavigate(); // Allows us to redirect
@@ -16,6 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
   const { auth, handleLogin } = useContext(LoginContext);
+  const [openPopUp, setOpenPopUp] = useState(false); // Allows alerts to show up
 
   const userNameValidation = () => {
     if (userName === "") {
@@ -59,15 +61,19 @@ const Login = () => {
         handleLogin(newAuth);
         navigate("/");
       } else {
-        alert("Usuario o contraseña incorrectos");
+        setTimeout(() => {
+          setOpenPopUp(true)
+        }, 0);
       }
     });
     setUserName("");
     setPassword("");
   };
 
+
   return (
     <Container className="py-3">
+      <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Usuario o contraseña incorrectos." />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4">
           <h1>Iniciar sesión</h1>

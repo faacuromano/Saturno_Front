@@ -43,7 +43,7 @@ npm install
 ```shell
 npm start 
 ```
-3.A Si el comando anterior no funciona, intenta este.
+3.1 Si el comando anterior no funciona, intenta este.
 ```shell
 npm run st
 ```

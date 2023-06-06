@@ -61,7 +61,7 @@ SATURNO se distribuye bajo la licencia MIT. Para más información, consulta el 
 
 Si tienes alguna pregunta o consulta relacionada con SATURNO, por favor, ponte en contacto con nuestro equipo de desarrollo en [dev@saturno.com](mailto:dev@saturno.com).
 
-##Acompañenos en esta hermosa aventura.
+## Acompañenos en esta hermosa aventura.
 
 ## Figma:
 Para este proyecto trabajaremos de manera remota con Figma donde empezaremos a crear las primeras plantillas de cómo se va a ver la aplicación.

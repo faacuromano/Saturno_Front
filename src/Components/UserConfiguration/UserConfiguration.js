@@ -256,7 +256,7 @@ const UserConfiguration = () => {
                   <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
                   <Form.Control
                     type="text"
-                    value={fechaNac.slice(0, 10)}
+                    value={fechaNac}
                     onChange={fechaNacHandler}
                   />
                 </Form.Group>

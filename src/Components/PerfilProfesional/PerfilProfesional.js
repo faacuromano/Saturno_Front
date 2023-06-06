@@ -99,7 +99,10 @@ const PerfilProfesional = () => {
                     </em>
                   </p>
                 ) : (
-                  <AcordionServicios servicios={serviceData} />
+                  <AcordionServicios
+                    servicios={serviceData}
+                    profesional={profesional}
+                  />
                 )}
               </Col>
             </Row>

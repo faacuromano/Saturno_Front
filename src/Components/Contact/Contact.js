@@ -120,6 +120,9 @@ const Contact = () => {
                 name="user_name"
                 onChange={nameContactHandler}
                 value={nameContact} />
+                 {errors.nameContact && (
+                <div className="errors">{errors.nameContact}</div>
+              )}
             </Form.Group>
             <Form.Group>
               <Form.Label>Email:</Form.Label>
@@ -128,6 +131,9 @@ const Contact = () => {
                 name="user_email"
                 onChange={emailContactHandler}
                 value={emailContact} />
+                 {errors.emailContact && (
+                <div className="errors">{errors.emailContact}</div>
+              )}
             </Form.Group>
             <Form.Group>
               <Form.Label>Mensaje:</Form.Label>
@@ -137,6 +143,9 @@ const Contact = () => {
                 rows={4}
                 onChange={messageHandler}
                 value={message} />
+                 {errors.message && (
+                <div className="errors">{errors.message}</div>
+              )}
             </Form.Group>
             {mensajeEnviado && <p style={{ color: 'green', padding: '10px', margin: '10px', textAlign: 'center', fontFamily: 'Roboto'}}>Mensaje enviado</p>}
             <Button

@@ -1,13 +1,35 @@
 import React, { useRef, useState } from "react";
-
+import emailjs from '@emailjs/browser';
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const Contact = () => {
+
+  const form = useRef();
+  const [mensajeEnviado, setMensajeEnviado] = useState(false);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_bi7vwtq', 'template_xwpoj3g', form.current, 'RERaAk2SC1-ojAP5A')
+      .then((result) => {
+          console.log(result.text);
+          setMensajeEnviado(true);
+          limpiarCampos();
+
+          setTimeout(() => {
+          setMensajeEnviado(false);
+        }, 3000);
+
+      }, (error) => {
+          alert("Ha ocurrido un error. Vuelve a intentar.")
+          console.log(error.text);
+      });
+  };
+
   const [nameContact, setNameContact] = useState("");
   const [emailContact, setEmailContact] = useState("");
-  const [subjectContact, setSubjectContact] = useState("");
   const [message, setMessage] = useState("");
 
   // Error validation setters
@@ -57,20 +79,6 @@ const Contact = () => {
     }
   };
 
-  // Asunto 
-  const subjectValidation = () => {
-    if (subjectContact.length > 70) {
-      setErrors({
-        ...errors,
-        subjectContact: "No debe contener más de 70 caracteres.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.subjectContact;
-      setErrors(_errors);
-    }
-  };
-
   // ===========
 
   const nameContactHandler = (e) => {
@@ -81,10 +89,6 @@ const Contact = () => {
     setEmailContact(e.target.value);
   };
 
-  const subjectContactHandler = (e) => {
-    setSubjectContact(e.target.value);
-  };
-
   const messageHandler = (e) => {
     setMessage(e.target.value);
   };
@@ -92,7 +96,6 @@ const Contact = () => {
   const limpiarCampos = () => {
     setNameContact("");
     setEmailContact("");
-    setSubjectContact("");
     setMessage("");
   };
 
@@ -109,54 +112,39 @@ const Contact = () => {
             </p>
           </Col>
           <Col xs={12} lg={10} xl={7} className="mt-2">
-            <Form>
-              <Form.Group>
-                <Form.Label>Nombre:</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={nameContactHandler}
-                  onBlur={nameValidation}
-                  value={nameContact}
-
-                />
-                {errors.nameContact && (
-                  <div className="errors">{errors.nameContact}</div>
-                )}
-              </Form.Group>
-              <Form.Group className="mt-4">
-                <Form.Label>E-mail:</Form.Label>
-                <Form.Control
-                  type="email"
-                  onChange={emailContactHandler}
-                  onBlur={emailValidation}
-                  value={emailContact}
-                />
-              {errors.emailContact && (
-                <div className="errors">{errors.emailContact}</div>
-              )}
-              </Form.Group>
-              <Form.Group className="mt-4">
-                <Form.Label>Asunto:</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={subjectContactHandler}
-                  value={subjectContact}
-                  onBlur={subjectValidation}
-                />
-                {errors.subjectContact && (
-                  <div className="errors">{errors.subjectContact}</div>
-                )}
-              </Form.Group>
-              <Form.Group className="mt-4">
-                <Form.Label>Mensaje:</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={4}
-                  onChange={messageHandler}
-                  value={message}
-                />
-              </Form.Group>
-              <Button variant="primary" className="mt-4">
+          <Form ref={form} onSubmit={sendEmail}>
+            <Form.Group>
+              <Form.Label>Nombre:</Form.Label>
+              <Form.Control 
+                type="text"  
+                name="user_name"
+                onChange={nameContactHandler}
+                value={nameContact} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Email:</Form.Label>
+              <Form.Control 
+                type="email" 
+                name="user_email"
+                onChange={emailContactHandler}
+                value={emailContact} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Mensaje:</Form.Label>
+              <Form.Control 
+                name="message"
+                as="textarea"
+                rows={4}
+                onChange={messageHandler}
+                value={message} />
+            </Form.Group>
+            {mensajeEnviado && <p style={{ color: 'green', padding: '10px', margin: '10px', textAlign: 'center', fontFamily: 'Roboto'}}>Mensaje enviado</p>}
+            <Button
+                type="submit" 
+                value="Send" 
+                onClick={sendEmail}
+                variant="primary" 
+                className="mt-4">
                 Enviar
               </Button>
               <Button
@@ -165,8 +153,8 @@ const Contact = () => {
                 onClick={limpiarCampos}
               >
                 Resetear
-              </Button>
-            </Form>
+              </Button>  
+           </Form>
           </Col>
         </Row>
       </Container>

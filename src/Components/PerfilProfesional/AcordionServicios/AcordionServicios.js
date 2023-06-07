@@ -4,8 +4,9 @@ import Accordion from "react-bootstrap/Accordion";
 import { Button } from "react-bootstrap";
 
 import { BsCalendarEvent } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
-const AcordionServicios = ({ servicios }) => {
+const AcordionServicios = ({ servicios, profesional }) => {
   return (
     <>
       <Accordion>
@@ -18,9 +19,11 @@ const AcordionServicios = ({ servicios }) => {
             </Accordion.Header>
             <Accordion.Body>
               <p>{item.descripcion}</p>
-              <Button>
-                <BsCalendarEvent /> Sacar turno
-              </Button>
+              <Link to={`/perfilProfesional/${profesional}/${item.id}`}>
+                <Button>
+                  <BsCalendarEvent /> Sacar turno
+                </Button>
+              </Link>
             </Accordion.Body>
           </Accordion.Item>
         ))}

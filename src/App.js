@@ -28,6 +28,7 @@ import SignUpProfesional from "./Components/SignUp/SignUpProfesional";
 import ProfessionalConf from "./Components/UserConfiguration/ProfessionalConf";
 
 import ScrollToTop from "./functions/ScrollToTop";
+import SacarTurno from "./Components/Sacarturno/SacarTurno";
 
 function App() {
   return (
@@ -162,6 +163,14 @@ function App() {
             element={
               <Container className="text-center py-5">
                 <AdminCliente />
+              </Container>
+            }
+          />
+          <Route
+            path="/perfilProfesional/:profesional/:servicio"
+            element={
+              <Container className="text-center py-5">
+                <SacarTurno />
               </Container>
             }
           />

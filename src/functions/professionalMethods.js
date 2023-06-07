@@ -61,3 +61,15 @@ export async function editProfessional(id, data) {
     console.log("auth: ", errors);
   }
 }
+
+export async function obtenerTurnos(data) {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/profesional/horarios/${data}`,
+      method: "GET",
+    });
+    return response;
+  } catch (errors) {
+    console.log(errors);
+  }
+}

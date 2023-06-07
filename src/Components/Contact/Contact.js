@@ -14,17 +14,17 @@ const Contact = () => {
 
     emailjs.sendForm('service_bi7vwtq', 'template_xwpoj3g', form.current, 'RERaAk2SC1-ojAP5A')
       .then((result) => {
-          console.log(result.text);
-          setMensajeEnviado(true);
-          limpiarCampos();
+        console.log(result.text);
+        setMensajeEnviado(true);
+        limpiarCampos();
 
-          setTimeout(() => {
+        setTimeout(() => {
           setMensajeEnviado(false);
         }, 3000);
 
       }, (error) => {
-          alert("Ha ocurrido un error. Vuelve a intentar.")
-          console.log(error.text);
+        alert("Ha ocurrido un error. Vuelve a intentar.")
+        console.log(error.text);
       });
   };
 
@@ -38,8 +38,7 @@ const Contact = () => {
   const inputNameContact = useRef(null);
   const inputNameLast = useRef(null);
   const inputEmail = useRef(null);
-  const inputPhoneNumber = useRef(null);
-  const inputUbication = useRef(null);
+
 
   // Validations
 
@@ -112,38 +111,46 @@ const Contact = () => {
             </p>
           </Col>
           <Col xs={12} lg={10} xl={7} className="mt-2">
-          <Form ref={form} onSubmit={sendEmail}>
-            <Form.Group>
-              <Form.Label>Nombre:</Form.Label>
-              <Form.Control 
-                type="text"  
-                name="user_name"
-                onChange={nameContactHandler}
-                value={nameContact} />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Email:</Form.Label>
-              <Form.Control 
-                type="email" 
-                name="user_email"
-                onChange={emailContactHandler}
-                value={emailContact} />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Mensaje:</Form.Label>
-              <Form.Control 
-                name="message"
-                as="textarea"
-                rows={4}
-                onChange={messageHandler}
-                value={message} />
-            </Form.Group>
-            {mensajeEnviado && <p style={{ color: 'green', padding: '10px', margin: '10px', textAlign: 'center', fontFamily: 'Roboto'}}>Mensaje enviado</p>}
-            <Button
-                type="submit" 
-                value="Send" 
+            <Form ref={form} onSubmit={sendEmail}>
+              <Form.Group>
+                <Form.Label>Nombre:</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="user_name"
+                  onChange={nameContactHandler}
+                  value={nameContact}
+                  onBlur={nameValidation} />
+                {errors.nameContact && (
+                  <div className="errors">{errors.nameContact}</div>
+                )}
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Email:</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="user_email"
+                  onChange={emailContactHandler}
+                  value={emailContact}
+                  onBlur={emailValidation} />
+                {errors.emailContact && (
+                  <div className="errors">{errors.emailContact}</div>
+                )}
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Mensaje:</Form.Label>
+                <Form.Control
+                  name="message"
+                  as="textarea"
+                  rows={4}
+                  onChange={messageHandler}
+                  value={message} />
+              </Form.Group>
+              {mensajeEnviado && <p style={{ color: 'green', padding: '10px', margin: '10px', textAlign: 'center', fontFamily: 'Roboto' }}>Mensaje enviado</p>}
+              <Button
+                type="submit"
+                value="Send"
                 onClick={sendEmail}
-                variant="primary" 
+                variant="primary"
                 className="mt-4">
                 Enviar
               </Button>
@@ -153,8 +160,8 @@ const Contact = () => {
                 onClick={limpiarCampos}
               >
                 Resetear
-              </Button>  
-           </Form>
+              </Button>
+            </Form>
           </Col>
         </Row>
       </Container>

@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router";
 
 import { RegisterClient } from "../../functions/clientMethods";
+import AlertPopUp from "../AlertPopUp/AlertPopUp";
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
@@ -25,6 +26,7 @@ const SignUp = () => {
   const [ubication, setUbication] = useState("Rosario");
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState("");
+  const [openPopUp, setOpenPopUp] = useState(""); // Handler pop up
 
   const inputUserName = useRef(null);
   const inputNameLast = useRef(null);
@@ -185,63 +187,42 @@ const SignUp = () => {
 
   //GUARDAR INFORMACIÓN
   const saveBaseUsuarioHandler = () => {
-    const usuarioDatos = {
-      idUsuariosNavigation: {
-        nombre: name,
-        apellido: lastname,
-        username: userName,
-        mail: email,
-        ubicacion: ubication,
-        numTelefono: phoneNumber,
-        fechaNacimiento: fechaNac,
-        fotoPerfil: "string",
-        pass: password,
-      },
+
+    if (
+      userName === "" ||
+      name === "" ||
+      lastname === "" ||
+      email === "" ||
+      phoneNumber === "" ||
+      ubication === "" ||
+      password === "" ||
+      validPassword === ""
+    ) {
+      setTimeout(() => {
+        setOpenPopUp(true)
+      }, 0);
+    } else {
+      const usuarioDatos = {
+        idUsuariosNavigation: {
+          nombre: name,
+          apellido: lastname,
+          username: userName,
+          mail: email,
+          ubicacion: ubication,
+          numTelefono: phoneNumber,
+          fechaNacimiento: fechaNac,
+          fotoPerfil: "string",
+          pass: password,
+        },
+      }
+      RegisterClient(usuarioDatos);
+      localStorage.setItem("user", userName);
+      handleShow();
+      setErrorsValidation("");
     };
-
-    // if (
-    //   Object.keys(errors).length === 0 &&
-    //   userName &&
-    //   lastname &&
-    //   email &&
-    //   phoneNumber &&
-    //   ubication &&
-    //   password &&
-    //   validPassword
-    // ) {
-
     cleanInputs();
-    RegisterClient(usuarioDatos);
-    localStorage.setItem("user", userName);
-    handleShow();
-    setErrorsValidation("");
-
-    // } else {
-    //   if (errors.userName) {
-    //     inputUserName.current.focus();
-    //   }
-    //   if (errors.lastname) {
-    //     inputNameLast.current.focus();
-    //   }
-    //   if (errors.email) {
-    //     inputEmail.current.focus();
-    //   }
-    //   if (errors.phoneNumber) {
-    //     inputPhoneNumber.current.focus();
-    //   }
-    //   if (errors.ubication) {
-    //     inputUbication.current.focus();
-    //   }
-    //   if (errors.password) {
-    //     inputPassword.current.focus();
-    //   }
-    //   if (errors.validPassword) {
-    //     inputValidPassword.current.focus();
-    //   }
-
-    //   setErrorsValidation("Por favor ingrese los datos correctamente.");
-    // }
   };
+
 
   const cleanInputs = () => {
     setUserName("");
@@ -257,6 +238,7 @@ const SignUp = () => {
 
   return (
     <Container className="py-3">
+      <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Debe completar los campos requeridos." />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
           <h1>Registro de cliente</h1>

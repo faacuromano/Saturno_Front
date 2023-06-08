@@ -7,8 +7,13 @@ import { useNavigate } from "react-router";
 import { getRubros } from "../../functions/rubrosMethods";
 import { getUbicaciones } from "../../functions/ubicationMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
+import AlertPopUpSusc from "../AlertPopUp/AlertPopUpSusc";
 
 const SignUpProfesional = () => {
+  
+  
+
+  const navigate = useNavigate();
   const [userNameProf, setUserNameProf] = useState("");
   const [nameProf, setNameProf] = useState("");
   const [lastNameProf, setLastNameProf] = useState("");
@@ -41,12 +46,16 @@ const SignUpProfesional = () => {
   const inputHoraInicio = useRef(null);
   const inputHoraFinal = useRef(null);
   const inputProfesion = useRef(null);
-
   const [openPopUp, setOpenPopUp] = useState(false);
-
+  const [openPopUpSusc, setOpenPopUpSusc] = useState(false);
   //lista de rubros y ubicaciones
 
+
   useEffect(() => {
+    setTimeout(() => {
+      setOpenPopUpSusc(true)
+    }, 0);
+
     getRubros()
       .then((response) => {
         console.log("listaRubros", response);
@@ -343,6 +352,7 @@ const SignUpProfesional = () => {
       RegisterProfessional(profesionalDatos);
       console.log(profesionalDatos);
       setErrorsValidation("");
+      navigate("/login");
     }
     cleanInputs();
   };
@@ -364,9 +374,19 @@ const SignUpProfesional = () => {
     setContraProf("");
     setValidContraProf("");
   };
+  const volver = () => {
+    navigate("/tipo-de-cuenta")
+    setOpenPopUpSusc(false)
+  }
+  const continuar = () => {
+    "/signuprofesional"
+    setOpenPopUpSusc(false)
+  }
+
 
   return (
     <Container className="py-3">
+      <AlertPopUpSusc open={openPopUpSusc} onClose={() => volver() } onContinue={()=> continuar()}/>
       <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Debe completar los campos requeridos." />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">

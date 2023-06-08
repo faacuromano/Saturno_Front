@@ -10,6 +10,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { authClient } from "../../functions/clientMethods";
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
+import { GetServiceByUsername } from "../../functions/serviceMethods";
 
 const Login = () => {
   const navigate = useNavigate(); // Allows us to redirect
@@ -59,7 +60,21 @@ const Login = () => {
           tipoCuenta: response.data.user.tipoCuenta,
         };
         handleLogin(newAuth);
-        navigate("/");
+
+        GetServiceByUsername(newAuth.username).then(function(serviceResponse) {
+          console.log(serviceResponse)
+          if (serviceResponse.length>0) {
+            // El cliente tiene servicios asociados
+            navigate("/");
+            console.log("El cliente tiene servicios");
+          } else {
+            // El cliente no tiene servicios asociados
+            navigate("/servicesettings");
+            console.log("El cliente no tiene servicios");
+          }
+          // Navegar a la ruta principal
+          
+        });
       } else {
         setTimeout(() => {
           setOpenPopUp(true)

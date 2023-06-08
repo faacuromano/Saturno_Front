@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import AlertPopUp from "../AlertPopUp/AlertPopUp";
 
 const Contact = () => {
 
@@ -12,25 +13,36 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('service_bi7vwtq', 'template_xwpoj3g', form.current, 'RERaAk2SC1-ojAP5A')
+    if(nameContact === "" || emailContact === "" || message == ""){
+      setTimeout(() => {
+        setOpenPopUp(true)
+      }, 0)
+    } else {
+      emailjs.sendForm('service_bi7vwtq', 'template_xwpoj3g', form.current, 'RERaAk2SC1-ojAP5A')
       .then((result) => {
         console.log(result.text);
-        setMensajeEnviado(true);
-        limpiarCampos();
+        
+            setMensajeEnviado(true);
+            limpiarCampos();
 
-        setTimeout(() => {
-          setMensajeEnviado(false);
-        }, 3000);
-
+            setTimeout(() => {
+            setMensajeEnviado(false);
+          }, 3000);
+        
       }, (error) => {
-        alert("Ha ocurrido un error. Vuelve a intentar.")
+        alert("El mensaje no pudo enviarse. Vuelva a intentarlo.")
         console.log(error.text);
       });
-  };
+ 
+
+    }
+
+     };
 
   const [nameContact, setNameContact] = useState("");
   const [emailContact, setEmailContact] = useState("");
   const [message, setMessage] = useState("");
+  const [openPopUp, setOpenPopUp] = useState(false); // Allows alerts to show up
 
   // Error validation setters
   const [errors, setErrors] = useState({});
@@ -101,6 +113,7 @@ const Contact = () => {
   return (
     <>
       <Container className="py-3">
+      <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Por favor ingrese los datos correctamente." />
         <Row className="justify-content-center text-start">
           <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
             <h1>Contacto</h1>

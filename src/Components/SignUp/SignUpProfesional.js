@@ -8,10 +8,11 @@ import { getRubros } from "../../functions/rubrosMethods";
 import { getUbicaciones } from "../../functions/ubicationMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
 import AlertPopUpSusc from "../AlertPopUp/AlertPopUpSusc";
+import MercadoPagoLink from "../MercadoPagoLink/MercadoPagoLink";
 
 const SignUpProfesional = () => {
-  
-  
+
+
 
   const navigate = useNavigate();
   const [userNameProf, setUserNameProf] = useState("");
@@ -48,6 +49,7 @@ const SignUpProfesional = () => {
   const inputProfesion = useRef(null);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [openPopUpSusc, setOpenPopUpSusc] = useState(false);
+  const [openPay, setOpenPay] = useState(false);
   //lista de rubros y ubicaciones
 
 
@@ -353,6 +355,9 @@ const SignUpProfesional = () => {
       console.log(profesionalDatos);
       setErrorsValidation("");
       navigate("/login");
+      setTimeout(() => {
+        setOpenPay(true)
+      }, 0);
     }
     cleanInputs();
   };
@@ -386,7 +391,7 @@ const SignUpProfesional = () => {
 
   return (
     <Container className="py-3">
-      <AlertPopUpSusc open={openPopUpSusc} onClose={() => volver() } onContinue={()=> continuar()}/>
+      <AlertPopUpSusc open={openPopUpSusc} onClose={() => volver()} onContinue={() => continuar()} />
       <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Debe completar los campos requeridos." />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
@@ -577,6 +582,7 @@ const SignUpProfesional = () => {
           >
             Resetear
           </Button>
+          <MercadoPagoLink open={openPay}></MercadoPagoLink>
         </Col>
       </Row>
     </Container>

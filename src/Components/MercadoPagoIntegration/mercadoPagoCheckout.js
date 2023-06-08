@@ -1,5 +1,6 @@
 import axios from "axios";
 import { payment } from "mercadopago";
+const cors = require("cors");
 
 // const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -20,15 +21,14 @@ export async function RegisterPayment(preference) {
   
     const suscription = await axios.post(url, body, {
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer APP_USR-2303800404167032-053121-7d6958f7ac334a6723eeaf0caf34f864-1387539311",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With"
-
+        "Content-Type": "application/json",
+        "Authorization": "Bearer APP_USR-2303800404167032-053121-7d6958f7ac334a6723eeaf0caf34f864-1387539311"
       }
 
     });
+    console.log(body)
     
   return suscription.data;
 }
@@ -45,6 +45,8 @@ export async function GetPreferenceId(preference) {
   
     const suscription = await axios.get(url, body, {
       headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
         "Content-Type": "application/json",
         "Authorization": "Bearer APP_USR-2303800404167032-053121-7d6958f7ac334a6723eeaf0caf34f864-1387539311"
       }

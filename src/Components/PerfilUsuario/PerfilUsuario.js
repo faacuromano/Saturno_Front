@@ -6,15 +6,28 @@ import { Link } from "react-router-dom";
 
 import CardsProfesionales from "../Home/CardsProfesionales/CardsProfesionalesF";
 import { getClientProfile } from "../../functions/clientMethods";
+import { GetTurnosByUsername } from "../../functions/turnoMethods";
+import CardTurno from "../Turnos/CardTurno";
+
+//getTurnosbyUsername --> mapear y mostrar la lista de turnos
 
 const PerfilUsuario = () => {
   const [userLogged, setUserLogged] = useState({});
+  const [listaTurnos, setListaTurnos] = useState([]);
 
   useEffect(() => {
     const username = localStorage.getItem("user");
     getClientProfile(username).then(function (response) {
       setUserLogged(response.data);
     });
+
+    GetTurnosByUsername(username)
+      .then( function(response){
+        console.log('response',response)
+        setListaTurnos([...response])
+        console.log('lista', listaTurnos)
+      })
+
   }, []);
 
   return (
@@ -34,13 +47,14 @@ const PerfilUsuario = () => {
               </Col>
               <Col xs={10} className="border-bottom mt-5">
                 <h6>Tus turnos</h6>
+                <CardTurno listaTurnos={listaTurnos}/>      
               </Col>
               <Col xs={12} className="mt-4">
                 <CardsProfesionales />
               </Col>
               <Col xs={10} className="text-center mt-5">
                 <p>
-                  <strong>¿Problemas con un turno?</strong> Envinos un{" "}
+                  <strong>¿Problemas con un turno?</strong> Envianos un{" "}
                   <Link to={"/contacto"} className="colorLink">
                     mensaje
                   </Link>

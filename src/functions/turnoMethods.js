@@ -17,3 +17,15 @@ export async function crearTurno(turno) {
     console.log(errors);
   }
 }
+
+export async function GetTurnosByUsername(username) {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/turnosDe/${username}`,
+      method: "GET",
+    });
+    return response.data;
+  } catch (errors) {
+    console.log(errors);
+  }
+}

@@ -60,21 +60,24 @@ const Login = () => {
           tipoCuenta: response.data.user.tipoCuenta,
         };
         handleLogin(newAuth);
-
-        GetServiceByUsername(newAuth.username).then(function(serviceResponse) {
-          console.log(serviceResponse)
-          if (serviceResponse.length>0) {
-            // El cliente tiene servicios asociados
-            navigate("/");
-            console.log("El cliente tiene servicios");
-          } else {
-            // El cliente no tiene servicios asociados
-            navigate("/servicesettings");
-            console.log("El cliente no tiene servicios");
-          }
-          // Navegar a la ruta principal
-          
-        });
+        
+        if(newAuth.tipoCuenta === 'P') {
+          GetServiceByUsername(newAuth.username).then(function(serviceResponse) {
+            console.log(serviceResponse)
+            if (serviceResponse.length>0) {
+              // El cliente tiene servicios asociados
+              navigate("/");
+              console.log("El cliente tiene servicios");
+            } else {
+              // El cliente no tiene servicios asociados
+              navigate("/servicesettings");
+              console.log("El cliente no tiene servicios");
+            } 
+            // Navegar a la ruta principal
+          });  
+        } else {
+          navigate("/");
+        }
       } else {
         setTimeout(() => {
           setOpenPopUp(true)

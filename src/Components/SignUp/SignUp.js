@@ -248,6 +248,7 @@ const SignUp = () => {
             <Form.Group>
               <Form.Label>Nombre de usuario:</Form.Label>
               <Form.Control
+                placeholder="User123"
                 type="text"
                 onChange={userNameHandler}
                 onBlur={userNameValidation}
@@ -261,6 +262,7 @@ const SignUp = () => {
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
               <Form.Control
+                placeholder="Juan"
                 onChange={nameHandler}
                 value={name}
                 onBlur={nameValidation}
@@ -272,6 +274,7 @@ const SignUp = () => {
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>
               <Form.Control
+                placeholder="Topo"
                 onChange={lastnameHandler}
                 value={lastname}
                 onBlur={LastnameValidation}
@@ -285,6 +288,7 @@ const SignUp = () => {
             <Form.Group className="mt-4">
               <Form.Label>E-mail:</Form.Label>
               <Form.Control
+                placeholder="ejemplo@gmail.com"
                 onChange={emailHandler}
                 value={email}
                 onBlur={emailValidation}
@@ -296,6 +300,7 @@ const SignUp = () => {
             <Form.Group className="mt-4">
               <Form.Label>Número de celular:</Form.Label>
               <Form.Control
+                placeholder="3402000000"
                 onChange={phoneNumberHandler}
                 value={phoneNumber}
                 onBlur={phoneNumberValidation}
@@ -309,6 +314,7 @@ const SignUp = () => {
             <Form.Group className="mt-4">
               <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
               <Form.Control
+                placeholder="1965-03-25"
                 onChange={fechaNacHandler}
                 value={fechaNac}
                 type="text"
@@ -335,6 +341,7 @@ const SignUp = () => {
             <Form.Group className="mt-4">
               <Form.Label>Contraseña:</Form.Label>
               <Form.Control
+                placeholder="Contraseña"
                 onChange={passwordHandler}
                 onBlur={passwordValidation}
                 value={password}
@@ -348,6 +355,7 @@ const SignUp = () => {
             <Form.Group className="mt-4">
               <Form.Label>Repita la contraseña:</Form.Label>
               <Form.Control
+                placeholder="Contraseña"
                 onChange={validPasswordHandler}
                 onBlur={validPasswordValidation}
                 value={validPassword}

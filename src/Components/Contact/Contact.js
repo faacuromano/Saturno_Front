@@ -128,6 +128,7 @@ const Contact = () => {
               <Form.Group>
                 <Form.Label>Nombre:</Form.Label>
                 <Form.Control
+                  placeholder="Cosme Fulanito"
                   type="text"
                   name="user_name"
                   onChange={nameContactHandler}
@@ -140,6 +141,7 @@ const Contact = () => {
               <Form.Group>
                 <Form.Label>Email:</Form.Label>
                 <Form.Control
+                  placeholder="ejemplo@gmail.com"
                   type="email"
                   name="user_email"
                   onChange={emailContactHandler}
@@ -152,6 +154,7 @@ const Contact = () => {
               <Form.Group>
                 <Form.Label>Mensaje:</Form.Label>
                 <Form.Control
+                  placeholder="Escriba aquí su mensaje..."
                   name="message"
                   as="textarea"
                   rows={4}

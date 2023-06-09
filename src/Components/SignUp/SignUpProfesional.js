@@ -397,6 +397,7 @@ const SignUpProfesional = () => {
             <Form.Group>
               <Form.Label>Nombre de usuario:</Form.Label>
               <Form.Control
+                placeholder="User123"
                 type="text"
                 onChange={userNameProfHandler}
                 onBlur={userNameProfValidation}
@@ -410,6 +411,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
               <Form.Control
+                placeholder="Homero"
                 type="text"
                 onChange={nameProfHandler}
                 onBlur={nameProfValidation}
@@ -423,6 +425,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>
               <Form.Control
+                placeholder="Simpson"
                 type="text"
                 onChange={lastNameProfHandler}
                 onBlur={lastNameProfValidation}
@@ -436,6 +439,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Email:</Form.Label>
               <Form.Control
+                placeholder="ejemplo@gmail.com"
                 type="text"
                 onChange={emailProfHandler}
                 onBlur={emailProfValidation}
@@ -449,6 +453,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Número de teléfono:</Form.Label>
               <Form.Control
+                placeholder="3402000000"
                 type="text"
                 onChange={phoneProfHandler}
                 onBlur={phoneProfValidation}
@@ -462,6 +467,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
               <Form.Control
+                placeholder="1956-05-13"
                 type="text"
                 onChange={nacProfHandler}
                 onBlur={nacProfValidation}
@@ -486,6 +492,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Dirección (calle, nro.):</Form.Label>
               <Form.Control
+                placeholder="Avenida Siempreviva 742"
                 type="text"
                 onChange={direcProfHandler}
                 onBlur={direcProfValidation}
@@ -499,7 +506,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Profesión:</Form.Label>
               <Form.Select
-                aria-label="select your city"
+                aria-label="select your prof"
                 value={profesion}
                 onChange={profesionHandler}
               >
@@ -513,6 +520,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Breve descripción del servicio:</Form.Label>
               <Form.Control
+                placeholder="Escriba su descripción aquí..."
                 type="text-area"
                 rows="5"
                 cols="33"
@@ -523,6 +531,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Horario de inicio: (hh:mm:ss)</Form.Label>
               <Form.Control
+                placeholder="07:00:00"
                 type="text"
                 onChange={horaInicioHandler}
                 onBlur={horaInicioValidation}
@@ -536,6 +545,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Horario de cierre: (hh:mm:ss)</Form.Label>
               <Form.Control
+                placeholder="19:00:00"
                 type="text"
                 onChange={horaFinalHandler}
                 onBlur={horaFinalValidation}
@@ -549,6 +559,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Contraseña:</Form.Label>
               <Form.Control
+                placeholder="Contraseña"
                 type="password"
                 onChange={contraProfHandler}
                 onBlur={contraProfValidation}
@@ -559,6 +570,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Repita la contraseña:</Form.Label>
               <Form.Control
+                placeholder="Contraseña"
                 type="password"
                 onChange={validContraProfHandler}
                 onBlur={validContraProfValidation}

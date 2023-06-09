@@ -98,6 +98,7 @@ const Login = () => {
             <Form.Group>
               <Form.Label>Nombre de usuario:</Form.Label>
               <Form.Control
+                placeholder="User123"
                 type="text"
                 id="userName"
                 onChange={(event) => setUserName(event.target.value)}
@@ -111,6 +112,7 @@ const Login = () => {
             <Form.Group className="my-4">
               <Form.Label>Contraseña:</Form.Label>
               <Form.Control
+                placeholder="Contraseña"
                 type="password"
                 id="password"
                 onChange={(event) => setPassword(event.target.value)}

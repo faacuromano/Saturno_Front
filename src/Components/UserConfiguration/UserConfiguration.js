@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Col, Container, Row, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Image } from "react-bootstrap";
+import { Image as BootstrapImage } from "react-bootstrap";
 
 import { editClient } from "../../functions/clientMethods";
 import { getClientByUsername } from "../../functions/clientMethods";
@@ -21,18 +21,66 @@ const UserConfiguration = () => {
   const [fotoPerfil, setFotoPerfil] = useState("");
   const [username, setUsername] = useState("");
 
-  const [image, setImage] = useState("");
+  //BASE 64
 
-  const convertToBase64 = (e) => {
+  const [base64Image, setBase64Image] = useState("");
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        const img = new Image();
+        img.src = reader.result;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const maxSize = 200;
+          let width = img.width;
+          let height = img.height;
+
+          if (width !== height) {
+            const aspectRatio = width / height;
+            if (width > height) {
+              height = maxSize;
+              width = Math.round(maxSize * aspectRatio);
+            } else {
+              width = maxSize;
+              height = Math.round(maxSize / aspectRatio);
+            }
+          }
+
+          const offsetX = Math.round((maxSize - width) / 2);
+          const offsetY = Math.round((maxSize - height) / 2);
+
+          canvas.width = maxSize;
+          canvas.height = maxSize;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, offsetX, offsetY, width, height);
+
+          const base64 = canvas.toDataURL("image/jpeg", 0.2);
+          resolve(base64);
+        };
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      setImage(reader.result.toString());
-      console.log(image);
-    };
-
-    reader.readAsDataURL(file);
+    if (file && file.type.startsWith("image/")) {
+      convertToBase64(file)
+        .then((base64) => {
+          setBase64Image(base64);
+          setFotoPerfil(base64);
+        })
+        .catch((error) => {
+          console.log("Error al convertir la imagen:", error);
+        });
+    }
   };
 
   //Modal
@@ -299,14 +347,14 @@ const UserConfiguration = () => {
                 <Col xs={12} className="mt-4 border rounded">
                   <Row className="justify-content-center py-4 align-items-center">
                     <Col xs={3}>
-                      <Image src={fotoPerfil} fluid roundedCircle />
+                      <BootstrapImage src={fotoPerfil} fluid roundedCircle />
                     </Col>
                     <Col xs={7}>
                       <h5>Cambiar foto de perfil</h5>
                       {/* <Button variant="secondary">Cargar</Button> */}
                       <Input
                         type="file"
-                        onChange={(e) => convertToBase64(e)}
+                        onChange={(e) => handleImageUpload(e)}
                         variant="secondary"
                       >
                         {" "}

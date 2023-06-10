@@ -3,9 +3,10 @@ import { GetByProfUsername } from "../../functions/professionalMethods";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Image } from "react-bootstrap";
+import { Image as ImageBootstrap } from "react-bootstrap";
 import { editProfessional } from "../../functions/professionalMethods";
 import { getRubros } from "../../functions/rubrosMethods";
+import { Input } from "reactstrap";
 
 const ProfessionalConf = () => {
   //set de la info en los inputs
@@ -18,94 +19,6 @@ const ProfessionalConf = () => {
   const [profesion, setProfesion] = useState("");
   const [profesiones, setProfesiones] = useState([]);
   const [user, setUser] = useState([]);
-
-  const [image, setImage] = useState("");
-
-  const resizeImage = (imageFile) => {
-    return new Promise((resolve) => {
-      if (typeof window !== "undefined") {
-        const img = new window.Image();
-        const canvas = document.createElement("canvas");
-        const MAX_SIZE = 100;
-
-        img.onload = () => {
-          let width = img.width;
-          let height = img.height;
-          let size = Math.min(width, height);
-
-          // Ajustar el tamaño del lienzo al tamaño cuadrado deseado
-          canvas.width = size;
-          canvas.height = size;
-
-          const ctx = canvas.getContext("2d");
-
-          // Calcular las coordenadas de recorte para centrar la imagen en el lienzo
-          let x = 0;
-          let y = 0;
-          if (width > height) {
-            x = (width - height) / 2;
-          } else {
-            y = (height - width) / 2;
-          }
-
-          // Dibujar la imagen recortada en el lienzo
-          ctx.drawImage(img, x, y, size, size, 0, 0, size, size);
-
-          canvas.toBlob((blob) => {
-            resolve(blob);
-          }, imageFile.type);
-        };
-
-        img.src = URL.createObjectURL(imageFile);
-      } else {
-        resolve(imageFile);
-      }
-    });
-  };
-
-  const compressImage = (imageFile, quality) => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = URL.createObjectURL(imageFile);
-
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-
-        canvas.toBlob(
-          (blob) => {
-            resolve(blob);
-          },
-          imageFile.type,
-          quality
-        );
-      };
-
-      img.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
-  const convert2base64 = (e) => {
-    const file = e.target.files[0];
-    const quality = 0.8; // Ajusta la calidad de compresión entre 0 y 1
-
-    compressImage(file, quality)
-      .then((compressedBlob) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setImage(reader.result.toString());
-        };
-        reader.readAsDataURL(compressedBlob);
-      })
-      .catch((error) => {
-        console.error("Error al comprimir la imagen:", error);
-      });
-  };
 
   useEffect(() => {
     const username = localStorage.getItem("user");
@@ -134,6 +47,67 @@ const ProfessionalConf = () => {
         console.error("Error:", error);
       });
   }, []);
+
+  //BASE 64
+  const [base64Image, setBase64Image] = useState("");
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        const img = new Image();
+        img.src = reader.result;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const maxSize = 800;
+          let width = img.width;
+          let height = img.height;
+
+          if (width !== height) {
+            const aspectRatio = width / height;
+            if (width > height) {
+              height = maxSize;
+              width = Math.round(maxSize * aspectRatio);
+            } else {
+              width = maxSize;
+              height = Math.round(maxSize / aspectRatio);
+            }
+          }
+
+          const offsetX = Math.round((maxSize - width) / 2);
+          const offsetY = Math.round((maxSize - height) / 2);
+
+          canvas.width = maxSize;
+          canvas.height = maxSize;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, offsetX, offsetY, width, height);
+
+          const base64 = canvas.toDataURL("image/jpeg", 0.7);
+          resolve(base64);
+        };
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      convertToBase64(file)
+        .then((base64) => {
+          setBase64Image(base64);
+          setFotoPerfil(base64);
+        })
+        .catch((error) => {
+          console.log("Error al convertir la imagen:", error);
+        });
+    }
+  };
 
   //inputs ref
   const inputDescripcion = useRef(null);
@@ -242,16 +216,19 @@ const ProfessionalConf = () => {
                 <Col xs={8} className="mt-4 border rounded">
                   <Row className="justify-content-center py-4 align-items-center">
                     <Col xs={3}>
-                      <Image src={image} fluid />
+                      <ImageBootstrap src={fotoPerfil} fluid />
                     </Col>
                     <Col xs={7}>
                       <h5>Cambiar foto de portada</h5>
-                      <Form.Control
-                        id="fileupload"
-                        className="hidden"
+                      {/* <Button variant="secondary">Cargar</Button> */}
+                      <Input
                         type="file"
-                        onChange={(e) => convert2base64(e)}
-                      />
+                        onChange={(e) => handleImageUpload(e)}
+                        variant="secondary"
+                      >
+                        {" "}
+                        Cargar{" "}
+                      </Input>
                     </Col>
                   </Row>
                 </Col>

@@ -187,7 +187,6 @@ const SignUp = () => {
 
   //GUARDAR INFORMACIÓN
   const saveBaseUsuarioHandler = () => {
-
     if (
       userName === "" ||
       name === "" ||
@@ -199,7 +198,7 @@ const SignUp = () => {
       validPassword === ""
     ) {
       setTimeout(() => {
-        setOpenPopUp(true)
+        setOpenPopUp(true);
       }, 0);
     } else {
       const usuarioDatos = {
@@ -211,18 +210,17 @@ const SignUp = () => {
           ubicacion: ubication,
           numTelefono: phoneNumber,
           fechaNacimiento: fechaNac,
-          fotoPerfil: "string",
+          fotoPerfil: null,
           pass: password,
         },
-      }
+      };
       RegisterClient(usuarioDatos);
       localStorage.setItem("user", userName);
       handleShow();
       setErrorsValidation("");
-    };
+    }
     cleanInputs();
   };
-
 
   const cleanInputs = () => {
     setUserName("");
@@ -238,7 +236,12 @@ const SignUp = () => {
 
   return (
     <Container className="py-3">
-      <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Debe completar los campos requeridos." />
+      <AlertPopUp
+        open={openPopUp}
+        onClose={() => setOpenPopUp(false)}
+        titulo="Error"
+        mensaje="Debe completar los campos requeridos."
+      />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
           <h1>Registro de cliente</h1>

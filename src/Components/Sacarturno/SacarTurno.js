@@ -173,24 +173,36 @@ const SacarTurno = () => {
     <Container>
       <Row className="justify-content-center text-start">
         <Col xs={10}>
-          <h3 className="mt-3 mb-4">Sacar Turno</h3>
-          <p>
-            <strong>Servicio:</strong> {servicio}
-          </p>
-          <p>
-            <strong>Profesional:</strong> {profData.username}
-          </p>
-          <p>
-            <strong>Horario apertura:</strong> {profData.horarioInicio}
-          </p>
-          <p>
-            <strong>Horario cierre:</strong> {profData.horarioFinal}
-          </p>
-          <p>
-            <strong>Cliente:</strong> {user}
-          </p>
+          <Row className="justify-content-center">
+            <Col xs={10} className="border-bottom mb-3">
+              <h3 className="mt-3 mb-2">Sacar turno con:</h3>
+            </Col>
+            <Col xs={5}>
+              <p>
+                <strong>Profesional:</strong> {profData.nombre}{" "}
+                {profData.apellido}
+              </p>
+              <p>
+                <strong>Dirección:</strong> {profData.direccion}
+              </p>
+            </Col>
+            <Col xs={5}>
+              <p>
+                <strong>Horario apertura:</strong>{" "}
+                {profData.horarioInicio
+                  ? profData.horarioInicio.slice(0, 5)
+                  : "sin dato"}
+              </p>
+              <p>
+                <strong>Horario cierre:</strong>{" "}
+                {profData.horarioFinal
+                  ? profData.horarioFinal.slice(0, 5)
+                  : "sin dato"}
+              </p>
+            </Col>
+          </Row>
           <Row className="mt-4">
-            <Col xs={6}>
+            <Col xs={6} className="d-flex justify-content-center">
               <DayPicker
                 mode="single"
                 selected={selected}

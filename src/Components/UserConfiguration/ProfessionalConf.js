@@ -19,27 +19,26 @@ const ProfessionalConf = () => {
   const [profesiones, setProfesiones] = useState([]);
   const [user, setUser] = useState([]);
 
-  
   const [image, setImage] = useState("");
 
   const resizeImage = (imageFile) => {
     return new Promise((resolve) => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         const img = new window.Image();
         const canvas = document.createElement("canvas");
         const MAX_SIZE = 100;
-  
+
         img.onload = () => {
           let width = img.width;
           let height = img.height;
           let size = Math.min(width, height);
-  
+
           // Ajustar el tamaño del lienzo al tamaño cuadrado deseado
           canvas.width = size;
           canvas.height = size;
-  
+
           const ctx = canvas.getContext("2d");
-  
+
           // Calcular las coordenadas de recorte para centrar la imagen en el lienzo
           let x = 0;
           let y = 0;
@@ -48,15 +47,15 @@ const ProfessionalConf = () => {
           } else {
             y = (height - width) / 2;
           }
-  
+
           // Dibujar la imagen recortada en el lienzo
           ctx.drawImage(img, x, y, size, size, 0, 0, size, size);
-  
+
           canvas.toBlob((blob) => {
             resolve(blob);
           }, imageFile.type);
         };
-  
+
         img.src = URL.createObjectURL(imageFile);
       } else {
         resolve(imageFile);
@@ -68,29 +67,33 @@ const ProfessionalConf = () => {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.src = URL.createObjectURL(imageFile);
-  
+
       img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
-  
-        canvas.toBlob((blob) => {
-          resolve(blob);
-        }, imageFile.type, quality);
+
+        canvas.toBlob(
+          (blob) => {
+            resolve(blob);
+          },
+          imageFile.type,
+          quality
+        );
       };
-  
+
       img.onerror = (error) => {
         reject(error);
       };
     });
   };
-  
+
   const convert2base64 = (e) => {
     const file = e.target.files[0];
     const quality = 0.8; // Ajusta la calidad de compresión entre 0 y 1
-  
+
     compressImage(file, quality)
       .then((compressedBlob) => {
         const reader = new FileReader();
@@ -100,10 +103,9 @@ const ProfessionalConf = () => {
         reader.readAsDataURL(compressedBlob);
       })
       .catch((error) => {
-        console.error('Error al comprimir la imagen:', error);
+        console.error("Error al comprimir la imagen:", error);
       });
   };
-
 
   useEffect(() => {
     const username = localStorage.getItem("user");
@@ -240,7 +242,7 @@ const ProfessionalConf = () => {
                 <Col xs={8} className="mt-4 border rounded">
                   <Row className="justify-content-center py-4 align-items-center">
                     <Col xs={3}>
-                      <Image src={fotoPerfil} fluid />
+                      <Image src={image} fluid />
                     </Col>
                     <Col xs={7}>
                       <h5>Cambiar foto de portada</h5>

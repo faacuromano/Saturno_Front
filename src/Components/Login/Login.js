@@ -60,11 +60,13 @@ const Login = () => {
           tipoCuenta: response.data.user.tipoCuenta,
         };
         handleLogin(newAuth);
-        
-        if(newAuth.tipoCuenta === 'P') {
-          GetServiceByUsername(newAuth.username).then(function(serviceResponse) {
-            console.log(serviceResponse)
-            if (serviceResponse.length>0) {
+
+        if (newAuth.tipoCuenta === "P") {
+          GetServiceByUsername(newAuth.username).then(function (
+            serviceResponse
+          ) {
+            console.log(serviceResponse);
+            if (serviceResponse.length > 0) {
               // El cliente tiene servicios asociados
               navigate("/");
               console.log("El cliente tiene servicios");
@@ -72,26 +74,28 @@ const Login = () => {
               // El cliente no tiene servicios asociados
               navigate("/servicesettings");
               console.log("El cliente no tiene servicios");
-            } 
+            }
             // Navegar a la ruta principal
-          });  
+          });
         } else {
           navigate("/");
         }
       } else {
         setTimeout(() => {
-          setOpenPopUp(true)
+          setOpenPopUp(true);
         }, 0);
       }
     });
-    setUserName("");
-    setPassword("");
   };
-
 
   return (
     <Container className="py-3">
-      <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Usuario o contraseña incorrectos." />
+      <AlertPopUp
+        open={openPopUp}
+        onClose={() => setOpenPopUp(false)}
+        titulo="Error"
+        mensaje="Usuario o contraseña incorrectos."
+      />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4">
           <h1>Iniciar sesión</h1>

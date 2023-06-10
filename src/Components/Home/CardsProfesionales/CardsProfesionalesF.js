@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getProfessionals } from "../../../functions/professionalMethods";
 
+import "./CardsProfesionalesF.css";
+
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
@@ -26,14 +28,20 @@ const CardsProfesionales = () => {
 
   return (
     <>
-      <Row className="">
+      <Row>
         {professional.length < 1 ? (
           <p className="display-6 my-5 text-center">
             <strong>Ups!</strong> No hay datos disponibles (?)
           </p>
         ) : (
           professional.map((item, index) => (
-            <Col xs={12} md={6} lg={3} className="mb-3 mb-lg-0" key={index}>
+            <Col
+              xs={12}
+              md={6}
+              lg={3}
+              className="mb-3 mb-lg-0 d-flex carta"
+              key={index}
+            >
               <Link to={`/perfilProfesional/${item.username}`}>
                 <CardProfesionalF data={item} />
               </Link>

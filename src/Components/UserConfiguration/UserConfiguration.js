@@ -8,6 +8,7 @@ import { Image } from "react-bootstrap";
 import { editClient } from "../../functions/clientMethods";
 import { getClientByUsername } from "../../functions/clientMethods";
 import { Input } from "reactstrap";
+import ResetPassword from "./ResetPassword";
 
 const UserConfiguration = () => {
   //set de la info en los inputs
@@ -19,20 +20,19 @@ const UserConfiguration = () => {
   const [ubication, setUbication] = useState("");
   const [fotoPerfil, setFotoPerfil] = useState("");
   const [username, setUsername] = useState("");
-  
+
   const [image, setImage] = useState("");
 
   const convertToBase64 = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
 
-    reader.onload = () => { 
-      setImage(reader.result.toString())
-      console.log(image)
+    reader.onload = () => {
+      setImage(reader.result.toString());
+      console.log(image);
     };
 
     reader.readAsDataURL(file);
-
   };
 
   //Modal
@@ -296,7 +296,7 @@ const UserConfiguration = () => {
                   )}
                 </Form.Group>
                 {<div className="errorsValidation">{errorsValidation}</div>}
-                <Col xs={8} className="mt-4 border rounded">
+                <Col xs={12} className="mt-4 border rounded">
                   <Row className="justify-content-center py-4 align-items-center">
                     <Col xs={3}>
                       <Image src={fotoPerfil} fluid roundedCircle />
@@ -305,9 +305,13 @@ const UserConfiguration = () => {
                       <h5>Cambiar foto de perfil</h5>
                       {/* <Button variant="secondary">Cargar</Button> */}
                       <Input
-                        type = "file"
-                        onChange = { e => convertToBase64(e) }
-                        variant = "secondary" > Cargar </Input>
+                        type="file"
+                        onChange={(e) => convertToBase64(e)}
+                        variant="secondary"
+                      >
+                        {" "}
+                        Cargar{" "}
+                      </Input>
                     </Col>
                   </Row>
                 </Col>
@@ -320,32 +324,7 @@ const UserConfiguration = () => {
                 </Button>
               </Form>
             </Col>
-            <Col
-              xs={12}
-              className="border-bottom pb-4 mb-4 mt-5"
-              id="change-password"
-            >
-              <h1>Cambiar contraseña</h1>
-            </Col>
-            <Col xs={12} className="mt-2">
-              <Form>
-                <Form.Group>
-                  <Form.Label>Contraseña vieja:</Form.Label>
-                  <Form.Control type="password" />
-                </Form.Group>
-                <Form.Group className="mt-4">
-                  <Form.Label>Constraseña nueva:</Form.Label>
-                  <Form.Control type="password" />
-                </Form.Group>
-                <Form.Group className="mt-4">
-                  <Form.Label>Repita la contraseña nueva:</Form.Label>
-                  <Form.Control type="password" />
-                </Form.Group>
-                <Button variant="primary" className="mt-4">
-                  Cambiar
-                </Button>
-              </Form>
-            </Col>
+            <ResetPassword username={username} />
           </Row>
         </Col>
         <Modal show={show} onHide={handleClose} centered>

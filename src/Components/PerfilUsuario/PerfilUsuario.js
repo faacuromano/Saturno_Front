@@ -21,13 +21,11 @@ const PerfilUsuario = () => {
       setUserLogged(response.data);
     });
 
-    GetTurnosByUsername(username)
-      .then( function(response){
-        console.log('response',response)
-        setListaTurnos([...response])
-        console.log('lista', listaTurnos)
-      })
-
+    GetTurnosByUsername(username).then(function (response) {
+      console.log("response", response);
+      setListaTurnos([...response]);
+      console.log("lista", listaTurnos);
+    });
   }, []);
 
   return (
@@ -45,9 +43,9 @@ const PerfilUsuario = () => {
                 </h1>
                 <h5 className="fw-light">{userLogged.ubicacion}</h5>
               </Col>
-              <Col xs={10} className="border-bottom mt-5">
+              <Col xs={10} className="border-bottom mt-5 pb-3">
                 <h6>Tus turnos</h6>
-                <CardTurno listaTurnos={listaTurnos}/>      
+                <CardTurno listaTurnos={listaTurnos} />
               </Col>
               <Col xs={12} className="mt-4">
                 <CardsProfesionales />

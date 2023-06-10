@@ -18,11 +18,12 @@ const TablaCliente = () => {
 
   return (
     <>
-      <p className="fw-bold">Administrador de clientes:</p>
+      <p className="fw-bold mb-4">
+        Clickea en el nombre de usuario para modificar su información
+      </p>
       <Table hover>
         <thead>
           <tr>
-            <th>ID</th>
             <th>UserName</th>
             <th>Name</th>
             <th>LastName</th>
@@ -33,7 +34,9 @@ const TablaCliente = () => {
           ))}
         </thead>
       </Table>
-      <Link to={"/signup"}><Button className="my-3">Crear cliente</Button></Link>
+      <Link to={"/signup"}>
+        <Button className="my-3">Crear cliente</Button>
+      </Link>
     </>
   );
 };

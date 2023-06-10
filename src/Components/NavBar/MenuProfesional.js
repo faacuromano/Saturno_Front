@@ -35,6 +35,9 @@ const MenuProfesional = () => {
           <Dropdown.Item as={Link} to={"/professionalconf"}>
             Configurar cuenta profesional
           </Dropdown.Item>
+          <Dropdown.Item as={Link} to={"/configuracionUsuario"}>
+            Configurar cuenta personal
+          </Dropdown.Item>
           <Dropdown.Item as={Link} to={"/servicesettings"}>
             Configurar tus servicios
           </Dropdown.Item>

@@ -26,9 +26,10 @@ import Error404 from "./Components/Error404/Error404";
 import NavBarLogOut from "./Components/NavBar/NavBarLogOut";
 import SignUpProfesional from "./Components/SignUp/SignUpProfesional";
 import ProfessionalConf from "./Components/UserConfiguration/ProfessionalConf";
+import SacarTurno from "./Components/Sacarturno/SacarTurno";
+import Verificacion from "./Components/Verificacion/Verificacion";
 
 import ScrollToTop from "./functions/ScrollToTop";
-import SacarTurno from "./Components/Sacarturno/SacarTurno";
 
 function App() {
   return (
@@ -171,6 +172,14 @@ function App() {
             element={
               <Container className="text-center py-5">
                 <SacarTurno />
+              </Container>
+            }
+          />
+          <Route
+            path="/verificacion"
+            element={
+              <Container className="text-center py-5">
+                <Verificacion />
               </Container>
             }
           />

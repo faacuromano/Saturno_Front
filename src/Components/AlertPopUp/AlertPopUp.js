@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Button, Modal } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Button, Modal } from "react-bootstrap";
 
 /*
     Para utilizarlo simplemente añadir el AlertPopUp 
@@ -14,27 +14,23 @@ import { Button, Modal } from 'react-bootstrap';
 */
 
 const AlertPopUp = ({ open, onClose, mensaje, titulo }) => {
+  if (!open) return null;
 
-    if (!open) return null;
-
-    return (
-        <>
-            <Modal show={true}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{titulo}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{mensaje}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={onClose}>
-                        Cerrar
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
-
-    );
+  return (
+    <>
+      <Modal show={true} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>{titulo}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{mensaje}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={onClose}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 };
 
-export default AlertPopUp
-
-
+export default AlertPopUp;

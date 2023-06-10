@@ -1,0 +1,11 @@
+.negro a {
+    color:black;
+}
+
+.negro a:hover {
+    color:gray;
+}
+
+.negro a:focus {
+    color:gray;
+}

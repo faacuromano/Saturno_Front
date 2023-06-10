@@ -96,6 +96,10 @@ a {
   box-shadow: none;
 }
 
+ul li svg {
+  margin-bottom: 2px;
+}
+
 /* .accordion-button:not(.collapsed) {
   color: #f8f9fa;
   background-color: #ff5b5ce6;

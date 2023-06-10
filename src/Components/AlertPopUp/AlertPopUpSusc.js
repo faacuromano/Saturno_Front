@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Button, Modal } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Button, Modal } from "react-bootstrap";
 
 /*
     Para utilizarlo simplemente añadir el AlertPopUp 
@@ -14,40 +14,37 @@ import { Button, Modal } from 'react-bootstrap';
 */
 
 const AlertPopUp = ({ open, onClose, onContinue }) => {
+  if (!open) return null;
 
-    if (!open) return null;
-
-    return (
-        <>
-            <Modal show={true}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Suscribite!</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <h6>
-                        Obtén acceso exclusivo a las características premium por $1500/mes.
-                        </h6>
-                    <p  style={{ fontFamily: 'Roboto' }}>
-                        <li>Programar turnos de manera rápida y segura.</li>
-                        <li>Acceso 24/7.</li>
-                        <li>Recordatorios.</li>
-                        <li>Mayor comodidad.</li>
-                        <li>Organización y eficiencia.</li>        
-                    </p>
-                   
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={onClose}>
-                        Volver
-                    </Button>
-                    <Button variant="primary" onClick={onContinue}>
-                        Continuar
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
-
-    );
+  return (
+    <>
+      <Modal show={true} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Suscribite!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h6>
+            Obtén acceso exclusivo a las características premium por $1500/mes.
+          </h6>
+          <p style={{ fontFamily: "Roboto" }}>
+            <li>Programar turnos de manera rápida y segura.</li>
+            <li>Acceso 24/7.</li>
+            <li>Recordatorios.</li>
+            <li>Mayor comodidad.</li>
+            <li>Organización y eficiencia.</li>
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={onClose}>
+            Volver
+          </Button>
+          <Button variant="primary" onClick={onContinue}>
+            Continuar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 };
 
-export default AlertPopUp
+export default AlertPopUp;

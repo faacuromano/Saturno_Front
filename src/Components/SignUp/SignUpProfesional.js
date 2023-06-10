@@ -10,8 +10,8 @@ import AlertPopUp from "../AlertPopUp/AlertPopUp";
 import AlertPopUpSusc from "../AlertPopUp/AlertPopUpSusc";
 
 const SignUpProfesional = () => {
-  
-  
+
+
 
   const navigate = useNavigate();
   const [userNameProf, setUserNameProf] = useState("");
@@ -160,9 +160,18 @@ const SignUpProfesional = () => {
     setPhoneProf(e.target.value);
   };
 
+  // Validate ONLY numbers in phone:
+  function containsSpecialChars(str) {
+    const onlyNumbers =
+      /^[0-9]*$/;
+    return onlyNumbers.test(str) != true ? true : false;
+  }
+
   const phoneProfValidation = () => {
     if (phoneProf === "") {
       setErrors({ ...errors, phoneProf: "Campo obligatorio." });
+    } else if (containsSpecialChars(phoneProf)) {
+      setErrors({ ...errors, phoneProf: "No puede contener carácteres especiales o espacios." });
     } else if (phoneProf.length < 10 || phoneProf.length > 10) {
       setErrors({ ...errors, phoneProf: "Debe contener 10 números." });
     } else {
@@ -386,8 +395,8 @@ const SignUpProfesional = () => {
 
   return (
     <Container className="py-3">
-      <AlertPopUpSusc open={openPopUpSusc} onClose={() => volver() } onContinue={()=> continuar()}/>
-      <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Debe completar los campos requeridos." />
+      <AlertPopUpSusc open={openPopUpSusc} onClose={() => volver()} onContinue={() => continuar()} />
+      <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Debe completar los campos requeridos y sin errores." />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
           <h1>Registro de profesional</h1>

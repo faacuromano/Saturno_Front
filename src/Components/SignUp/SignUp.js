@@ -120,9 +120,18 @@ const SignUp = () => {
     setPhoneNumber(e.target.value);
   };
 
+  // Validate ONLY numbers in phone:
+  function containsSpecialChars(str) {
+    const onlyNumbers =
+    /^[0-9]*$/;
+    return onlyNumbers.test(str) != true ? true : false; 
+  }
+
   const phoneNumberValidation = () => {
     if (phoneNumber === "") {
       setErrors({ ...errors, phoneNumber: "Campo obligatorio." });
+    } else if (containsSpecialChars(phoneNumber)) {
+      setErrors({ ...errors, phoneNumber: "No puede contener carácteres especiales o espacios." });
     } else if (phoneNumber.length < 10 || phoneNumber.length > 10) {
       setErrors({ ...errors, phoneNumber: "Debe contener 10 números." });
     } else {
@@ -131,6 +140,9 @@ const SignUp = () => {
       setErrors(_errors);
     }
   };
+
+  console.log(typeof phoneNumber)
+
 
   const fechaNacHandler = (e) => {
     setFechaNac(e.target.value);
@@ -240,7 +252,7 @@ const SignUp = () => {
         open={openPopUp}
         onClose={() => setOpenPopUp(false)}
         titulo="Error"
-        mensaje="Debe completar los campos requeridos."
+        mensaje="Debe completar los campos requeridos y sin errores."
       />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">

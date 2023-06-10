@@ -29,6 +29,7 @@ import ProfessionalConf from "./Components/UserConfiguration/ProfessionalConf";
 
 import ScrollToTop from "./functions/ScrollToTop";
 import SacarTurno from "./Components/Sacarturno/SacarTurno";
+import ValidatePayment from "./Components/ValidatePayment/ValidatePayment";
 
 function App() {
   return (
@@ -179,6 +180,14 @@ function App() {
             element={
               <Container className="text-center py-5">
                 <Error404 />
+              </Container>
+            }
+          />
+          <Route
+            path="/validatepayment"
+            element={
+              <Container className="text-center py-5">
+                <ValidatePayment/>
               </Container>
             }
           />

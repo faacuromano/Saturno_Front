@@ -7,6 +7,7 @@ import { Image } from "react-bootstrap";
 
 import { editClient } from "../../functions/clientMethods";
 import { getClientByUsername } from "../../functions/clientMethods";
+import { Input } from "reactstrap";
 
 const UserConfiguration = () => {
   //set de la info en los inputs
@@ -18,6 +19,21 @@ const UserConfiguration = () => {
   const [ubication, setUbication] = useState("");
   const [fotoPerfil, setFotoPerfil] = useState("");
   const [username, setUsername] = useState("");
+  
+  const [image, setImage] = useState("");
+
+  const convertToBase64 = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => { 
+      setImage(reader.result.toString())
+      console.log(image)
+    };
+
+    reader.readAsDataURL(file);
+
+  };
 
   //Modal
   const [show, setShow] = useState(false);
@@ -44,9 +60,9 @@ const UserConfiguration = () => {
   useEffect(() => {
     const user_name = localStorage.getItem("user");
     getClientByUsername(user_name).then(function (response) {
-      setUsername(response.data.username);
       setName(response.data.nombre);
       setLastName(response.data.apellido);
+      setUsername(response.data.username);
       setEmail(response.data.mail);
       setFechaNac(response.data.fechaNacimiento);
       setPhoneNumber(response.data.numTelefono);
@@ -287,7 +303,11 @@ const UserConfiguration = () => {
                     </Col>
                     <Col xs={7}>
                       <h5>Cambiar foto de perfil</h5>
-                      <Button variant="secondary">Cargar</Button>
+                      {/* <Button variant="secondary">Cargar</Button> */}
+                      <Input
+                        type = "file"
+                        onChange = { e => convertToBase64(e) }
+                        variant = "secondary" > Cargar </Input>
                     </Col>
                   </Row>
                 </Col>

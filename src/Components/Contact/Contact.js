@@ -1,43 +1,47 @@
 import React, { useRef, useState } from "react";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
 
 const Contact = () => {
-
   const form = useRef();
   const [mensajeEnviado, setMensajeEnviado] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    if(nameContact === "" || emailContact === "" || message == ""){
+    if (nameContact === "" || emailContact === "" || message == "") {
       setTimeout(() => {
-        setOpenPopUp(true)
-      }, 0)
+        setOpenPopUp(true);
+      }, 0);
     } else {
-      emailjs.sendForm('service_bi7vwtq', 'template_xwpoj3g', form.current, 'RERaAk2SC1-ojAP5A')
-      .then((result) => {
-        console.log(result.text);
-        
+      emailjs
+        .sendForm(
+          "service_bi7vwtq",
+          "template_xwpoj3g",
+          form.current,
+          "RERaAk2SC1-ojAP5A"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+
             setMensajeEnviado(true);
             limpiarCampos();
 
             setTimeout(() => {
-            setMensajeEnviado(false);
-          }, 3000);
-        
-      }, (error) => {
-        alert("El mensaje no pudo enviarse. Vuelva a intentarlo.")
-        console.log(error.text);
-      });
- 
-
+              setMensajeEnviado(false);
+            }, 3000);
+          },
+          (error) => {
+            alert("El mensaje no pudo enviarse. Vuelva a intentarlo.");
+            console.log(error.text);
+          }
+        );
     }
-
-     };
+  };
 
   const [nameContact, setNameContact] = useState("");
   const [emailContact, setEmailContact] = useState("");
@@ -51,10 +55,9 @@ const Contact = () => {
   const inputNameLast = useRef(null);
   const inputEmail = useRef(null);
 
-
   // Validations
 
-  // Name 
+  // Name
   const nameValidation = () => {
     if (nameContact === "") {
       setErrors({ ...errors, nameContact: "Campo obligatorio." });
@@ -113,7 +116,12 @@ const Contact = () => {
   return (
     <>
       <Container className="py-3">
-      <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Por favor ingrese los datos correctamente." />
+        <AlertPopUp
+          open={openPopUp}
+          onClose={() => setOpenPopUp(false)}
+          titulo="Error"
+          mensaje="Por favor ingrese los datos correctamente."
+        />
         <Row className="justify-content-center text-start">
           <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
             <h1>Contacto</h1>
@@ -133,41 +141,57 @@ const Contact = () => {
                   name="user_name"
                   onChange={nameContactHandler}
                   value={nameContact}
-                  onBlur={nameValidation} />
+                  onBlur={nameValidation}
+                />
                 {errors.nameContact && (
                   <div className="errors">{errors.nameContact}</div>
                 )}
               </Form.Group>
               <Form.Group>
-                <Form.Label>Email:</Form.Label>
+                <Form.Label className="mt-3">Email:</Form.Label>
                 <Form.Control
                   placeholder="ejemplo@gmail.com"
                   type="email"
                   name="user_email"
                   onChange={emailContactHandler}
                   value={emailContact}
-                  onBlur={emailValidation} />
+                  onBlur={emailValidation}
+                />
                 {errors.emailContact && (
                   <div className="errors">{errors.emailContact}</div>
                 )}
               </Form.Group>
               <Form.Group>
-                <Form.Label>Mensaje:</Form.Label>
+                <Form.Label className="mt-3">Mensaje:</Form.Label>
                 <Form.Control
                   placeholder="Escriba aquí su mensaje..."
                   name="message"
                   as="textarea"
                   rows={4}
                   onChange={messageHandler}
-                  value={message} />
+                  value={message}
+                />
               </Form.Group>
-              {mensajeEnviado && <p style={{ color: 'green', padding: '10px', margin: '10px', textAlign: 'center', fontFamily: 'Roboto' }}>Mensaje enviado</p>}
+              {mensajeEnviado && (
+                <p
+                  style={{
+                    color: "green",
+                    padding: "10px",
+                    margin: "10px",
+                    textAlign: "center",
+                    fontFamily: "Roboto",
+                  }}
+                >
+                  Mensaje enviado
+                </p>
+              )}
               <Button
                 type="submit"
                 value="Send"
                 onClick={sendEmail}
                 variant="primary"
-                className="mt-4">
+                className="mt-4"
+              >
                 Enviar
               </Button>
               <Button

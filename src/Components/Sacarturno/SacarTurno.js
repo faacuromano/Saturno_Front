@@ -76,15 +76,15 @@ const SacarTurno = () => {
   const [selected, setSelected] = useState();
 
   let footer = (
-    <p className="mt-3">
-      <strong>Por favor seleccione un día</strong>
-    </p>
+    <Alert variant="warning" className="mt-2">
+      Por favor seleccione un día
+    </Alert>
   );
   if (selected) {
     footer = (
-      <p className="mt-3">
-        <strong>Seleccionaste {format(selected, "Y-MM-dd")}</strong>
-      </p>
+      <Alert variant="success" className="mt-2">
+        Seleccionaste <strong>{format(selected, "Y-MM-dd")}</strong>
+      </Alert>
     );
   }
 
@@ -101,13 +101,15 @@ const SacarTurno = () => {
         const lista = Object.values(response.data)[0];
         setMapeoBotones(
           <>
-            <h4 className="my-4">Selecciona un horario para sacar un turno:</h4>
+            <h5 className="my-4 ms-3">Selecciona el horario de tu turno:</h5>
             {lista.map((item, index) => (
               <>
                 <Button
                   key={index}
-                  className="ms-1 mb-1"
+                  className="ms-2 mb-2"
                   onClick={handleShow.bind(this, item)}
+                  variant="secondary"
+                  size="sm"
                 >
                   {item}
                 </Button>
@@ -170,30 +172,32 @@ const SacarTurno = () => {
   };
 
   return (
-    <Container>
+    <Container className="pb-3">
       <Row className="justify-content-center text-start">
-        <Col xs={10}>
+        <Col xs={12} lg={9} className="shadow-sm rounded pt-4">
           <Row className="justify-content-center">
-            <Col xs={10} className="border-bottom mb-3">
-              <h3 className="mt-3 mb-2">Sacar turno con:</h3>
+            <Col xs={12} className="pb-4">
+              <h1 className="ms-4">Sacar turno</h1>
             </Col>
-            <Col xs={5}>
-              <p>
+          </Row>
+          <Row className="justify-content-center content text-white p-4">
+            <Col xs={12} sm={10} lg={5}>
+              <p className="my-1">
                 <strong>Profesional:</strong> {profData.nombre}{" "}
                 {profData.apellido}
               </p>
-              <p>
+              <p className="my-1">
                 <strong>Dirección:</strong> {profData.direccion}
               </p>
             </Col>
-            <Col xs={5}>
-              <p>
+            <Col xs={12} sm={10} lg={5}>
+              <p className="my-1">
                 <strong>Horario apertura:</strong>{" "}
                 {profData.horarioInicio
                   ? profData.horarioInicio.slice(0, 5)
                   : "sin dato"}
               </p>
-              <p>
+              <p className="my-1">
                 <strong>Horario cierre:</strong>{" "}
                 {profData.horarioFinal
                   ? profData.horarioFinal.slice(0, 5)
@@ -201,8 +205,14 @@ const SacarTurno = () => {
               </p>
             </Col>
           </Row>
-          <Row className="mt-4">
-            <Col xs={6} className="d-flex justify-content-center">
+          <Row className="pt-4 pb-5 justify-content-center">
+            <Col
+              xs={10}
+              md={6}
+              lg={5}
+              xl={4}
+              className="d-flex justify-content-center"
+            >
               <DayPicker
                 mode="single"
                 selected={selected}
@@ -213,7 +223,9 @@ const SacarTurno = () => {
                 fromMonth={defaultMonth}
               />
             </Col>
-            <Col xs={6}>{mapeoBotones}</Col>
+            <Col xs={11} sm={9} md={6}>
+              {mapeoBotones}
+            </Col>
           </Row>
         </Col>
         {mensaje}

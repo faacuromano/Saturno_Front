@@ -41,6 +41,7 @@ const MenuProfesional = () => {
           <Dropdown.Item as={Link} to={"/servicesettings"}>
             Configurar tus servicios
           </Dropdown.Item>
+          <Dropdown.Divider />
           <Dropdown.Item onClick={handleShow}>Cerrar sesión</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

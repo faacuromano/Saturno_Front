@@ -50,13 +50,13 @@ const NavBarLogOut = () => {
             <Link to={"/"}>Inicio</Link>
           </Nav.Link>
           <Nav.Link className="navBar-options mt-3 mt-lg-0">
-            <Link to={"/profesionales"}>Qué es Saturno?</Link>
-          </Nav.Link>
-          <Nav.Link className="navBar-options mt-3 mt-lg-0">
-            <Link to={"/contacto"}>Contacto</Link>
+            <Link to={"/profesionales"}>¿Qué es Saturno?</Link>
           </Nav.Link>
           <Nav.Link className="navBar-options mt-3 mt-lg-0">
             <Link to={"/sobrenosotros"}>Sobre nosotros</Link>
+          </Nav.Link>
+          <Nav.Link className="navBar-options mt-3 mt-lg-0">
+            <Link to={"/contacto"}>Contacto</Link>
           </Nav.Link>
           <Nav.Link className="my-3 my-lg-0">{menuRender}</Nav.Link>
         </Navbar.Collapse>

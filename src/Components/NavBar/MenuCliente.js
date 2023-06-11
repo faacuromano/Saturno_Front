@@ -31,6 +31,7 @@ const MenuCliente = () => {
           <Dropdown.Item as={Link} to={"/configuracionUsuario"}>
             Configuraciones
           </Dropdown.Item>
+          <Dropdown.Divider />
           <Dropdown.Item onClick={handleShow}>Cerrar sesión</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

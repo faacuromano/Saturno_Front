@@ -30,6 +30,7 @@ import SacarTurno from "./Components/Sacarturno/SacarTurno";
 import Verificacion from "./Components/Verificacion/Verificacion";
 
 import ScrollToTop from "./functions/ScrollToTop";
+import { Col, Row } from "react-bootstrap";
 
 function App() {
   return (
@@ -38,11 +39,18 @@ function App() {
         <NavBarLogOut />
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <Container fluid>
+                <Home />
+              </Container>
+            }
+          />
           <Route
             path="/buscar"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <Search />
               </Container>
             }
@@ -50,7 +58,7 @@ function App() {
           <Route
             path="/profesionales"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <Profesionales />
               </Container>
             }
@@ -58,7 +66,7 @@ function App() {
           <Route
             path="/contacto"
             element={
-              <Container className="text-center py-5">
+              <Container className="py-5" fluid>
                 <Contact />
               </Container>
             }
@@ -66,7 +74,7 @@ function App() {
           <Route
             path="/sobrenosotros"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <AboutUs />
               </Container>
             }
@@ -74,7 +82,7 @@ function App() {
           <Route
             path="/login"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <Login />
               </Container>
             }
@@ -82,7 +90,7 @@ function App() {
           <Route
             path="/tipo-de-cuenta"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <TipoCuenta />
               </Container>
             }
@@ -90,7 +98,7 @@ function App() {
           <Route
             path="/signup"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <SignUp />
               </Container>
             }
@@ -98,7 +106,7 @@ function App() {
           <Route
             path="/signuprofesional"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <SignUpProfesional />
               </Container>
             }
@@ -106,7 +114,7 @@ function App() {
           <Route
             path="/perfilProfesional/:profesional"
             element={
-              <Container className="text-center py-5">
+              <Container className="pb-5 pt-3">
                 <PerfilProfesional />
               </Container>
             }
@@ -114,7 +122,7 @@ function App() {
           <Route
             path="/perfilUsuario"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <PerfilUsuario />
               </Container>
             }
@@ -122,7 +130,7 @@ function App() {
           <Route
             path="/configuracionUsuario"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <UserConfiguration />
               </Container>
             }
@@ -130,7 +138,7 @@ function App() {
           <Route
             path="/recoverPassword"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <RecoverPassword />
               </Container>
             }
@@ -138,7 +146,7 @@ function App() {
           <Route
             path="/serviceSettings"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <ServiceSettings />
               </Container>
             }
@@ -146,7 +154,7 @@ function App() {
           <Route
             path="/professionalconf"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <ProfessionalConf />
               </Container>
             }
@@ -154,7 +162,7 @@ function App() {
           <Route
             path="/admin"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <Admin />
               </Container>
             }
@@ -162,7 +170,7 @@ function App() {
           <Route
             path="/adminCliente"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <AdminCliente />
               </Container>
             }
@@ -170,7 +178,7 @@ function App() {
           <Route
             path="/perfilProfesional/:profesional/:servicio"
             element={
-              <Container className="text-center py-5">
+              <Container className="pb-5 pt-3" fluid>
                 <SacarTurno />
               </Container>
             }
@@ -178,7 +186,7 @@ function App() {
           <Route
             path="/verificacion"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <Verificacion />
               </Container>
             }
@@ -186,13 +194,12 @@ function App() {
           <Route
             path="/*"
             element={
-              <Container className="text-center py-5">
+              <Container className="text-center py-5" fluid>
                 <Error404 />
               </Container>
             }
           />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </div>
   );

@@ -37,7 +37,7 @@ const CardsProfesionales = () => {
           professional.map((item, index) => (
             <Col
               xs={12}
-              md={6}
+              sm={6}
               lg={3}
               className="mb-3 mb-lg-0 d-flex carta"
               key={index}

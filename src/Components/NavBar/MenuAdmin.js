@@ -31,6 +31,7 @@ const MenuAdmin = () => {
           <Dropdown.Item as={Link} to={"/admin"}>
             Admin
           </Dropdown.Item>
+          <Dropdown.Divider />
           <Dropdown.Item onClick={handleShow}>Cerrar sesión</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

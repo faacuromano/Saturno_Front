@@ -7,7 +7,7 @@ import { GetServiceByUsername } from "../../functions/serviceMethods";
 import "./PerfilProfesional.css";
 import "react-day-picker/dist/style.css";
 
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import Modal from "react-bootstrap/Modal";
 import { useParams } from "react-router";
@@ -46,9 +46,9 @@ const PerfilProfesional = () => {
 
   return (
     <>
-      <Container>
+      <Container fluid>
         <Row className="justify-content-center">
-          <Col xs={11} className="rounded border">
+          <Col xs={11} className="rounded shadow-sm">
             <Row>
               <Col
                 xs={12}
@@ -56,54 +56,83 @@ const PerfilProfesional = () => {
                 style={estilo}
               ></Col>
             </Row>
-            <Row className="justify-content-center pt-3 pb-5">
-              <Col xs={3}>
-                <Row className="justify-content-center">
-                  <Col xs={8}>
+            <Row className="pb-4">
+              <Col xs={12} className="fondo-gris10 border-bottom mb-4">
+                <Row className="justify-content-center align-items-center">
+                  <Col xs={4} md={3} lg={2} xl={1}>
                     <Image
                       src={profData.fotoPerfil}
                       roundedCircle
                       fluid
-                      className="my-4"
+                      className="my-3 d-block ms-auto imagen-perfil shadow-sm"
                     />
                   </Col>
+                  <Col xs={8} sm={5} className="ps-0">
+                    <h3 className="mb-0 display-6">
+                      <strong>
+                        {profData.nombre} {profData.apellido}
+                      </strong>
+                    </h3>
+                    <h6 className="mb-0 text-muted">
+                      <strong>
+                        {profData.profesion} - {profData.ubicacion}
+                      </strong>
+                    </h6>
+                  </Col>
                 </Row>
-                <ul className="list-unstyled text-start ps-5">
-                  <li className="mb-2">
-                    <BiMap /> <strong>{profData.direccion}</strong> -{" "}
-                    {profData.ubicacion}
-                  </li>
-                  <li className="mb-2">
-                    <FiClock /> {profData.horarioInicio} a{" "}
-                    {profData.horarioFinal}
-                  </li>
-                  <li className="mb-2">
-                    <BiMobileAlt /> {profData.numTelefono}
-                  </li>
-                </ul>
               </Col>
-              <Col xs={8} className="text-start mt-5">
-                <h1 className="pb-4 mb-3">
-                  {profData.nombre} {profData.apellido}
-                </h1>
-                <h5 className="mb-3 text-muted">{profData.profesion}</h5>
-                <h5 className="mb-3">Descripción</h5>
-                <p className="my-3">{profData.descripcion}</p>
-                <h5 className="my-3">Lista de servicios</h5>
-                <p>Selecciona un servicio para solicitar un turno</p>
-
-                {serviceData.length === 0 ? (
-                  <p>
-                    <em>
-                      Para mostrar su perfil al público debe crear un servicio
-                    </em>
-                  </p>
-                ) : (
-                  <AcordionServicios
-                    servicios={serviceData}
-                    profesional={profesional}
-                  />
-                )}
+              <Col xs={12}>
+                <Row className="justify-content-evenly">
+                  <Col xs={12} sm={10} md={5} lg={4} xl={3} className="py-md-4">
+                    <h5 className="mt-3 mb-2">Detalles</h5>
+                    <ul className="list-unstyled profile">
+                      <li className="mb-2">
+                        <BiMap /> {profData.direccion}
+                      </li>
+                      <li className="mb-2">
+                        <FiClock />{" "}
+                        {profData.horarioInicio
+                          ? profData.horarioInicio.slice(0, 5)
+                          : "sin datos"}{" "}
+                        a{" "}
+                        {profData.horarioFinal
+                          ? profData.horarioFinal.slice(0, 5)
+                          : "sin datos"}
+                      </li>
+                      <li className="mb-2">
+                        <BiMobileAlt /> {profData.numTelefono}
+                      </li>
+                    </ul>
+                  </Col>
+                  <Col xs={12} sm={10} md={7} className="py-4">
+                    {profData.descripcion ? (
+                      <>
+                        <h5 className="mb-2">Descripción</h5>
+                        <p className="my-2">{profData.descripcion}</p>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                    <h5 className="my-2 ms-2">Lista de servicios</h5>
+                    <p className="text-muted ms-2">
+                      <em>
+                        Selecciona un servicio para solicitar un turno a este
+                        profesional
+                      </em>
+                    </p>
+                    {serviceData.length === 0 ? (
+                      <Alert variant="danger">
+                        En este momento este profesional no tiene ningún
+                        servicio disponible
+                      </Alert>
+                    ) : (
+                      <AcordionServicios
+                        servicios={serviceData}
+                        profesional={profesional}
+                      />
+                    )}
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </Col>

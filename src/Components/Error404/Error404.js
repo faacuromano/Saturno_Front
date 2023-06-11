@@ -3,14 +3,14 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Error404 = () => {
-  const logoSolo = require("./logo-solo.jpg");
+  const logoSolo = require("./logo-solo.png");
   return (
     <Container className="px-0">
       <Row>
         <Col xs={12} className="mt-5">
           <img src={logoSolo} className="logo-solo" alt="" />
         </Col>
-        <Col xs={12} className="py-5">
+        <Col xs={12} className="pb-5">
           <p className="display-6 my-5">
             <strong>Ups!</strong> La página que estas buscando no se encuentra
             disponible.

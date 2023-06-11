@@ -19,7 +19,7 @@ const AlertPopUp = ({ open, onClose, onContinue }) => {
   return (
     <>
       <Modal show={true} centered>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Suscribite!</Modal.Title>
         </Modal.Header>
         <Modal.Body>

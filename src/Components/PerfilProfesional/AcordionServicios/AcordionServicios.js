@@ -1,7 +1,7 @@
 import React from "react";
 
 import Accordion from "react-bootstrap/Accordion";
-import { Button } from "react-bootstrap";
+import { Badge, Button } from "react-bootstrap";
 
 import { BsCalendarEvent } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -13,14 +13,18 @@ const AcordionServicios = ({ servicios, profesional }) => {
         {servicios.map((item, index) => (
           <Accordion.Item eventKey={index}>
             <Accordion.Header>
-              <p className="mb-0">
-                {item.nombre} - <strong>${item.precio}</strong>
+              <p className="mb-0 align-middle">
+                <strong>{item.nombre}</strong>{" "}
+                <Badge variant="secondary" className="d-block mt-1">
+                  ${item.precio}
+                </Badge>
               </p>
             </Accordion.Header>
             <Accordion.Body>
+              <h5 className="mb-1">Descripción</h5>
               <p>{item.descripcion}</p>
               <Link to={`/perfilProfesional/${profesional}/${item.id}`}>
-                <Button>
+                <Button size="sm" className="mt-1">
                   <BsCalendarEvent /> Sacar turno
                 </Button>
               </Link>

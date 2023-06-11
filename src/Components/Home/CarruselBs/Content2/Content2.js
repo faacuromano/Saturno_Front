@@ -15,19 +15,28 @@ const Content1 = () => {
 
   return (
     <div>
-      <Row className="justify-content-center content2 py-4 align-items-center">
-        <Col xs={10} md={4} className="my-3 my-lg-0 text-end">
-          <h1 className="text-white font-weight-bold">
+      <Row className="justify-content-center content inner-shadow py-4 align-items-center">
+        <Col xs={6} md={5} lg={3} className="d-md-none">
+          <Image src={empleada1} fluid roundedCircle className="shadow" />
+        </Col>
+        <Col
+          xs={10}
+          md={6}
+          lg={5}
+          xl={4}
+          className="my-3 my-lg-0 text-md-end text-center"
+        >
+          <h1 className="text-white font-weight-bold my-3">
             Buscá los mejores negocios en tu zona y pedí tu turno
           </h1>
           <Link to={"/buscar"}>
-            <Button color="primary">
+            <Button variant="light">
               <FiSearch /> Buscar
             </Button>
           </Link>
         </Col>
-        <Col xs={8} md={3}>
-          <Image src={empleada1} fluid roundedCircle />
+        <Col xs={6} md={5} lg={3} className="d-none d-md-flex">
+          <Image src={empleada1} fluid roundedCircle className="shadow" />
         </Col>
       </Row>
     </div>

@@ -1,37 +1,150 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,400;1,500&display=swap');
+
+:root {
+  --rojo: rgba(255, 49, 49, 1);
+  --rojo90: rgba(255, 49, 49, 0.90);
+  --rojo75: rgba(255, 49, 49, 0.75);
+  --rojo50: rgba(255, 49, 49, 0.5);
+  --rojo25: rgba(255, 49, 49, 0.25);
+  --blanco: #ffffff;
+  --blanco75: rgba(255, 255, 255, 0.75);
+  --negro: #272727;
+  --gris: rgba(92, 99, 106, 1);
+  --gris95: rgba(92, 99, 106, 0.95);
+  --gris85: rgba(92, 99, 106, 0.85);
+  --gris60: rgba(92, 99, 106, 0.60);
+  --gris10: rgba(92, 99, 106, 0.10);
+}
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #222;
+  background-color: #ffffff;
+  color: var(--negro);
+  letter-spacing: 0.1px;
+}
+
+a {
+  color: var(--rojo);
+  text-decoration: none;
+}
+
+a p {
+  font-size: 0.9rem;
+  color: var(--gris);
+}
+
+a .card svg {
+  color: var(--rojo);
+}
+
+a .card {
+  transition: all .2s linear;
+}
+
+a .card:hover {
+  transform: scale(1.02);
+  
+}
+
+a .h5 {
+  font-size: 1.2rem;
+  color: var(--negro);
 }
 
 a.colorLink {
-  color: #ff5e5b !important;
+  color: var(--rojo) !important;
+  font-weight: bold;
 }
 
-/* MODIFICACIONES AL BOOTSTRAP */
+a.colorLink:hover {
+  color: var(--rojo75) !important;
+  font-weight: bold;
+}
+
+.btn {
+  letter-spacing: 0.2px;
+}
+
+.btn svg {
+  margin-right: 5px;
+}
+
+.btn-primary:focus-visible {
+  color: var(--blanco);
+  background-color: var(--rojo90);
+  border-color: var(--rojo90);
+}
 
 .btn-primary {
-  background-color: #ff5e5b;
-  color: white;
-  border-radius: 15px;
-  border: none;
+  color: var(--blanco);
+  background-color: var(--rojo);
+  border-color: var(--rojo);
+  border-radius: 5px;
   font-weight: 700;
-  font-size: 15px;
   padding: 8px 20px;
+  --bs-btn-focus-shadow-rgb: 255,49,49;
 }
 
 .btn-primary:hover {
-  background-color: #ff423e;
+  background-color: var(--rojo90);
+  border-color: var(--rojo90);
+  color: var(--blanco);
+}
+
+.btn-primary:active {
+  background-color: var(--rojo75)!important;
+  border-color: var(--rojo75)!important;
+  color: var(--blanco)!important;
 }
 
 .btn-secondary {
-  color: white;
-  border-radius: 15px;
-  border: none;
+  color: var(--blanco);
+  background-color: var(--gris);
+  border-color: var(--gris);
+  border-radius: 5px;
   font-weight: 700;
-  font-size: 15px;
   padding: 8px 20px;
+  --bs-btn-focus-shadow-rgb: 255,49,49;
+}
+
+.btn-secondary:hover {
+  background-color: var(--gris95);
+  border-color: var(--gris95);
+  color: var(--blanco);
+}
+
+.btn-secondary:active {
+  background-color: var(--gris85)!important;
+  border-color: var(--gris85)!important;
+  color: var(--blanco)!important;
+}
+
+.btn-light {
+  color: var(--rojo);
+  background-color: var(--blanco);
+  border-color: var(--blanco);
+  border-radius: 5px;
+  font-weight: 500;
+  padding: 8px 20px;
+  --bs-btn-focus-shadow-rgb: 255,49,49;
+}
+
+.btn-light:hover {
+  background-color: var(--blanco75);
+  border-color: var(--blanco75);
+  color: var(--rojo);
+}
+
+.btn-light:active {
+  background-color: var(--blanco75)!important;
+  border-color: var(--blanco75)!important;
+  color: var(--rojo)!important;
+}
+
+.btn-close:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem var(--rojo25);
+  opacity: 1;
 }
 
 .container-fluid {
@@ -47,19 +160,7 @@ a.colorLink {
 }
 
 .container {
-  background-color: #fff;
-}
-
-.h5 {
-  font-size: 1.1rem;
-}
-
-.btn-check:checked + .btn,
-.btn.active,
-.btn.show,
-.btn:first-child:active,
-:not(.btn-check) + .btn:active {
-  background-color: #ff423e;
+  background-color: var(--blanco);
 }
 
 h1 {
@@ -70,26 +171,58 @@ label {
   font-weight: 700;
 }
 
-a {
-  text-decoration: none;
-  color: #282c34;
-}
-
 .form-control:focus {
-  box-shadow: none;
-  border-color: #282c34;
+  border-color: var(--gris);
+  box-shadow: 0 0 0 0.25rem var(--rojo25);
 }
 
 .form-control {
-  border-radius: 12px;
+  border-radius: 5px;
 }
 
-.fondo-jade {
-  background-color: #55dac3;
+.texto-rojo {
+  color: var(--rojo);
 }
 
-.dark {
-  filter: invert(1);
+.texto-gris85 {
+  color: var(--gris85);
+}
+
+.fondo-rojo {
+  background-color: var(--rojo);
+}
+
+.fondo-rojo75 {
+  background-color: var(--rojo75);
+}
+
+.fondo-rojo50 {
+  background-color: var(--rojo50);
+}
+
+.fondo-rojo25 {
+  background-color: var(--rojo25);
+}
+
+.fondo-gris60 {
+  background-color: var(--gris60);
+}
+
+.fondo-gris85 {
+  background-color: var(--gris85);
+}
+
+.fondo-gris10 {
+  background-color: var(--gris10);
+}
+
+.bg-primary {
+  background-color: var(--rojo)!important;
+}
+
+.content {
+  background: rgb(199,29,29);
+  background: radial-gradient(circle, rgba(199,29,29,0.85) 19%, rgba(121,2,2,0.85) 95%);
 }
 
 .accordion-button:focus{
@@ -100,7 +233,77 @@ ul li svg {
   margin-bottom: 2px;
 }
 
-/* .accordion-button:not(.collapsed) {
-  color: #f8f9fa;
-  background-color: #ff5b5ce6;
+/*Login*/
+.errors {
+  color: var(--rojo);
+}
+
+/*navbar*/
+.navBar {
+  border: 1px solid #dcdbdb;
+}
+
+.navBar-options a {
+  list-style: none;
+  padding: 12px;
+  font-weight: 700;
+  margin: 10px;
+  text-decoration: none;
+  color: var(--negro);
+  letter-spacing: 0.2px;
+}
+
+.navBar-options a:hover {
+  color: var(--rojo);
+}
+
+.logoApp {
+  width: 150px;
+}
+
+li button .btn-primary {
+  display: flex;
+  align-items: center;
+}
+
+/*perfil profesional
+*/
+
+.list-unstyled.profile li {
+  color: var(--gris);
+}
+
+.list-unstyled.profile li svg {
+  color: var(--rojo);
+}
+
+.imagen-perfil {
+  width: 90px;
+}
+
+.accordion-button:not(.collapsed) {
+  color: var(--negro);
+  background-color: var(--rojo25);
+}
+
+.accordion-button::after {
+  background-image: var(--bs-accordion-btn-icon)!important;
+}
+ 
+/*Calendario*/
+/* .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: var(--rojo25)!important;
 } */
+
+.rdp {
+  --rdp-cell-size: 40px!important;
+  --rdp-accent-color: var(--rojo)!important;
+  --rdp-background-color: var(--rojo25)!important;
+  /* Switch to dark colors for dark themes */
+  --rdp-accent-color-dark: var(--rojo50)!important;
+  --rdp-background-color-dark: var(--rojo75)!important;
+  /* Outline border for focused elements */
+  --rdp-outline: 2px solid var(--rdp-accent-color)!important;
+  /* Outline border for focused and selected elements */
+  --rdp-outline-selected: 2px solid rgba(0, 0, 0, 0.75);
+}

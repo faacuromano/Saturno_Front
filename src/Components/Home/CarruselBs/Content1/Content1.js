@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./Content1.css";
-
 import { FaRegUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -15,16 +13,22 @@ const Content1 = () => {
 
   return (
     <div>
-      <Row className="justify-content-center content1 py-4 align-items-center">
-        <Col xs={8} md={3}>
-          <Image src={empleada1} fluid roundedCircle />
+      <Row className="justify-content-center content py-4 align-items-center">
+        <Col xs={6} md={5} lg={3}>
+          <Image src={empleada1} fluid roundedCircle className="shadow" />
         </Col>
-        <Col xs={10} md={4} className="my-3 my-lg-0">
-          <h1 className="text-white font-weight-bold">
+        <Col
+          xs={10}
+          md={6}
+          lg={5}
+          xl={4}
+          className="my-3 my-lg-0 text-md-start text-center"
+        >
+          <h1 className="text-white font-weight-bold my-3">
             El gestor de turnos que tu negocio estaba necesitando
           </h1>
           <Link to={"/profesionales"}>
-            <Button variant="primary">
+            <Button variant="light">
               <FaRegUser /> Ver más
             </Button>
           </Link>

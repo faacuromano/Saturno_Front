@@ -12,12 +12,12 @@ const CardProfesional = ({ data }) => {
       <Card.Img src={data.fotoPerfil} variant="top" />
       <Card.Body>
         <Card.Title>{data.nombre + " " + data.apellido} </Card.Title>
-        <Card.Subtitle className="text-muted mb-2">
+        <Card.Subtitle className="text-muted mb-3">
           {data.profesion}
         </Card.Subtitle>
         <Card.Text>
           <ul className="list-unstyled mb-0">
-            <li className="mb-0">
+            <li className="mb-1">
               <BiMap />
               {data.direccion} - {data.ubicacion}
             </li>

@@ -176,7 +176,7 @@ const SacarTurno = () => {
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={9} className="shadow-sm rounded pt-4">
           <Row className="justify-content-center">
-            <Col xs={12} className="pb-4">
+            <Col xs={12} className="pb-3">
               <h1 className="ms-4">Sacar turno</h1>
             </Col>
           </Row>
@@ -205,7 +205,7 @@ const SacarTurno = () => {
               </p>
             </Col>
           </Row>
-          <Row className="pt-4 pb-5 justify-content-center">
+          <Row className="pt-4 pb-4 justify-content-center">
             <Col
               xs={10}
               md={6}

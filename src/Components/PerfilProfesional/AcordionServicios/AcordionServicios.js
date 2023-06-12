@@ -13,11 +13,14 @@ const AcordionServicios = ({ servicios, profesional }) => {
         {servicios.map((item, index) => (
           <Accordion.Item eventKey={index}>
             <Accordion.Header>
+              <Badge variant="primary" className="me-1">
+                ${item.precio}
+              </Badge>
+              <Badge bg="secondary" className="me-3">
+                {item.duracion ? item.duracion.slice(0, 5) : "00"}
+              </Badge>
               <p className="mb-0 align-middle">
                 <strong>{item.nombre}</strong>{" "}
-                <Badge variant="secondary" className="d-block mt-1">
-                  ${item.precio}
-                </Badge>
               </p>
             </Accordion.Header>
             <Accordion.Body>

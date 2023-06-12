@@ -10,12 +10,14 @@ const CardProfesional = ({ data }) => {
   return (
     <Card key={data.Id} className="mb-4 shadow-sm border-0 align-self-stretch">
       <Card.Img src={data.fotoPerfil} variant="top" />
-      <Card.Body>
-        <Card.Title>{data.nombre + " " + data.apellido} </Card.Title>
-        <Card.Subtitle className="text-muted mb-3">
+      <Card.Body className="pt-3">
+        <Card.Title className="ms-2 mb-1 fw-bold">
+          {data.nombre + " " + data.apellido}
+        </Card.Title>
+        <Card.Subtitle className="text-muted mb-2 ms-2 fw-normal border-bottom pb-3">
           {data.profesion}
         </Card.Subtitle>
-        <Card.Text>
+        <Card.Text className="pt-2">
           <ul className="list-unstyled mb-0">
             <li className="mb-1">
               <BiMap />
@@ -23,13 +25,10 @@ const CardProfesional = ({ data }) => {
             </li>
             <li>
               <FiClock />
-              <span className="ml-4">
-                {data.horarioInicio
-                  ? data.horarioInicio.slice(0, 5)
-                  : "sin dato"}{" "}
-                -{" "}
-                {data.horarioFinal ? data.horarioFinal.slice(0, 5) : "sin dato"}
-              </span>
+              {data.horarioInicio
+                ? data.horarioInicio.slice(0, 5)
+                : "sin dato"}{" "}
+              a {data.horarioFinal ? data.horarioFinal.slice(0, 5) : "sin dato"}
             </li>
           </ul>
         </Card.Text>

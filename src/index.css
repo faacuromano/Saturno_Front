@@ -266,8 +266,7 @@ li button .btn-primary {
   align-items: center;
 }
 
-/*perfil profesional
-*/
+/*perfil profesional*/
 
 .list-unstyled.profile li {
   color: var(--gris);
@@ -291,10 +290,6 @@ li button .btn-primary {
 }
  
 /*Calendario*/
-/* .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
-  background-color: var(--rojo25)!important;
-} */
-
 .rdp {
   --rdp-cell-size: 40px!important;
   --rdp-accent-color: var(--rojo)!important;

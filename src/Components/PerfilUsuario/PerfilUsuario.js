@@ -47,9 +47,6 @@ const PerfilUsuario = () => {
                 <h6>Tus turnos</h6>
                 <CardTurno listaTurnos={listaTurnos} />
               </Col>
-              <Col xs={12} className="mt-4">
-                <CardsProfesionales />
-              </Col>
               <Col xs={10} className="text-center mt-5">
                 <p>
                   <strong>¿Problemas con un turno?</strong> Envianos un{" "}

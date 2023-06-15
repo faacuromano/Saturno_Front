@@ -18,7 +18,7 @@ const ChangePassword = () => {
           <Form>
             <Form.Group>
               <Form.Label>E-mail:</Form.Label>
-              <Form.Control type="email" placeholder="ejemplo@gmail.com"/>
+              <Form.Control type="email" placeholder="ejemplo@gmail.com" />
             </Form.Group>
             <Button variant="primary" className="mt-3">
               Enviar

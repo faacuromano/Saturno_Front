@@ -30,3 +30,13 @@ export async function cambiarPassword(username, data) {
     console.log(errors);
   }
 }
+
+export function decryptToken(encryptedToken) {
+  // Eliminar los asteriscos agregados
+  let withoutAsterisks = encryptedToken.replaceAll("*", "");
+
+  // Invertir el string
+  let decryptedToken = withoutAsterisks.split("").reverse().join("");
+
+  return decryptedToken;
+}

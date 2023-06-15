@@ -18,11 +18,10 @@ const ProfessionalConf = () => {
   const [direccion, setDireccion] = useState("");
   const [profesion, setProfesion] = useState("");
   const [profesiones, setProfesiones] = useState([]);
-  const [user, setUser] = useState([]);
 
   useEffect(() => {
-    const username = localStorage.getItem("user");
-    //me traigo todos los datos del usuario loggeado de la BD
+    const user = JSON.parse(localStorage.getItem("user"));
+    const username = user.username;
     GetByProfUsername(username)
       .then((response) => {
         console.log("respuesta", response);
@@ -155,12 +154,9 @@ const ProfessionalConf = () => {
   };
 
   return (
-    <Container className="py-3">
+    <Container>
       <Row className="justify-content-around">
-        <Col xs={3} className="text-end border-end pe-4">
-          <p className="fw-bold">Modificar información</p>
-        </Col>
-        <Col xs={8} className="text-start">
+        <Col xs={8} className="text-start shadow-sm rounded p-5">
           <Row>
             <Col xs={12} className="border-bottom pb-4 mb-4" id="others">
               <h1>Otras configuraciones - Profesional</h1>

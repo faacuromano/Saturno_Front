@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Col, Row, Form, Button } from "react-bootstrap";
+import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import { cambiarPassword } from "../../functions/otherMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
 
-const ResetPassword = ({ username }) => {
+const ResetPassword = () => {
   const [passViejo, setPassViejo] = useState();
   const [passNuevo, setPassNuevo] = useState();
   const [repetirPass, setRepetirPass] = useState();
@@ -20,7 +20,8 @@ const ResetPassword = ({ username }) => {
       newPass: passNuevo,
       sameNew: repetirPass,
     };
-    console.log("front", data);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const username = user.username;
     cambiarPassword(username, data).then(function (response) {
       if (response) {
         setTituloPopUp("Contraseña cambiada");
@@ -40,56 +41,58 @@ const ResetPassword = ({ username }) => {
     });
   };
   return (
-    <Row>
-      <Col
-        xs={12}
-        className="border-bottom pb-4 mb-4 mt-5"
-        id="change-password"
-      >
-        <h1>Cambiar contraseña</h1>
-      </Col>
-      <Col xs={12} className="mt-2">
-        <Form>
-          <Form.Group>
-            <Form.Label>Contraseña vieja:</Form.Label>
-            <Form.Control
-              type="password"
-              value={passViejo}
-              onChange={passViejoHandler}
-            />
-          </Form.Group>
-          <Form.Group className="mt-4">
-            <Form.Label>Constraseña nueva:</Form.Label>
-            <Form.Control
-              type="password"
-              value={passNuevo}
-              onChange={passNuevoHandler}
-            />
-          </Form.Group>
-          <Form.Group className="mt-4">
-            <Form.Label>Repita la contraseña nueva:</Form.Label>
-            <Form.Control
-              type="password"
-              value={repetirPass}
-              onChange={repetirPassHandler}
-            />
-          </Form.Group>
-          <Button
-            variant="primary"
-            className="mt-4"
-            onClick={cambiarPasswordHandler}
-          >
-            Cambiar
-          </Button>
-        </Form>
-      </Col>
-      <AlertPopUp
-        open={openPopUp}
-        onClose={() => setOpenPopUp(false)}
-        titulo={tituloPopUp}
-        mensaje={mensajePopUp}
-      />
-    </Row>
+    <Container>
+      <Row>
+        <Col
+          xs={12}
+          className="border-bottom pb-4 mb-4 mt-5"
+          id="change-password"
+        >
+          <h1>Cambiar contraseña</h1>
+        </Col>
+        <Col xs={12} className="mt-2">
+          <Form>
+            <Form.Group>
+              <Form.Label>Contraseña vieja:</Form.Label>
+              <Form.Control
+                type="password"
+                value={passViejo}
+                onChange={passViejoHandler}
+              />
+            </Form.Group>
+            <Form.Group className="mt-4">
+              <Form.Label>Constraseña nueva:</Form.Label>
+              <Form.Control
+                type="password"
+                value={passNuevo}
+                onChange={passNuevoHandler}
+              />
+            </Form.Group>
+            <Form.Group className="mt-4">
+              <Form.Label>Repita la contraseña nueva:</Form.Label>
+              <Form.Control
+                type="password"
+                value={repetirPass}
+                onChange={repetirPassHandler}
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              className="mt-4"
+              onClick={cambiarPasswordHandler}
+            >
+              Cambiar
+            </Button>
+          </Form>
+        </Col>
+        <AlertPopUp
+          open={openPopUp}
+          onClose={() => setOpenPopUp(false)}
+          titulo={tituloPopUp}
+          mensaje={mensajePopUp}
+        />
+      </Row>
+    </Container>
   );
 };
 

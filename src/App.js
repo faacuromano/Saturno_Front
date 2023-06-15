@@ -200,7 +200,7 @@ function App() {
           <Route
             path="/menuProfesional"
             element={
-              <Container className="text-center py-5" fluid>
+              <Container fluid>
                 <ConfiguracionProfesional />
               </Container>
             }

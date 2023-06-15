@@ -6,9 +6,10 @@ import Form from "react-bootstrap/Form";
 import { Image as BootstrapImage } from "react-bootstrap";
 
 import { editClient } from "../../functions/clientMethods";
-import { getClientByUsername } from "../../functions/clientMethods";
+import { getUserByUsername } from "../../functions/clientMethods";
 import { Input } from "reactstrap";
 import ResetPassword from "./ResetPassword";
+import { decryptToken } from "../../functions/otherMethods";
 
 const UserConfiguration = () => {
   //set de la info en los inputs
@@ -108,15 +109,20 @@ const UserConfiguration = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     const username = user.username;
-    getClientByUsername(username).then(function (response) {
-      setName(response.data.nombre);
-      setLastName(response.data.apellido);
-      setUsername(response.data.username);
-      setEmail(response.data.mail);
-      setFechaNac(response.data.fechaNacimiento);
-      setPhoneNumber(response.data.numTelefono);
-      setFotoPerfil(response.data.fotoPerfil);
-      setUbication(response.data.ubicacion);
+    const accessToken = decryptToken(user.token);
+    getUserByUsername(username, accessToken).then(function (response) {
+      try {
+        setName(response.data.nombre);
+        setLastName(response.data.apellido);
+        setUsername(response.data.username);
+        setEmail(response.data.mail);
+        setFechaNac(response.data.fechaNacimiento);
+        setPhoneNumber(response.data.numTelefono);
+        setFotoPerfil(response.data.fotoPerfil);
+        setUbication(response.data.ubicacion);
+      } catch (errors) {
+        console.log(errors);
+      }
     });
   }, []);
 
@@ -252,17 +258,9 @@ const UserConfiguration = () => {
   };
 
   return (
-    <Container className="py-3">
+    <Container>
       <Row className="justify-content-around">
-        <Col xs={3} className="text-end border-end pe-4">
-          <a href="#change-info" className="fw-bold">
-            <p>Modificar información</p>
-          </a>
-          <a href="#change-password" className="fw-bold">
-            <p>Cambiar contraseña</p>
-          </a>
-        </Col>
-        <Col xs={8} className="text-start">
+        <Col xs={8} className="text-start shadow-sm rounded p-5">
           <Row>
             <Col xs={12} className="border-bottom pb-4 mb-4" id="change-info">
               <h1>Modificar información</h1>
@@ -373,7 +371,6 @@ const UserConfiguration = () => {
                 </Button>
               </Form>
             </Col>
-            <ResetPassword username={username} />
           </Row>
         </Col>
         <Modal show={show} onHide={handleClose} centered>

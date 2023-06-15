@@ -73,7 +73,7 @@ const ConfiguracionProfesional = () => {
               </Link>
             </li>
             <li className="mb-2">
-              <Link>
+              <Link to={"/configuracionUsuario"}>
                 <FaRegKeyboard />
                 Editar información personal
               </Link>

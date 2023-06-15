@@ -13,6 +13,7 @@ import MenuCliente from "./MenuCliente";
 import MenuProfesional from "./MenuProfesional";
 import MenuAdmin from "./MenuAdmin";
 import { getUserByUsername } from "../../functions/clientMethods";
+import { decryptToken } from "../../functions/otherMethods";
 
 const NavBarLogOut = () => {
   const [menuRender, setMenuRender] = useState(<MenuOffline />);
@@ -44,16 +45,6 @@ const NavBarLogOut = () => {
       });
     }
   }, []);
-
-  function decryptToken(encryptedToken) {
-    // Eliminar los asteriscos agregados
-    let withoutAsterisks = encryptedToken.replaceAll("*", "");
-
-    // Invertir el string
-    let decryptedToken = withoutAsterisks.split("").reverse().join("");
-
-    return decryptedToken;
-  }
 
   useEffect(() => {
     if (auth.tipoCuenta === "C") {

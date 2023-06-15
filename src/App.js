@@ -29,6 +29,7 @@ import ProfessionalConf from "./Components/UserConfiguration/ProfessionalConf";
 import SacarTurno from "./Components/Sacarturno/SacarTurno";
 import Verificacion from "./Components/Verificacion/Verificacion";
 import ConfiguracionProfesional from "./Components/ConfiguracionProfesional/ConfiguracionProfesional";
+import ResetPassword from "./Components/UserConfiguration/ResetPassword";
 
 import ScrollToTop from "./functions/ScrollToTop";
 
@@ -202,6 +203,14 @@ function App() {
             element={
               <Container fluid>
                 <ConfiguracionProfesional />
+              </Container>
+            }
+          />
+          <Route
+            path="/cambiarPassword"
+            element={
+              <Container fluid>
+                <ResetPassword />
               </Container>
             }
           />

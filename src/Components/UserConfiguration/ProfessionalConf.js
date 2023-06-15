@@ -7,6 +7,7 @@ import { Image as ImageBootstrap } from "react-bootstrap";
 import { editProfessional } from "../../functions/professionalMethods";
 import { getRubros } from "../../functions/rubrosMethods";
 import { Input } from "reactstrap";
+import { decryptToken } from "../../functions/otherMethods";
 
 const ProfessionalConf = () => {
   //set de la info en los inputs
@@ -149,7 +150,12 @@ const ProfessionalConf = () => {
       direccion: direccion,
       profesion: profesion,
     };
-    editProfessional(id, profesionalDatos);
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    const accessToken = decryptToken(user.token);
+
+    console.log("mod", id, profesionalDatos, accessToken);
+    editProfessional(id, profesionalDatos, accessToken);
     console.log("nuevos datos:", profesionalDatos);
   };
 
@@ -158,8 +164,8 @@ const ProfessionalConf = () => {
       <Row className="justify-content-around">
         <Col xs={8} className="text-start shadow-sm rounded p-5">
           <Row>
-            <Col xs={12} className="border-bottom pb-4 mb-4" id="others">
-              <h1>Otras configuraciones - Profesional</h1>
+            <Col xs={12} className="border-bottom pb-4 mb-4">
+              <h1>Modificar información Profesional</h1>
             </Col>
             <Col xs={12}>
               <Form>

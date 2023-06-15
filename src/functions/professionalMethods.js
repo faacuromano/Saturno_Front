@@ -45,8 +45,7 @@ export async function RegisterProfessional(professional) {
   }
 }
 
-export async function editProfessional(id, data) {
-  console.log("edit: ", id, data);
+export async function editProfessional(id, data, token) {
   try {
     const response = await axios({
       url: `${baseUrl}/profesional/${id}`,
@@ -54,6 +53,7 @@ export async function editProfessional(id, data) {
       data: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json", // <- HERE
+        Authorization: `Bearer ${token}`,
       },
     });
     return response;

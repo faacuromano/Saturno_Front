@@ -14,8 +14,8 @@ import { useParams } from "react-router";
 import { DayPicker } from "react-day-picker";
 import AcordionServicios from "./AcordionServicios/AcordionServicios";
 
-import { FiClock } from "react-icons/fi";
-import { BiMap, BiMobileAlt } from "react-icons/bi";
+import { BiMap } from "react-icons/bi";
+import { FaRegClock, FaRegMap, FaRegIdBadge } from "react-icons/fa";
 
 const PerfilProfesional = () => {
   const [profData, setProfData] = useState([]);
@@ -74,7 +74,7 @@ const PerfilProfesional = () => {
                       </strong>
                     </h2>
                     <h6 className="mb-0 text-muted fw-normal">
-                      {profData.profesion} - {profData.ubicacion}
+                      {profData.profesion}
                     </h6>
                   </Col>
                 </Row>
@@ -88,7 +88,10 @@ const PerfilProfesional = () => {
                         <BiMap /> {profData.direccion}
                       </li>
                       <li className="mb-2">
-                        <FiClock />{" "}
+                        <FaRegMap /> {profData.ubicacion}
+                      </li>
+                      <li className="mb-2">
+                        <FaRegClock />{" "}
                         {profData.horarioInicio
                           ? profData.horarioInicio.slice(0, 5)
                           : "sin datos"}{" "}
@@ -98,7 +101,7 @@ const PerfilProfesional = () => {
                           : "sin datos"}
                       </li>
                       <li className="mb-2">
-                        <BiMobileAlt /> {profData.numTelefono}
+                        <FaRegIdBadge /> {profData.numTelefono}
                       </li>
                     </ul>
                   </Col>

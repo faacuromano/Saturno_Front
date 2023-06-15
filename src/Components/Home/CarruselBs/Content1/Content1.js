@@ -28,7 +28,7 @@ const Content1 = () => {
             El gestor de turnos que tu negocio estaba necesitando
           </h1>
           <Link to={"/profesionales"}>
-            <Button variant="light">
+            <Button variant="primary">
               <FaRegUser /> Ver más
             </Button>
           </Link>

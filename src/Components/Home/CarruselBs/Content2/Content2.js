@@ -30,7 +30,7 @@ const Content1 = () => {
             Buscá los mejores negocios en tu zona y pedí tu turno
           </h1>
           <Link to={"/buscar"}>
-            <Button variant="light">
+            <Button variant="primary">
               <FiSearch /> Buscar
             </Button>
           </Link>

@@ -13,7 +13,7 @@ import {
   FaRegCreditCard,
   FaRegAddressCard,
   FaRegKeyboard,
-  FaRegWindowClose,
+  FaRegIdBadge,
 } from "react-icons/fa";
 
 const ConfiguracionProfesional = () => {
@@ -74,8 +74,14 @@ const ConfiguracionProfesional = () => {
             </li>
             <li className="mb-2">
               <Link to={"/configuracionUsuario"}>
-                <FaRegKeyboard />
+                <FaRegIdBadge />
                 Editar información personal
+              </Link>
+            </li>
+            <li className="mb-2">
+              <Link to={"/cambiarPassword"}>
+                <FaRegKeyboard />
+                Cambiar contraseña
               </Link>
             </li>
           </ul>

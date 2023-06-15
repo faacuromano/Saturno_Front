@@ -8,7 +8,6 @@ import { Image as BootstrapImage } from "react-bootstrap";
 import { editClient } from "../../functions/clientMethods";
 import { getUserByUsername } from "../../functions/clientMethods";
 import { Input } from "reactstrap";
-import ResetPassword from "./ResetPassword";
 import { decryptToken } from "../../functions/otherMethods";
 
 const UserConfiguration = () => {
@@ -231,7 +230,10 @@ const UserConfiguration = () => {
       fotoPerfil: fotoPerfil,
     };
 
-    editClient(username, newUserData).then(function (response) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const accessToken = decryptToken(user.token);
+
+    editClient(username, newUserData, accessToken).then(function (response) {
       if (response) {
         handlerHeaderModal(
           <Modal.Header closeButton>
@@ -263,7 +265,7 @@ const UserConfiguration = () => {
         <Col xs={8} className="text-start shadow-sm rounded p-5">
           <Row>
             <Col xs={12} className="border-bottom pb-4 mb-4" id="change-info">
-              <h1>Modificar información</h1>
+              <h1>Modificar información personal</h1>
             </Col>
             <Col xs={12}>
               <Form>

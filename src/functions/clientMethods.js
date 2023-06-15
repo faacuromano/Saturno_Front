@@ -100,7 +100,7 @@ export async function RegisterClient(client) {
   }
 }
 
-export async function editClient(username, data) {
+export async function editClient(username, data, token) {
   try {
     const response = await axios({
       url: `${baseUrl}/Usuario/${username}`,
@@ -108,6 +108,7 @@ export async function editClient(username, data) {
       data: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json", // <- HERE
+        Authorization: `Bearer ${token}`,
       },
     });
     return response;

@@ -41,16 +41,10 @@ const ResetPassword = () => {
     });
   };
   return (
-    <Container>
-      <Row>
-        <Col
-          xs={12}
-          className="border-bottom pb-4 mb-4 mt-5"
-          id="change-password"
-        >
-          <h1>Cambiar contraseña</h1>
-        </Col>
-        <Col xs={12} className="mt-2">
+    <Container className="py-5">
+      <Row className="justify-content-center">
+        <Col xs={7} className=" shadow-sm rounded p-5">
+          <h1 className="border-bottom pb-4 mb-4">Cambiar contraseña</h1>
           <Form>
             <Form.Group>
               <Form.Label>Contraseña vieja:</Form.Label>

@@ -3,8 +3,9 @@ import React from "react";
 import "./CardProfesional.css";
 
 import Card from "react-bootstrap/Card";
-import { FiClock } from "react-icons/fi";
+
 import { BiMap } from "react-icons/bi";
+import { FaRegClock, FaRegMap } from "react-icons/fa";
 
 const CardProfesional = ({ data }) => {
   return (
@@ -24,11 +25,11 @@ const CardProfesional = ({ data }) => {
               {data.direccion}
             </li>
             <li className="mb-1">
-              <BiMap />
+              <FaRegMap />
               {data.ubicacion}
             </li>
             <li>
-              <FiClock />
+              <FaRegClock />
               {data.horarioInicio
                 ? data.horarioInicio.slice(0, 5)
                 : "sin dato"}{" "}

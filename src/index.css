@@ -155,6 +155,12 @@ li a:hover {
   opacity: 1;
 }
 
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+  color: var(--blanco);
+  background-color: var(--rojo75);
+  border-color: var(--rojo75);
+}
+
 .container-fluid {
   --bs-gutter-x: 0;
 }
@@ -229,8 +235,19 @@ label {
 }
 
 .content {
-  background: rgb(199,29,29);
-  background: radial-gradient(circle, rgba(199,29,29,0.85) 19%, rgba(121,2,2,0.85) 95%);
+  background: rgb(84,219,195);
+background: linear-gradient(0deg, rgba(84,219,195,1) 0%, rgba(45,131,162,1) 49%, rgba(23,82,144,1) 100%);
+}
+
+.content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./Components/Home/CarruselBs/az-subtle.png'); /* Reemplaza 'ruta-de-la-imagen.png' con la ruta de tu imagen */
+  opacity: 0.7; /* Ajusta la opacidad de la imagen según tus necesidades */
 }
 
 .accordion-button:focus{

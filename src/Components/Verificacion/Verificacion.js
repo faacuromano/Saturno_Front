@@ -3,13 +3,15 @@ import { Button, Col, Container, Form, FormGroup, Row } from "react-bootstrap";
 import { verficarEmail } from "../../functions/otherMethods";
 import MercadoPagoLink from "../MercadoPago/MercadoPagoLink";
 import ValidatePayment from "../MercadoPago/ValidatePayment";
+import { GetByProfUsername } from "../../functions/professionalMethods";
 
 const Verificacion = () => {
   const [username, setUsername] = useState();
   const usernameHandler = (e) => setUsername(e.target.value);
-  const [paymentLink, setPaymentLink] = useState(true);
-  const [storedToken, setStoredToken] = useState();
-  const [userToken, setUserToken] = useState(null);
+  const [paymentLink, setPaymentLink] = useState(false);
+  const [verificationState, setVerificationState] = useState();
+  const [message, setMessage] = useState("");
+  const monto = "$2000";
 
   // Retrieve data from localStorage
   const userData = localStorage.getItem("user");
@@ -17,28 +19,33 @@ const Verificacion = () => {
   console.log(userData)
   const parsedData = JSON.parse(userData); // Parseamos data del localhost
 
-  const verifyLoggedAccountSusbscriptionState = () => {
+  const verifyLoggedAccountSubscriptionState = () => {
+    const username = parsedData['username'];
 
-    // const username = parsedData['username'];
+    GetByProfUsername(username).then((user) => {
+      const verification = user.verificado;
+      setVerificationState(verification);
 
-    // generateHash(username).then((user) => {
+      if (verification === false) {
+        setMessage(
+          `Usted no posee su cuenta verificada, para ello deberá abonar mensualmente un monto de ${monto}, debajo se encuentra el link de pago para verificar su cuenta`
+        );
+        setPaymentLink(true)
+      } else {
+        setMessage("Cuenta verificada");
+      }
+      console.log("response state", verification)
+    });
+    console.log("verif state", verificationState)
+  };
 
-    //   const token = user; // Tomamos token
-    //   setStoredToken(token);
-    //   if(userToken != storedToken)
-    //   {
-
-
-    //   }
-    // });
-
-
-
-  } 
+  verifyLoggedAccountSubscriptionState();
 
 
   return (
     <Container className="vh-100">
+      <p className="text-center">{message}</p>
+      <MercadoPagoLink open={paymentLink}></MercadoPagoLink>
 
     </Container>
   );

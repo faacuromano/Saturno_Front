@@ -25,8 +25,8 @@ const SacarTurno = () => {
   const [defaultMonth, setDefaultMonth] = useState();
 
   useEffect(() => {
-    const userLoaded = localStorage.getItem("user");
-    setUser(userLoaded);
+    const userLoaded = JSON.parse(localStorage.getItem("user"));
+    setUser(userLoaded.username);
     GetByProfUsername(profesional).then(function (response) {
       setProfData(response);
     });
@@ -87,6 +87,11 @@ const SacarTurno = () => {
       </Alert>
     );
   }
+
+  const beforeToday = (day) => {
+    const today = new Date();
+    return day < today;
+  };
 
   //Map de la lista de botones
   const [mapeoBotones, setMapeoBotones] = useState();
@@ -221,6 +226,7 @@ const SacarTurno = () => {
                 fromYear={anioTurno}
                 defaultMonth={defaultMonth}
                 fromMonth={defaultMonth}
+                disabled={beforeToday}
               />
             </Col>
             <Col xs={11} sm={9} md={6}>

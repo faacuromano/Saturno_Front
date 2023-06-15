@@ -15,6 +15,21 @@ export async function getClient() {
   }
 }
 
+export async function getUserByUsername(username, token) {
+  try {
+    const response = await axios({
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      url: `${baseUrl}/usuario/${username}`,
+      method: "GET",
+    });
+    return response;
+  } catch (errors) {
+    console.log(errors);
+  }
+}
+
 export async function getClientByUsername(username) {
   try {
     const response = await axios({

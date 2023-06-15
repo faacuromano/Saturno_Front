@@ -21,7 +21,11 @@ const CardProfesional = ({ data }) => {
           <ul className="list-unstyled mb-0">
             <li className="mb-1">
               <BiMap />
-              {data.direccion} - {data.ubicacion}
+              {data.direccion}
+            </li>
+            <li className="mb-1">
+              <BiMap />
+              {data.ubicacion}
             </li>
             <li>
               <FiClock />

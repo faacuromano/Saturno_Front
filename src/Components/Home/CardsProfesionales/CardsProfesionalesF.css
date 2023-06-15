@@ -1,3 +1,4 @@
 .carta a {
-    display: flex
+    display: block;
+    width: 100%;
 }

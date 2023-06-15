@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 
 import Home from "./Components/Home/Home";
-import Footer from "./Components/Footer/Footer";
+// import Footer from "./Components/Footer/Footer";
 import Login from "./Components/Login/Login";
 import Search from "./Components/Search/Search";
 import Contact from "./Components/Contact/Contact";
@@ -28,25 +28,31 @@ import SignUpProfesional from "./Components/SignUp/SignUpProfesional";
 import ProfessionalConf from "./Components/UserConfiguration/ProfessionalConf";
 import SacarTurno from "./Components/Sacarturno/SacarTurno";
 import Verificacion from "./Components/Verificacion/Verificacion";
+import ConfiguracionProfesional from "./Components/ConfiguracionProfesional/ConfiguracionProfesional";
 
 import ScrollToTop from "./functions/ScrollToTop";
-import { Col, Row } from "react-bootstrap";
+
+import LoginContext from "./Contexts/ThemeContext/LoginContext";
 
 function App() {
+  const { auth, handleLogin } = useContext(LoginContext);
+  const [homeRender, setHomeRender] = useState();
+
+  useEffect(() => {
+    if (auth.tipoCuenta === "P") {
+      setHomeRender(<ConfiguracionProfesional />);
+    } else {
+      setHomeRender(<Home />);
+    }
+  }, [auth]);
+
   return (
     <div>
       <BrowserRouter>
         <NavBarLogOut />
         <ScrollToTop />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Container fluid>
-                <Home />
-              </Container>
-            }
-          />
+          <Route path="/" element={<Container fluid>{homeRender}</Container>} />
           <Route
             path="/buscar"
             element={
@@ -188,6 +194,14 @@ function App() {
             element={
               <Container className="text-center py-5" fluid>
                 <Verificacion />
+              </Container>
+            }
+          />
+          <Route
+            path="/menuProfesional"
+            element={
+              <Container className="text-center py-5" fluid>
+                <ConfiguracionProfesional />
               </Container>
             }
           />

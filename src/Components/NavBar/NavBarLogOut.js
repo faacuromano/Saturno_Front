@@ -2,20 +2,58 @@ import React, { useState, useContext, useEffect } from "react";
 
 import "./NavBar.css";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Container } from "react-bootstrap";
+import { Container, Modal, Button } from "react-bootstrap";
 
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
 import MenuOffline from "./MenuOffline";
 import MenuCliente from "./MenuCliente";
 import MenuProfesional from "./MenuProfesional";
 import MenuAdmin from "./MenuAdmin";
+import { getUserByUsername } from "../../functions/clientMethods";
 
 const NavBarLogOut = () => {
   const [menuRender, setMenuRender] = useState(<MenuOffline />);
   const { auth, handleLogin } = useContext(LoginContext);
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false);
+    navigate("/");
+  };
+  const handleShow = () => setShow(true);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userLogged = JSON.parse(localStorage.getItem("user"));
+    if (userLogged) {
+      const accessToken = decryptToken(userLogged.token);
+      getUserByUsername(userLogged.username, accessToken).then(function (
+        response
+      ) {
+        if (response) {
+          console.log("logeado");
+          handleLogin(userLogged);
+        } else {
+          console.log("no logeado");
+          localStorage.removeItem("user");
+          handleShow();
+        }
+      });
+    }
+  }, []);
+
+  function decryptToken(encryptedToken) {
+    // Eliminar los asteriscos agregados
+    let withoutAsterisks = encryptedToken.replaceAll("*", "");
+
+    // Invertir el string
+    let decryptedToken = withoutAsterisks.split("").reverse().join("");
+
+    return decryptedToken;
+  }
 
   useEffect(() => {
     if (auth.tipoCuenta === "C") {
@@ -61,6 +99,17 @@ const NavBarLogOut = () => {
           <Nav.Link className="my-3 my-lg-0">{menuRender}</Nav.Link>
         </Navbar.Collapse>
       </Container>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>¡Ups!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Tu sesión a expirado, por favor logea de vuelta</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Volver
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Navbar>
   );
 };

@@ -106,8 +106,9 @@ const UserConfiguration = () => {
   const inputUbication = useRef(null);
 
   useEffect(() => {
-    const user_name = localStorage.getItem("user");
-    getClientByUsername(user_name).then(function (response) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const username = user.username;
+    getClientByUsername(username).then(function (response) {
       setName(response.data.nombre);
       setLastName(response.data.apellido);
       setUsername(response.data.username);

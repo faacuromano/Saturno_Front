@@ -23,19 +23,18 @@ const Login = () => {
   const loginHandler = () => {
     authClient(userName, password).then(function (response) {
       if (response) {
-        localStorage.setItem("user", response.data.user.username);
         const newAuth = {
           username: response.data.user.username,
           token: response.data.token,
           tipoCuenta: response.data.user.tipoCuenta,
         };
+        localStorage.setItem("user", JSON.stringify(newAuth));
         handleLogin(newAuth);
 
         if (newAuth.tipoCuenta === "P") {
           GetServiceByUsername(newAuth.username).then(function (
             serviceResponse
           ) {
-            console.log(serviceResponse);
             if (serviceResponse.length > 0) {
               // El cliente tiene servicios asociados
               navigate("/");

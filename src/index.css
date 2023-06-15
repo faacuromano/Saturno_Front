@@ -42,7 +42,7 @@ a .card {
 }
 
 a .card:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
   
 }
 
@@ -59,6 +59,14 @@ a.colorLink {
 a.colorLink:hover {
   color: var(--rojo75) !important;
   font-weight: bold;
+}
+
+li a {
+  color: var(--negro);
+}
+
+li a:hover {
+  color: var(--gris60);
 }
 
 .btn {

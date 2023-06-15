@@ -28,7 +28,8 @@ const ServiceSettings = () => {
   const [mapServicio, setMapServicio] = useState();
 
   useEffect(() => {
-    const username = localStorage.getItem("user");
+    const user = JSON.parse(localStorage.getItem("user"));
+    const username = user.username;
     GetServiceByUsername(username).then(function (response) {
       setServicios(response);
     });

@@ -35,6 +35,8 @@ import ScrollToTop from "./functions/ScrollToTop";
 
 import LoginContext from "./Contexts/ThemeContext/LoginContext";
 
+import { campoObligatorio } from "./Validations/Validations";
+
 function App() {
   const { auth, handleLogin } = useContext(LoginContext);
   const [homeRender, setHomeRender] = useState();

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { Col, Container, Row, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -7,6 +7,8 @@ import { useNavigate } from "react-router";
 
 import { RegisterClient } from "../../functions/clientMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
+import { validacionesInputs, validacionesInputsTel, validacionesInputsEmail, validacionesInputsPass, validacionesInputsValidPass, validacionesInputsFecha } from "../../Validations/Validations";
+import { getUbicaciones } from "../../functions/ubicationMethods";
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
@@ -17,185 +19,50 @@ const SignUp = () => {
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
 
+  //estados
   const [userName, setUserName] = useState("");
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [fechaNac, setFechaNac] = useState("");
-  const [ubication, setUbication] = useState("Rosario");
+  const [ubicacion, setUbicacion] = useState('');
+  const [ubicaciones, setUbicaciones] = useState([]);
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState("");
   const [openPopUp, setOpenPopUp] = useState(""); // Handler pop up
-
+  //referencias
   const inputUserName = useRef(null);
   const inputNameLast = useRef(null);
   const inputName = useRef(null);
   const inputEmail = useRef(null);
+  const inputFechaNac = useRef(null);
+  const inputUbicacion = useRef(null);
   const inputPhoneNumber = useRef(null);
-  const inputUbication = useRef(null);
   const inputPassword = useRef(null);
   const inputValidPassword = useRef(null);
+  //errores
+  const [userNameError, setUserNameError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [lastnameError, setLastnameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [ubicacionError, setUbicacionError] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [fechaNacError, setFechaNacError] = useState("");
+  const [passError, setPassError] = useState("");
+  const [validPassError, setValidPassError] = useState("");
 
-  const [errors, setErrors] = useState({});
-  const [errorsValidation, setErrorsValidation] = useState("");
-
-  // Handlers y validaciones
-  const userNameHandler = (e) => {
-    setUserName(e.target.value);
-  };
-
-  const userNameValidation = () => {
-    if (userName === "") {
-      setErrors({ ...errors, userName: "Campo obligatorio." });
-    } else if (userName.length < 4 || userName.length > 10) {
-      setErrors({
-        ...errors,
-        userName: "Debe contener entre 4 y 10 caracteres.",
+  //mapear lista de ubicaciones
+  useEffect(() => {
+    getUbicaciones()
+      .then((response) => {
+        console.log("listaUbicaciones", response);
+        setUbicaciones([...response.data]);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.userName;
-      setErrors(_errors);
-    }
-  };
-
-  const nameHandler = (e) => {
-    setName(e.target.value);
-  };
-
-  const nameValidation = () => {
-    if (name === "") {
-      setErrors({ ...errors, name: "Campo obligatorio." });
-    } else if (name.length > 25) {
-      setErrors({
-        ...errors,
-        name: "No debe contener más de 25 caracteres.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.name;
-      setErrors(_errors);
-    }
-  };
-
-  const lastnameHandler = (e) => {
-    setLastname(e.target.value);
-  };
-
-  const LastnameValidation = () => {
-    if (lastname === "") {
-      setErrors({ ...errors, lastname: "Campo obligatorio." });
-    } else if (lastname.length < 5 || lastname.length > 25) {
-      setErrors({
-        ...errors,
-        lastname: "Debe contener entre 5 y 25 caracteres.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.lastname;
-      setErrors(_errors);
-    }
-  };
-
-  const emailHandler = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const emailValidation = () => {
-    const validEmail = "@";
-    const correct = email.match(validEmail);
-    if (email === "") {
-      setErrors({ ...errors, email: "Campo obligatorio." });
-    } else if (!correct) {
-      setErrors({ ...errors, email: "Ingrese un email correcto." });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.email;
-      setErrors(_errors);
-    }
-  };
-
-  const phoneNumberHandler = (e) => {
-    setPhoneNumber(e.target.value);
-  };
-
-  // Validate ONLY numbers in phone:
-  function containsSpecialChars(str) {
-    const onlyNumbers =
-    /^[0-9]*$/;
-    return onlyNumbers.test(str) != true ? true : false; 
-  }
-
-  const phoneNumberValidation = () => {
-    if (phoneNumber === "") {
-      setErrors({ ...errors, phoneNumber: "Campo obligatorio." });
-    } else if (containsSpecialChars(phoneNumber)) {
-      setErrors({ ...errors, phoneNumber: "No puede contener carácteres especiales o espacios." });
-    } else if (phoneNumber.length < 10 || phoneNumber.length > 10) {
-      setErrors({ ...errors, phoneNumber: "Debe contener 10 números." });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.phoneNumber;
-      setErrors(_errors);
-    }
-  };
-
-  console.log(typeof phoneNumber)
-
-
-  const fechaNacHandler = (e) => {
-    setFechaNac(e.target.value);
-  };
-
-  const ubicationHandler = (e) => {
-    setUbication(e.target.value);
-  };
-
-  const ubicationValidation = () => {
-    if (ubication === "") {
-      setErrors({ ...errors, ubication: "Campo obligatorio." });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.ubication;
-      setErrors(_errors);
-    }
-  };
-
-  const passwordHandler = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const passwordValidation = () => {
-    if (password === "") {
-      setErrors({ ...errors, password: "Campo obligatorio." });
-    } else if (password.length < 5 || password.length > 10) {
-      setErrors({
-        ...errors,
-        password: "Debe contener entre 5 y 10 caracteres.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.password;
-      setErrors(_errors);
-    }
-  };
-
-  const validPasswordHandler = (e) => {
-    setValidPassword(e.target.value);
-  };
-
-  const validPasswordValidation = () => {
-    if (validPassword === "") {
-      setErrors({ ...errors, validPassword: "Campo obligatorio." });
-    } else if (validPassword !== password) {
-      setErrors({ ...errors, validPassword: "Las contraseñas no coinciden." });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.validPassword;
-      setErrors(_errors);
-    }
-  };
+  }, []);
 
   //GUARDAR INFORMACIÓN
   const saveBaseUsuarioHandler = () => {
@@ -204,22 +71,35 @@ const SignUp = () => {
       name === "" ||
       lastname === "" ||
       email === "" ||
+      ubicacion === "" ||
       phoneNumber === "" ||
-      ubication === "" ||
       password === "" ||
-      validPassword === ""
+      validPassword === "" 
+      ) {
+      setTimeout(() => {
+        setOpenPopUp(true);
+      }, 0);
+    } else if (
+        userNameError || 
+        nameError || 
+        lastnameError || 
+        emailError || 
+        ubicacionError || 
+        phoneNumberError || 
+        passError || 
+        validPassError
     ) {
       setTimeout(() => {
         setOpenPopUp(true);
       }, 0);
     } else {
       const usuarioDatos = {
-        idUsuariosNavigation: {
+          idUsuariosNavigation: {
           nombre: name,
           apellido: lastname,
           username: userName,
           mail: email,
-          ubicacion: ubication,
+          ubicacion: ubicacion ,
           numTelefono: phoneNumber,
           fechaNacimiento: fechaNac,
           fotoPerfil: null,
@@ -229,9 +109,8 @@ const SignUp = () => {
       RegisterClient(usuarioDatos);
       localStorage.setItem("user", userName);
       handleShow();
-      setErrorsValidation("");
+      cleanInputs();
     }
-    cleanInputs();
   };
 
   const cleanInputs = () => {
@@ -241,7 +120,7 @@ const SignUp = () => {
     setEmail("");
     setPhoneNumber("");
     setFechaNac("");
-    setUbication("");
+    setUbicacion("");
     setPassword("");
     setValidPassword("");
   };
@@ -263,125 +142,148 @@ const SignUp = () => {
             <Form.Group>
               <Form.Label>Nombre de usuario:</Form.Label>
               <Form.Control
-                placeholder="User123"
+                placeholder="Usuario"
                 type="text"
-                onChange={userNameHandler}
-                onBlur={userNameValidation}
+                onChange={(event) => setUserName(event.target.value)}
                 value={userName}
                 ref={inputUserName}
+                onBlur={()=> setUserNameError(validacionesInputs(inputUserName.current))}
               />
-              {errors.userName && (
-                <div className="errors">{errors.userName}</div>
-              )}
+              {userNameError && (
+                  <div className="errors"> 
+                    {userNameError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
               <Form.Control
-                placeholder="Juan"
-                onChange={nameHandler}
+                placeholder="Homero"
+                onChange={(event) => setName(event.target.value)}
                 value={name}
-                onBlur={nameValidation}
                 type="text"
                 ref={inputName}
+                onBlur={()=> setNameError(validacionesInputs(inputName.current))}
               />
+              {nameError && (
+                  <div className="errors"> 
+                    {nameError}
+                  </div>)}
             </Form.Group>
-            {errors.name && <div className="errors">{errors.name}</div>}
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>
               <Form.Control
-                placeholder="Topo"
-                onChange={lastnameHandler}
+                placeholder="Simpson"
+                onChange={(event) => setLastname(event.target.value)}
                 value={lastname}
-                onBlur={LastnameValidation}
                 type="text"
                 ref={inputNameLast}
+                onBlur={()=> setLastnameError(validacionesInputs(inputNameLast.current))}
               />
-              {errors.lastname && (
-                <div className="errors">{errors.lastname}</div>
-              )}
+              {lastnameError && (
+                  <div className="errors"> 
+                    {lastnameError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>E-mail:</Form.Label>
               <Form.Control
                 placeholder="ejemplo@gmail.com"
-                onChange={emailHandler}
+                onChange={(event) => setEmail(event.target.value)}
                 value={email}
-                onBlur={emailValidation}
                 type="email"
                 ref={inputEmail}
+                onBlur={()=> setEmailError(validacionesInputsEmail(inputEmail.current))}
               />
-              {errors.email && <div className="errors">{errors.email}</div>}
+              {emailError && (
+                  <div className="errors"> 
+                    {emailError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Número de celular:</Form.Label>
               <Form.Control
                 placeholder="3402000000"
-                onChange={phoneNumberHandler}
+                onChange={(event) => setPhoneNumber(event.target.value)}
                 value={phoneNumber}
-                onBlur={phoneNumberValidation}
                 type="text"
                 ref={inputPhoneNumber}
+                onBlur={()=> setPhoneNumberError(validacionesInputsTel(inputPhoneNumber.current))}
               />
-              {errors.phoneNumber && (
-                <div className="errors">{errors.phoneNumber}</div>
-              )}
+              {phoneNumberError && (
+                  <div className="errors"> 
+                    {phoneNumberError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
               <Form.Control
                 placeholder="1965-03-25"
-                onChange={fechaNacHandler}
+                onChange={(event) => setFechaNac(event.target.value)}
                 value={fechaNac}
+                ref={inputFechaNac}
                 type="text"
+                onBlur={()=> setFechaNacError(validacionesInputsFecha(inputFechaNac.current))}
               />
+              {fechaNacError && (
+                  <div className="errors"> 
+                    {fechaNacError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Ubicación:</Form.Label>
               <Form.Select
-                onChange={ubicationHandler}
-                value={ubication}
-                onBlur={ubicationValidation}
-                ref={inputUbication}
+                aria-label="select your city"
+                value={ubicacion}
+                onChange={(event) => setUbicacion(event.target.value)}
+                ref={inputUbicacion}
+                onBlur={()=> setUbicacionError(validacionesInputs(inputUbicacion.current))}
               >
-                <option>Elija su ciudad</option>
-                <option value="Rosario">Rosario</option>
-                <option value="Arroyo Seco">Arroyo Seco</option>
-                <option value="VGG">Villa Gobernador Galvez</option>
-                <option value="Baigorria">Baigorria</option>
+                <option value="" disabled>Elegir una ciudad</option>
+                {ubicaciones.map((ubicacion, index) => (
+                  <option key={index} value={ubicacion}>
+                    {ubicacion}
+                  </option>
+                ))}
               </Form.Select>
-              {errors.ubication && (
-                <div className="errors">{errors.ubication}</div>
-              )}
+              {ubicacionError && (
+                  <div className="errors"> 
+                    {ubicacionError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Contraseña:</Form.Label>
               <Form.Control
                 placeholder="Contraseña"
-                onChange={passwordHandler}
-                onBlur={passwordValidation}
+                onChange={(event) => setPassword(event.target.value)}
                 value={password}
                 type="password"
                 ref={inputPassword}
+                onBlur={()=> setPassError(validacionesInputsPass(inputPassword.current))}
               />
-              {errors.password && (
-                <div className="errors">{errors.password}</div>
-              )}
+              {passError && (
+                  <div className="errors"> 
+                    {passError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Repita la contraseña:</Form.Label>
               <Form.Control
                 placeholder="Contraseña"
-                onChange={validPasswordHandler}
-                onBlur={validPasswordValidation}
+                onChange={(event) => setValidPassword(event.target.value)}
                 value={validPassword}
                 type="password"
                 ref={inputValidPassword}
+                onBlur={()=> setValidPassError
+                  (validacionesInputsValidPass({
+                  value1: inputValidPassword.current.value,
+                  value2: password
+                }))}
               />
-              {errors.validPassword && (
-                <div className="errors">{errors.validPassword}</div>
-              )}
+              {validPassError && (
+                  <div className="errors"> 
+                    {validPassError}
+                  </div>)}
             </Form.Group>
-            {<div className="errorsValidation">{errorsValidation}</div>}
             <Button
               variant="primary"
               className="mt-4"

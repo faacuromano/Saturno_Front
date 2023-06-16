@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 
 import "./Login.css";
 
@@ -11,15 +11,20 @@ import { authClient } from "../../functions/clientMethods";
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
 import { GetServiceByUsername } from "../../functions/serviceMethods";
+import { validacionesInputs } from "../../Validations/Validations";
 
 const Login = () => {
   const navigate = useNavigate(); // Allows us to redirect
   const [userName, setUserName] = useState("");
+  const inputUserName = useRef(userName);
+  const [userNameError, setUserNameError] = useState();
+  const [passError, setPassError] = useState()
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState("");
+  const inputPass = useRef();
   const { auth, handleLogin } = useContext(LoginContext);
   const [openPopUp, setOpenPopUp] = useState(false); // Allows alerts to show up
 
+ 
   const loginHandler = () => {
     authClient(userName, password).then(function (response) {
       if (response) {
@@ -74,12 +79,18 @@ const Login = () => {
             <Form.Group>
               <Form.Label>Nombre de usuario:</Form.Label>
               <Form.Control
-                placeholder="User123"
+                placeholder="Usuario"
                 type="text"
                 id="userName"
+                ref={inputUserName}
+                onBlur={()=> setUserNameError(validacionesInputs(inputUserName.current))}
                 onChange={(event) => setUserName(event.target.value)}
                 value={userName}
               />
+              {userNameError && (
+                  <div className="errors"> 
+                    {userNameError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="my-4">
               <Form.Label>Contraseña:</Form.Label>
@@ -89,7 +100,13 @@ const Login = () => {
                 id="password"
                 onChange={(event) => setPassword(event.target.value)}
                 value={password}
+                ref={inputPass}
+                onBlur={()=> setPassError(validacionesInputs(inputPass.current))}
               />
+              {passError && (
+                  <div className="errors"> 
+                    {passError}
+                  </div>)} 
             </Form.Group>
             <Button onClick={loginHandler} color="primary" className="mb-4">
               Entrar

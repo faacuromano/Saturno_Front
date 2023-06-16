@@ -8,31 +8,29 @@ import { getRubros } from "../../functions/rubrosMethods";
 import { getUbicaciones } from "../../functions/ubicationMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
 import AlertPopUpSusc from "../AlertPopUp/AlertPopUpSusc";
+import { validacionesInputs, validacionesInputsTel, validacionesInputsEmail, validacionesInputsPass, validacionesInputsValidPass, validacionesInputsFecha, validacionesInputsHora } from "../../Validations/Validations";
 
 const SignUpProfesional = () => {
 
-
-
   const navigate = useNavigate();
+  //estados
   const [userNameProf, setUserNameProf] = useState("");
   const [nameProf, setNameProf] = useState("");
   const [lastNameProf, setLastNameProf] = useState("");
   const [emailProf, setEmailProf] = useState("");
   const [phoneProf, setPhoneProf] = useState("");
   const [nacProf, setNacProf] = useState("");
-  //const [ubicProf,setUbicProf ] = useState("");
   const [direcProf, setDirecProf] = useState("");
   const [descProf, setDescProf] = useState("");
   const [horaInicio, setHoraInicio] = useState("");
   const [horaFinal, setHoraFinal] = useState("");
   const [contraProf, setContraProf] = useState("");
   const [validContraProf, setValidContraProf] = useState("");
-  const [errors, setErrors] = useState({});
-  const [errorsValidation, setErrorsValidation] = useState("");
-  const [profesion, setProfesion] = useState("Psicologo");
+  const [profesion, setProfesion] = useState("");
   const [profesiones, setProfesiones] = useState([]);
-  const [ubicacion, setUbicacion] = useState("Rosario");
+  const [ubicacion, setUbicacion] = useState('');
   const [ubicaciones, setUbicaciones] = useState([]);
+  //referencias
   const inputUserNameProf = useRef(null);
   const inputNameProf = useRef(null);
   const inputLastNameProf = useRef(null);
@@ -41,6 +39,7 @@ const SignUpProfesional = () => {
   const inputNacProf = useRef(null);
   const inputUbicProf = useRef(null);
   const inputDirecProf = useRef(null);
+  const inputDesc = useRef(null);
   const inputContraProf = useRef(null);
   const inputValidContraProf = useRef(null);
   const inputHoraInicio = useRef(null);
@@ -48,9 +47,27 @@ const SignUpProfesional = () => {
   const inputProfesion = useRef(null);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [openPopUpSusc, setOpenPopUpSusc] = useState(false);
+  
+  //errores
+  const [userNameError, setUserNameError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [nacError, setNacError] = useState("");
+  const [direcError, setDirecError] = useState("");
+  const [descError, setDescError] = useState("");
+  const [horaInicioError, setHoraInicioError] = useState("");
+  const [horaFinalError, setHoraFinalError] = useState("");
+  const [passError, setPassError] = useState("");
+  const [validPassError, setValidPassError] = useState("");
+  const [profesionError, setProfesionError] = useState("");
+  const [ubicacionError, setUbicacionError] = useState('');
+  
+
+
+
   //lista de rubros y ubicaciones
-
-
   useEffect(() => {
     setTimeout(() => {
       setOpenPopUpSusc(true)
@@ -75,248 +92,6 @@ const SignUpProfesional = () => {
       });
   }, []);
 
-  //NOMBRE USUARIO: HANDLER, VALIDATION
-
-  const userNameProfHandler = (e) => {
-    setUserNameProf(e.target.value);
-  };
-
-  const userNameProfValidation = () => {
-    if (userNameProf === "") {
-      setErrors({ ...errors, userNameProf: "Campo obligatorio." });
-    } else if (userNameProf.length < 4 || userNameProf.length > 15) {
-      setErrors({
-        ...errors,
-        userNameProf: "Debe contener entre 4 y 15 caracteres.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.userNameProf;
-      setErrors(_errors);
-    }
-  };
-
-  //NOMBRE: HANDLER, VALIDATION
-  const nameProfHandler = (e) => {
-    setNameProf(e.target.value);
-  };
-
-  const nameProfValidation = () => {
-    if (nameProf === "") {
-      setErrors({ ...errors, nameProf: "Campo obligatorio." });
-    } else if (nameProf.length < 4 || nameProf.length > 10) {
-      setErrors({
-        ...errors,
-        nameProf: "Debe contener entre 4 y 10 caracteres.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.nameProf;
-      setErrors(_errors);
-    }
-  };
-
-  //APELLIDO: HANDLER, VALIDATION
-  const lastNameProfHandler = (e) => {
-    setLastNameProf(e.target.value);
-  };
-
-  const lastNameProfValidation = () => {
-    if (lastNameProf === "") {
-      setErrors({ ...errors, lastNameProf: "Campo obligatorio." });
-    } else if (lastNameProf.length < 4 || lastNameProf.length > 10) {
-      setErrors({
-        ...errors,
-        lastNameProf: "Debe contener entre 4 y 10 caracteres.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.lastNameProf;
-      setErrors(_errors);
-    }
-  };
-
-  //EMAIL: HANDLER, VALIDATION
-  const emailProfHandler = (e) => {
-    setEmailProf(e.target.value);
-  };
-
-  const emailProfValidation = () => {
-    const validEmail = "@";
-    const correct = emailProf.match(validEmail);
-    if (emailProf === "") {
-      setErrors({ ...errors, emailProf: "Campo obligatorio." });
-    } else if (!correct) {
-      setErrors({ ...errors, emailProf: "Ingrese un email correcto." });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.emailProf;
-      setErrors(_errors);
-    }
-  };
-
-  //TELEFONO: HANDLER, VALIDATION
-  const phoneProfHandler = (e) => {
-    setPhoneProf(e.target.value);
-  };
-
-  // Validate ONLY numbers in phone:
-  function containsSpecialChars(str) {
-    const onlyNumbers =
-      /^[0-9]*$/;
-    return onlyNumbers.test(str) != true ? true : false;
-  }
-
-  const phoneProfValidation = () => {
-    if (phoneProf === "") {
-      setErrors({ ...errors, phoneProf: "Campo obligatorio." });
-    } else if (containsSpecialChars(phoneProf)) {
-      setErrors({ ...errors, phoneProf: "No puede contener carácteres especiales o espacios." });
-    } else if (phoneProf.length < 10 || phoneProf.length > 10) {
-      setErrors({ ...errors, phoneProf: "Debe contener 10 números." });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.phoneProf;
-      setErrors(_errors);
-    }
-  };
-
-  //NACIMIENTO: HANDLER, VALIDATION
-  const nacProfHandler = (e) => {
-    setNacProf(e.target.value);
-  };
-
-  const nacProfValidation = () => {
-    if (nacProf === "") {
-      setErrors({ ...errors, nacProf: "Campo obligatorio." });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.nacProf;
-      setErrors(_errors);
-    }
-  };
-
-  //UBICACION: HANDLER, VALIDATION
-  /*     const ubicProfHandler = (e) => {
-    setUbicProf(e.target.value);
-    };
-
-    const ubicProfValidation = () => {
-      if (ubicProf === "") {
-        setErrors({ ...errors, ubicProf: "Campo obligatorio." });
-      } else {
-        let _errors = { ...errors };
-        delete _errors.ubicProf;
-        setErrors(_errors);
-      }
-    }; */
-
-  //DIRECCION: HANDLER, VALIDATION
-  const direcProfHandler = (e) => {
-    setDirecProf(e.target.value);
-  };
-
-  const direcProfValidation = () => {
-    if (direcProf === "") {
-      setErrors({ ...errors, direcProf: "Campo obligatorio." });
-    } else if (direcProf.length < 5) {
-      setErrors({
-        ...errors,
-        direcProf: "No puede contener menos de 5 caracteres.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.direcProf;
-      setErrors(_errors);
-    }
-  };
-
-  //PROFESION HANDLER
-  const profesionHandler = (e) => {
-    setProfesion(e.target.value);
-    console.log("profesion", profesion);
-  };
-
-  //ubicacion hanlder
-
-  const ubicacionHandler = (e) => {
-    setUbicacion(e.target.value);
-    console.log("ubicacion", ubicacion);
-  };
-
-  //DESCRIPCION: HANDLER
-  const descProfHandler = (e) => {
-    setDescProf(e.target.value);
-  };
-
-  //HORA_DESDE: HANDLER
-  const horaInicioHandler = (e) => {
-    setHoraInicio(e.target.value);
-  };
-
-  const horaInicioValidation = () => {
-    if (horaInicio === "") {
-      setErrors({ ...errors, horaInicio: "Campo obligatorio." });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.horaInicio;
-      setErrors(_errors);
-    }
-  };
-
-  //HORA_HASTA: HANDLER
-  const horaFinalHandler = (e) => {
-    setHoraFinal(e.target.value);
-  };
-
-  const horaFinalValidation = () => {
-    if (horaFinal === "") {
-      setErrors({ ...errors, horaFinal: "Campo obligatorio." });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.horaFinal;
-      setErrors(_errors);
-    }
-  };
-
-  //CONTRASENA: HANDLER, VALIDATION
-  const contraProfHandler = (e) => {
-    setContraProf(e.target.value);
-  };
-
-  const contraProfValidation = () => {
-    if (contraProf === "") {
-      setErrors({ ...errors, contraProf: "Campo obligatorio." });
-    } else if (contraProf.length < 5 || contraProf.length > 10) {
-      setErrors({
-        ...errors,
-        contraProf: "Debe contener entre 5 y 10 caracteres.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.contraProf;
-      setErrors(_errors);
-    }
-  };
-  //CONTRASENA VALIDA: HANDLER, VALIDATION
-  const validContraProfHandler = (e) => {
-    setValidContraProf(e.target.value);
-  };
-
-  const validContraProfValidation = () => {
-    if (validContraProf === "") {
-      setErrors({ ...errors, validContraProf: "Campo obligatorio." });
-    } else if (validContraProf !== contraProf) {
-      setErrors({
-        ...errors,
-        validContraProf: "Las contraseñas no coinciden.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.validContraProf;
-      setErrors(_errors);
-    }
-  };
 
   //GUARDAR LOS DATOS DEL PROFESIONAL
   const saveProfHandler = () => {
@@ -326,6 +101,7 @@ const SignUpProfesional = () => {
       lastNameProf === "" ||
       emailProf === "" ||
       phoneProf === "" ||
+      descProf === "" ||
       ubicacion === "" ||
       direcProf === "" ||
       horaInicio === "" ||
@@ -335,6 +111,23 @@ const SignUpProfesional = () => {
     ) {
       setTimeout(() => {
         setOpenPopUp(true)
+      }, 0);
+    } else if (
+      userNameError || 
+      nameError || 
+      lastNameError || 
+      emailError || 
+      ubicacionError || 
+      descError ||
+      direcError ||
+      horaInicioError ||
+      horaFinalError ||
+      phoneError || 
+      passError || 
+      validPassError
+    ) {
+      setTimeout(() => {
+        setOpenPopUp(true);
       }, 0);
     } else {
       const profesionalDatos = {
@@ -354,16 +147,13 @@ const SignUpProfesional = () => {
           fechaNacimiento: nacProf,
           fotoPerfil: null,
           pass: contraProf,
-          /* verificado: true,
-          tipoCuenta: "P" */
         },
       };
       RegisterProfessional(profesionalDatos);
       console.log(profesionalDatos);
-      setErrorsValidation("");
       navigate("/login");
+      cleanInputs();
     }
-    cleanInputs();
   };
 
   //LIMPIAR CAMPOS
@@ -383,6 +173,7 @@ const SignUpProfesional = () => {
     setContraProf("");
     setValidContraProf("");
   };
+
   const volver = () => {
     navigate("/tipo-de-cuenta")
     setOpenPopUpSusc(false)
@@ -406,125 +197,149 @@ const SignUpProfesional = () => {
             <Form.Group>
               <Form.Label>Nombre de usuario:</Form.Label>
               <Form.Control
-                placeholder="User123"
+                placeholder="Usuario"
                 type="text"
-                onChange={userNameProfHandler}
-                onBlur={userNameProfValidation}
                 value={userNameProf}
                 ref={inputUserNameProf}
+                onChange={(event) => setUserNameProf(event.target.value)}
+                onBlur={()=> setUserNameError(validacionesInputs(inputUserNameProf.current))}
               />
-              {errors.userNameProf && (
-                <div className="errors">{errors.userNameProf}</div>
-              )}
+              {userNameError && (
+                <div className="errors"> 
+                  {userNameError}
+                </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
               <Form.Control
                 placeholder="Homero"
                 type="text"
-                onChange={nameProfHandler}
-                onBlur={nameProfValidation}
                 value={nameProf}
                 ref={inputNameProf}
+                onChange={(event) => setNameProf(event.target.value)}
+                onBlur={()=> setNameError(validacionesInputs(inputNameProf.current))}
               />
-              {errors.nameProf && (
-                <div className="errors">{errors.nameProf}</div>
-              )}
+              {nameError && (
+                <div className="errors"> 
+                  {nameError}
+                </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>
               <Form.Control
                 placeholder="Simpson"
                 type="text"
-                onChange={lastNameProfHandler}
-                onBlur={lastNameProfValidation}
                 value={lastNameProf}
                 ref={inputLastNameProf}
+                onChange={(event) => setLastNameProf(event.target.value)}
+                onBlur={()=> setLastNameError(validacionesInputs(inputLastNameProf.current))}
               />
-              {errors.lastNameProf && (
-                <div className="errors">{errors.lastNameProf}</div>
-              )}
+                {lastNameError && (
+                  <div className="errors"> 
+                    {lastNameError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Email:</Form.Label>
               <Form.Control
                 placeholder="ejemplo@gmail.com"
                 type="text"
-                onChange={emailProfHandler}
-                onBlur={emailProfValidation}
                 value={emailProf}
                 ref={inputEmailProf}
-              />
-              {errors.emailProf && (
-                <div className="errors">{errors.emailProf}</div>
-              )}
+                onChange={(event) => setEmailProf(event.target.value)}
+                onBlur={()=> setEmailError(validacionesInputsEmail(inputEmailProf.current))}
+              /> 
+              {emailError && (
+                <div className="errors"> 
+                  {emailError}
+                </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Número de teléfono:</Form.Label>
               <Form.Control
                 placeholder="3402000000"
                 type="text"
-                onChange={phoneProfHandler}
-                onBlur={phoneProfValidation}
                 value={phoneProf}
                 ref={inputPhoneProf}
+                onChange={(event) => setPhoneProf(event.target.value)}
+                onBlur={()=> setPhoneError(validacionesInputsTel(inputPhoneProf.current))}
               />
-              {errors.phoneProf && (
-                <div className="errors">{errors.phoneProf}</div>
-              )}
+              {phoneError && (
+                <div className="errors"> 
+                  {phoneError}
+                </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
               <Form.Control
                 placeholder="1956-05-13"
                 type="text"
-                onChange={nacProfHandler}
-                onBlur={nacProfValidation}
                 value={nacProf}
                 ref={inputNacProf}
+                onChange={(event) => setNacProf(event.target.value)}
+                onBlur={()=> setNacError(validacionesInputsFecha(inputNacProf.current))}
               />
+              {nacError && (
+                <div className="errors"> 
+                  {nacError}
+                </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Ubicación:</Form.Label>
               <Form.Select
                 aria-label="select your city"
                 value={ubicacion}
-                onChange={ubicacionHandler}
+                ref={inputUbicProf}
+                onChange={(event) => setUbicacion(event.target.value)}
+                onBlur={()=> setUbicacionError(validacionesInputs(inputUbicProf.current))}
               >
+                <option value="" selected>Elegir una ciudad</option>
                 {ubicaciones.map((ubicacion, index) => (
                   <option key={index} value={ubicacion}>
                     {ubicacion}
                   </option>
                 ))}
               </Form.Select>
+              {ubicacionError && (
+                  <div className="errors"> 
+                    {ubicacionError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Dirección (calle, nro.):</Form.Label>
               <Form.Control
                 placeholder="Avenida Siempreviva 742"
                 type="text"
-                onChange={direcProfHandler}
-                onBlur={direcProfValidation}
                 value={direcProf}
                 ref={inputDirecProf}
-              />
-              {errors.direcProf && (
-                <div className="errors">{errors.direcProf}</div>
-              )}
+                onChange={(event) => setDirecProf(event.target.value)}
+                onBlur={()=> setDirecError(validacionesInputs(inputDirecProf.current))}
+              /> 
+              {direcError && (
+                <div className="errors"> 
+                  {direcError}
+                </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Profesión:</Form.Label>
               <Form.Select
                 aria-label="select your prof"
+                ref={inputProfesion}
                 value={profesion}
-                onChange={profesionHandler}
+                onChange={(event) => setProfesion(event.target.value)}
+                onBlur={()=> setProfesionError(validacionesInputs(inputProfesion.current))}
               >
+                <option value="" selected>Elegir una profesión</option>
                 {profesiones.map((profesion, index) => (
                   <option key={index} value={profesion}>
                     {profesion}
                   </option>
                 ))}
               </Form.Select>
+              {profesionError && (
+                <div className="errors"> 
+                  {profesionError}
+                </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Breve descripción del servicio:</Form.Label>
@@ -533,59 +348,79 @@ const SignUpProfesional = () => {
                 type="text-area"
                 rows="5"
                 cols="33"
-                onChange={descProfHandler}
                 value={descProf}
+                ref={inputDesc}
+                onChange={(event) => setDescProf(event.target.value)}
+                onBlur={()=> setDescError(validacionesInputs(inputDesc.current))}
               />
+                {descError && (
+                  <div className="errors"> 
+                    {descError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Horario de inicio: (hh:mm:ss)</Form.Label>
               <Form.Control
                 placeholder="07:00:00"
                 type="text"
-                onChange={horaInicioHandler}
-                onBlur={horaInicioValidation}
                 value={horaInicio}
                 ref={inputHoraInicio}
+                onChange={(event) => setHoraInicio(event.target.value)}
+                onBlur={()=> setHoraInicioError(validacionesInputsHora(inputHoraInicio.current.value))}
               />
-              {errors.horaInicio && (
-                <div className="errors">{errors.horaInicio}</div>
-              )}
+              {horaInicioError && (
+                  <div className="errors"> 
+                    {horaInicioError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Horario de cierre: (hh:mm:ss)</Form.Label>
               <Form.Control
                 placeholder="19:00:00"
                 type="text"
-                onChange={horaFinalHandler}
-                onBlur={horaFinalValidation}
                 value={horaFinal}
                 ref={inputHoraFinal}
+                onChange={(event) => setHoraFinal(event.target.value)}
+                onBlur={()=> setHoraFinalError(validacionesInputsHora(inputHoraFinal.current.value))}
               />
-              {errors.horaFinal && (
-                <div className="errors">{errors.horaFinal}</div>
-              )}
+              {horaFinalError && (
+                  <div className="errors"> 
+                    {horaFinalError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Contraseña:</Form.Label>
               <Form.Control
                 placeholder="Contraseña"
                 type="password"
-                onChange={contraProfHandler}
-                onBlur={contraProfValidation}
                 value={contraProf}
                 ref={inputContraProf}
+                onChange={(event) => setContraProf(event.target.value)}
+                onBlur={()=> setPassError(validacionesInputsPass(inputContraProf.current))}
               />
+              {passError && (
+                  <div className="errors"> 
+                    {passError}
+                  </div>)}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Repita la contraseña:</Form.Label>
               <Form.Control
                 placeholder="Contraseña"
                 type="password"
-                onChange={validContraProfHandler}
-                onBlur={validContraProfValidation}
                 value={validContraProf}
                 ref={inputValidContraProf}
+                onChange={(event) => setValidContraProf(event.target.value)}
+                onBlur={()=> setValidPassError
+                  (validacionesInputsValidPass({
+                  value1: inputValidContraProf.current.value,
+                  value2: contraProf
+                }))}
               />
+                {validPassError && (
+                    <div className="errors"> 
+                      {validPassError}
+                    </div>)}
             </Form.Group>
           </Form>
           <Button variant="primary" className="mt-4" onClick={saveProfHandler}>

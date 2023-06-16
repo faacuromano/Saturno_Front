@@ -4,6 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
+import { validacionesInputs, validacionesInputsEmail, campoObligatorio} from "../../Validations/Validations";
 
 const Contact = () => {
   const form = useRef();
@@ -13,6 +14,10 @@ const Contact = () => {
     e.preventDefault();
 
     if (nameContact === "" || emailContact === "" || message == "") {
+      setTimeout(() => {
+        setOpenPopUp(true);
+      }, 0);
+    } else if (nameContactError || emailContactError || messageError) {
       setTimeout(() => {
         setOpenPopUp(true);
       }, 0);
@@ -43,69 +48,19 @@ const Contact = () => {
     }
   };
 
+  //estados
   const [nameContact, setNameContact] = useState("");
   const [emailContact, setEmailContact] = useState("");
   const [message, setMessage] = useState("");
   const [openPopUp, setOpenPopUp] = useState(false); // Allows alerts to show up
-
-  // Error validation setters
-  const [errors, setErrors] = useState({});
-  const [errorsValidation, setErrorsValidation] = useState("");
+  // referencias
   const inputNameContact = useRef(null);
-  const inputNameLast = useRef(null);
+  const inputMessage= useRef(null);
   const inputEmail = useRef(null);
-
-  // Validations
-
-  // Name
-  const nameValidation = () => {
-    if (nameContact === "") {
-      setErrors({ ...errors, nameContact: "Campo obligatorio." });
-    } else if (nameContact.length > 25) {
-      setErrors({
-        ...errors,
-        nameContact: "Debe contener no más de 25 caracteres.",
-      });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.nameContact;
-      setErrors(_errors);
-    }
-  };
-
-  // Mail
-
-  const emailHandler = (e) => {
-    setEmailContact(e.target.value);
-  };
-
-  const emailValidation = () => {
-    const validEmail = "@";
-    const correct = emailContact.match(validEmail);
-    if (emailContact === "") {
-      setErrors({ ...errors, emailContact: "Campo obligatorio." });
-    } else if (!correct) {
-      setErrors({ ...errors, emailContact: "Ingrese un email correcto." });
-    } else {
-      let _errors = { ...errors };
-      delete _errors.emailContact;
-      setErrors(_errors);
-    }
-  };
-
-  // ===========
-
-  const nameContactHandler = (e) => {
-    setNameContact(e.target.value);
-  };
-
-  const emailContactHandler = (e) => {
-    setEmailContact(e.target.value);
-  };
-
-  const messageHandler = (e) => {
-    setMessage(e.target.value);
-  };
+  //errores
+  const [nameContactError, setNameContactError] = useState("");
+  const [emailContactError, setEmailContactError] = useState("");
+  const [messageError, setMessageError] = useState("");
 
   const limpiarCampos = () => {
     setNameContact("");
@@ -139,13 +94,15 @@ const Contact = () => {
                   placeholder="Cosme Fulanito"
                   type="text"
                   name="user_name"
-                  onChange={nameContactHandler}
                   value={nameContact}
-                  onBlur={nameValidation}
+                  ref={inputNameContact}
+                  onChange={(e)=> setNameContact(e.target.value)}
+                  onBlur={()=> setNameContactError(validacionesInputs(inputNameContact.current))}
                 />
-                {errors.nameContact && (
-                  <div className="errors">{errors.nameContact}</div>
-                )}
+                {nameContactError && (
+                  <div className="errors"> 
+                    {nameContactError}
+                  </div>)}
               </Form.Group>
               <Form.Group>
                 <Form.Label className="mt-3">Email:</Form.Label>
@@ -153,13 +110,15 @@ const Contact = () => {
                   placeholder="ejemplo@gmail.com"
                   type="email"
                   name="user_email"
-                  onChange={emailContactHandler}
+                  onChange={(e)=> setEmailContact(e.target.value)}
                   value={emailContact}
-                  onBlur={emailValidation}
+                  ref={inputEmail}
+                  onBlur={()=> setEmailContactError(validacionesInputsEmail(inputEmail.current))}
                 />
-                {errors.emailContact && (
-                  <div className="errors">{errors.emailContact}</div>
-                )}
+                {emailContactError && (
+                  <div className="errors"> 
+                    {emailContactError}
+                  </div>)}
               </Form.Group>
               <Form.Group>
                 <Form.Label className="mt-3">Mensaje:</Form.Label>
@@ -168,9 +127,15 @@ const Contact = () => {
                   name="message"
                   as="textarea"
                   rows={4}
-                  onChange={messageHandler}
                   value={message}
+                  ref={inputMessage}
+                  onChange={(e)=> setMessage(e.target.value)}
+                  onBlur={()=> setMessageError(campoObligatorio(inputMessage.current))}
                 />
+                {messageError && (
+                  <div className="errors"> 
+                    {messageError}
+                  </div>)}
               </Form.Group>
               {mensajeEnviado && (
                 <p

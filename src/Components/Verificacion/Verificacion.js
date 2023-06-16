@@ -1,47 +1,52 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, FormGroup, Row } from "react-bootstrap";
 import { verficarEmail } from "../../functions/otherMethods";
+import MercadoPagoLink from "../MercadoPago/MercadoPagoLink";
+import ValidatePayment from "../MercadoPago/ValidatePayment";
+import { GetByProfUsername } from "../../functions/professionalMethods";
 
 const Verificacion = () => {
   const [username, setUsername] = useState();
   const usernameHandler = (e) => setUsername(e.target.value);
+  const [paymentLink, setPaymentLink] = useState(false);
+  const [verificationState, setVerificationState] = useState();
+  const [message, setMessage] = useState("");
+  const monto = "$2000";
 
-  const [message, setMessage] = useState("Ingrese un username");
+  // Retrieve data from localStorage
+  const userData = localStorage.getItem("user");
 
-  const validarCuenta = () => {
-    if (username) {
-      verficarEmail(username).then(function (response) {
-        if (response) {
-          setMessage(response.data);
-        } else {
-          setMessage("Usuario no encontrado");
-        }
-      });
-    } else {
-      setMessage("Asegurese de ingresar un username");
-    }
+  console.log(userData)
+  const parsedData = JSON.parse(userData); // Parseamos data del localhost
+
+  const verifyLoggedAccountSubscriptionState = () => {
+    const username = parsedData['username'];
+
+    GetByProfUsername(username).then((user) => {
+      const verification = user.verificado;
+      setVerificationState(verification);
+
+      if (verification === false) {
+        setMessage(
+          `Usted no posee su cuenta verificada, para ello deberá abonar mensualmente un monto de ${monto}. Debajo se encuentra el link de pago para poder verificarla y utilizar todos nuestros beneficios.`
+        );
+        setPaymentLink(true)
+      } else {
+        setMessage("Cuenta verificada");
+      }
+      console.log("response state", verification)
+    });
+    console.log("verif state", verificationState)
   };
+
+  verifyLoggedAccountSubscriptionState();
+
 
   return (
     <Container className="vh-100">
-      <Row className="justify-content-center">
-        <Col xs={8}>
-          <Form className="text-start">
-            <FormGroup>
-              <Form.Label>Username:</Form.Label>
-              <Form.Control
-                type="text"
-                value={username}
-                onChange={usernameHandler}
-              />
-            </FormGroup>
-            <Button onClick={validarCuenta} className="mt-3">
-              Verificar
-            </Button>
-          </Form>
-          <p>{message}</p>
-        </Col>
-      </Row>
+      <p className="text-center">{message}</p>
+      <MercadoPagoLink open={paymentLink}></MercadoPagoLink>
+
     </Container>
   );
 };

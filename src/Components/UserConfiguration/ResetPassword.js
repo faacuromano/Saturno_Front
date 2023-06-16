@@ -47,7 +47,7 @@ const ResetPassword = () => {
           <h1 className="border-bottom pb-4 mb-4">Cambiar contraseña</h1>
           <Form>
             <Form.Group>
-              <Form.Label>Contraseña vieja:</Form.Label>
+              <Form.Label>Contraseña anterior:</Form.Label>
               <Form.Control
                 type="password"
                 value={passViejo}

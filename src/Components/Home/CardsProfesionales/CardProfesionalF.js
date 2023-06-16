@@ -12,7 +12,7 @@ const CardProfesional = ({ data }) => {
     <Card key={data.Id} className="mb-4 shadow-sm border-0 align-self-stretch">
       <Card.Img src={data.fotoPerfil} variant="top" />
       <Card.Body className="pt-3">
-        <Card.Title className="ms-2 mb-1 fw-bold">
+        <Card.Title className="ms-2 mb-2 fw-bold">
           {data.nombre + " " + data.apellido}
         </Card.Title>
         <Card.Subtitle className="text-muted mb-2 ms-2 fw-normal border-bottom pb-3">

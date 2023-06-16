@@ -128,7 +128,7 @@ const Contact = () => {
           </Col>
           <Col xs={12} lg={10} xl={7}>
             <p>
-              <b>¿Tienes una consulta?</b> No dudes en escribirnos.
+              <b>¿Tenes una consulta?</b> No dudes en escribirnos:
             </p>
           </Col>
           <Col xs={12} lg={10} xl={7} className="mt-2">

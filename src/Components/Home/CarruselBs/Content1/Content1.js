@@ -22,7 +22,7 @@ const Content1 = () => {
           md={6}
           lg={5}
           xl={4}
-          className="my-3 my-lg-0 text-md-start text-center"
+          className="my-3 my-lg-0 text-md-start text-center index1"
         >
           <h1 className="text-white font-weight-bold my-3">
             El gestor de turnos que tu negocio estaba necesitando

@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 
 import { Button, Dropdown, ButtonGroup, Modal } from "react-bootstrap";
-import { FaRegUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
@@ -24,12 +23,15 @@ const MenuCliente = () => {
     <>
       <Dropdown as={ButtonGroup} className="index9999">
         <Button variant="primary" as={Link} to={"/perfilUsuario"}>
-          <FaRegUser /> Menu cliente
+          Ver turnos
         </Button>
         <Dropdown.Toggle split variant="primary" id="dropdown-user" />
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to={"/configuracionUsuario"}>
-            Configuraciones
+            Modificar perfil
+          </Dropdown.Item>
+          <Dropdown.Item as={Link} to={"/cambiarPassword"}>
+            Cambiar contraseña
           </Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item onClick={handleShow}>Cerrar sesión</Dropdown.Item>

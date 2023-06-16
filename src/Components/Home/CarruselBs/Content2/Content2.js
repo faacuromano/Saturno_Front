@@ -24,14 +24,14 @@ const Content1 = () => {
           md={6}
           lg={5}
           xl={4}
-          className="my-3 my-lg-0 text-md-end text-center"
+          className="my-3 my-lg-0 text-md-end text-center index1"
         >
           <h1 className="text-white font-weight-bold my-3">
             Buscá los mejores negocios en tu zona y pedí tu turno
           </h1>
-          <Link to={"/buscar"}>
+          <Link to={"/sobrenosotros"}>
             <Button variant="primary">
-              <FiSearch /> Buscar
+              <FiSearch /> Conocenos
             </Button>
           </Link>
         </Col>

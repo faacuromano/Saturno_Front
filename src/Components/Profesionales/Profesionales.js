@@ -90,7 +90,7 @@ const Profesionales = () => {
                 ¿Estás listo para trabajar con <strong>nosotros?</strong>
               </p>
             </Col>
-            <Col xs={12}>
+            <Col xs={12} className="index1">
               <Link to={"/signuprofesional"} className="colorLink">
                 <Button variant="primary">Crear cuenta profesional</Button>
               </Link>

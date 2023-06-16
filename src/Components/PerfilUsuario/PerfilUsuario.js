@@ -4,7 +4,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 
-import CardsProfesionales from "../Home/CardsProfesionales/CardsProfesionalesF";
 import { getClientProfile } from "../../functions/clientMethods";
 import { GetTurnosByUsername } from "../../functions/turnoMethods";
 import CardTurno from "../Turnos/CardTurno";
@@ -24,8 +23,10 @@ const PerfilUsuario = () => {
 
     GetTurnosByUsername(username).then(function (response) {
       console.log("response", response);
-      setListaTurnos([...response]);
+      if(response){
+        setListaTurnos([...response]);
       console.log("lista", listaTurnos);
+      }
     });
   }, []);
 
@@ -33,23 +34,23 @@ const PerfilUsuario = () => {
     <>
       <Container>
         <Row className="justify-content-center text-start">
-          <Col xs={11} className="border rounded py-4">
+          <Col xs={8} className="shadow-sm rounded py-4">
             <Row className="justify-content-center align-items-center pt-3">
               <Col xs={2}>
                 <Image src={userLogged.fotoPerfil} alt="" roundedCircle fluid />
               </Col>
               <Col xs={8}>
-                <h1>
+                <h2 className="mb-0">
                   {userLogged.nombre} {userLogged.apellido}
-                </h1>
-                <h5 className="fw-light">{userLogged.ubicacion}</h5>
+                </h2>
+                <h5 className="mb-0 text-muted fw-normal">{userLogged.ubicacion}</h5>
               </Col>
               <Col xs={10} className="border-bottom mt-5 pb-3">
                 <h6>Tus turnos</h6>
                 <CardTurno listaTurnos={listaTurnos} />
               </Col>
               <Col xs={10} className="text-center mt-5">
-                <p>
+                <p className="text-muted texto-chico">
                   <strong>¿Problemas con un turno?</strong> Envianos un{" "}
                   <Link to={"/contacto"} className="colorLink">
                     mensaje

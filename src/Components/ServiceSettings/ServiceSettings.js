@@ -143,10 +143,11 @@ const ServiceSettings = () => {
         </Col>
         <Col xl={7}>
           <h3>Crea un servicio nuevo</h3>
+          <p>Completa la siguiente información para crear un servicio:</p>
         </Col>
         <Col xl={7}>
           <Form>
-            <Form.Group className="my-4">
+            <Form.Group className="mt-3 mb-4">
               <Form.Label>Nombre del servicio:</Form.Label>
               <Form.Control
                 type="text"
@@ -163,20 +164,22 @@ const ServiceSettings = () => {
               />
             </Form.Group>
             <Form.Group className="my-4">
-              <Form.Label>Descripción:</Form.Label>
-              <Form.Control
-                type="text"
-                value={descripcionServicio}
-                onChange={descripcionHandler}
-              />
-            </Form.Group>
-            <Form.Group className="my-4">
               <Form.Label>Duración (hh:mm:ss):</Form.Label>
               <Form.Control
                 type="text"
                 value={duracionServicio}
                 onChange={duracionHandler}
               />
+              <Form.Group className="my-4">
+                <Form.Label>Descripción:</Form.Label>
+                <Form.Control
+                  type="text"
+                  as="textarea"
+                  rows={2}
+                  value={descripcionServicio}
+                  onChange={descripcionHandler}
+                />
+              </Form.Group>
             </Form.Group>
             <Button variant="primary" onClick={createServiceHandler}>
               Crear servicio

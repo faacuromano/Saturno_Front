@@ -75,6 +75,7 @@ li a:hover {
 
 .btn svg {
   margin-right: 5px;
+  margin-bottom: 2px;
 }
 
 .btn-primary:focus-visible {
@@ -161,6 +162,12 @@ li a:hover {
   border-color: var(--rojo75);
 }
 
+.dropdown-item.active, .dropdown-item:active {
+  color: var(--blanco);
+  text-decoration: none;
+  background-color: var(--rojo90);
+}
+
 .container-fluid {
   --bs-gutter-x: 0;
 }
@@ -202,6 +209,10 @@ label {
   color: var(--gris85);
 }
 
+.texto-chico {
+  font-size: 14px;
+}
+
 .fondo-rojo {
   background-color: var(--rojo);
 }
@@ -237,6 +248,7 @@ label {
 .content {
   background: rgb(84,219,195);
 background: linear-gradient(0deg, rgba(84,219,195,1) 0%, rgba(45,131,162,1) 49%, rgba(23,82,144,1) 100%);
+position: relative;
 }
 
 .content::after {

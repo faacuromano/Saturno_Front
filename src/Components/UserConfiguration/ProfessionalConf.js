@@ -215,22 +215,21 @@ const ProfessionalConf = () => {
                     onChange={horaCierreHandler}
                   />
                 </Form.Group>
-                <Col xs={8} className="mt-4 border rounded">
-                  <Row className="justify-content-center py-4 align-items-center">
+                <Col xs={12} className="mt-4 border rounded p-5">
+                  <Row className="justify-content-center align-items-center">
                     <Col xs={3}>
                       <ImageBootstrap src={fotoPerfil} fluid />
                     </Col>
-                    <Col xs={7}>
-                      <h5>Cambiar foto de portada</h5>
-                      {/* <Button variant="secondary">Cargar</Button> */}
-                      <Input
-                        type="file"
-                        onChange={(e) => handleImageUpload(e)}
-                        variant="secondary"
-                      >
-                        {" "}
-                        Cargar{" "}
-                      </Input>
+                    <Col xs={9}>
+                      <h5 className="mb-2">Cambiar foto de portada</h5>
+                      <Form.Group>
+                        <Form.Control
+                          type="file"
+                          onChange={(e) => handleImageUpload(e)}
+                          variant="secondary"
+                          size="sm"
+                        />
+                      </Form.Group>
                     </Col>
                   </Row>
                 </Col>

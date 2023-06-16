@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Accordion from "react-bootstrap/Accordion";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Form, Modal, Badge } from "react-bootstrap";
 import { DeleteService, EditService } from "../../../functions/serviceMethods";
 
 const AcordionEdit = ({ servicios, refreshAfterChange, idProfesional }) => {
@@ -80,20 +80,29 @@ const AcordionEdit = ({ servicios, refreshAfterChange, idProfesional }) => {
         {servicios.map((item, index) => (
           <Accordion.Item eventKey={index}>
             <Accordion.Header>
-              <p className="mb-0">
-                <strong>{item.nombre}</strong> - ${item.precio}
+              <Badge variant="primary" className="me-1">
+                ${item.precio}
+              </Badge>
+              <Badge bg="secondary" className="me-3">
+                {item.duracion ? item.duracion.slice(0, 5) : "00"}
+              </Badge>
+              <p className="mb-0 align-middle">
+                <strong>{item.nombre}</strong>
               </p>
             </Accordion.Header>
             <Accordion.Body>
               <p>{item.descripcion}</p>
               <Button
                 className="me-1"
+                size="sm"
                 variant="secondary"
                 onClick={loadEditService.bind(this, item)}
               >
                 Editar
               </Button>
-              <Button onClick={handleDeleteShow}>Borrar</Button>
+              <Button size="sm" onClick={handleDeleteShow}>
+                Borrar
+              </Button>
               {/* Modal DELETE */}
               <Modal show={showDelete} onHide={handleDeleteClose} centered>
                 <Modal.Header closeButton>
@@ -143,19 +152,21 @@ const AcordionEdit = ({ servicios, refreshAfterChange, idProfesional }) => {
                       />
                     </Form.Group>
                     <Form.Group className="my-4">
-                      <Form.Label>Descripción:</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={descripcionServicio}
-                        onChange={descripcionHandler}
-                      />
-                    </Form.Group>
-                    <Form.Group className="my-4">
                       <Form.Label>Duración (hh:mm:ss):</Form.Label>
                       <Form.Control
                         type="text"
                         value={duracionServicio}
                         onChange={duracionHandler}
+                      />
+                    </Form.Group>
+                    <Form.Group className="my-4">
+                      <Form.Label>Descripción:</Form.Label>
+                      <Form.Control
+                        type="text"
+                        as="textarea"
+                        rows={2}
+                        value={descripcionServicio}
+                        onChange={descripcionHandler}
                       />
                     </Form.Group>
                   </Form>

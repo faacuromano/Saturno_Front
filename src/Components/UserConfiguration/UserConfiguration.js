@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { Col, Container, Row, Modal } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Col, Container, Row, Modal, Form, Button } from "react-bootstrap";
 import { Image as BootstrapImage } from "react-bootstrap";
 
 import { editClient } from "../../functions/clientMethods";
 import { getUserByUsername } from "../../functions/clientMethods";
-import { Input } from "reactstrap";
+// import { Input } from "reactstrap";
 import { decryptToken } from "../../functions/otherMethods";
 
 const UserConfiguration = () => {
@@ -345,22 +343,21 @@ const UserConfiguration = () => {
                   )}
                 </Form.Group>
                 {<div className="errorsValidation">{errorsValidation}</div>}
-                <Col xs={12} className="mt-4 border rounded">
-                  <Row className="justify-content-center py-4 align-items-center">
+                <Col xs={12} className="mt-4 border rounded p-5">
+                  <Row className="justify-content-center align-items-center">
                     <Col xs={3}>
                       <BootstrapImage src={fotoPerfil} fluid roundedCircle />
                     </Col>
-                    <Col xs={7}>
-                      <h5>Cambiar foto de perfil</h5>
-                      {/* <Button variant="secondary">Cargar</Button> */}
-                      <Input
-                        type="file"
-                        onChange={(e) => handleImageUpload(e)}
-                        variant="secondary"
-                      >
-                        {" "}
-                        Cargar{" "}
-                      </Input>
+                    <Col xs={9}>
+                      <h5 className="mb-2">Cambiar foto de perfil</h5>
+                      <Form.Group>
+                        <Form.Control
+                          type="file"
+                          onChange={(e) => handleImageUpload(e)}
+                          variant="secondary"
+                          size="sm"
+                        />
+                      </Form.Group>
                     </Col>
                   </Row>
                 </Col>

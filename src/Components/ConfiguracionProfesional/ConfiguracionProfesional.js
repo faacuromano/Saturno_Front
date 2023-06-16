@@ -32,12 +32,6 @@ const ConfiguracionProfesional = () => {
           <ul className="list-unstyled pb-1">
             <li className="mb-2">
               <Link>
-                <FaRegCalendarPlus />
-                Reservar turno
-              </Link>
-            </li>
-            <li className="mb-2">
-              <Link>
                 <FaRegCalendar />
                 Turnos de esta semana
               </Link>

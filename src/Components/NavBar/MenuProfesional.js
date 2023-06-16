@@ -28,7 +28,7 @@ const MenuProfesional = () => {
           as={Link}
           to={`/perfilProfesional/${auth.username}`}
         >
-          <FaRegUser /> Perfil profesional
+          Ver perfil
         </Button>
         <Dropdown.Toggle split variant="primary" id="dropdown-user" />
         <Dropdown.Menu>

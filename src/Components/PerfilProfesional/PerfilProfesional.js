@@ -67,22 +67,22 @@ const PerfilProfesional = () => {
                       className="my-3 d-block ms-auto imagen-perfil shadow-sm"
                     />
                   </Col>
-                  <Col xs={8} sm={7} className="ps-0">
+                  <Col xs={8} sm={7}>
                     <h2 className="mb-0">
                       <strong>
                         {profData.nombre} {profData.apellido}
                       </strong>
                     </h2>
-                    <h6 className="mb-0 text-muted fw-normal">
+                    <h5 className="mb-0 text-muted fw-normal">
                       {profData.profesion}
-                    </h6>
+                    </h5>
                   </Col>
                 </Row>
               </Col>
               <Col xs={12}>
                 <Row className="justify-content-evenly">
                   <Col xs={12} sm={10} md={5} lg={4} xl={3} className="py-md-4">
-                    <h5 className="mt-3 mb-2">Detalles</h5>
+                    <h5 className="mt-3 mb-3">Detalles</h5>
                     <ul className="list-unstyled profile">
                       <li className="mb-2">
                         <BiMap /> {profData.direccion}
@@ -108,13 +108,13 @@ const PerfilProfesional = () => {
                   <Col xs={12} sm={10} md={7} className="py-4">
                     {profData.descripcion ? (
                       <>
-                        <h5 className="mb-2">Descripción</h5>
+                        <h5 className="mb-3">Descripción</h5>
                         <p className="my-2">{profData.descripcion}</p>
                       </>
                     ) : (
                       ""
                     )}
-                    <h5 className="my-2 ms-2">Lista de servicios</h5>
+                    <h5 className="my-3 ms-2">Lista de servicios</h5>
                     <p className="text-muted ms-2">
                       <em>
                         Selecciona un servicio para solicitar un turno a este

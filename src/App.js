@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Router, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 
 import Home from "./Components/Home/Home";
@@ -34,6 +34,7 @@ import ResetPassword from "./Components/UserConfiguration/ResetPassword";
 import ScrollToTop from "./functions/ScrollToTop";
 
 import LoginContext from "./Contexts/ThemeContext/LoginContext";
+import ActivateSuscriptionRoute from "./Components/MercadoPago/ActivateSuscriptionRoute";
 
 function App() {
   const { auth, handleLogin } = useContext(LoginContext);
@@ -198,6 +199,11 @@ function App() {
               </Container>
             }
           />
+          <Route path="/inaccessible-route" element={
+            <Container fluid>
+              <ActivateSuscriptionRoute />
+            </Container>
+          } />
           <Route
             path="/menuProfesional"
             element={
@@ -223,8 +229,11 @@ function App() {
             }
           />
         </Routes>
+        {/* <Link to="/inaccessible-route?fromExternalURL=true">
+          <button>Access Inaccessible Page</button>
+        </Link> Link de acceso al validate payment*/}
       </BrowserRouter>
-    </div>
+    </div >
   );
 }
 

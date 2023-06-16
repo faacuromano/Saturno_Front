@@ -28,7 +28,7 @@ const Verificacion = () => {
 
       if (verification === false) {
         setMessage(
-          `Usted no posee su cuenta verificada, para ello deberá abonar mensualmente un monto de ${monto}, debajo se encuentra el link de pago para verificar su cuenta`
+          `Usted no posee su cuenta verificada, para ello deberá abonar mensualmente un monto de ${monto}. Debajo se encuentra el link de pago para poder verificarla y utilizar todos nuestros beneficios.`
         );
         setPaymentLink(true)
       } else {

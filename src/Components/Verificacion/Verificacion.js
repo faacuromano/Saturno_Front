@@ -23,10 +23,10 @@ const Verificacion = () => {
     const username = parsedData['username'];
 
     GetByProfUsername(username).then((user) => {
-      const verification = user.verificado;
-      setVerificationState(verification);
+      const estadoSub = user.estadoSub;
+      setVerificationState(estadoSub);
 
-      if (verification === false) {
+      if (estadoSub === false) {
         setMessage(
           `Usted no posee su cuenta verificada, para ello deberá abonar mensualmente un monto de ${monto}. Debajo se encuentra el link de pago para poder verificarla y utilizar todos nuestros beneficios.`
         );
@@ -34,7 +34,7 @@ const Verificacion = () => {
       } else {
         setMessage("Cuenta verificada");
       }
-      console.log("response state", verification)
+      console.log("response state", estadoSub)
     });
     console.log("verif state", verificationState)
   };

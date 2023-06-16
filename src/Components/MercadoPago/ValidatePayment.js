@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router';
 
 // Falta agregar los controles de errores (si no está el user en localstores send message)
 
+// Agregar mensaje en validación para UX
+
 const ValidatePayment = () => {
 
   const navigate = useNavigate();
@@ -51,22 +53,9 @@ const ValidatePayment = () => {
 
       if (token == code) {
         console.log("continue")
-        verficarEmail(username);
-        // GetByProfUsername(username).then((response) => {
 
-        //   const id = response.id;
+        verficarEmail(username); // Verifica Username
 
-        //   const profesionalDatos = {
-        //     idUsuarios: id,
-        //     verificado: true,
-        //   };
-        //   const accessToken = decryptToken(parsedData.token);
-        //   console.log("mod", id, profesionalDatos, accessToken);
-
-        //   editProfessional(id, profesionalDatos, accessToken);
-        //   console.log("nuevos datos:", profesionalDatos);
-
-        // });
         setErrorMessage("¡Éxito!")
         setAlertMessage('Su cuenta ha sido verificada exitosamente.')
 
@@ -134,9 +123,10 @@ const ValidatePayment = () => {
             setErrorMessage("¡Éxito!")
             setAlertMessage('El correo con el código e instrucciones para validar y activar su cuenta se envió correctamente.')
             handleToggleContent(); // Shows Code Validator
-            setEmailButtonShow(false); // Hides Send Email
+             
             setTimeout(() => {
               setOpenPopUp(true)
+              setEmailButtonShow(false); // Hides Send Email // Chequear
             }, 0);
           })
           .catch((error) => {

@@ -6,12 +6,10 @@ import Form from "react-bootstrap/Form";
 import { Image as ImageBootstrap } from "react-bootstrap";
 import { editProfessional } from "../../functions/professionalMethods";
 import { getRubros } from "../../functions/rubrosMethods";
-import { Input } from "reactstrap";
 import { decryptToken } from "../../functions/otherMethods";
 
 const ProfessionalConf = () => {
   //set de la info en los inputs
-  const [id, setId] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [horaInicio, setHoraInicio] = useState("");
   const [horaCierre, setHoraCierre] = useState("");
@@ -26,7 +24,6 @@ const ProfessionalConf = () => {
     GetByProfUsername(username)
       .then((response) => {
         console.log("respuesta", response);
-        setId(response.idUsuarios);
         setDescripcion(response.descripcion);
         setHoraInicio(response.horarioInicio);
         setHoraCierre(response.horarioFinal);
@@ -142,7 +139,6 @@ const ProfessionalConf = () => {
   //GUARDAR LOS DATOS DEL PROFESIONAL
   const modifyProfHandler = () => {
     const profesionalDatos = {
-      idUsuarios: id,
       descripcion: descripcion,
       horarioInicio: horaInicio,
       horarioFinal: horaCierre,
@@ -154,9 +150,12 @@ const ProfessionalConf = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const accessToken = decryptToken(user.token);
 
-    console.log("mod", id, profesionalDatos, accessToken);
-    editProfessional(id, profesionalDatos, accessToken);
-    console.log("nuevos datos:", profesionalDatos);
+    console.log("mod", user.username, profesionalDatos, accessToken);
+    editProfessional(user.username, profesionalDatos, accessToken).then(
+      function (response) {
+        console.log(response);
+      }
+    );
   };
 
   return (

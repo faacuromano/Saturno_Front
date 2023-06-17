@@ -45,10 +45,10 @@ export async function RegisterProfessional(professional) {
   }
 }
 
-export async function editProfessional(id, data, token) {
+export async function editProfessional(username, data, token) {
   try {
     const response = await axios({
-      url: `${baseUrl}/profesional/${id}`,
+      url: `${baseUrl}/profesional/${username}`,
       method: "PUT",
       data: JSON.stringify(data),
       headers: {

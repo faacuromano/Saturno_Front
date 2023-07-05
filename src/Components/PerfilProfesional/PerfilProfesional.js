@@ -46,7 +46,7 @@ const PerfilProfesional = () => {
 
   return (
     <>
-      <Container fluid>
+      <Container fluid className="py-3">
         <Row className="justify-content-center">
           <Col xs={11} className="rounded shadow-sm">
             <Row>
@@ -58,13 +58,13 @@ const PerfilProfesional = () => {
             </Row>
             <Row className="pb-4">
               <Col xs={12} className="fondo-gris10 border-bottom mb-3">
-                <Row className="justify-content-start align-items-center">
+                <Row className="justify-content-start align-items-center py-3">
                   <Col xs={4} md={3} lg={2} xl={1} className="ms-4">
                     <Image
                       src={profData.fotoPerfil}
                       roundedCircle
                       fluid
-                      className="my-3 d-block ms-auto imagen-perfil shadow-sm"
+                      className="d-block ms-auto imagen-perfil shadow-sm"
                     />
                   </Col>
                   <Col xs={8} sm={7}>
@@ -81,8 +81,8 @@ const PerfilProfesional = () => {
               </Col>
               <Col xs={12}>
                 <Row className="justify-content-evenly">
-                  <Col xs={12} sm={10} md={5} lg={4} xl={3} className="py-md-4">
-                    <h5 className="mt-3 mb-3">Detalles</h5>
+                  <Col xs={12} sm={10} md={5} lg={4} xl={3} className="py-md-3">
+                    <h5 className="mb-3">Detalles</h5>
                     <ul className="list-unstyled profile">
                       <li className="mb-2">
                         <BiMap /> {profData.direccion}
@@ -105,17 +105,17 @@ const PerfilProfesional = () => {
                       </li>
                     </ul>
                   </Col>
-                  <Col xs={12} sm={10} md={7} className="py-4">
+                  <Col xs={12} sm={10} md={8} className="py-md-3">
                     {profData.descripcion ? (
                       <>
-                        <h5 className="mb-3">Descripción</h5>
-                        <p className="my-2">{profData.descripcion}</p>
+                        <h5 className="mb-2">Descripción</h5>
+                        <p className="mt-2 mb-3">{profData.descripcion}</p>
                       </>
                     ) : (
                       ""
                     )}
-                    <h5 className="my-3 ms-2">Lista de servicios</h5>
-                    <p className="text-muted ms-2">
+                    <h5 className="mb-2">Lista de servicios</h5>
+                    <p className="text-muted">
                       <em>
                         Selecciona un servicio para solicitar un turno a este
                         profesional

@@ -7,7 +7,7 @@ import { Image } from "react-bootstrap";
 const AboutUs = () => {
   const imgAboutUs = require("./saturnoApp.png");
   return (
-    <Container className="py-3 px-0">
+    <Container className="py-5 px-0">
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4">
           <h1>Sobre nosotros</h1>
@@ -27,11 +27,9 @@ const AboutUs = () => {
               como para Windows.
             </em>
           </p>
+          <Image src={imgAboutUs} fluid className="my-4" />
         </Col>
-        <Col xs={12} className="px-0">
-          <Image src={imgAboutUs} fluid />
-        </Col>
-        <Col xs={12} lg={10} xl={7} className="mt-5">
+        <Col xs={12} lg={10} xl={7}>
           <p>
             Nuestra Experiencia nos demuestra que ninguna empresa se maneja del
             mismo modo que otra de rubro similar, por lo tanto nuestro software

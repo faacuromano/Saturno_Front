@@ -42,7 +42,6 @@ const AcordionServicios = ({ servicios, profesional }) => {
               </p>
             </Accordion.Header>
             <Accordion.Body>
-              <h5 className="mb-1">Descripción</h5>
               <p>{item.descripcion}</p>
               <Button
                 size="sm"

@@ -84,7 +84,7 @@ function App() {
           <Route
             path="/sobrenosotros"
             element={
-              <Container className="text-center py-5" fluid>
+              <Container fluid>
                 <AboutUs />
               </Container>
             }
@@ -196,16 +196,19 @@ function App() {
           <Route
             path="/verificacion"
             element={
-              <Container className="text-center py-5" fluid>
+              <Container className="py-5" fluid>
                 <Verificacion />
               </Container>
             }
           />
-          <Route path="/inaccessible-route" element={
-            <Container fluid>
-              <ActivateSuscriptionRoute />
-            </Container>
-          } />
+          <Route
+            path="/inaccessible-route"
+            element={
+              <Container fluid>
+                <ActivateSuscriptionRoute />
+              </Container>
+            }
+          />
           <Route
             path="/menuProfesional"
             element={
@@ -233,9 +236,9 @@ function App() {
         </Routes>
         {/* <Link to="/inaccessible-route?fromExternalURL=true">
           <button>Access Inaccessible Page</button>
-        </Link> Link de acceso al validate payment*/}
+        </Link> */}
       </BrowserRouter>
-    </div >
+    </div>
   );
 }
 

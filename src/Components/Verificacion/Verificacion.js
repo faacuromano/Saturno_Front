@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Container, Form, FormGroup, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { verficarEmail } from "../../functions/otherMethods";
 import MercadoPagoLink from "../MercadoPago/MercadoPagoLink";
 import ValidatePayment from "../MercadoPago/ValidatePayment";
@@ -16,11 +16,11 @@ const Verificacion = () => {
   // Retrieve data from localStorage
   const userData = localStorage.getItem("user");
 
-  console.log(userData)
+  console.log(userData);
   const parsedData = JSON.parse(userData); // Parseamos data del localhost
 
   const verifyLoggedAccountSubscriptionState = () => {
-    const username = parsedData['username'];
+    const username = parsedData["username"];
 
     GetByProfUsername(username).then((user) => {
       const estadoSub = user.estadoSub;
@@ -30,23 +30,39 @@ const Verificacion = () => {
         setMessage(
           `Usted no posee su cuenta verificada, para ello deberá abonar mensualmente un monto de ${monto}. Debajo se encuentra el link de pago para poder verificarla y utilizar todos nuestros beneficios.`
         );
-        setPaymentLink(true)
+        setPaymentLink(true);
       } else {
-        setMessage("Cuenta verificada");
+        setMessage(
+          <Row className="justify-content-center">
+            <Col xs={11} md={9} lg={7} className="shadow-sm rounded">
+              <Row className="fondo-rojo75 rounded-top">
+                <Col xs={12} className="p-3">
+                  <h2 className="mb-0 text-white">Cuenta verificada</h2>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} className="p-4">
+                  <p className="mb-2">Tu cuenta se encuentra verificada</p>
+                  <p>
+                    <strong>Días restantes:</strong> 31 días
+                  </p>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        );
       }
-      console.log("response state", estadoSub)
+      console.log("response state", estadoSub);
     });
-    console.log("verif state", verificationState)
+    console.log("verif state", verificationState);
   };
 
   verifyLoggedAccountSubscriptionState();
 
-
   return (
-    <Container className="vh-100">
-      <p className="text-center">{message}</p>
+    <Container>
+      {message}
       <MercadoPagoLink open={paymentLink}></MercadoPagoLink>
-
     </Container>
   );
 };

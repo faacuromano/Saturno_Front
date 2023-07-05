@@ -23,9 +23,9 @@ const PerfilUsuario = () => {
 
     GetTurnosByUsername(username).then(function (response) {
       console.log("response", response);
-      if(response){
+      if (response) {
         setListaTurnos([...response]);
-      console.log("lista", listaTurnos);
+        console.log("lista", listaTurnos);
       }
     });
   }, []);
@@ -34,22 +34,23 @@ const PerfilUsuario = () => {
     <>
       <Container>
         <Row className="justify-content-center text-start">
-          <Col xs={8} className="shadow-sm rounded py-4">
-            <Row className="justify-content-center align-items-center pt-3">
+          <Col xs={8} className="shadow-sm rounded p-4">
+            <Row className="justify-content-center align-items-center">
               <Col xs={2}>
                 <Image src={userLogged.fotoPerfil} alt="" roundedCircle fluid />
               </Col>
-              <Col xs={8}>
+              <Col xs={10}>
                 <h2 className="mb-0">
                   {userLogged.nombre} {userLogged.apellido}
                 </h2>
-                <h5 className="mb-0 text-muted fw-normal">{userLogged.ubicacion}</h5>
+                <h5 className="mb-0 text-muted fw-normal">
+                  {userLogged.ubicacion}
+                </h5>
               </Col>
-              <Col xs={10} className="border-bottom mt-5 pb-3">
-                <h6>Tus turnos</h6>
+              <Col xs={12} className="mt-3 pb-2">
                 <CardTurno listaTurnos={listaTurnos} />
               </Col>
-              <Col xs={10} className="text-center mt-5">
+              <Col xs={12} className="mt-0">
                 <p className="text-muted texto-chico">
                   <strong>¿Problemas con un turno?</strong> Envianos un{" "}
                   <Link to={"/contacto"} className="colorLink">

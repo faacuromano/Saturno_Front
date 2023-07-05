@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { verficarEmail } from "../../functions/otherMethods";
+import { Col, Container, Row } from "react-bootstrap";
+// import { verficarEmail } from "../../functions/otherMethods";
 import MercadoPagoLink from "../MercadoPago/MercadoPagoLink";
-import ValidatePayment from "../MercadoPago/ValidatePayment";
+// import ValidatePayment from "../MercadoPago/ValidatePayment";
 import { GetByProfUsername } from "../../functions/professionalMethods";
 
 const Verificacion = () => {
-  const [username, setUsername] = useState();
-  const usernameHandler = (e) => setUsername(e.target.value);
+  // const [username, setUsername] = useState();
+  // const usernameHandler = (e) => setUsername(e.target.value);
   const [paymentLink, setPaymentLink] = useState(true);
   const [verificationState, setVerificationState] = useState();
   const [message, setMessage] = useState("");
-  const monto = "$2000";
+  // const monto = "$2000";
 
   useEffect(() => {
     verifyLoggedAccountSubscriptionState();

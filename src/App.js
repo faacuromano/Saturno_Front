@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-import { BrowserRouter, Routes, Route, Router, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 
 import Home from "./Components/Home/Home";
@@ -36,7 +36,7 @@ import ScrollToTop from "./functions/ScrollToTop";
 import LoginContext from "./Contexts/ThemeContext/LoginContext";
 import ActivateSuscriptionRoute from "./Components/MercadoPago/ActivateSuscriptionRoute";
 
-import { campoObligatorio } from "./Validations/Validations";
+// import { campoObligatorio } from "./Validations/Validations"; ???
 import AdminProfesional from "./Components/Admin/AdminCliente/AdminProfesional";
 
 function App() {

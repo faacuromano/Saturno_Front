@@ -1,13 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { Button, Container, Form, Modal } from "react-bootstrap";
-import {
-  GetByProfUsername,
-  editProfessional,
-} from "../../functions/professionalMethods";
+import { Button, Form } from "react-bootstrap";
+import { GetByProfUsername } from "../../functions/professionalMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
 import "./ValidatePayment.css";
-import { decryptToken, verficarEmail } from "../../functions/otherMethods";
+import { verficarEmail } from "../../functions/otherMethods";
 import { useNavigate } from "react-router";
 
 // Para ingresar a este componente => localhost:3000/inaccessible-route?fromExternalURL=true
@@ -50,7 +47,7 @@ const ValidatePayment = () => {
     generateHash(username).then((userInfo) => {
       const token = userInfo; // Tomamos token
 
-      if (token == code) {
+      if (token === code) {
         verficarEmail(username); // Verifica Username
 
         setErrorMessage("¡Éxito!");

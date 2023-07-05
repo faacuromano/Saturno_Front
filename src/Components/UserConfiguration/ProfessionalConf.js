@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { GetByProfUsername } from "../../functions/professionalMethods";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -59,8 +59,8 @@ const ProfessionalConf = () => {
         img.onload = () => {
           const canvas = document.createElement("canvas");
           const maxSize = 800;
-          let width = 800
-          let height = width/5.298;
+          let width = 800;
+          let height = width / 5.298;
 
           const offsetX = Math.round((maxSize - width) / 2);
           const offsetY = Math.round((151 - height) / 2);
@@ -94,12 +94,12 @@ const ProfessionalConf = () => {
     }
   };
 
-  //inputs ref
-  const inputDescripcion = useRef(null);
-  const inputHoraInicio = useRef(null);
-  const inputHoraFinal = useRef(null);
-  const inputDireccion = useRef(null);
-  const inputProfesion = useRef(null);
+  // //inputs ref
+  // const inputDescripcion = useRef(null);
+  // const inputHoraInicio = useRef(null);
+  // const inputHoraFinal = useRef(null);
+  // const inputDireccion = useRef(null);
+  // const inputProfesion = useRef(null);
 
   //Handlers
 

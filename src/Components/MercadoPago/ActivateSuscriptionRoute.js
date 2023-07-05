@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import ValidatePayment from "./ValidatePayment";
 
@@ -38,9 +33,6 @@ const ActivateSuscriptionRoute = () => {
 
   return (
     <Container>
-      {/* <br></br>
-            <br></br>
-            <p className="text-center"></p> */}
       <Row className="justify-content-center">
         <Col xs={11} md={9} lg={7} className="shadow-sm rounded">
           <Row className="fondo-rojo75 rounded-top">

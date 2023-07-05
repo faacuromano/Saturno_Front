@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
 /*
@@ -15,24 +15,33 @@ import { Button, Modal } from "react-bootstrap";
 
 const AlertPopUp = ({ open, onClose, onContinue }) => {
   if (!open) return null;
+  const logoSolo = require("./logo-solo.png");
 
   return (
     <>
       <Modal show={true} centered>
-        <Modal.Header>
-          <Modal.Title>Suscribite!</Modal.Title>
+        <Modal.Header className="py-2 px-4 border-bottom-0">
+          <Modal.Title className="fw-normal fs-2">
+            <img src={logoSolo} className="logo-solo" alt="" /> Suscribite a{" "}
+            <strong>Saturno</strong>
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <h6>
-            Obtén acceso exclusivo a las características premium por $1500/mes.
-          </h6>
-          <p style={{ fontFamily: "Roboto" }}>
-            <li>Programar turnos de manera rápida y segura.</li>
-            <li>Acceso 24/7.</li>
-            <li>Recordatorios.</li>
-            <li>Mayor comodidad.</li>
-            <li>Organización y eficiencia.</li>
-          </p>
+        <Modal.Body className="p-0">
+          <div className="fondo-rojo75 w-100 py-3 px-5">
+            <h6 className="mb-0 text-white">
+              Por solo <strong>$2000 al mes</strong> podes disfrutar de todos
+              los beneficios de una agenda online
+            </h6>
+          </div>
+          <div className="w-100 pt-3 pb-2 px-5">
+            <ul className="ps-3">
+              <li>Programa tus turnos de manera rápida y segura</li>
+              <li>Ofrece tu negocio en internet</li>
+              <li>Crea servicios con diferentes duraciones</li>
+              <li>Permite sacar turnos 24/7</li>
+              <li>Busca facilmente la información de tu cliente</li>
+            </ul>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onClose}>

@@ -4,7 +4,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
-import { validacionesInputs, validacionesInputsEmail, campoObligatorio} from "../../Validations/Validations";
+import {
+  validacionesInputs,
+  validacionesInputsEmail,
+  campoObligatorio,
+} from "../../Validations/Validations";
 
 const Contact = () => {
   const form = useRef();
@@ -13,7 +17,7 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    if (nameContact === "" || emailContact === "" || message == "") {
+    if (nameContact === "" || emailContact === "" || message === "") {
       setTimeout(() => {
         setOpenPopUp(true);
       }, 0);
@@ -55,7 +59,7 @@ const Contact = () => {
   const [openPopUp, setOpenPopUp] = useState(false); // Allows alerts to show up
   // referencias
   const inputNameContact = useRef(null);
-  const inputMessage= useRef(null);
+  const inputMessage = useRef(null);
   const inputEmail = useRef(null);
   //errores
   const [nameContactError, setNameContactError] = useState("");
@@ -96,13 +100,16 @@ const Contact = () => {
                   name="user_name"
                   value={nameContact}
                   ref={inputNameContact}
-                  onChange={(e)=> setNameContact(e.target.value)}
-                  onBlur={()=> setNameContactError(validacionesInputs(inputNameContact.current))}
+                  onChange={(e) => setNameContact(e.target.value)}
+                  onBlur={() =>
+                    setNameContactError(
+                      validacionesInputs(inputNameContact.current)
+                    )
+                  }
                 />
                 {nameContactError && (
-                  <div className="errors"> 
-                    {nameContactError}
-                  </div>)}
+                  <div className="errors">{nameContactError}</div>
+                )}
               </Form.Group>
               <Form.Group>
                 <Form.Label className="mt-3">Email:</Form.Label>
@@ -110,15 +117,18 @@ const Contact = () => {
                   placeholder="ejemplo@gmail.com"
                   type="email"
                   name="user_email"
-                  onChange={(e)=> setEmailContact(e.target.value)}
+                  onChange={(e) => setEmailContact(e.target.value)}
                   value={emailContact}
                   ref={inputEmail}
-                  onBlur={()=> setEmailContactError(validacionesInputsEmail(inputEmail.current))}
+                  onBlur={() =>
+                    setEmailContactError(
+                      validacionesInputsEmail(inputEmail.current)
+                    )
+                  }
                 />
                 {emailContactError && (
-                  <div className="errors"> 
-                    {emailContactError}
-                  </div>)}
+                  <div className="errors">{emailContactError}</div>
+                )}
               </Form.Group>
               <Form.Group>
                 <Form.Label className="mt-3">Mensaje:</Form.Label>
@@ -129,13 +139,12 @@ const Contact = () => {
                   rows={4}
                   value={message}
                   ref={inputMessage}
-                  onChange={(e)=> setMessage(e.target.value)}
-                  onBlur={()=> setMessageError(campoObligatorio(inputMessage.current))}
+                  onChange={(e) => setMessage(e.target.value)}
+                  onBlur={() =>
+                    setMessageError(campoObligatorio(inputMessage.current))
+                  }
                 />
-                {messageError && (
-                  <div className="errors"> 
-                    {messageError}
-                  </div>)}
+                {messageError && <div className="errors">{messageError}</div>}
               </Form.Group>
               {mensajeEnviado && (
                 <p

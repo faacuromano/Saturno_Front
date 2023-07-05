@@ -19,8 +19,8 @@ const SacarTurno = () => {
   const [mensaje, setMensaje] = useState();
   const navigate = useNavigate();
 
-  const [diaTurno, setDiaTurno] = useState();
-  const [mesTurno, setMesTurno] = useState();
+  // const [diaTurno, setDiaTurno] = useState();
+  // const [mesTurno, setMesTurno] = useState();
   const [anioTurno, setAnioTurno] = useState();
   const [defaultMonth, setDefaultMonth] = useState();
 
@@ -32,12 +32,12 @@ const SacarTurno = () => {
     });
 
     const today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
+    // const dd = String(today.getDate()).padStart(2, "0");
     const mm = String(today.getMonth()).padStart(2, "0"); //January is 0!
     const yyyy = today.getFullYear();
 
-    setDiaTurno(dd);
-    setMesTurno(mm);
+    // setDiaTurno(dd);
+    // setMesTurno(mm);
     setAnioTurno(yyyy);
 
     setDefaultMonth(new Date(yyyy, mm));

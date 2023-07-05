@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Col, Container, Row } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 
@@ -26,6 +26,8 @@ const PerfilUsuario = () => {
       if (response) {
         setListaTurnos([...response]);
         console.log("lista", listaTurnos);
+      } else {
+        setListaTurnos();
       }
     });
   }, []);
@@ -48,7 +50,13 @@ const PerfilUsuario = () => {
                 </h5>
               </Col>
               <Col xs={12} className="mt-3 pb-2">
-                <CardTurno listaTurnos={listaTurnos} />
+                {listaTurnos ? (
+                  <CardTurno listaTurnos={listaTurnos} />
+                ) : (
+                  <Alert variant="warning" className="mt-3 mb-4">
+                    No tienes ningún turno vigente
+                  </Alert>
+                )}
               </Col>
               <Col xs={12} className="mt-0">
                 <p className="text-muted texto-chico">

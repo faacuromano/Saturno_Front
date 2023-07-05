@@ -23,15 +23,11 @@ const MenuAdmin = () => {
   return (
     <>
       <Dropdown as={ButtonGroup} className="index9999">
-        <Button variant="primary" as={Link} to={"/perfilUsuario"}>
-          <FaRegUser /> Menu cliente
+        <Button variant="primary" as={Link} to={"/admin"}>
+          <FaRegUser /> Administrar
         </Button>
         <Dropdown.Toggle split variant="primary" id="dropdown-user" />
         <Dropdown.Menu>
-          <Dropdown.Item as={Link} to={"/admin"}>
-            Admin
-          </Dropdown.Item>
-          <Dropdown.Divider />
           <Dropdown.Item onClick={handleShow}>Cerrar sesión</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import Accordion from "react-bootstrap/Accordion";
-import { Badge, Button } from "react-bootstrap";
+import { Badge, Button, Modal } from "react-bootstrap";
 
 import { BsCalendarEvent } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import LoginContext from "../../../Contexts/ThemeContext/LoginContext";
 
 const AcordionServicios = ({ servicios, profesional }) => {
+  const { auth, handleLogin } = useContext(LoginContext);
+  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const chequeoUsuario = (id) => {
+    if (auth.tipoCuenta === "C") {
+      navigate(`/perfilProfesional/${profesional}/${id}`);
+    } else if (auth.tipoCuenta === "P") {
+      navigate("/");
+    } else {
+      handleShow();
+    }
+  };
+  /*/perfilProfesional/${profesional}/${id} */
   return (
     <>
       <Accordion>
@@ -26,14 +44,34 @@ const AcordionServicios = ({ servicios, profesional }) => {
             <Accordion.Body>
               <h5 className="mb-1">Descripción</h5>
               <p>{item.descripcion}</p>
-              <Link to={`/perfilProfesional/${profesional}/${item.id}`}>
-                <Button size="sm" className="mt-1">
-                  <BsCalendarEvent /> Sacar turno
-                </Button>
-              </Link>
+              <Button
+                size="sm"
+                className="mt-1"
+                onClick={chequeoUsuario.bind(this, item.id)}
+              >
+                <BsCalendarEvent /> Sacar turno
+              </Button>
             </Accordion.Body>
           </Accordion.Item>
         ))}
+        <Modal show={show} onHide={handleClose} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>¡Alto ahí!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p className="text-center">
+              Tenes que tener una cuenta para poder sacar un turno
+            </p>
+          </Modal.Body>
+          <Modal.Footer className="text-center">
+            <div className="w-100">
+              <Link to={"/login"}>Logeate para continuar</Link>
+            </div>
+            <div className="w-100">
+              <Link to={"/signup"}>O crea una cuenta</Link>
+            </div>
+          </Modal.Footer>
+        </Modal>
       </Accordion>
     </>
   );

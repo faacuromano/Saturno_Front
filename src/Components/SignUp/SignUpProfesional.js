@@ -8,10 +8,17 @@ import { getRubros } from "../../functions/rubrosMethods";
 import { getUbicaciones } from "../../functions/ubicationMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
 import AlertPopUpSusc from "../AlertPopUp/AlertPopUpSusc";
-import { validacionesInputs, validacionesInputsTel, validacionesInputsEmail, validacionesInputsPass, validacionesInputsValidPass, validacionesInputsFecha, validacionesInputsHora } from "../../Validations/Validations";
+import {
+  validacionesInputs,
+  validacionesInputsTel,
+  validacionesInputsEmail,
+  validacionesInputsPass,
+  validacionesInputsValidPass,
+  validacionesInputsFecha,
+  validacionesInputsHora,
+} from "../../Validations/Validations";
 
 const SignUpProfesional = () => {
-
   const navigate = useNavigate();
   //estados
   const [userNameProf, setUserNameProf] = useState("");
@@ -28,7 +35,7 @@ const SignUpProfesional = () => {
   const [validContraProf, setValidContraProf] = useState("");
   const [profesion, setProfesion] = useState("");
   const [profesiones, setProfesiones] = useState([]);
-  const [ubicacion, setUbicacion] = useState('');
+  const [ubicacion, setUbicacion] = useState("");
   const [ubicaciones, setUbicaciones] = useState([]);
   //referencias
   const inputUserNameProf = useRef(null);
@@ -47,7 +54,7 @@ const SignUpProfesional = () => {
   const inputProfesion = useRef(null);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [openPopUpSusc, setOpenPopUpSusc] = useState(false);
-  
+
   //errores
   const [userNameError, setUserNameError] = useState("");
   const [nameError, setNameError] = useState("");
@@ -62,15 +69,12 @@ const SignUpProfesional = () => {
   const [passError, setPassError] = useState("");
   const [validPassError, setValidPassError] = useState("");
   const [profesionError, setProfesionError] = useState("");
-  const [ubicacionError, setUbicacionError] = useState('');
-  
-
-
+  const [ubicacionError, setUbicacionError] = useState("");
 
   //lista de rubros y ubicaciones
   useEffect(() => {
     setTimeout(() => {
-      setOpenPopUpSusc(true)
+      setOpenPopUpSusc(true);
     }, 0);
 
     getRubros()
@@ -92,7 +96,6 @@ const SignUpProfesional = () => {
       });
   }, []);
 
-
   //GUARDAR LOS DATOS DEL PROFESIONAL
   const saveProfHandler = () => {
     if (
@@ -110,20 +113,20 @@ const SignUpProfesional = () => {
       validContraProf === ""
     ) {
       setTimeout(() => {
-        setOpenPopUp(true)
+        setOpenPopUp(true);
       }, 0);
     } else if (
-      userNameError || 
-      nameError || 
-      lastNameError || 
-      emailError || 
-      ubicacionError || 
+      userNameError ||
+      nameError ||
+      lastNameError ||
+      emailError ||
+      ubicacionError ||
       descError ||
       direcError ||
       horaInicioError ||
       horaFinalError ||
-      phoneError || 
-      passError || 
+      phoneError ||
+      passError ||
       validPassError
     ) {
       setTimeout(() => {
@@ -175,19 +178,27 @@ const SignUpProfesional = () => {
   };
 
   const volver = () => {
-    navigate("/tipo-de-cuenta")
-    setOpenPopUpSusc(false)
-  }
+    navigate("/tipo-de-cuenta");
+    setOpenPopUpSusc(false);
+  };
   const continuar = () => {
-    "/signuprofesional"
-    setOpenPopUpSusc(false)
-  }
-
+    "/signuprofesional";
+    setOpenPopUpSusc(false);
+  };
 
   return (
     <Container className="py-3">
-      <AlertPopUpSusc open={openPopUpSusc} onClose={() => volver()} onContinue={() => continuar()} />
-      <AlertPopUp open={openPopUp} onClose={() => setOpenPopUp(false)} titulo="Error" mensaje="Debe completar los campos requeridos y sin errores." />
+      <AlertPopUpSusc
+        open={openPopUpSusc}
+        onClose={() => volver()}
+        onContinue={() => continuar()}
+      />
+      <AlertPopUp
+        open={openPopUp}
+        onClose={() => setOpenPopUp(false)}
+        titulo="Error"
+        mensaje="Debe completar los campos requeridos y sin errores."
+      />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
           <h1>Registro de profesional</h1>
@@ -202,12 +213,13 @@ const SignUpProfesional = () => {
                 value={userNameProf}
                 ref={inputUserNameProf}
                 onChange={(event) => setUserNameProf(event.target.value)}
-                onBlur={()=> setUserNameError(validacionesInputs(inputUserNameProf.current))}
+                onBlur={() =>
+                  setUserNameError(
+                    validacionesInputs(inputUserNameProf.current)
+                  )
+                }
               />
-              {userNameError && (
-                <div className="errors"> 
-                  {userNameError}
-                </div>)}
+              {userNameError && <div className="errors">{userNameError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
@@ -217,12 +229,11 @@ const SignUpProfesional = () => {
                 value={nameProf}
                 ref={inputNameProf}
                 onChange={(event) => setNameProf(event.target.value)}
-                onBlur={()=> setNameError(validacionesInputs(inputNameProf.current))}
+                onBlur={() =>
+                  setNameError(validacionesInputs(inputNameProf.current))
+                }
               />
-              {nameError && (
-                <div className="errors"> 
-                  {nameError}
-                </div>)}
+              {nameError && <div className="errors">{nameError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>
@@ -232,12 +243,13 @@ const SignUpProfesional = () => {
                 value={lastNameProf}
                 ref={inputLastNameProf}
                 onChange={(event) => setLastNameProf(event.target.value)}
-                onBlur={()=> setLastNameError(validacionesInputs(inputLastNameProf.current))}
+                onBlur={() =>
+                  setLastNameError(
+                    validacionesInputs(inputLastNameProf.current)
+                  )
+                }
               />
-                {lastNameError && (
-                  <div className="errors"> 
-                    {lastNameError}
-                  </div>)}
+              {lastNameError && <div className="errors">{lastNameError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Email:</Form.Label>
@@ -247,12 +259,11 @@ const SignUpProfesional = () => {
                 value={emailProf}
                 ref={inputEmailProf}
                 onChange={(event) => setEmailProf(event.target.value)}
-                onBlur={()=> setEmailError(validacionesInputsEmail(inputEmailProf.current))}
-              /> 
-              {emailError && (
-                <div className="errors"> 
-                  {emailError}
-                </div>)}
+                onBlur={() =>
+                  setEmailError(validacionesInputsEmail(inputEmailProf.current))
+                }
+              />
+              {emailError && <div className="errors">{emailError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Número de teléfono:</Form.Label>
@@ -262,12 +273,11 @@ const SignUpProfesional = () => {
                 value={phoneProf}
                 ref={inputPhoneProf}
                 onChange={(event) => setPhoneProf(event.target.value)}
-                onBlur={()=> setPhoneError(validacionesInputsTel(inputPhoneProf.current))}
+                onBlur={() =>
+                  setPhoneError(validacionesInputsTel(inputPhoneProf.current))
+                }
               />
-              {phoneError && (
-                <div className="errors"> 
-                  {phoneError}
-                </div>)}
+              {phoneError && <div className="errors">{phoneError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
@@ -277,12 +287,11 @@ const SignUpProfesional = () => {
                 value={nacProf}
                 ref={inputNacProf}
                 onChange={(event) => setNacProf(event.target.value)}
-                onBlur={()=> setNacError(validacionesInputsFecha(inputNacProf.current))}
+                onBlur={() =>
+                  setNacError(validacionesInputsFecha(inputNacProf.current))
+                }
               />
-              {nacError && (
-                <div className="errors"> 
-                  {nacError}
-                </div>)}
+              {nacError && <div className="errors">{nacError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Ubicación:</Form.Label>
@@ -291,19 +300,20 @@ const SignUpProfesional = () => {
                 value={ubicacion}
                 ref={inputUbicProf}
                 onChange={(event) => setUbicacion(event.target.value)}
-                onBlur={()=> setUbicacionError(validacionesInputs(inputUbicProf.current))}
+                onBlur={() =>
+                  setUbicacionError(validacionesInputs(inputUbicProf.current))
+                }
               >
-                <option value="" selected>Elegir una ciudad</option>
+                <option value="" selected>
+                  Elegir una ciudad
+                </option>
                 {ubicaciones.map((ubicacion, index) => (
                   <option key={index} value={ubicacion}>
                     {ubicacion}
                   </option>
                 ))}
               </Form.Select>
-              {ubicacionError && (
-                  <div className="errors"> 
-                    {ubicacionError}
-                  </div>)}
+              {ubicacionError && <div className="errors">{ubicacionError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Dirección (calle, nro.):</Form.Label>
@@ -313,12 +323,11 @@ const SignUpProfesional = () => {
                 value={direcProf}
                 ref={inputDirecProf}
                 onChange={(event) => setDirecProf(event.target.value)}
-                onBlur={()=> setDirecError(validacionesInputs(inputDirecProf.current))}
-              /> 
-              {direcError && (
-                <div className="errors"> 
-                  {direcError}
-                </div>)}
+                onBlur={() =>
+                  setDirecError(validacionesInputs(inputDirecProf.current))
+                }
+              />
+              {direcError && <div className="errors">{direcError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Profesión:</Form.Label>
@@ -327,19 +336,20 @@ const SignUpProfesional = () => {
                 ref={inputProfesion}
                 value={profesion}
                 onChange={(event) => setProfesion(event.target.value)}
-                onBlur={()=> setProfesionError(validacionesInputs(inputProfesion.current))}
+                onBlur={() =>
+                  setProfesionError(validacionesInputs(inputProfesion.current))
+                }
               >
-                <option value="" selected>Elegir una profesión</option>
+                <option value="" selected>
+                  Elegir una profesión
+                </option>
                 {profesiones.map((profesion, index) => (
                   <option key={index} value={profesion}>
                     {profesion}
                   </option>
                 ))}
               </Form.Select>
-              {profesionError && (
-                <div className="errors"> 
-                  {profesionError}
-                </div>)}
+              {profesionError && <div className="errors">{profesionError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Breve descripción del servicio:</Form.Label>
@@ -351,12 +361,11 @@ const SignUpProfesional = () => {
                 value={descProf}
                 ref={inputDesc}
                 onChange={(event) => setDescProf(event.target.value)}
-                onBlur={()=> setDescError(validacionesInputs(inputDesc.current))}
+                onBlur={() =>
+                  setDescError(validacionesInputs(inputDesc.current))
+                }
               />
-                {descError && (
-                  <div className="errors"> 
-                    {descError}
-                  </div>)}
+              {descError && <div className="errors">{descError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Horario de inicio: (hh:mm:ss)</Form.Label>
@@ -366,12 +375,15 @@ const SignUpProfesional = () => {
                 value={horaInicio}
                 ref={inputHoraInicio}
                 onChange={(event) => setHoraInicio(event.target.value)}
-                onBlur={()=> setHoraInicioError(validacionesInputsHora(inputHoraInicio.current.value))}
+                onBlur={() =>
+                  setHoraInicioError(
+                    validacionesInputsHora(inputHoraInicio.current.value)
+                  )
+                }
               />
               {horaInicioError && (
-                  <div className="errors"> 
-                    {horaInicioError}
-                  </div>)}
+                <div className="errors">{horaInicioError}</div>
+              )}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Horario de cierre: (hh:mm:ss)</Form.Label>
@@ -381,12 +393,13 @@ const SignUpProfesional = () => {
                 value={horaFinal}
                 ref={inputHoraFinal}
                 onChange={(event) => setHoraFinal(event.target.value)}
-                onBlur={()=> setHoraFinalError(validacionesInputsHora(inputHoraFinal.current.value))}
+                onBlur={() =>
+                  setHoraFinalError(
+                    validacionesInputsHora(inputHoraFinal.current.value)
+                  )
+                }
               />
-              {horaFinalError && (
-                  <div className="errors"> 
-                    {horaFinalError}
-                  </div>)}
+              {horaFinalError && <div className="errors">{horaFinalError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Contraseña:</Form.Label>
@@ -396,12 +409,14 @@ const SignUpProfesional = () => {
                 value={contraProf}
                 ref={inputContraProf}
                 onChange={(event) => setContraProf(event.target.value)}
-                onBlur={()=> setPassError(validacionesInputsPass(inputContraProf.current))}
+                onBlur={() =>
+                  setPassError(validacionesInputsPass(inputContraProf.current))
+                }
               />
-              {passError && (
-                  <div className="errors"> 
-                    {passError}
-                  </div>)}
+              <Form.Text className="text-muted">
+                La contraseña debe tener una mayúscula y un número
+              </Form.Text>
+              {passError && <div className="errors">{passError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Repita la contraseña:</Form.Label>
@@ -411,16 +426,16 @@ const SignUpProfesional = () => {
                 value={validContraProf}
                 ref={inputValidContraProf}
                 onChange={(event) => setValidContraProf(event.target.value)}
-                onBlur={()=> setValidPassError
-                  (validacionesInputsValidPass({
-                  value1: inputValidContraProf.current.value,
-                  value2: contraProf
-                }))}
+                onBlur={() =>
+                  setValidPassError(
+                    validacionesInputsValidPass({
+                      value1: inputValidContraProf.current.value,
+                      value2: contraProf,
+                    })
+                  )
+                }
               />
-                {validPassError && (
-                    <div className="errors"> 
-                      {validPassError}
-                    </div>)}
+              {validPassError && <div className="errors">{validPassError}</div>}
             </Form.Group>
           </Form>
           <Button variant="primary" className="mt-4" onClick={saveProfHandler}>

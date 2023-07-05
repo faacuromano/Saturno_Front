@@ -7,7 +7,14 @@ import { useNavigate } from "react-router";
 
 import { RegisterClient } from "../../functions/clientMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
-import { validacionesInputs, validacionesInputsTel, validacionesInputsEmail, validacionesInputsPass, validacionesInputsValidPass, validacionesInputsFecha } from "../../Validations/Validations";
+import {
+  validacionesInputs,
+  validacionesInputsTel,
+  validacionesInputsEmail,
+  validacionesInputsPass,
+  validacionesInputsValidPass,
+  validacionesInputsFecha,
+} from "../../Validations/Validations";
 import { getUbicaciones } from "../../functions/ubicationMethods";
 
 const SignUp = () => {
@@ -26,7 +33,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [fechaNac, setFechaNac] = useState("");
-  const [ubicacion, setUbicacion] = useState('');
+  const [ubicacion, setUbicacion] = useState("");
   const [ubicaciones, setUbicaciones] = useState([]);
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState("");
@@ -46,7 +53,7 @@ const SignUp = () => {
   const [nameError, setNameError] = useState("");
   const [lastnameError, setLastnameError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [ubicacionError, setUbicacionError] = useState('');
+  const [ubicacionError, setUbicacionError] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [fechaNacError, setFechaNacError] = useState("");
   const [passError, setPassError] = useState("");
@@ -74,32 +81,32 @@ const SignUp = () => {
       ubicacion === "" ||
       phoneNumber === "" ||
       password === "" ||
-      validPassword === "" 
-      ) {
+      validPassword === ""
+    ) {
       setTimeout(() => {
         setOpenPopUp(true);
       }, 0);
     } else if (
-        userNameError || 
-        nameError || 
-        lastnameError || 
-        emailError || 
-        ubicacionError || 
-        phoneNumberError || 
-        passError || 
-        validPassError
+      userNameError ||
+      nameError ||
+      lastnameError ||
+      emailError ||
+      ubicacionError ||
+      phoneNumberError ||
+      passError ||
+      validPassError
     ) {
       setTimeout(() => {
         setOpenPopUp(true);
       }, 0);
     } else {
       const usuarioDatos = {
-          idUsuariosNavigation: {
+        idUsuariosNavigation: {
           nombre: name,
           apellido: lastname,
           username: userName,
           mail: email,
-          ubicacion: ubicacion ,
+          ubicacion: ubicacion,
           numTelefono: phoneNumber,
           fechaNacimiento: fechaNac,
           fotoPerfil: null,
@@ -147,12 +154,11 @@ const SignUp = () => {
                 onChange={(event) => setUserName(event.target.value)}
                 value={userName}
                 ref={inputUserName}
-                onBlur={()=> setUserNameError(validacionesInputs(inputUserName.current))}
+                onBlur={() =>
+                  setUserNameError(validacionesInputs(inputUserName.current))
+                }
               />
-              {userNameError && (
-                  <div className="errors"> 
-                    {userNameError}
-                  </div>)}
+              {userNameError && <div className="errors">{userNameError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
@@ -162,12 +168,11 @@ const SignUp = () => {
                 value={name}
                 type="text"
                 ref={inputName}
-                onBlur={()=> setNameError(validacionesInputs(inputName.current))}
+                onBlur={() =>
+                  setNameError(validacionesInputs(inputName.current))
+                }
               />
-              {nameError && (
-                  <div className="errors"> 
-                    {nameError}
-                  </div>)}
+              {nameError && <div className="errors">{nameError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>
@@ -177,12 +182,11 @@ const SignUp = () => {
                 value={lastname}
                 type="text"
                 ref={inputNameLast}
-                onBlur={()=> setLastnameError(validacionesInputs(inputNameLast.current))}
+                onBlur={() =>
+                  setLastnameError(validacionesInputs(inputNameLast.current))
+                }
               />
-              {lastnameError && (
-                  <div className="errors"> 
-                    {lastnameError}
-                  </div>)}
+              {lastnameError && <div className="errors">{lastnameError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>E-mail:</Form.Label>
@@ -192,12 +196,11 @@ const SignUp = () => {
                 value={email}
                 type="email"
                 ref={inputEmail}
-                onBlur={()=> setEmailError(validacionesInputsEmail(inputEmail.current))}
+                onBlur={() =>
+                  setEmailError(validacionesInputsEmail(inputEmail.current))
+                }
               />
-              {emailError && (
-                  <div className="errors"> 
-                    {emailError}
-                  </div>)}
+              {emailError && <div className="errors">{emailError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Número de celular:</Form.Label>
@@ -207,12 +210,15 @@ const SignUp = () => {
                 value={phoneNumber}
                 type="text"
                 ref={inputPhoneNumber}
-                onBlur={()=> setPhoneNumberError(validacionesInputsTel(inputPhoneNumber.current))}
+                onBlur={() =>
+                  setPhoneNumberError(
+                    validacionesInputsTel(inputPhoneNumber.current)
+                  )
+                }
               />
               {phoneNumberError && (
-                  <div className="errors"> 
-                    {phoneNumberError}
-                  </div>)}
+                <div className="errors">{phoneNumberError}</div>
+              )}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
@@ -222,12 +228,13 @@ const SignUp = () => {
                 value={fechaNac}
                 ref={inputFechaNac}
                 type="text"
-                onBlur={()=> setFechaNacError(validacionesInputsFecha(inputFechaNac.current))}
+                onBlur={() =>
+                  setFechaNacError(
+                    validacionesInputsFecha(inputFechaNac.current)
+                  )
+                }
               />
-              {fechaNacError && (
-                  <div className="errors"> 
-                    {fechaNacError}
-                  </div>)}
+              {fechaNacError && <div className="errors">{fechaNacError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Ubicación:</Form.Label>
@@ -236,19 +243,20 @@ const SignUp = () => {
                 value={ubicacion}
                 onChange={(event) => setUbicacion(event.target.value)}
                 ref={inputUbicacion}
-                onBlur={()=> setUbicacionError(validacionesInputs(inputUbicacion.current))}
+                onBlur={() =>
+                  setUbicacionError(validacionesInputs(inputUbicacion.current))
+                }
               >
-                <option value="" disabled>Elegir una ciudad</option>
+                <option value="" disabled>
+                  Elegir una ciudad
+                </option>
                 {ubicaciones.map((ubicacion, index) => (
                   <option key={index} value={ubicacion}>
                     {ubicacion}
                   </option>
                 ))}
               </Form.Select>
-              {ubicacionError && (
-                  <div className="errors"> 
-                    {ubicacionError}
-                  </div>)}
+              {ubicacionError && <div className="errors">{ubicacionError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Contraseña:</Form.Label>
@@ -258,12 +266,14 @@ const SignUp = () => {
                 value={password}
                 type="password"
                 ref={inputPassword}
-                onBlur={()=> setPassError(validacionesInputsPass(inputPassword.current))}
+                onBlur={() =>
+                  setPassError(validacionesInputsPass(inputPassword.current))
+                }
               />
-              {passError && (
-                  <div className="errors"> 
-                    {passError}
-                  </div>)}
+              <Form.Text className="text-muted">
+                La contraseña debe tener una mayúscula y un número
+              </Form.Text>
+              {passError && <div className="errors">{passError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
               <Form.Label>Repita la contraseña:</Form.Label>
@@ -273,16 +283,16 @@ const SignUp = () => {
                 value={validPassword}
                 type="password"
                 ref={inputValidPassword}
-                onBlur={()=> setValidPassError
-                  (validacionesInputsValidPass({
-                  value1: inputValidPassword.current.value,
-                  value2: password
-                }))}
+                onBlur={() =>
+                  setValidPassError(
+                    validacionesInputsValidPass({
+                      value1: inputValidPassword.current.value,
+                      value2: password,
+                    })
+                  )
+                }
               />
-              {validPassError && (
-                  <div className="errors"> 
-                    {validPassError}
-                  </div>)}
+              {validPassError && <div className="errors">{validPassError}</div>}
             </Form.Group>
             <Button
               variant="primary"

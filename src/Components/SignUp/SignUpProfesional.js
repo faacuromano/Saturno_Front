@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Col, Container, FormGroup, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { RegisterProfessional } from "../../functions/professionalMethods";
@@ -17,6 +17,7 @@ import {
   validacionesInputsFecha,
   validacionesInputsHora,
 } from "../../Validations/Validations";
+import DatePicker from "react-date-picker";
 
 const SignUpProfesional = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const SignUpProfesional = () => {
   const [lastNameProf, setLastNameProf] = useState("");
   const [emailProf, setEmailProf] = useState("");
   const [phoneProf, setPhoneProf] = useState("");
-  const [nacProf, setNacProf] = useState("");
+  const [nacProf, setNacProf] = useState(new Date());
   const [direcProf, setDirecProf] = useState("");
   const [descProf, setDescProf] = useState("");
   const [horaInicio, setHoraInicio] = useState("");
@@ -54,6 +55,7 @@ const SignUpProfesional = () => {
   const inputProfesion = useRef(null);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [openPopUpSusc, setOpenPopUpSusc] = useState(false);
+  const [openPopUpCreated, setOpenPopUpCreated] = useState(false);
 
   //errores
   const [userNameError, setUserNameError] = useState("");
@@ -147,15 +149,13 @@ const SignUpProfesional = () => {
           mail: emailProf,
           ubicacion: ubicacion,
           numTelefono: phoneProf,
-          fechaNacimiento: nacProf,
+          fechaNacimiento: nacProf.toISOString().split("T")[0],
           fotoPerfil: null,
           pass: contraProf,
         },
       };
       RegisterProfessional(profesionalDatos);
-      console.log(profesionalDatos);
-      navigate("/login");
-      cleanInputs();
+      setOpenPopUpCreated(true);
     }
   };
 
@@ -166,7 +166,7 @@ const SignUpProfesional = () => {
     setLastNameProf("");
     setEmailProf("");
     setPhoneProf("");
-    setNacProf("");
+    setNacProf(new Date());
     setDirecProf("");
     setProfesion("");
     setUbicacion("");
@@ -182,7 +182,6 @@ const SignUpProfesional = () => {
     setOpenPopUpSusc(false);
   };
   const continuar = () => {
-    "/signuprofesional";
     setOpenPopUpSusc(false);
   };
 
@@ -197,7 +196,16 @@ const SignUpProfesional = () => {
         open={openPopUp}
         onClose={() => setOpenPopUp(false)}
         titulo="Error"
-        mensaje="Debe completar los campos requeridos y sin errores."
+        mensaje="Debe completar los campos requeridos y sin errores"
+      />
+      <AlertPopUp
+        open={openPopUpCreated}
+        onClose={() => {
+          setOpenPopUpCreated(false);
+          navigate("/");
+        }}
+        titulo="¡Cuenta creada con éxito!"
+        mensaje="Ya estás cerca de poder ofrecer tus turnos. Loggeate nuevamente para comenzar a configurar tus servicios"
       />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
@@ -280,19 +288,10 @@ const SignUpProfesional = () => {
               {phoneError && <div className="errors">{phoneError}</div>}
             </Form.Group>
             <Form.Group className="mt-4">
-              <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
-              <Form.Control
-                placeholder="1956-05-13"
-                type="text"
-                value={nacProf}
-                ref={inputNacProf}
-                onChange={(event) => setNacProf(event.target.value)}
-                onBlur={() =>
-                  setNacError(validacionesInputsFecha(inputNacProf.current))
-                }
-              />
-              {nacError && <div className="errors">{nacError}</div>}
+              <Form.Label>Fecha de nacimiento:</Form.Label>
             </Form.Group>
+            <DatePicker onChange={setNacProf} value={nacProf} />
+            {nacError && <div className="errors">{nacError}</div>}
             <Form.Group className="mt-4">
               <Form.Label>Ubicación:</Form.Label>
               <Form.Select

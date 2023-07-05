@@ -4,6 +4,7 @@ import { Col, Container, Row, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router";
+import DatePicker from "react-date-picker";
 
 import { RegisterClient } from "../../functions/clientMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
@@ -32,7 +33,7 @@ const SignUp = () => {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [fechaNac, setFechaNac] = useState("");
+  const [fechaNac, setFechaNac] = useState(new Date());
   const [ubicacion, setUbicacion] = useState("");
   const [ubicaciones, setUbicaciones] = useState([]);
   const [password, setPassword] = useState("");
@@ -108,7 +109,7 @@ const SignUp = () => {
           mail: email,
           ubicacion: ubicacion,
           numTelefono: phoneNumber,
-          fechaNacimiento: fechaNac,
+          fechaNacimiento: fechaNac.toISOString().split("T")[0],
           fotoPerfil: null,
           pass: password,
         },
@@ -221,21 +222,10 @@ const SignUp = () => {
               )}
             </Form.Group>
             <Form.Group className="mt-4">
-              <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
-              <Form.Control
-                placeholder="1965-03-25"
-                onChange={(event) => setFechaNac(event.target.value)}
-                value={fechaNac}
-                ref={inputFechaNac}
-                type="text"
-                onBlur={() =>
-                  setFechaNacError(
-                    validacionesInputsFecha(inputFechaNac.current)
-                  )
-                }
-              />
-              {fechaNacError && <div className="errors">{fechaNacError}</div>}
+              <Form.Label>Fecha de nacimiento:</Form.Label>
             </Form.Group>
+            <DatePicker onChange={setFechaNac} value={fechaNac} />
+            {fechaNacError && <div className="errors">{fechaNacError}</div>}
             <Form.Group className="mt-4">
               <Form.Label>Ubicación:</Form.Label>
               <Form.Select

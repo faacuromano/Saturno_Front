@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { Col, Container, Row, Modal, Form, Button } from "react-bootstrap";
 import { Image as BootstrapImage } from "react-bootstrap";
+import DatePicker from "react-date-picker";
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
 
 import { editClient } from "../../functions/clientMethods";
 import { getUserByUsername } from "../../functions/clientMethods";
-// import { Input } from "reactstrap";
 import { decryptToken } from "../../functions/otherMethods";
 
 const UserConfiguration = () => {
@@ -113,7 +115,7 @@ const UserConfiguration = () => {
         setLastName(response.data.apellido);
         setUsername(response.data.username);
         setEmail(response.data.mail);
-        setFechaNac(response.data.fechaNacimiento);
+        setFechaNac(new Date(response.data.fechaNacimiento));
         setPhoneNumber(response.data.numTelefono);
         setFotoPerfil(response.data.fotoPerfil);
         setUbication(response.data.ubicacion);
@@ -224,7 +226,7 @@ const UserConfiguration = () => {
       mail: email,
       ubicacion: ubication,
       numTelefono: phoneNumber,
-      fechaNacimiento: fechaNac,
+      fechaNacimiento: fechaNac.toISOString().split("T")[0],
       fotoPerfil: fotoPerfil,
     };
 
@@ -316,13 +318,9 @@ const UserConfiguration = () => {
                   )}
                 </Form.Group>
                 <Form.Group className="mt-4">
-                  <Form.Label>Fecha de nacimiento (yyyy-mm-dd)</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={fechaNac}
-                    onChange={fechaNacHandler}
-                  />
+                  <Form.Label>Fecha de nacimiento:</Form.Label>
                 </Form.Group>
+                <DatePicker onChange={setFechaNac} value={fechaNac} />
                 <Form.Group className="mt-4">
                   <Form.Label>Ciudad:</Form.Label>
                   <Form.Select

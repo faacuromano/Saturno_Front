@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
-import { cambiarPassword } from "../../functions/otherMethods";
+import { cambiarPassword, decryptToken } from "../../functions/otherMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
 
 const ResetPassword = () => {
@@ -22,7 +22,8 @@ const ResetPassword = () => {
     };
     const user = JSON.parse(localStorage.getItem("user"));
     const username = user.username;
-    cambiarPassword(username, data).then(function (response) {
+    const accessToken = decryptToken(user.token);
+    cambiarPassword(username, data, accessToken).then(function (response) {
       if (response) {
         setTituloPopUp("Contraseña cambiada");
         setMensajePopUp("La contraseña ha sido cambiada con éxito");

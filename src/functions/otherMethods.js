@@ -14,7 +14,7 @@ export async function verficarEmail(username) {
   }
 }
 
-export async function cambiarPassword(username, data) {
+export async function cambiarPassword(username, data, token) {
   console.log("back", username, data);
   try {
     const response = await axios({
@@ -23,7 +23,8 @@ export async function cambiarPassword(username, data) {
       data: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json", // <- HERE
-      },
+        Authorization: `Bearer ${token}`,
+      }
     });
     return response;
   } catch (errors) {

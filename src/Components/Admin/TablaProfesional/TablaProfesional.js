@@ -21,8 +21,8 @@ const TablaProfesional = () => {
       <Table hover>
         <thead>
           <tr>
-            <th>ID</th>
             <th>UserName</th>
+            <th>ID</th>
             <th>Name</th>
             <th>LastName</th>
             <th>Email</th>

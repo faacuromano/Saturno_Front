@@ -18,10 +18,10 @@ export async function crearTurno(turno) {
   }
 }
 
-export async function GetTurnosByUsername(username) {
+export async function GetTurnosByUsername(username, estadoTurno) {
   try {
     const response = await axios({
-      url: `${baseUrl}/turnosDe/${username}`,
+      url: `${baseUrl}/turnosDe/${username}?estado=${estadoTurno}`,
       method: "GET",
     });
     return response.data;

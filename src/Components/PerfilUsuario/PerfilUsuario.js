@@ -21,7 +21,7 @@ const PerfilUsuario = () => {
       setUserLogged(response.data);
     });
 
-    GetTurnosByUsername(username).then(function (response) {
+    GetTurnosByUsername(username, 2).then(function (response) {
       console.log("response", response);
       if (response) {
         setListaTurnos([...response]);

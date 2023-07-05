@@ -13,7 +13,7 @@ const ProfessionalConf = () => {
   const [descripcion, setDescripcion] = useState("");
   const [horaInicio, setHoraInicio] = useState("");
   const [horaCierre, setHoraCierre] = useState("");
-  const [fotoPerfil, setFotoPerfil] = useState("");
+  const [fotoBanner, setFotoBanner] = useState("");
   const [direccion, setDireccion] = useState("");
   const [profesion, setProfesion] = useState("");
   const [profesiones, setProfesiones] = useState([]);
@@ -27,7 +27,7 @@ const ProfessionalConf = () => {
         setDescripcion(response.descripcion);
         setHoraInicio(response.horarioInicio);
         setHoraCierre(response.horarioFinal);
-        setFotoPerfil(response.fotoPerfil);
+        setFotoBanner(response.fotoBanner);
         setDireccion(response.direccion);
         setProfesion(response.profesion);
       })
@@ -59,29 +59,17 @@ const ProfessionalConf = () => {
         img.onload = () => {
           const canvas = document.createElement("canvas");
           const maxSize = 800;
-          let width = img.width;
-          let height = img.height;
-
-          if (width !== height) {
-            const aspectRatio = width / height;
-            if (width > height) {
-              height = maxSize;
-              width = Math.round(maxSize * aspectRatio);
-            } else {
-              width = maxSize;
-              height = Math.round(maxSize / aspectRatio);
-            }
-          }
+          let width = 800
+          let height = width/5.298;
 
           const offsetX = Math.round((maxSize - width) / 2);
-          const offsetY = Math.round((maxSize - height) / 2);
+          const offsetY = Math.round((151 - height) / 2);
 
           canvas.width = maxSize;
-          canvas.height = maxSize;
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, offsetX, offsetY, width, height);
 
-          const base64 = canvas.toDataURL("image/jpeg", 0.7);
+          const base64 = canvas.toDataURL("image/jpeg", 1);
           resolve(base64);
         };
       };
@@ -98,7 +86,7 @@ const ProfessionalConf = () => {
       convertToBase64(file)
         .then((base64) => {
           setBase64Image(base64);
-          setFotoPerfil(base64);
+          setFotoBanner(base64);
         })
         .catch((error) => {
           console.log("Error al convertir la imagen:", error);
@@ -142,7 +130,7 @@ const ProfessionalConf = () => {
       descripcion: descripcion,
       horarioInicio: horaInicio,
       horarioFinal: horaCierre,
-      fotoBanner: null,
+      fotoBanner: fotoBanner,
       direccion: direccion,
       profesion: profesion,
     };
@@ -217,7 +205,7 @@ const ProfessionalConf = () => {
                 <Col xs={12} className="mt-4 border rounded p-5">
                   <Row className="justify-content-center align-items-center">
                     <Col xs={3}>
-                      <ImageBootstrap src={fotoPerfil} fluid />
+                      <ImageBootstrap src={fotoBanner} fluid />
                     </Col>
                     <Col xs={9}>
                       <h5 className="mb-2">Cambiar foto de portada</h5>

@@ -33,7 +33,7 @@ const UserConfiguration = () => {
         img.src = reader.result;
         img.onload = () => {
           const canvas = document.createElement("canvas");
-          const maxSize = 200;
+          const maxSize = 400;
           let width = img.width;
           let height = img.height;
 
@@ -56,7 +56,7 @@ const UserConfiguration = () => {
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, offsetX, offsetY, width, height);
 
-          const base64 = canvas.toDataURL("image/jpeg", 0.2);
+          const base64 = canvas.toDataURL("image/jpeg", 1);
           resolve(base64);
         };
       };

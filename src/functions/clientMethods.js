@@ -2,10 +2,22 @@ import axios from "axios";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
-export async function getClient() {
+export async function getUser() {
   try {
     const response = await axios({
       url: `${baseUrl}/usuario`,
+      method: "GET",
+    });
+
+    return response;
+  } catch (errors) {
+    console.log(errors);
+  }
+}
+export async function getClient() {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/cliente`,
       method: "GET",
     });
 
@@ -66,16 +78,16 @@ export async function authClient(user, passw) {
   }
 }
 
-export async function DeleteClient(id) {
-  console.log("function: ", id);
+export async function DeleteClient(username, token) {
+  console.log("function: ", username);
   try {
     const response = await axios({
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "DELETE",
+        Authorization: `Bearer ${token}`,
       },
-      url: `${baseUrl}/Usuario?id=${id}`,
+      url: `${baseUrl}/cliente?username=${username}`,
       method: "DELETE",
+      
     });
     return response;
   } catch (errors) {
@@ -93,7 +105,7 @@ export async function RegisterClient(client) {
         "Content-Type": "application/json", // <- HERE
       },
     });
-    const listUser = getClient();
+    const listUser = getUser();
     console.log("listUser", listUser);
   } catch (errors) {
     console.log(errors);

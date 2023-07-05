@@ -9,8 +9,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { editClient, DeleteClient } from "../../../functions/clientMethods";
 import LoginContext from "../../../Contexts/ThemeContext/LoginContext";
 import { decryptToken } from "../../../functions/otherMethods"
+import { DeleteProfesional } from "../../../functions/professionalMethods";
 
-const AdminCliente = () => {
+const AdminProfesional = () => {
   const navigate = useNavigate()
   const { auth, handleLogin } = useContext(LoginContext);
 
@@ -74,7 +75,7 @@ const AdminCliente = () => {
   const accessToken = decryptToken(user.token);
 
   const deleteUser = () => {
-    DeleteClient(userName, accessToken)
+    DeleteProfesional(userName, accessToken)
     navigate("/admin")
   }
   
@@ -138,4 +139,4 @@ const AdminCliente = () => {
   );
 };
 
-export default AdminCliente;
+export default AdminProfesional;

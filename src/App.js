@@ -37,6 +37,7 @@ import LoginContext from "./Contexts/ThemeContext/LoginContext";
 import ActivateSuscriptionRoute from "./Components/MercadoPago/ActivateSuscriptionRoute";
 
 import { campoObligatorio } from "./Validations/Validations";
+import AdminProfesional from "./Components/Admin/AdminCliente/AdminProfesional";
 
 function App() {
   const { auth, handleLogin } = useContext(LoginContext);
@@ -182,6 +183,14 @@ function App() {
             element={
               <Container className="text-center py-5" fluid>
                 <AdminCliente />
+              </Container>
+            }
+          />
+          <Route
+            path="/adminProfesional"
+            element={
+              <Container className="text-center py-5" fluid>
+                <AdminProfesional />
               </Container>
             }
           />

@@ -45,6 +45,23 @@ export async function RegisterProfessional(professional) {
   }
 }
 
+export async function DeleteProfesional(username, token) {
+  console.log("function: ", username);
+  try {
+    const response = await axios({
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      url: `${baseUrl}/profesional?username=${username}`,
+      method: "DELETE",
+      
+    });
+    return response;
+  } catch (errors) {
+    console.log("auth: ", errors);
+  }
+}
+
 export async function editProfessional(username, data, token) {
   try {
     const response = await axios({

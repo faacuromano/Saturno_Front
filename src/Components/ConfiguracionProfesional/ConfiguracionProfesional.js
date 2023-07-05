@@ -20,9 +20,9 @@ const ConfiguracionProfesional = () => {
   const { auth, handleLogin } = useContext(LoginContext);
 
   return (
-    <Container className="py-5">
+    <Container className="py-4">
       <Row className="justify-content-center">
-        <Col xs={7} className=" shadow-sm rounded p-5">
+        <Col xs={7} className=" shadow-sm rounded px-5 py-4">
           <p className="fs-5 pb-3">
             Panel de control de <strong>{auth.username}</strong>
           </p>

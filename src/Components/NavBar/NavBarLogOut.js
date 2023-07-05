@@ -35,10 +35,8 @@ const NavBarLogOut = () => {
         response
       ) {
         if (response) {
-          console.log("logeado");
           handleLogin(userLogged);
         } else {
-          console.log("no logeado");
           localStorage.removeItem("user");
           handleShow();
         }

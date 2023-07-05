@@ -213,7 +213,7 @@ function App() {
           <Route
             path="/inaccessible-route"
             element={
-              <Container fluid>
+              <Container className="py-5" fluid>
                 <ActivateSuscriptionRoute />
               </Container>
             }

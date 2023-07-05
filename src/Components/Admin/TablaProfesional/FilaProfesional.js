@@ -17,7 +17,6 @@ const FilaProfesional = (user) => {
           </Link>
         </td>
         <td>{profesional.idUsuarios}</td>
-        <td>{profesional.username}</td>
         <td>{profesional.nombre}</td>
         <td>{profesional.apellido}</td>
         <td>{profesional.mail}</td>

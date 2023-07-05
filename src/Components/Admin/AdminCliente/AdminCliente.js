@@ -65,15 +65,18 @@ const AdminCliente = () => {
         fotoPerfil: ""
     };
 
+    const user = JSON.parse(localStorage.getItem("user"));
+    const accessToken = decryptToken(user.token);
+
     editClient(newUserData.username, newUserData, accessToken).then(function (response) {
       console.log(response);
     });
-
   };
-  const user = JSON.parse(localStorage.getItem("user"));
-  const accessToken = decryptToken(user.token);
+
 
   const deleteUser = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const accessToken = decryptToken(user.token);
     DeleteClient(userName, accessToken)
     navigate("/admin")
   }

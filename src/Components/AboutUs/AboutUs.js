@@ -31,9 +31,8 @@ const AboutUs = () => {
         </Col>
         <Col xs={12} lg={10} xl={7}>
           <p>
-            Nuestra Experiencia nos demuestra que ninguna empresa se maneja del
-            mismo modo que otra de rubro similar, por lo tanto nuestro software
-            es adaptable a las necesidades del Cliente. <br />{" "}
+          Con una trayectoria basada en una sólida formación académica y una amistad que se ha fortalecido a lo largo de los años, hemos creado un sitio web de alta calidad y nos esforzamos por brindar el mejor servicio a nuestros valiosos clientes. 
+ <br />{" "}
           </p>
           <p>
             Nuestros servicios están orientados a que su empresa logre optimizar
@@ -41,9 +40,7 @@ const AboutUs = () => {
             <strong>mas competitivos.</strong>
           </p>
           <p>
-            Utilizando herramientas como, por ejemplo: copias en internet,
-            permitiéndole utilizar los beneficios que esta tecnología de punta
-            permite alcanzar. Aguante facu capo boca.
+          La profesionalidad es un pilar fundamental de nuestra empresa. Nos esforzamos por cumplir y superar las expectativas de nuestros clientes, entregando soluciones innovadoras y personalizadas que se adaptan a sus necesidades específicas. Dedicamos tiempo y esfuerzo en comprender a fondo los objetivos y desafíos de cada proyecto, lo que nos permite ofrecer resultados de calidad y satisfacción garantizada.
           </p>
         </Col>
       </Row>

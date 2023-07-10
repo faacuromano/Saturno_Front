@@ -15,7 +15,7 @@ const MercadoPagoLink = ({ open }) => {
       variant="primary"
       onClick={() =>
         openInNewTab(
-          "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848895d7df01889c4d6037027f"
+          "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084892b330d01892df4f4ca0165"
         )
       }
       target="_blank"

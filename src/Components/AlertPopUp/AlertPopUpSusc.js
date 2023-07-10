@@ -15,7 +15,7 @@ import { Button, Modal } from "react-bootstrap";
 
 const AlertPopUp = ({ open, onClose, onContinue }) => {
   if (!open) return null;
-  const logoSolo = require("./logo-solo.png");
+  const logoSolo = require("../logo-solo/logo-solo.png");
 
   return (
     <>

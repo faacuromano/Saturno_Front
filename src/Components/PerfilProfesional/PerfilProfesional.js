@@ -82,7 +82,7 @@ const PerfilProfesional = () => {
               <Col xs={12}>
                 <Row className="justify-content-evenly">
                   <Col xs={12} sm={10} md={5} lg={4} xl={3} className="py-md-3">
-                    <h5 className="mb-3">Detalles</h5>
+                    <h5 className="mb-3 fw-bold">Detalles</h5>
                     <ul className="list-unstyled profile">
                       <li className="mb-2">
                         <BiMap /> {profData.direccion}
@@ -108,13 +108,13 @@ const PerfilProfesional = () => {
                   <Col xs={12} sm={10} md={8} className="py-md-3">
                     {profData.descripcion ? (
                       <>
-                        <h5 className="mb-2">Descripción</h5>
+                        <h5 className="mb-2 fw-bold">Descripción</h5>
                         <p className="mt-2 mb-3">{profData.descripcion}</p>
                       </>
                     ) : (
                       ""
                     )}
-                    <h5 className="mb-2">Lista de servicios</h5>
+                    <h5 className="mb-2 fw-bold">Lista de servicios</h5>
                     <p className="text-muted">
                       <em>
                         Selecciona un servicio para solicitar un turno a este

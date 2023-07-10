@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,400;1,500&display=swap');
 
 :root {
-  --rojo: rgba(255, 49, 49, 1);
-  --rojo90: rgba(255, 49, 49, 0.90);
-  --rojo75: rgba(255, 49, 49, 0.75);
-  --rojo50: rgba(255, 49, 49, 0.5);
-  --rojo25: rgba(255, 49, 49, 0.25);
+  --rojo: rgba(130, 57, 130, 1);
+  --rojo90: rgba(130, 57, 130, 0.90);
+  --rojo75: rgba(130, 57, 130, 0.75);
+  --rojo50: rgba(130, 57, 130, 0.5);
+  --rojo25: rgba(130, 57, 130, 0.25);
   --blanco: #ffffff;
   --blanco75: rgba(255, 255, 255, 0.75);
   --negro: #272727;
@@ -14,6 +14,7 @@
   --gris85: rgba(92, 99, 106, 0.85);
   --gris60: rgba(92, 99, 106, 0.60);
   --gris10: rgba(92, 99, 106, 0.10);
+  --violeta: rgba(255, 49, 49, 0.25);
 }
 
 body {
@@ -245,11 +246,6 @@ label {
   background-color: var(--rojo)!important;
 }
 
-.content {
-  background: rgb(84,219,195);
-background: linear-gradient(0deg, rgba(84,219,195,1) 0%, rgba(45,131,162,1) 49%, rgba(23,82,144,1) 100%);
-position: relative;
-}
 
 .content::after {
   content: "";

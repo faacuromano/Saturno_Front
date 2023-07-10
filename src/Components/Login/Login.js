@@ -18,13 +18,12 @@ const Login = () => {
   const [userName, setUserName] = useState("");
   const inputUserName = useRef(userName);
   const [userNameError, setUserNameError] = useState();
-  const [passError, setPassError] = useState()
+  const [passError, setPassError] = useState();
   const [password, setPassword] = useState("");
   const inputPass = useRef();
   const { auth, handleLogin } = useContext(LoginContext);
   const [openPopUp, setOpenPopUp] = useState(false); // Allows alerts to show up
 
- 
   const loginHandler = () => {
     authClient(userName, password).then(function (response) {
       if (response) {
@@ -83,14 +82,13 @@ const Login = () => {
                 type="text"
                 id="userName"
                 ref={inputUserName}
-                onBlur={()=> setUserNameError(validacionesInputs(inputUserName.current))}
+                onBlur={() =>
+                  setUserNameError(validacionesInputs(inputUserName.current))
+                }
                 onChange={(event) => setUserName(event.target.value)}
                 value={userName}
               />
-              {userNameError && (
-                  <div className="errors"> 
-                    {userNameError}
-                  </div>)}
+              {userNameError && <div className="errors">{userNameError}</div>}
             </Form.Group>
             <Form.Group className="my-4">
               <Form.Label>Contraseña:</Form.Label>
@@ -101,12 +99,11 @@ const Login = () => {
                 onChange={(event) => setPassword(event.target.value)}
                 value={password}
                 ref={inputPass}
-                onBlur={()=> setPassError(validacionesInputs(inputPass.current))}
+                onBlur={() =>
+                  setPassError(validacionesInputs(inputPass.current))
+                }
               />
-              {passError && (
-                  <div className="errors"> 
-                    {passError}
-                  </div>)} 
+              {passError && <div className="errors">{passError}</div>}
             </Form.Group>
             <Button onClick={loginHandler} color="primary" className="mb-4">
               Entrar

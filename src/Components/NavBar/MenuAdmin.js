@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
 
 const MenuAdmin = () => {
+  const logoSolo = require("../logo-solo/logo-solo.png");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -32,8 +33,10 @@ const MenuAdmin = () => {
         </Dropdown.Menu>
       </Dropdown>
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Cerrar sesión</Modal.Title>
+        <Modal.Header closeButton className="py-1">
+          <Modal.Title className="fw-normal fs-2">
+            <img src={logoSolo} className="logo-solo" alt="" /> Cerrar sesión
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>¿Estas seguro que quieres cerrar sesión?</Modal.Body>
         <Modal.Footer>

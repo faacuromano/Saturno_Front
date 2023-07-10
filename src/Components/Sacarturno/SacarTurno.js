@@ -13,6 +13,7 @@ import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
 
 const SacarTurno = () => {
+  const logoSolo = require("../logo-solo/logo-solo.png");
   const { profesional, servicio } = useParams();
   const [user, setUser] = useState();
   const [profData, setProfData] = useState([]);
@@ -106,14 +107,14 @@ const SacarTurno = () => {
         const lista = Object.values(response.data)[0];
         setMapeoBotones(
           <>
-            <h5 className="my-4 ms-3">Selecciona el horario de tu turno:</h5>
+            <h5 className="mt-4 mb-3 ms-3 fw-bold">Selecciona un horario:</h5>
             {lista.map((item, index) => (
               <>
                 <Button
                   key={index}
                   className="ms-2 mb-2"
                   onClick={handleShow.bind(this, item)}
-                  variant="secondary"
+                  variant="primary"
                   size="sm"
                 >
                   {item}
@@ -136,33 +137,37 @@ const SacarTurno = () => {
     setShow(true);
     setCreatedMessage(
       <>
-        <Modal.Body>
-          <p>
-            Por favor, revise atentamente la siguiente información antes de
-            confirmar el turno
-          </p>
-          <ul>
-            <li>
-              <strong>Profesional: </strong>
-              {profData.nombre} {profData.apellido}
-            </li>
-            <li>
-              <strong>Profesión: </strong>
-              {profData.profesion}
-            </li>
-            <li>
-              <strong>Día: </strong>
-              {format(selected, "dd-MM-Y")}
-            </li>
-            <li>
-              <strong>Horario: </strong> {item}
-            </li>
-            <li>
-              <strong>Dirección: </strong>
-              {profData.direccion} - {profData.ubicacion}
-            </li>
-          </ul>
-          {mensaje}
+        <Modal.Body className="p-0">
+          <div className="fondo-rojo75 w-100 py-3 px-5">
+            <p className="mb-0 text-white">
+              Por favor, revise atentamente la siguiente información antes de
+              confirmar el turno
+            </p>
+          </div>
+          <div className="w-100 pt-3 pb-2 px-5">
+            <ul className="ps-3">
+              <li>
+                <strong>Profesional: </strong>
+                {profData.nombre} {profData.apellido}
+              </li>
+              <li>
+                <strong>Profesión: </strong>
+                {profData.profesion}
+              </li>
+              <li>
+                <strong>Día: </strong>
+                {format(selected, "dd-MM-Y")}
+              </li>
+              <li>
+                <strong>Horario: </strong> {item}
+              </li>
+              <li>
+                <strong>Dirección: </strong>
+                {profData.direccion} - {profData.ubicacion}
+              </li>
+            </ul>
+            {mensaje}
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={sacarTurno.bind(this, item)}>
@@ -182,10 +187,10 @@ const SacarTurno = () => {
         <Col xs={12} lg={9} className="shadow-sm rounded pt-4">
           <Row className="justify-content-center">
             <Col xs={12} className="pb-3">
-              <h1 className="ms-4">Sacar turno</h1>
+              <h2 className="ms-4">Sacar turno</h2>
             </Col>
           </Row>
-          <Row className="justify-content-center content text-white p-4">
+          <Row className="justify-content-center fondo-rojo75 text-white p-4">
             <Col xs={12} sm={10} lg={5}>
               <p className="my-1">
                 <strong>Profesional:</strong> {profData.nombre}{" "}
@@ -210,7 +215,7 @@ const SacarTurno = () => {
               </p>
             </Col>
           </Row>
-          <Row className="pt-4 pb-4 justify-content-center">
+          <Row className="pt-2 pb-2 justify-content-center">
             <Col
               xs={10}
               md={6}
@@ -237,8 +242,10 @@ const SacarTurno = () => {
         {mensaje}
       </Row>
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Sacando turno</Modal.Title>
+        <Modal.Header closeButton className="py-1">
+          <Modal.Title className="fw-bold fs-2">
+            <img src={logoSolo} className="logo-solo" alt="" /> Sacando turno
+          </Modal.Title>
         </Modal.Header>
         {createdMessage}
       </Modal>

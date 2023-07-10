@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LoginContext from "../../../Contexts/ThemeContext/LoginContext";
 
 const AcordionServicios = ({ servicios, profesional }) => {
+  const logoSolo = require("../../logo-solo/logo-solo.png");
   const { auth, handleLogin } = useContext(LoginContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -55,14 +56,14 @@ const AcordionServicios = ({ servicios, profesional }) => {
         ))}
         <Modal show={show} onHide={handleClose} centered>
           <Modal.Header closeButton>
-            <Modal.Title>¡Alto ahí!</Modal.Title>
+            <Modal.Title className="fw-bold fs-2">
+              <img src={logoSolo} className="logo-solo" alt="" /> ¡Alto ahí!
+            </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <p className="text-center">
-              Tenes que tener una cuenta para poder sacar un turno
-            </p>
+          <Modal.Body className="pt-4 text-center">
+            <p>Tenes que tener una cuenta para poder sacar un turno</p>
           </Modal.Body>
-          <Modal.Footer className="text-center">
+          <Modal.Footer className="text-center fw-bold">
             <div className="w-100">
               <Link to={"/login"}>Logeate para continuar</Link>
             </div>

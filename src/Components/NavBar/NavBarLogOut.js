@@ -16,6 +16,7 @@ import { getUserByUsername } from "../../functions/clientMethods";
 import { decryptToken } from "../../functions/otherMethods";
 
 const NavBarLogOut = () => {
+  const logoSolo = require("../logo-solo/logo-solo.png");
   const [menuRender, setMenuRender] = useState(<MenuOffline />);
   const { auth, handleLogin } = useContext(LoginContext);
   const [show, setShow] = useState(false);
@@ -90,7 +91,9 @@ const NavBarLogOut = () => {
       </Container>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>¡Ups!</Modal.Title>
+          <Modal.Title className="fw-normal fs-2">
+            <img src={logoSolo} className="logo-solo" alt="" /> ¡Ups!
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>Tu sesión a expirado, por favor logea de vuelta</Modal.Body>
         <Modal.Footer>

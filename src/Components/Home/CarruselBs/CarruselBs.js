@@ -6,7 +6,7 @@ import Content2 from "./Content2/Content2";
 
 const CarruselBs = () => {
   return (
-    <Carousel controls={false} className="mb-3">
+    <Carousel controls={false} className="mb-3 shadow-sm">
       <Carousel.Item>
         <Content1 />
       </Carousel.Item>

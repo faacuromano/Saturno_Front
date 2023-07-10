@@ -13,7 +13,7 @@ const AboutUs = () => {
           <h1>Sobre nosotros</h1>
         </Col>
         <Col xs={12} lg={10} xl={7} className="my-4">
-          <h5>Quienes somos</h5>
+          <h5 className="fw-bold mt-1 mb-3">Quienes somos</h5>
           <p>
             <strong>Grupo 4 </strong>es una empresa dispuesta a revolucionar el
             mundo de la informática. Sistemas, Redes, Capacitación y
@@ -27,12 +27,15 @@ const AboutUs = () => {
               como para Windows.
             </em>
           </p>
-          <Image src={imgAboutUs} fluid className="my-4" />
+          <Image src={imgAboutUs} fluid className="mt-3 mb-2" />
         </Col>
         <Col xs={12} lg={10} xl={7}>
           <p>
-          Con una trayectoria basada en una sólida formación académica y una amistad que se ha fortalecido a lo largo de los años, hemos creado un sitio web de alta calidad y nos esforzamos por brindar el mejor servicio a nuestros valiosos clientes. 
- <br />{" "}
+            Con una trayectoria basada en una sólida formación académica y una
+            amistad que se ha fortalecido a lo largo de los años, hemos creado
+            un sitio web de alta calidad y nos esforzamos por brindar el mejor
+            servicio a nuestros valiosos clientes.
+            <br />{" "}
           </p>
           <p>
             Nuestros servicios están orientados a que su empresa logre optimizar
@@ -40,7 +43,13 @@ const AboutUs = () => {
             <strong>mas competitivos.</strong>
           </p>
           <p>
-          La profesionalidad es un pilar fundamental de nuestra empresa. Nos esforzamos por cumplir y superar las expectativas de nuestros clientes, entregando soluciones innovadoras y personalizadas que se adaptan a sus necesidades específicas. Dedicamos tiempo y esfuerzo en comprender a fondo los objetivos y desafíos de cada proyecto, lo que nos permite ofrecer resultados de calidad y satisfacción garantizada.
+            La profesionalidad es un pilar fundamental de nuestra empresa. Nos
+            esforzamos por cumplir y superar las expectativas de nuestros
+            clientes, entregando soluciones innovadoras y personalizadas que se
+            adaptan a sus necesidades específicas. Dedicamos tiempo y esfuerzo
+            en comprender a fondo los objetivos y desafíos de cada proyecto, lo
+            que nos permite ofrecer resultados de calidad y satisfacción
+            garantizada.
           </p>
         </Col>
       </Row>

@@ -9,7 +9,7 @@ import { BsShopWindow } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const Profesionales = () => {
-  const logoSolo = require("./logo-solo.png");
+  const logoSolo = require("../logo-solo/logo-solo.png");
   return (
     <>
       <Container>
@@ -53,40 +53,31 @@ const Profesionales = () => {
             <h2>Aplicaciones</h2>
           </Col>
           <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Alquiler de canchas</p>
+            <p className="border py-3 rounded mb-2">Psicólogo</p>
           </Col>
           <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Barberías</p>
+            <p className="border py-3 rounded mb-2">Docente</p>
           </Col>
           <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Clubes</p>
+            <p className="border py-3 rounded mb-2">Canchas de futbol</p>
           </Col>
           <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Estéticas</p>
+            <p className="border py-3 rounded mb-2">Peluquero</p>
           </Col>
           <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Gimnasios</p>
+            <p className="border py-3 rounded mb-2">Médico</p>
           </Col>
           <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Peluquerías</p>
+            <p className="border py-3 rounded mb-2">Estilista</p>
           </Col>
           <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Personal trainers</p>
-          </Col>
-          <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Salones de eventos</p>
-          </Col>
-          <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Services de autos</p>
-          </Col>
-          <Col xs={6} lg={3}>
-            <p className="border py-3 rounded mb-2">Veterinarias</p>
+            <p className="border py-3 rounded mb-2">Kinesiólogo</p>
           </Col>
         </Row>
         <div>
-          <Row className="content py-4 mt-4">
+          <Row className="fondo-gris10 py-4 mt-4">
             <Col xs={12}>
-              <p className="display-6 text-white mb-2">
+              <p className="display-6 texto-rojo mb-2">
                 ¿Estás listo para trabajar con <strong>nosotros?</strong>
               </p>
             </Col>
@@ -101,6 +92,9 @@ const Profesionales = () => {
           <Col xs={12} className="text-center">
             <p className="mb-0">
               <strong>¿Tenés alguna consulta sobre nuestro servicio?</strong>
+            </p>
+            <p className="mb-0">
+              <strong>¿Tu profesión no aparece en la lista?</strong>
             </p>
             <p className="mb-0">
               No dudes en{" "}

@@ -135,19 +135,19 @@ const ServiceSettings = () => {
     <Container>
       <Row className="justify-content-center text-start">
         <Col xl={7}>
-          <h3>Tus servicios</h3>
+          <h2>Tus servicios</h2>
           <p>A continuación verá sus servicios disponibles:</p>
         </Col>
         <Col xl={7} className="mt-2 mb-5">
           {mapServicio}
         </Col>
         <Col xl={7}>
-          <h3>Crea un servicio nuevo</h3>
+          <h2>Crea un servicio nuevo</h2>
           <p>Completa la siguiente información para crear un servicio:</p>
         </Col>
         <Col xl={7}>
           <Form>
-            <Form.Group className="mt-3 mb-4">
+            <Form.Group className="mt-1 mb-4">
               <Form.Label>Nombre del servicio:</Form.Label>
               <Form.Control
                 type="text"

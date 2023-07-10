@@ -14,15 +14,16 @@ import { Button, Modal } from "react-bootstrap";
 */
 
 const AlertPopUp = ({ open, onClose, mensaje, titulo }) => {
+  const logoSolo = require("../logo-solo/logo-solo.png");
   if (!open) return null;
 
   return (
     <>
       <Modal show={true} centered>
-        <Modal.Header>
-          <Modal.Title>{titulo}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{mensaje}</Modal.Body>
+        <Modal.Title className="fw-bold fs-2">
+          <img src={logoSolo} className="logo-solo" alt="" /> {titulo}
+        </Modal.Title>
+        <Modal.Body className="pb-4">{mensaje}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onClose}>
             Cerrar

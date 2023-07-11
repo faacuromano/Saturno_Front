@@ -114,6 +114,7 @@ const SignUp = () => {
           pass: password,
         },
       };
+      console.log(usuarioDatos);
       RegisterClient(usuarioDatos);
       localStorage.setItem("user", userName);
       handleShow();

@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 
 import Home from "./Components/Home/Home";
@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div>
-      <BrowserRouter>
+      <HashRouter>
         <NavBarLogOut />
         <ScrollToTop />
         <Routes>
@@ -246,7 +246,7 @@ function App() {
         {/* <Link to="/inaccessible-route?fromExternalURL=true">
           <button>Access Inaccessible Page</button>
         </Link> */}
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

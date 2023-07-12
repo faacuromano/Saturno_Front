@@ -85,6 +85,8 @@ const ServiceSettings = () => {
   };
 
   const refreshAfterChange = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const username = user.username;
     GetServiceByUsername(username).then(function (response) {
       setServicios(response);
     });

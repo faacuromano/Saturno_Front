@@ -20,7 +20,7 @@ const ConfiguracionProfesional = () => {
   const { auth, handleLogin } = useContext(LoginContext);
   const [turnosProf, setTurnosProf] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
-  const username = user.username;
+  const username = user;
   const [nombreProf, setNombreProf] = useState('');
   const [apellidoProf, setApellidoProf] = useState('');
   

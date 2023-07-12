@@ -18,6 +18,18 @@ export async function crearTurno(turno) {
   }
 }
 
+export async function GetTurnos() {
+  try {
+    const response = await axios({
+      url: `${baseUrl}/turno`,
+      method: "GET",
+    });
+    return response.data;
+  } catch (errors) {
+    console.log(errors);
+  }
+}
+
 export async function GetTurnosByUsername(username, estadoTurno) {
   try {
     const response = await axios({

@@ -35,8 +35,6 @@ const Contact = () => {
         )
         .then(
           (result) => {
-            console.log(result.text);
-
             setMensajeEnviado(true);
             limpiarCampos();
 

@@ -7,6 +7,7 @@ import { Image as ImageBootstrap } from "react-bootstrap";
 import { editProfessional } from "../../functions/professionalMethods";
 import { getRubros } from "../../functions/rubrosMethods";
 import { decryptToken } from "../../functions/otherMethods";
+import AlertPopUp from "../AlertPopUp/AlertPopUp";
 
 const ProfessionalConf = () => {
   //set de la info en los inputs
@@ -18,12 +19,13 @@ const ProfessionalConf = () => {
   const [profesion, setProfesion] = useState("");
   const [profesiones, setProfesiones] = useState([]);
 
+  const [openPopUp, setOpenPopUp] = useState(false);
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     const username = user.username;
     GetByProfUsername(username)
       .then((response) => {
-        console.log("respuesta", response);
         setDescripcion(response.descripcion);
         setHoraInicio(response.horarioInicio);
         setHoraCierre(response.horarioFinal);
@@ -37,7 +39,6 @@ const ProfessionalConf = () => {
 
     getRubros()
       .then((response) => {
-        console.log("listaRubros", response);
         setProfesiones([...response.data]);
       })
       .catch((error) => {
@@ -121,7 +122,6 @@ const ProfessionalConf = () => {
 
   const profesionHandler = (e) => {
     setProfesion(e.target.value);
-    console.log("profesion", profesion);
   };
 
   //GUARDAR LOS DATOS DEL PROFESIONAL
@@ -138,12 +138,8 @@ const ProfessionalConf = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const accessToken = decryptToken(user.token);
 
-    console.log("mod", user.username, profesionalDatos, accessToken);
-    editProfessional(user.username, profesionalDatos, accessToken).then(
-      function (response) {
-        console.log(response);
-      }
-    );
+    editProfessional(user.username, profesionalDatos, accessToken);
+    setOpenPopUp(true);
   };
 
   return (
@@ -232,6 +228,12 @@ const ProfessionalConf = () => {
           </Row>
         </Col>
       </Row>
+      <AlertPopUp
+        open={openPopUp}
+        onClose={() => setOpenPopUp(false)}
+        titulo="Información modificada"
+        mensaje="Tu información fue modificada con éxito"
+      />
     </Container>
   );
 };

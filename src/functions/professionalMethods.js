@@ -28,7 +28,6 @@ export async function GetByProfUsername(username) {
 }
 
 export async function RegisterProfessional(professional) {
-  console.log("Register professional ", professional);
   try {
     axios({
       url: `${baseUrl}/profesional`,
@@ -38,15 +37,12 @@ export async function RegisterProfessional(professional) {
         "Content-Type": "application/json", // <- HERE
       },
     });
-    const listUser = getProfessionals();
-    console.log(listUser);
   } catch (errors) {
     console.log(errors);
   }
 }
 
 export async function DeleteProfesional(username, token) {
-  console.log("function: ", username);
   try {
     const response = await axios({
       headers: {
@@ -54,7 +50,6 @@ export async function DeleteProfesional(username, token) {
       },
       url: `${baseUrl}/profesional?username=${username}`,
       method: "DELETE",
-      
     });
     return response;
   } catch (errors) {

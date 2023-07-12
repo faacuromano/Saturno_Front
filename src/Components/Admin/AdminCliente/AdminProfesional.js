@@ -68,11 +68,7 @@ const AdminProfesional = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const accessToken = decryptToken(user.token);
 
-    editClient(newUserData.username, newUserData, accessToken).then(function (
-      response
-    ) {
-      console.log(response);
-    });
+    editClient(newUserData.username, newUserData, accessToken);
   };
 
   const deleteUser = () => {

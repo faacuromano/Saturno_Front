@@ -42,11 +42,9 @@ const Login = () => {
             if (serviceResponse.length > 0) {
               // El cliente tiene servicios asociados
               navigate("/");
-              console.log("El cliente tiene servicios");
             } else {
               // El cliente no tiene servicios asociados
               navigate("/servicesettings");
-              console.log("El cliente no tiene servicios");
             }
             // Navegar a la ruta principal
           });

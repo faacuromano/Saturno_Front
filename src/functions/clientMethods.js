@@ -87,7 +87,6 @@ export async function DeleteClient(username, token) {
       },
       url: `${baseUrl}/cliente?username=${username}`,
       method: "DELETE",
-      
     });
     return response;
   } catch (errors) {
@@ -105,8 +104,6 @@ export async function RegisterClient(client) {
         "Content-Type": "application/json", // <- HERE
       },
     });
-    const listUser = getUser();
-    console.log("listUser", listUser);
   } catch (errors) {
     console.log(errors);
   }

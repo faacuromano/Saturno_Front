@@ -67,7 +67,6 @@ const AcordionEdit = ({ servicios, refreshAfterChange, idProfesional }) => {
     };
 
     EditService(item.id, editedService).then(function (response) {
-      console.log(response);
       refreshAfterChange();
       handleEditClose();
       limpiarCampos();

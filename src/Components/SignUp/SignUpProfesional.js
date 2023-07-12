@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { RegisterProfessional } from "../../functions/professionalMethods";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { getRubros } from "../../functions/rubrosMethods";
 import { getUbicaciones } from "../../functions/ubicationMethods";
 import AlertPopUp from "../AlertPopUp/AlertPopUp";
@@ -81,7 +81,6 @@ const SignUpProfesional = () => {
 
     getRubros()
       .then((response) => {
-        console.log("listaRubros", response);
         setProfesiones([...response.data]);
       })
       .catch((error) => {
@@ -90,7 +89,6 @@ const SignUpProfesional = () => {
 
     getUbicaciones()
       .then((response) => {
-        console.log("listaUbicaciones", response);
         setUbicaciones([...response.data]);
       })
       .catch((error) => {
@@ -205,7 +203,7 @@ const SignUpProfesional = () => {
           navigate("/");
         }}
         titulo="¡Cuenta creada con éxito!"
-        mensaje="Ya estás cerca de poder ofrecer tus turnos. Loggeate nuevamente para comenzar a configurar tus servicios"
+        mensaje="Ya estás cerca de poder ofrecer tus turnos. Loggeate nuevamente para comenzar a configurar tus servicios."
       />
       <Row className="justify-content-center text-start">
         <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">

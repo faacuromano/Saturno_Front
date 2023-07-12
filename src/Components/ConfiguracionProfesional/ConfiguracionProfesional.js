@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import LoginContext from "../../Contexts/ThemeContext/LoginContext";
-import { Alert, Container, Row, Col, Button, Badge } from "react-bootstrap";
+import { Alert, Container, Row, Col, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { GetTurnos } from "../../functions/turnoMethods";
 import { GetByProfUsername } from "../../functions/professionalMethods";
 import Accordion from "react-bootstrap/Accordion";
 
 import {
-  FaRegCalendar,
   FaRegAddressBook,
   FaRegCalendarAlt,
   FaRegCreditCard,
@@ -19,20 +18,18 @@ import {
 const ConfiguracionProfesional = () => {
   const { auth, handleLogin } = useContext(LoginContext);
   const [turnosProf, setTurnosProf] = useState([]);
-  const [nombreProf, setNombreProf] = useState("");
-  const [apellidoProf, setApellidoProf] = useState("");
+  // const [nombreProf, setNombreProf] = useState("");
+  // const [apellidoProf, setApellidoProf] = useState("");
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     const fetchData = async () => {
       try {
         const responseProf = await GetByProfUsername(user.username);
-        console.log("profesional log", responseProf);
-        setNombreProf(responseProf.nombre);
-        setApellidoProf(responseProf.apellido);
+        // setNombreProf(responseProf.nombre);
+        // setApellidoProf(responseProf.apellido);
 
         const responseTurnos = await GetTurnos();
-        console.log("lista turnos prof", responseTurnos);
 
         const nombreyap = `${responseProf.nombre} ${responseProf.apellido}`;
 
@@ -40,7 +37,6 @@ const ConfiguracionProfesional = () => {
           (turno) => turno.nombreProfesional === nombreyap
         );
         setTurnosProf(turnosFiltrados);
-        console.log("filtro", turnosFiltrados);
       } catch (error) {
         console.error(error);
       }

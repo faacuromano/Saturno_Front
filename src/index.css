@@ -246,8 +246,12 @@ label {
   background-color: var(--rojo)!important;
 }
 
+.content{
+  background-color: rgba(187, 152, 187, 1);
+}
 
 .content::after {
+  
   content: "";
   position: absolute;
   top: 0;

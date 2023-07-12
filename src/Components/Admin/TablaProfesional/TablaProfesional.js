@@ -14,7 +14,6 @@ const TablaProfesional = () => {
     });
   }, []);
 
-  console.log(professionals);
   return (
     <>
       <p className="fw-bold">Administrador de profesionales:</p>

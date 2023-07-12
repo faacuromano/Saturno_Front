@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Col, Container, Row, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-date-picker";
 
 import { RegisterClient } from "../../functions/clientMethods";
@@ -64,7 +64,6 @@ const SignUp = () => {
   useEffect(() => {
     getUbicaciones()
       .then((response) => {
-        console.log("listaUbicaciones", response);
         setUbicaciones([...response.data]);
       })
       .catch((error) => {
@@ -114,7 +113,6 @@ const SignUp = () => {
           pass: password,
         },
       };
-      console.log(usuarioDatos);
       RegisterClient(usuarioDatos);
       localStorage.setItem("user", userName);
       handleShow();

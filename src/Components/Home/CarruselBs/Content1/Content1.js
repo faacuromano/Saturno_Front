@@ -13,7 +13,7 @@ const Content1 = () => {
 
   return (
     <div>
-      <Row className="justify-content-center content fondo-rojo50 py-4 align-items-center">
+      <Row className="justify-content-center content py-4 align-items-center">
         <Col xs={6} md={5} lg={3}>
           <Image src={empleada1} fluid roundedCircle className="shadow" />
         </Col>

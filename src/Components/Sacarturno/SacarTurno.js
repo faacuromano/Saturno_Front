@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Col, Container, Row, Button, Alert, Modal } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   GetByProfUsername,
   obtenerTurnos,

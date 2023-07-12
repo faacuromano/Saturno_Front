@@ -22,10 +22,8 @@ const PerfilUsuario = () => {
     });
 
     GetTurnosByUsername(username, 2).then(function (response) {
-      console.log("response", response);
       if (response) {
         setListaTurnos([...response]);
-        console.log("lista", listaTurnos);
       } else {
         setListaTurnos();
       }

@@ -10,7 +10,7 @@ import "react-day-picker/dist/style.css";
 import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import Modal from "react-bootstrap/Modal";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { DayPicker } from "react-day-picker";
 import AcordionServicios from "./AcordionServicios/AcordionServicios";
 

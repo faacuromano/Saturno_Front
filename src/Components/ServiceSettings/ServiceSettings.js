@@ -76,7 +76,6 @@ const ServiceSettings = () => {
         />
       );
     } else {
-      console.log("Lista vacia");
       setMapServicio(
         <p>
           <em>Cree un servicio para empezar poder empezar a ofrecer turnos</em>

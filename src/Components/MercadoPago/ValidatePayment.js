@@ -88,7 +88,6 @@ const ValidatePayment = () => {
       .join("");
 
     const token = hashHex.substr(0, 10); // Generación de token único, los 10 primeros carácteres
-    console.log(token);
     return token;
   };
 

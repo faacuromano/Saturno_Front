@@ -58,8 +58,8 @@ const PerfilProfesional = () => {
             </Row>
             <Row className="pb-4">
               <Col xs={12} className="fondo-gris10 border-bottom mb-3">
-                <Row className="justify-content-start align-items-center py-3">
-                  <Col xs={4} md={3} lg={2} xl={1} className="ms-4">
+                <Row className="justify-content-center align-items-center py-3">
+                  <Col xs={4} md={2} className="mb-2 mb-md-0">
                     <Image
                       src={profData.fotoPerfil}
                       roundedCircle
@@ -67,7 +67,17 @@ const PerfilProfesional = () => {
                       className="d-block ms-auto imagen-perfil shadow-sm"
                     />
                   </Col>
-                  <Col xs={8} sm={7}>
+                  <Col xs={10} className="d-none d-md-block">
+                    <h2 className="mb-0">
+                      <strong>
+                        {profData.nombre} {profData.apellido}
+                      </strong>
+                    </h2>
+                    <h5 className="mb-0 text-muted fw-normal">
+                      {profData.profesion}
+                    </h5>
+                  </Col>
+                  <Col xs={10} className="text-center d-md-none">
                     <h2 className="mb-0">
                       <strong>
                         {profData.nombre} {profData.apellido}

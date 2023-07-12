@@ -19,26 +19,26 @@ import {
 const ConfiguracionProfesional = () => {
   const { auth, handleLogin } = useContext(LoginContext);
   const [turnosProf, setTurnosProf] = useState([]);
-  const user = JSON.parse(localStorage.getItem("user"));
-  const username = user;
-  const [nombreProf, setNombreProf] = useState('');
-  const [apellidoProf, setApellidoProf] = useState('');
-  
-  
+  const [nombreProf, setNombreProf] = useState("");
+  const [apellidoProf, setApellidoProf] = useState("");
+
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
     const fetchData = async () => {
       try {
-        const responseProf = await GetByProfUsername(username);
+        const responseProf = await GetByProfUsername(user.username);
         console.log("profesional log", responseProf);
         setNombreProf(responseProf.nombre);
         setApellidoProf(responseProf.apellido);
-  
+
         const responseTurnos = await GetTurnos();
         console.log("lista turnos prof", responseTurnos);
-  
+
         const nombreyap = `${responseProf.nombre} ${responseProf.apellido}`;
-  
-        const turnosFiltrados = responseTurnos.filter(turno => turno.nombreProfesional === nombreyap);
+
+        const turnosFiltrados = responseTurnos.filter(
+          (turno) => turno.nombreProfesional === nombreyap
+        );
         setTurnosProf(turnosFiltrados);
         console.log("filtro", turnosFiltrados);
       } catch (error) {
@@ -47,7 +47,6 @@ const ConfiguracionProfesional = () => {
     };
     fetchData();
   }, []);
-  
 
   return (
     <Container className="py-4">
@@ -63,45 +62,47 @@ const ConfiguracionProfesional = () => {
           <div className="w-100 px-4 pt-1 pb-2">
             <h5 className="mt-4 pb-2 mb-3 border-bottom fw-bold">Turnos</h5>
             <ul className="list-unstyled pb-1">
-        {turnosProf.length === 0 ? (
-            <Alert variant="warning" className="mt-3 mb-4">
-               No tienes ningún turno vigente
-            </Alert>) :
-            ( <Accordion>
-              {turnosProf.map((turno, index) => (
-                <Accordion.Item eventKey={index}>
-                  <Accordion.Header>
-                    <Badge variant="primary" className="me-1">
-                      {turno.fechaTurno.slice(0, -9)}
-                    </Badge>
-                    <Badge bg="secondary" className="me-3">
-                      {turno.horaTurno.slice(0, -3)}hs
-                    </Badge>
-                    <b>
-                      {turno.nombreServicio.charAt(0).toUpperCase() +
-                        turno.nombreServicio.slice(1)}
-                    </b>
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    <ul>
-                      <li>
-                        <b>Fecha:</b> {turno.fechaTurno.slice(0, -9)}
-                      </li>
-                      <li>
-                        <b>Hora:</b> {turno.horaTurno.slice(0, -3)}hs
-                      </li>
-                      <li>
-                        <b>Precio:</b> ${turno.monto}
-                      </li>
-                      <li>
-                        <b>Cliente:</b> {turno.nombreCliente}
-                      </li>
-                    </ul>
-                  </Accordion.Body>
-                </Accordion.Item>
-              ))}
-            </Accordion>)}
-            <p></p>
+              {turnosProf.length === 0 ? (
+                <Alert variant="warning" className="mt-3 mb-4">
+                  No tienes ningún turno vigente
+                </Alert>
+              ) : (
+                <Accordion>
+                  {turnosProf.map((turno, index) => (
+                    <Accordion.Item eventKey={index}>
+                      <Accordion.Header>
+                        <Badge variant="primary" className="me-1">
+                          {turno.fechaTurno.slice(0, -9)}
+                        </Badge>
+                        <Badge bg="secondary" className="me-3">
+                          {turno.horaTurno.slice(0, -3)}hs
+                        </Badge>
+                        <b>
+                          {turno.nombreServicio.charAt(0).toUpperCase() +
+                            turno.nombreServicio.slice(1)}
+                        </b>
+                      </Accordion.Header>
+                      <Accordion.Body>
+                        <ul>
+                          <li>
+                            <b>Fecha:</b> {turno.fechaTurno.slice(0, -9)}
+                          </li>
+                          <li>
+                            <b>Hora:</b> {turno.horaTurno.slice(0, -3)}hs
+                          </li>
+                          <li>
+                            <b>Precio:</b> ${turno.monto}
+                          </li>
+                          <li>
+                            <b>Cliente:</b> {turno.nombreCliente}
+                          </li>
+                        </ul>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  ))}
+                </Accordion>
+              )}
+              <p></p>
               <li className="mb-2">
                 <Link>
                   <FaRegCalendarAlt />

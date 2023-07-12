@@ -82,15 +82,15 @@ const Contact = () => {
           mensaje="Por favor ingrese los datos correctamente."
         />
         <Row className="justify-content-center text-start">
-          <Col xs={12} lg={10} xl={7} className="border-bottom pb-4 mb-4">
+          <Col xs={11} lg={10} xl={7} className="border-bottom pb-4 mb-4">
             <h1>Contacto</h1>
           </Col>
-          <Col xs={12} lg={10} xl={7}>
+          <Col xs={11} lg={10} xl={7}>
             <p>
               <b>¿Tenes una consulta?</b> No dudes en escribirnos:
             </p>
           </Col>
-          <Col xs={12} lg={10} xl={7} className="mt-2">
+          <Col xs={11} lg={10} xl={7} className="mt-2">
             <Form ref={form} onSubmit={sendEmail}>
               <Form.Group>
                 <Form.Label>Nombre:</Form.Label>

@@ -36,12 +36,20 @@ const PerfilUsuario = () => {
     <>
       <Container>
         <Row className="justify-content-center text-start">
-          <Col xs={8} className="shadow-sm rounded p-4">
+          <Col xs={12} md={10} lg={8} className="shadow-sm rounded p-4">
             <Row className="justify-content-center align-items-center">
-              <Col xs={2}>
+              <Col xs={4} md={2} className="mb-2 mb-md-0">
                 <Image src={userLogged.fotoPerfil} alt="" roundedCircle fluid />
               </Col>
-              <Col xs={10}>
+              <Col xs={10} className="d-none d-md-block">
+                <h2 className="mb-0">
+                  {userLogged.nombre} {userLogged.apellido}
+                </h2>
+                <h5 className="mb-0 text-muted fw-normal">
+                  {userLogged.ubicacion}
+                </h5>
+              </Col>
+              <Col xs={10} className="text-center d-md-none">
                 <h2 className="mb-0">
                   {userLogged.nombre} {userLogged.apellido}
                 </h2>

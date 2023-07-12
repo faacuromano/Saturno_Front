@@ -262,7 +262,7 @@ const UserConfiguration = () => {
   return (
     <Container>
       <Row className="justify-content-around">
-        <Col xs={8} className="text-start shadow-sm rounded p-5">
+        <Col xs={12} md={8} className="text-start shadow-sm rounded p-5">
           <Row>
             <Col xs={12} className="border-bottom pb-4 mb-4" id="change-info">
               <h1>Modificar información personal</h1>
@@ -343,7 +343,7 @@ const UserConfiguration = () => {
                 {<div className="errorsValidation">{errorsValidation}</div>}
                 <Col xs={12} className="mt-4 border rounded p-5">
                   <Row className="justify-content-center align-items-center">
-                    <Col xs={3}>
+                    <Col xs={6} md={3} className="mb-2">
                       <BootstrapImage src={fotoPerfil} fluid roundedCircle />
                     </Col>
                     <Col xs={9}>

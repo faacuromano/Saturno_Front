@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Error404 = () => {
-  const logoSolo = require("./logo-solo.png");
+  const logoSolo = require("../logo-solo/logo-solo.png");
   return (
     <Container className="px-0">
       <Row>

@@ -149,7 +149,7 @@ const ProfessionalConf = () => {
   return (
     <Container>
       <Row className="justify-content-around">
-        <Col xs={8} className="text-start shadow-sm rounded p-5">
+        <Col xs={12} md={8} className="text-start shadow-sm rounded p-5">
           <Row>
             <Col xs={12} className="border-bottom pb-4 mb-4">
               <h1>Modificar información Profesional</h1>
@@ -204,7 +204,7 @@ const ProfessionalConf = () => {
                 </Form.Group>
                 <Col xs={12} className="mt-4 border rounded p-5">
                   <Row className="justify-content-center align-items-center">
-                    <Col xs={3}>
+                    <Col xs={6} md={3} className="mb-2">
                       <ImageBootstrap src={fotoBanner} fluid />
                     </Col>
                     <Col xs={9}>

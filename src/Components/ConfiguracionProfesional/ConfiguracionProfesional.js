@@ -21,7 +21,7 @@ const ConfiguracionProfesional = () => {
   return (
     <Container className="py-4">
       <Row className="justify-content-center">
-        <Col xs={7} className="shadow-sm rounded px-0">
+        <Col xs={11} md={7} className="shadow-sm rounded px-0">
           <div className="fondo-rojo75 w-100 px-4 pt-4 pb-2 rounded-top">
             <p className="fs-3 pb-0 text-white">
               ¡Bienvenido <strong>{auth.username}!</strong>

@@ -67,7 +67,7 @@ const ServiceSettings = () => {
   };
 
   const serviceMapHandler = () => {
-    if (servicios.length > 0) {
+    if (servicios) {
       setMapServicio(
         <AcordionEdit
           servicios={servicios}

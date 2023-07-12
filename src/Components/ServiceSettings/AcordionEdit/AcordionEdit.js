@@ -10,7 +10,7 @@ const AcordionEdit = ({ servicios, refreshAfterChange, idProfesional }) => {
   const handleDeleteShow = () => setShowDelete(true);
 
   const deleteServiceHandler = (item) => {
-    DeleteService(item.id).then(function () {
+    DeleteService(idServicio).then(function () {
       refreshAfterChange();
       handleDeleteClose();
     });
@@ -20,6 +20,7 @@ const AcordionEdit = ({ servicios, refreshAfterChange, idProfesional }) => {
   const handleEditClose = () => setShowEdit(false);
   const handleEditShow = () => setShowEdit(true);
 
+  const [idServicio, setIdServicio] = useState();
   const [nombreServicio, setNombreServicio] = useState("");
   const [precioServicio, setPrecioServicio] = useState();
   const [descripcionServicio, setDescripcionServicio] = useState("");
@@ -49,6 +50,7 @@ const AcordionEdit = ({ servicios, refreshAfterChange, idProfesional }) => {
   };
 
   const loadEditService = (item) => {
+    setIdServicio(item.id);
     setNombreServicio(item.nombre);
     setPrecioServicio(item.precio);
     setDescripcionServicio(item.descripcion);
@@ -58,15 +60,14 @@ const AcordionEdit = ({ servicios, refreshAfterChange, idProfesional }) => {
 
   const editServiceHandler = (item) => {
     const editedService = {
-      id: item.id,
+      id: idServicio,
       nombre: nombreServicio,
       descripcion: descripcionServicio,
       precio: precioServicio,
       duracion: duracionServicio,
       idProfesional: idProfesional,
     };
-
-    EditService(item.id, editedService).then(function (response) {
+    EditService(editedService.id, editedService).then(function (response) {
       refreshAfterChange();
       handleEditClose();
       limpiarCampos();

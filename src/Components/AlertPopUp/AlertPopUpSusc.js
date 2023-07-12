@@ -23,7 +23,7 @@ const AlertPopUp = ({ open, onClose, onContinue }) => {
         <Modal.Header className="py-2 px-4 border-bottom-0">
           <Modal.Title className="fw-normal fs-2">
             <img src={logoSolo} className="logo-solo" alt="" /> Suscribite a{" "}
-            <strong>Saturno</strong>
+            <strong>Suturno</strong>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="p-0">

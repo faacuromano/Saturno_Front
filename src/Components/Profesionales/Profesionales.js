@@ -22,7 +22,7 @@ const Profesionales = () => {
               El <strong>sistema de turnos</strong> que necesita tu negocio
             </p>
             <p className="my-4">
-              <strong>Saturno</strong> es una aplicación web que te permite
+              <strong>Suturno</strong> es una aplicación web que te permite
               ordenar y agilizar el procesamiento de turnos. Te permite
               utilizarla en cualquier dispositivo, desde cualquier lugar, entre
               múltiples usuarios al mismo tiempo

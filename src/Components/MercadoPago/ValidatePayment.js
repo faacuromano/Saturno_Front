@@ -112,7 +112,7 @@ const ValidatePayment = () => {
 
         const templateParams = {
           to_name: nombre + " " + apellido,
-          from_name: "SaTurno Servicios",
+          from_name: "SuTurno Servicios",
           message: token,
           to_email: mail, // Dirección de correo electrónico del destinatario
         };

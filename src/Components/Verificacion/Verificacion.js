@@ -39,11 +39,11 @@ const Verificacion = () => {
               <Row>
                 <Col xs={12} className="p-4">
                   <h5 className="mb-4">
-                    Activá tu cuenta para comenzar a operar con Saturno
+                    Activá tu cuenta para comenzar a operar con Suturno
                   </h5>
                   <p className="mb-4">
                     A continuación te redirigiremos a Mercado Pago para realizar
-                    la suscripción a <strong>Saturno</strong>. Una vez
+                    la suscripción a <strong>Suturno</strong>. Una vez
                     completado el pago te guiaremos para continuar con la
                     activación de la cuenta.
                   </p>

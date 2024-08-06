@@ -43,7 +43,7 @@ const Profesionales = () => {
             </Col>
             <Col xs={12} sm={10} md={7} lg={4} xl={3}>
               <BsShopWindow className="icon-display texto-rojo" />
-              <h4>PRESONALIZADO</h4>
+              <h4>PERSONALIZADO</h4>
               <p>Tu perfil tendrá toda tu información y servicios</p>
             </Col>
           </Row>

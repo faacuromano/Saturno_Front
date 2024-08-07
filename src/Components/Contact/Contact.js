@@ -93,7 +93,7 @@ const Contact = () => {
               <Form.Group>
                 <Form.Label>Nombre:</Form.Label>
                 <Form.Control
-                  placeholder="Cosme Fulanito"
+                  placeholder="Contacto"
                   type="text"
                   name="user_name"
                   value={nameContact}

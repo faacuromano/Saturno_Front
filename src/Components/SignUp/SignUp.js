@@ -163,7 +163,7 @@ const SignUp = () => {
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
               <Form.Control
-                placeholder="Homero"
+                placeholder="Nombre"
                 onChange={(event) => setName(event.target.value)}
                 value={name}
                 type="text"
@@ -177,7 +177,7 @@ const SignUp = () => {
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>
               <Form.Control
-                placeholder="Simpson"
+                placeholder="Apellido"
                 onChange={(event) => setLastname(event.target.value)}
                 value={lastname}
                 type="text"

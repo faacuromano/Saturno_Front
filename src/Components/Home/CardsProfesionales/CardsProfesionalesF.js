@@ -30,9 +30,9 @@ const CardsProfesionales = () => {
     <>
       <Row>
         {professional.length < 1 ? (
-          <p className="display-6 my-5 text-center">
-            <strong>Ups!</strong> No hay datos disponibles (?)
-          </p>
+          <div className="loader">
+            <div className="spinner"></div>
+          </div>
         ) : (
           professional.map((item, index) => (
             <Col

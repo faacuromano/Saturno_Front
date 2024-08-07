@@ -230,7 +230,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Nombre:</Form.Label>
               <Form.Control
-                placeholder="Homero"
+                placeholder="Nombre"
                 type="text"
                 value={nameProf}
                 ref={inputNameProf}
@@ -244,7 +244,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Apellido:</Form.Label>
               <Form.Control
-                placeholder="Simpson"
+                placeholder="Apellido"
                 type="text"
                 value={lastNameProf}
                 ref={inputLastNameProf}
@@ -315,7 +315,7 @@ const SignUpProfesional = () => {
             <Form.Group className="mt-4">
               <Form.Label>Dirección (calle, nro.):</Form.Label>
               <Form.Control
-                placeholder="Avenida Siempreviva 742"
+                placeholder="Dirección"
                 type="text"
                 value={direcProf}
                 ref={inputDirecProf}

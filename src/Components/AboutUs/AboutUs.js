@@ -15,7 +15,7 @@ const AboutUs = () => {
         <Col xs={11} md={10} xl={7} className="my-4">
           <h5 className="fw-bold mt-1 mb-3">Quienes somos</h5>
           <p>
-            <strong>Grupo 4 </strong>es una empresa dispuesta a revolucionar el
+            <strong>SuTurno </strong>es una empresa dispuesta a revolucionar el
             mundo de la informática. Sistemas, Redes, Capacitación y
             Asesoramiento generalizado sobre las distintas tecnologías de última
             generación.
